@@ -10,7 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header/>
-      <h1>CFS WEBSITE changes</h1>
+      <h1>CFS WEBSITE changes by sami</h1>
       <Footer/>
     </>
   )
