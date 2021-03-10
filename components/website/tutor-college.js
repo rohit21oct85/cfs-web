@@ -1,3 +1,7 @@
+// import OwlCarousel from 'react-owl-carousel';
+// import 'owl.carousel/dist/assets/owl.carousel.css';
+// import 'owl.carousel/dist/assets/owl.theme.default.css';
+
 export default function TutorCollege(){
     return(
         <section className="section brand_icons_bg pt-5 pb-5">
