@@ -1,4 +1,3 @@
-// import '../styles/globals.css'
 import '../styles/bootstrap.css'
 import '../styles/style.css'
 import '../public/fonts/font.css'

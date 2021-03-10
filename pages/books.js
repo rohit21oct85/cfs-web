@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Header from '../components/website/header'
-import Footer from '../components/website/footer'
+import Header from '../components/website/home/header'
+import Footer from '../components/website/home/footer'
 
 export default function Books() {
   return (
