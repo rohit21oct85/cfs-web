@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Header from '../components/website/home/header'
 import Navbar from '../components/website/home/navbar'
 import Footer from '../components/website/home/footer'
@@ -14,15 +13,25 @@ import SubscribeHere from '../components/website/home/subscribe-here'
 import TutorCollege from '../components/website/home/tutor-college'
 import Follow from '../components/website/home/follow'
 
+// export async function getStaticProps() {
+  // Call an external API endpoint to get posts.
+  // You can use any data fetching library
+  // const res = await fetch('https://.../posts')
+  // const posts = await res.json()
+
+  // By returning { props: posts }, the Blog component
+  // will receive `posts` as a prop at build time
+  // return {
+  //   props: {
+  //     posts,
+  //   },
+  // }
+// }
+
 export default function Home() {
+  
   return (
     <>
-      <Head>
-        <title>Crazy For Study</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/> 
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      </Head>
       <Header/>
       <Navbar/>
       <Banner/>
