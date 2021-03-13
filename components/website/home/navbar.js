@@ -1,7 +1,9 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Link from 'next/link'
+import { useRouter } from "next/router";
 
 export default function Navbar() {
+    const router = useRouter();
 
     const [showMenu,setShowMenu] = useState(false);
     const [showAMenu,setShowAMenu] = useState(false);
@@ -28,17 +30,29 @@ export default function Navbar() {
         setShowMenu(false);
         setClassname('show');
     }
+    const [homePClass, setHomePClass] = useState('');
+    const [homePImage, setHomePImage] = useState('logo.png');
+
+    useEffect(() => {
+        if(router.pathname !== '/'){
+            setHomePClass('bg_white_nav')
+            setHomePImage('logo_w.jpg')
+        }
+        return () => {
+        }
+    }, [])    
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light sticky-top">
+        <nav className={`navbar navbar-expand-lg navbar-light sticky-top ${homePClass}`}>
             <div className="container">
-                <Link href="/"><a className="navbar-brand"><img src="../images/logo.png" className="img-fluid" alt="logo"/></a></Link>
+                <Link href="/"><a className="navbar-brand"><img src={`../images/${homePImage}`} className="img-fluid" alt="logo"/></a></Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile_nav" aria-controls="mobile_nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span> 
                 </button>
                 <div className="collapse navbar-collapse" id="mobile_nav">
             
-                <ul className="navbar-nav navbar-light ml-auto">
+                {/* <ul className="navbar-nav navbar-light ml-auto"> */}
+                <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
                         <Link href="/q-and-a">
                             <a className="nav-link">Q and A</a>
