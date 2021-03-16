@@ -1,0 +1,42 @@
+import { useRouter } from "next/router";
+import Header from '../../../components/website/home/header'
+import Navbar from '../../../components/website/home/navbar'
+import Footer from '../../../components/website/home/footer'
+import Follow from '../../../components/website/home/follow'
+import BreadCrumb from '../../../components/website/all-subjects/breadcrumb'
+import BuySubscription from '../../../components/website/all-subjects/buy-subscription'
+import AllBooks from '../../../components/website/all-subjects/all-books'
+import {getBooks} from "../../../libs/subsubject"
+// import {getNavbarData} from "../../../libs/home"
+import {useState} from 'react';
+import { useQuery } from 'react-query'
+
+// export async  function getServerSideProps(context){
+//     const data = await getBooks(context.params.subsubject);
+//     return {
+//         props: {
+//             data: data,
+//         },
+//     };
+// }
+
+
+export default function SubSubject(){
+    const [pageNo, setPageNo] = useState(0);
+    const router = useRouter();
+
+    const { data, isLoading, error } = useQuery(['books', pageNo], () => getBooks({sub_subject_name: 'ecommerce', pageno : pageNo}))
+    
+    return (
+        <>
+            <Header/>
+            <Navbar/>
+            <BreadCrumb heading={router.query.subsubject}/>
+            <BuySubscription/>
+            {isLoading ? <>LOADING ...</> :
+            <AllBooks data={data} setPageNo={setPageNo} pageNo={pageNo}/>}
+            <Follow/>
+            <Footer/>
+        </>
+    )
+}

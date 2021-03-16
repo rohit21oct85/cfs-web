@@ -14,12 +14,12 @@ export default function Follow(){
                 <div className="row">
                     <div className="col-md-12 p-0">
                         <ul>
-                            <li><img src="../images/follow-img/img1.jpg" className="img-fluid" alt=""/></li>
-                            <li><img src="../images/follow-img/img2.jpg" className="img-fluid" alt=""/></li>
-                            <li><img src="../images/follow-img/img3.jpg" className="img-fluid" alt=""/></li>
-                            <li><img src="../images/follow-img/img4.jpg" className="img-fluid" alt=""/></li>
-                            <li><img src="../images/follow-img/img5.jpg" className="img-fluid" alt=""/></li>
-                            <li><img src="../images/follow-img/img6.jpg" className="img-fluid" alt=""/></li>
+                            <li><img src="/images/follow-img/img1.jpg" className="img-fluid" alt=""/></li>
+                            <li><img src="/images/follow-img/img2.jpg" className="img-fluid" alt=""/></li>
+                            <li><img src="/images/follow-img/img3.jpg" className="img-fluid" alt=""/></li>
+                            <li><img src="/images/follow-img/img4.jpg" className="img-fluid" alt=""/></li>
+                            <li><img src="/images/follow-img/img5.jpg" className="img-fluid" alt=""/></li>
+                            <li><img src="/images/follow-img/img6.jpg" className="img-fluid" alt=""/></li>
                         </ul>
                     </div>
                 </div>

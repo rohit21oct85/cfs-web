@@ -1,8 +1,17 @@
 // import { faBolt } from '@fortawesome/free-solid-svg-icons'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Head from 'next/head'
 
 export default function Header() {
+	
 	return (
+		<>
+		<Head>
+			<title>Crazy For Study</title>
+			<link rel="icon" href="/favicon.ico" />
+			{/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>  */}
+			<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>{/* needed for owl carousal */}
+      	</Head>
 		<header>
 			<div className="container-fluid">
 				<div className="row">
@@ -15,5 +24,6 @@ export default function Header() {
 				</div>
 			</div>
 		</header>
+		</>
 	)
 }

@@ -5,7 +5,7 @@ export default function Footer() {
 				<div className="row">
 					<div className="col-md-3">
 					<ul>
-						<li><a href="#"><img src="../images/logo_f.jpg" className="img-fluid" alt="logo footer"/></a></li>
+						<li><a href="#"><img src="/images/logo_f.jpg" className="img-fluid" alt="logo footer"/></a></li>
 						<li className="pt-3">Crazy for Study is a platform for the provision of academic help. It finctions with the help of a team of ingenious subject matter experts and academic writers who provide tectbook solutions to all.</li>
 					</ul>
 					<ul className="socail_icons">
@@ -53,15 +53,15 @@ export default function Footer() {
 						</div>
 						<div className="col-md-4 text-center">
 						<ul>
-							<li><a href="#"><img src="../images/ios-app-button.png" className="img-fluid" alt=""/></a></li>
+							<li><a href="#"><img src="/images/ios-app-button.png" className="img-fluid" alt=""/></a></li>
 						</ul>
 						</div>
 						<div className="col-md-4 text-right">
 						<ul>
-							<li><a href="#"><img src="../images/master-card.png" className="img-fluid" alt=""/></a></li>
-							<li><a href="#"><img src="../images/discover.png" className="img-fluid" alt=""/></a></li>
-							<li><a href="#"><img src="../images/paypal.png" className="img-fluid" alt=""/></a></li>
-							<li><a href="#"><img src="../images/american-express.png" className="img-fluid" alt=""/></a></li>
+							<li><a href="#"><img src="/images/master-card.png" className="img-fluid" alt=""/></a></li>
+							<li><a href="#"><img src="/images/discover.png" className="img-fluid" alt=""/></a></li>
+							<li><a href="#"><img src="/images/paypal.png" className="img-fluid" alt=""/></a></li>
+							<li><a href="#"><img src="/images/american-express.png" className="img-fluid" alt=""/></a></li>
 						</ul>
 						</div>
 					</div>

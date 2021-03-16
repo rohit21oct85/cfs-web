@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Header from '../components/website/home/header'
 import Navbar from '../components/website/home/navbar'
 import Footer from '../components/website/home/footer'
@@ -13,30 +12,33 @@ import PopularTbs from '../components/website/home/popular-tbs'
 import SubscribeHere from '../components/website/home/subscribe-here'
 import TutorCollege from '../components/website/home/tutor-college'
 import Follow from '../components/website/home/follow'
+import {getNavbarData} from '../libs/home'
+
+// export const getStaticProps = async () => {
+// 	const { data } = await getNavbarData();
+// 	return {
+// 		props: {
+// 			data,
+// 		},
+// 	};
+// };
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Crazy For Study</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/> 
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      </Head>
-      <Header/>
-      <Navbar/>
-      <Banner/>
-      <ContentCovered/>
-      <FindTbs/>
-      <AssignmentHelp/>
-      <AskExpert/>
-      <BuySubscription/>
-      <SubjectsWeCover/>
-      <PopularTbs/>
-      <SubscribeHere/>
-      <TutorCollege/>
-      <Follow/>
-      <Footer/>
-    </>
-  )
+		<Header/>
+		<Navbar/>
+		<Banner/>
+		<ContentCovered/>
+		<FindTbs/>
+		<AssignmentHelp/>
+		<AskExpert/>
+		<BuySubscription/>
+		<SubjectsWeCover/>
+		<PopularTbs/>
+		<SubscribeHere/>
+		<TutorCollege/>
+		<Follow/>
+		<Footer/>
+    </>)
 }

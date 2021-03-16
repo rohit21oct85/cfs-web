@@ -7,10 +7,8 @@ export default function Books() {
     <>
       <Head>
         <title>Crazy For Study</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header/>
-      <h1>CFS books</h1>
       <Footer/>
     </>
   )

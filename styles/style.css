@@ -13,7 +13,7 @@ h2{font-weight:bold; color:#000; font-size:37px;}
 h3{font-size:18px; color:#171313; font-weight:normal;}
 h4{font-weight:400;}
 h5{font-weight:bold; font-size:16px; text-transform:uppercase;}
-p{font-weight:500; font-size:16px; color:#323232;}
+p{font-weight:normal; font-size:16px; color:#323232;}
 p span,h2 span.yellow{color:#f8d021;}
 h2 span.d_b{display:block;}
 
@@ -34,6 +34,70 @@ header p i{color:#f53c20;}
 .navbar-light .navbar-nav .nav-link{font-size:15px; font-weight:500; color:#000; padding:10px 34px;}
 .navbar-light .navbar-nav .nav-item.login_signup_top a{font-weight:bold; padding:8px 0 8px 76px;}
 .navbar-light .navbar-nav .nav-item.login_signup_top a i{font-size:22px; padding-left:10px;}
+
+ .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+     
+     transition: 0.3s;
+}
+ .dropdown-menu.megamenu.sm-menu.border-top.show {
+    background: #f7f8fa;
+	padding:0px 15px;
+	border-bottom:4px solid #ea8b22; 
+}
+.nav_pding{padding-top:20px; margin-bottom:0px !important; padding-bottom:20px;}
+.nav_sm_menu_bg{background: #f7f4e6;}
+.sm-menu{
+    border-radius: 0px;
+    border: 0px;
+    top: 97%;
+    box-shadow: rgba(173, 173, 173, 0.2) 1px 3px 4px 0px;
+}
+.dropdown-item { 
+        font-size: 14px;
+		padding: 0.25rem 10px;
+		font-weight:500;
+}
+.dropdown-item.active, .dropdown-item:active {
+    color: #000;
+    text-decoration: none;
+    background:none;
+}
+ .dropdown-item:hover, .dropdown-item:focus {
+    color: #000;
+    text-decoration: none;
+    background: none;
+}
+.navbar-toggler{
+    outline: none !important;
+}
+ 
+.megamenu-li {
+	position: static;
+}
+
+.megamenu {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	right: 0;
+	padding: 15px;
+}
+.megamenu h6{
+    margin-left: 10px;
+	color: #000;
+    font-weight: 600;
+}
+.megamenu i{
+    width: 20px;
+}
+@media (min-width: 992px){
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    max-width: 1140px;
+    margin: auto;
+	box-shadow: 0 3px 5px rgb(0 0 0 / 20%);
+}
+}
 /*top nav end*/
 /*banner start*/
 .banner{background:#f8d021; position:relative; } 
@@ -283,4 +347,3 @@ footer .socail_icons li a:hover i{padding:0px; color:#fff;}
 	.next_prew ul li a:hover{background:#fad216;}
 	
 	
-
