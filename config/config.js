@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiUrl = `${process.env.HOST}/web/v1/`;
-// console.log(" config file not able to fetch env values", process.env.HOST);
+
 const config = {
     baseURL: apiUrl,
     headers: {
