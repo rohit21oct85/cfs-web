@@ -12,40 +12,33 @@ import PopularTbs from '../components/website/home/popular-tbs'
 import SubscribeHere from '../components/website/home/subscribe-here'
 import TutorCollege from '../components/website/home/tutor-college'
 import Follow from '../components/website/home/follow'
+import {getNavbarData} from '../libs/home'
 
-// export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  // const res = await fetch('https://.../posts')
-  // const posts = await res.json()
-
-  // By returning { props: posts }, the Blog component
-  // will receive `posts` as a prop at build time
-  // return {
-  //   props: {
-  //     posts,
-  //   },
-  // }
-// }
+// export const getStaticProps = async () => {
+// 	const { data } = await getNavbarData();
+// 	return {
+// 		props: {
+// 			data,
+// 		},
+// 	};
+// };
 
 export default function Home() {
-  
   return (
     <>
-      <Header/>
-      <Navbar/>
-      <Banner/>
-      <ContentCovered/>
-      <FindTbs/>
-      <AssignmentHelp/>
-      <AskExpert/>
-      <BuySubscription/>
-      <SubjectsWeCover/>
-      <PopularTbs/>
-      <SubscribeHere/>
-      <TutorCollege/>
-      <Follow/>
-      <Footer/>
-    </>
-  )
+		<Header/>
+		<Navbar/>
+		<Banner/>
+		<ContentCovered/>
+		<FindTbs/>
+		<AssignmentHelp/>
+		<AskExpert/>
+		<BuySubscription/>
+		<SubjectsWeCover/>
+		<PopularTbs/>
+		<SubscribeHere/>
+		<TutorCollege/>
+		<Follow/>
+		<Footer/>
+    </>)
 }
