@@ -1,3 +1,5 @@
+import {GetName} from '../../common/make-slug'
+
 export default function BreadCrumb({...props}){
 
     function createMarkup() {
@@ -10,7 +12,7 @@ export default function BreadCrumb({...props}){
                 <div className="row"> 
                     <div className="col-md-12 text-left">
                         <div className="all_banner_text"> 
-                            <h2>{props.heading}</h2>
+                            <h2>{GetName(props.heading)}</h2>
                             <ul className="breadcrumb">
                                 <li><a href="#">Home   </a><span dangerouslySetInnerHTML={createMarkup()}/></li>
                                 <li><a href="#"> TextBook Manual </a> <span dangerouslySetInnerHTML={createMarkup()}/></li>

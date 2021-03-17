@@ -20,12 +20,11 @@ import { useQuery } from 'react-query'
 //     };
 // }
 
-
 export default function SubSubject(){
     const [pageNo, setPageNo] = useState(0);
     const router = useRouter();
 
-    const { data, isLoading, error } = useQuery(['books', pageNo], () => getBooks({sub_subject_name: 'ecommerce', pageno : pageNo}))
+    const { data, isLoading, error } = useQuery([router.query.subsubject, pageNo], () => getBooks({sub_subject_name: router.query.subsubject, pageno : pageNo}))
     
     return (
         <>
@@ -33,8 +32,7 @@ export default function SubSubject(){
             <Navbar/>
             <BreadCrumb heading={router.query.subsubject}/>
             <BuySubscription/>
-            {isLoading ? <>LOADING ...</> :
-            <AllBooks data={data} setPageNo={setPageNo} pageNo={pageNo}/>}
+            { isLoading ? <>Loading ...</> : <AllBooks data={data} setPageNo={setPageNo} pageNo={pageNo}/> }
             <Follow/>
             <Footer/>
         </>

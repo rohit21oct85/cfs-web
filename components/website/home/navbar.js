@@ -3,13 +3,17 @@ import Link from 'next/link'
 import { useRouter } from "next/router";
 import { getNavbarData } from '../../../libs/home'
 import { useQuery } from 'react-query'
-  
+import { MakeSlug } from '../../common/make-slug'
 export default function Navbar() {
     const router = useRouter();
     const [showMenu,setShowMenu] = useState(false);
     const [showAMenu,setShowAMenu] = useState(false);
     const [classname, setClassname] = useState('');
     
+    const handleClick =()=>{
+        hideMenu()
+    }
+
     const openMenu = ()=>{
         setShowMenu(true);
         setShowAMenu(false);
@@ -71,7 +75,9 @@ export default function Navbar() {
                                         <div className={`col-sm-6 nav_pding ${key % 2 == 1 ? 'nav_sm_menu_bg' : ''} col-lg-2 border-right mb-4`} key={key}>
                                             <h6>{item.subject} <img src={`/images/nav-icons/${item.subject.toLowerCase().replace(/ /g,"-")}.png`} className="img-fluid" alt=""/> <i className="fa fa-angle-down"></i></h6>
                                             {item.sub_subject.map((it,key)=>{
-                                                return <Link href={{pathname:`${'textbook-solutions-manuals/'+item.subject.toLowerCase().replace(/ /g,"-")+'/'+it.sub_subject.toLowerCase().replace(/ /g,"-")}`}} key={key}><a className="dropdown-item">{it.sub_subject}</a></Link>
+                                                return <Link href={`/textbook-solutions-manuals/${MakeSlug(item.subject)+'/'+MakeSlug(it.sub_subject)}`} key={key}><a className="dropdown-item" onClick={handleClick}>{it.sub_subject}</a></Link>
+                                                // return <Link href={{pathname:`${'textbook-solutions-manuals/'+item.subject.toLowerCase().replace(/ /g,"-")+'/'+it.sub_subject.toLowerCase().replace(/ /g,"-")}`}} key={key}><a className="dropdown-item">{it.sub_subject}</a></Link>
+                                                // return <Link href={{pathname: 'textbook-solutions-manuals', query: {subject: item.subject.toLowerCase().replace(/ /g,"-"), sub_subject_name:it.sub_subject.toLowerCase().replace(/ /g,"-")} }} key={key}><a className="dropdown-item">{it.sub_subject}</a></Link>
                                             })}
                                         </div> 
                                     )

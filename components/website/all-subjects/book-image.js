@@ -6,9 +6,15 @@ function BookImage({isbn}) {
     
     useEffect(() => {
         async function fetchCoverImage(){
-            const response = await axios.get(`https://pictures.abebooks.com/isbn/${isbn}-us-300.jpg`);
-            if(response.status === 200){
-              setImage(`https://pictures.abebooks.com/isbn/${isbn}-us-300.jpg`);
+            try{
+                const response = await axios.get(`https://pictures.abebooks.com/isbn/${isbn}-us-300.jpg`);
+                if(response.status === 200){
+                    setImage(`https://pictures.abebooks.com/isbn/${isbn}-us-300.jpg`);
+                }
+            }catch(e){
+                if(e.response.status===404){
+                    setImage(`https://www.crazyforstudy.com/uploads/book-images-with-text/IMG-${isbn}.jpg`);
+                }
             }
         }
        fetchCoverImage();
@@ -18,7 +24,7 @@ function BookImage({isbn}) {
         {image && (<img src={image} style={{ width: "100%"}}/>)}
         {!image && (
         <div className="book_image_container">
-            <img src={`https://www.crazyforstudy.com/uploads/book-images-with-text/IMG-${isbn}.jpg`} style={{ width: "100%"}}/>
+            <img src={image} style={{ width: "100%"}}/>
         </div>
         )}
         </>
