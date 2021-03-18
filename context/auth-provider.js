@@ -6,6 +6,7 @@ const AuthContext = createContext()
 function AuthProvider({ children }) {
 	const { pathname, events } = useRouter()
 	const [user, setUser] = useState()
+	const protectedRoutes = ['dashboard'];
 
 	async function getUser() {
 		try {
@@ -29,7 +30,10 @@ function AuthProvider({ children }) {
 	useEffect(() => {
 		// Check that a new route is OK
 		const handleRouteChange = url => {
-		if (url !== '/' && !user) {
+		// if (url !== '/dashboard' && !user) {
+		// 	window.location.href = '/login'
+		// }
+		if (protectedRoutes.includes(url) && !user) {
 			window.location.href = '/login'
 		}
 	}
@@ -39,9 +43,9 @@ function AuthProvider({ children }) {
       	window.location.href = '/login'
     }
 
-	// if (pathname === '/login' && user) {
-	// 	window.location.href = '/dashboard'
-  	// }
+	if (pathname === '/login' && user) {
+		window.location.href = '/dashboard'
+  	}
 
     // Monitor routes
     events.on('routeChangeStart', handleRouteChange)
