@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { apiUrl } from '../config/config'
 import {GetName} from '../components/common/make-slug'
+
 export async function getBooks( param ) {
     try {
         let pagination = {pageno : param.pageno, limit: 10}

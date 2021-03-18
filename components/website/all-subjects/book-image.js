@@ -12,8 +12,10 @@ function BookImage({isbn}) {
                     setImage(`https://pictures.abebooks.com/isbn/${isbn}-us-300.jpg`);
                 }
             }catch(e){
-                if(e.response.status===404){
-                    setImage(`https://www.crazyforstudy.com/uploads/book-images-with-text/IMG-${isbn}.jpg`);
+                if(e.response){
+                    if(e.response.status===404){
+                        setImage(`https://www.crazyforstudy.com/uploads/book-images-with-text/IMG-${isbn}.jpg`);
+                    }
                 }
             }
         }

@@ -38,17 +38,15 @@ export default function  Pagination({...props}) {
                 <ul>
                     <li><a href="#" className="border-left-0 " onClick={handlePrev}>Previous</a></li>
                     {[...Array(pages)].map((e, i) => 
-                        ( i!=0 && i<4 ) &&
+                        ( i!=0 && (props.pageNo+1 == i || i<3) ) &&
                             <li key={i}>
                                 <a href="#" className={props.pageNo+1 == i ? 'active':''} onClick={handleClick}>{i}</a>
-                                {console.log(props.pageNo+1, i)}
                             </li>
                     )}
                     {[...Array(pages)].map((e, i) => 
-                        ( i>pages-4 ) &&
+                        ( i>pages-3 ) &&
                             <li key={i}>
                                 <a href="#" className={props.pageNo+1 == i ? 'active':''} onClick={handleClick}>{i}</a>
-                                {console.log(props.pageNo+1, i)}
                             </li>
                     )}
                     {/* <li><a href="#" className={props.pageNo+1 == 1 ? 'active':''} onClick={handleClick}>1</a></li>

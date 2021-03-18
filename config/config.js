@@ -14,8 +14,8 @@ const config = {
 const authAxios = axios.create(config);
 
 authAxios.interceptors.request.use(function(config) {
-    config.headers.Authorization = localStorage.getItem('access_token') ?
-        `Bearer ${localStorage.getItem('access_token')}` :
+    config.headers.Authorization = localStorage.getItem('access_token_student') ?
+        `Bearer ${localStorage.getItem('access_token_student')}` :
         ``;
     return config;
 });
