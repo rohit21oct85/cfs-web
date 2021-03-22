@@ -8,7 +8,7 @@ import AskExpert from '../components/website/q-and-a/ask-an-expert'
 import TryCrazy from '../components/website/q-and-a/try-crazy-for-study'
 import BuySubscription from '../components/website/q-and-a/buy-subscription'
 import HowItWorks from '../components/common/how-it-works'
-import StudyHelp from '../components/website/q-and-a/study-help'
+import StudyHelp from '../components/common/study-help'
 
 export default function QandA() {
     return(

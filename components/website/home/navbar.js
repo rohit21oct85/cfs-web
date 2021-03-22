@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { getNavbarData } from '../../../libs/home'
 import { useQuery } from 'react-query'
 import { MakeSlug } from '../../common/make-slug'
+
 export default function Navbar() {
     const router = useRouter();
     const [showMenu,setShowMenu] = useState(false);
@@ -50,6 +51,7 @@ export default function Navbar() {
     const { data, isLoading } = useQuery('menus', getNavbarData)
     
     return (
+        <>
         <nav className={`navbar navbar-expand-lg navbar-light sticky-top ${homePClass}`}>
             <div className="container">
                 <Link href="/"><a className="navbar-brand"><img src={`/images/${homePImage}`} className="img-fluid" alt="logo"/></a></Link>
@@ -92,15 +94,16 @@ export default function Navbar() {
                         </a>
                         {showAMenu && 
                         <div className={`dropdown-menu sm-menu ${classname}`} aria-labelledby="navbarDropdown" onMouseLeave={()=>hideMenuA()}>
-                            <a className="dropdown-item" href="#"><img src="/images/nav-icons/online-assignment-help.png" className="img-fluid" alt=""/> Assignment Help </a> 
+                            <Link href="/writing/online-assignment-help"><a className="dropdown-item"><img src="/images/nav-icons/online-assignment-help.png" className="img-fluid" alt=""/> Assignment Help </a></Link>
                         </div>}
                     </li>
-                    <li className="nav-item login_signup_top"><Link href="/login"><a className="nav-link">Login / Signup <i className="fa fa-user"></i></a></Link></li> 
+                    <li className="nav-item login_signup_top"><Link href="/auth/signin"><a className="nav-link">Login / Signup <i className="fa fa-user"></i></a></Link></li> 
         
                 </ul>
                 </div>
             </div>
         </nav> 
+        </>
     )
 }
   

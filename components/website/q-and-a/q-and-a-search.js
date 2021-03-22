@@ -1,3 +1,5 @@
+import Search from '../../common/search'
+
 export default function QandASearch() {
     return (
         <>
@@ -7,10 +9,11 @@ export default function QandASearch() {
                     <div className="col-md-8 m-auto text-center">
                         <div className="all_banner_text">
                         <h1>There is a 90% chance that we have answers for your questions</h1>
-                        <form className="mt-4">
+                        {/* <form className="mt-4">
                             <input type="text" placeholder="Search your homework question" className="form-control pl-5"/>
                             <button type="submit" className="search_btn"><i className="fa fa-search"></i> Search</button>
-                        </form>
+                        </form> */}
+                        <Search placeholder={"Search your homework question"} btnText={"Search"}/>
                         </div>
                     </div>
                     </div>

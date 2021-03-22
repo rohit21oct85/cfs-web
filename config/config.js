@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// const apiUrl = `http://127.0.0.1:8080/web/v1/`;
 const apiUrl = `${process.env.HOST}/web/v1/`;
 
 const config = {

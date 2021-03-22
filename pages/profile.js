@@ -10,6 +10,7 @@ import AccessDenied from '../components/access-denied'
 import { signOut } from 'next-auth/client'
 
 async function SignOut () {
+    console.log("removing...")
     localStorage.removeItem('access_token_student')
     localStorage.removeItem('refresh_token_student')
     localStorage.removeItem('student_name')
@@ -22,16 +23,29 @@ async function SignOut () {
 
 
 
-export default function  Dashboard() {
+export default function  Profile() {
     const [ session, loading ] = useSession()
+    console.log(session)
+    // const [user,setUser] = useState(null);
+    
+    // useEffect(() => {
+    //     setUser(localStorage.getItem('access_token_student'))
+    //     return () => {
+    //     }
+    // }, [])
 
+    // Server-render loading state
+    // if (!user) {
+    //     return <span>Loading...</span>
+    // }
     if (!session) { return  (<><AccessDenied/></>) }
     
+
     return (
         <>
             <Header/>
             <Navbar/>
-            <h1>Dashboard</h1>
+            <h1>Profile</h1>
             <Link href="#"><a onClick={SignOut}>SignOut</a></Link>
             <Follow/>
             <Footer/>

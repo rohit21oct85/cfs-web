@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p $PORT",
     "build": "next build",
     "start": "next start -p $PORT"
   },
@@ -15,6 +15,7 @@
     "axios": "^0.21.1",
     "font-awesome": "^4.7.0",
     "next": "10.0.8",
+    "next-auth": "^3.13.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-owl-carousel": "^2.3.3",

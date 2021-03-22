@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getNavbarData } from '../../../libs/home'
+import { getNavbarData } from '../../libs/home'
 import Link from 'next/link'
 import { useQuery } from 'react-query'
 

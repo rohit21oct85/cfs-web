@@ -68,6 +68,7 @@ export default function Login() {
                 <button type="submit" className="btn btn-primary">
                     {loading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 'Submit'}
                 </button>
+                <div className="g-signin2" data-onsuccess="onSignIn"></div>
             </form>
             <Follow/>
             <Footer/>

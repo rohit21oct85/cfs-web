@@ -1,27 +1,27 @@
 import BookImage from '../all-subjects/book-image'
+import Link from 'next/link'
 
 export default function SingleBook({...props}){
     return(
-        <div className="w-20 width_product">
+        <div className="col-md-3">
             <div className="our_popular_text">
                 <div className="our_popular_img">
                     {/* <img src={props.image} className="img-fluid" alt=""/> */}
                     <BookImage isbn={props.isbn}/>
                 </div>
                 <div className="our_popular_title">
-                   {props.bookname}
+                    {props.bookname} 
                 </div>
                 <div className="our_popular_isbn_no">
-                    ISBN: <span>{props.isbn}</span>
+                ISBN: <span>{props.isbn}</span>
                 </div>
                 <div className="star_rating">
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star-half-empty"></i>
+                    <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star-half-empty"></i>
+                </div>
+                <div className="view_detail_btn">
+                    <Link href="#"><a>View Detail</a></Link>
                 </div>
             </div>
         </div>
-    )
+        )
 }
