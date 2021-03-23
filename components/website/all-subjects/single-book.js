@@ -1,4 +1,4 @@
-import BookImage from '../all-subjects/book-image'
+import BookImage from '../../common/book-image'
 import Link from 'next/link'
 
 export default function SingleBook({...props}){
