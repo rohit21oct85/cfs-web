@@ -9,22 +9,23 @@ export async function setLogin(data) {
         }
     }
     catch(e){
-        if(error.response.status === 401){
+        if(e.response.status === 401){
             return null;
         }
     }
 }
 
 export async function setSignUp(data) {
+    console.log(data);
     try {
-        const res = await axios.Register(apiUrl + 'student/register', data)
+        const res = await axios.post(apiUrl + 'student/register', data)
         if(res.status === 200){
-            return res.data;
+            return res;
         }
     }
     catch(e){
-        if(error.response.status === 401){
-            return null;
+        if(e.response.status === 409){
+            return 409
         }
     }
 }

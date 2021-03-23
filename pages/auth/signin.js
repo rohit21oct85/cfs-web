@@ -7,25 +7,36 @@ import Footer from '../../components/website/home/footer'
 import Follow from '../../components/website/home/follow'
 import {useEffect} from 'react'
 import { useSession } from 'next-auth/client'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
+import { route } from 'next/dist/next-server/server/router';
+
 
 export default function SignIn({ csrfToken, providers }) {
 	const [ session, loading ] = useSession();
+	const [success, setSuccess] = useState(null);
+	const [loader, setLoader] = useState(false);
+	const [disabled, setDisabled] = useState(true)
+	const [error, setError] = useState(null);
 
+	const router = useRouter()
+	const emailRef = useRef();
+	const passwordRef = useRef();
+ 	
 	useEffect(() => {
 		if (session && session.expires){
 			Router.push('/dashboard')
 		}
-
 	}, [session])
-	
-	const [error, setError] = useState(null);
-	const emailRef = useRef();
-	const passwordRef = useRef();
- 	const [loader, setLoader] = useState(false);
 
-	const [disabled, setDisabled] = useState(true)
+	// useEffect(() => {
+	// 	
+	// 	return () => {
+	// 		setSuccess(null);
+	// 	}
+	// }, [success, router.query])
+
+	
 
 	const submitForm = async (e) => {
 		e.preventDefault();
@@ -110,6 +121,7 @@ return (
 					
 							<div className="form-group col-md-12 text-center signin_btn1"> 
 							{error && (<p style={{ color: 'red', margin: '0px' }}>{error}</p>)} 
+							{success && (<p style={{ color: 'green', margin: '0px' }}>{success}</p>)} 
 								<button type="submit" className="btn form-control" disabled={disabled}> {loader ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 'Sign In'}</button> 
 							</div>
 				

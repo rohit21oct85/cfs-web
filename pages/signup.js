@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { providers, signIn } from 'next-auth/client'
 import { useRef, useState } from 'react';
 import {setSignUp}  from '../libs/auth'
+import Router from 'next/router'
 
 export default function  SignUp({providers}) {
     const [error, setError] = useState(null);
@@ -25,7 +26,7 @@ export default function  SignUp({providers}) {
 		}
 	}
 
-    const SignUp = (e) => {
+    async function SignUp(e) {
         e.preventDefault();
 		const email = emailRef.current.value;
 		const password = passwordRef.current.value;
@@ -46,14 +47,23 @@ export default function  SignUp({providers}) {
 			return false;
         }else{
             setLoader(true);
-            setSignUp(
+            const res = await setSignUp(
                     {
-                        'name':name,
+                        'fullname':name,
                         'email':email,
                         'password':password,
                         'school':school
-                    }
-                    );
+                    });
+            if(res === 409){
+                setError("User with the same email already exists");
+                setLoader(false);
+			    return false;
+            }else if(res && res.status === 200){
+                Router.push({
+                    pathname: '/auth/signin',
+                    query: { signup: true }
+                })
+            }
         }
 
 
