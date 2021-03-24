@@ -1,15 +1,11 @@
 import { csrfToken, Provider } from 'next-auth/client'
 import { providers, signIn } from 'next-auth/client'
 import { useRef, useState } from 'react';
-import Header from '../../components/website/home/header'
-import Navbar from '../../components/website/home/navbar'
-import Footer from '../../components/website/home/footer'
-import Follow from '../../components/website/home/follow'
+import NewNavbar from '../../components/common/new-navbar-login-signup'
 import {useEffect} from 'react'
 import { useSession } from 'next-auth/client'
 import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
-import { route } from 'next/dist/next-server/server/router';
 
 
 export default function SignIn({ csrfToken, providers }) {
@@ -72,8 +68,7 @@ export default function SignIn({ csrfToken, providers }) {
 
 return (
     <>
-		<Header/>
-		<Navbar/>
+		<NewNavbar/>
 
 		<section className="login_banner pt-5 pb-5"> 
 			<div className="container">
@@ -161,7 +156,7 @@ return (
 							</div>
 							<div className="col-md-12 text-center">
 								<div className="sign_up_link">
-									Don't have an account? <Link href="/signup"><a>Sign Up here</a></Link>
+									Don't have an account? <Link href="/auth/signup"><a>Sign Up here</a></Link>
 								</div>
 							</div>
 							</div>
@@ -170,8 +165,6 @@ return (
 				</div>
 			</div>
 		</section>
-		<Follow/>
-		<Footer/>
     	</>
   	)
 }

@@ -1,14 +1,15 @@
 import { useQuery } from 'react-query'
 import { getPopularBooks } from '../../../libs/home'
 import BookImage from '../../common/book-image'
+import Link from 'next/link'
 
 export default function PopularTbs(){
 
-    const { data, isLoading } = useQuery('popular-books', getPopularBooks)
+    const { data, isLoading } = useQuery('popular-books',getPopularBooks,{ staleTime:Infinity })
 
     return (
         <section className="section our_popular_bg pt-5 pb-5">
-            <div className="container">
+            <div className="container">{console.log("re-render")}
                 <div className="row">
                     <div className="col-md-12 text-center mb-5">
                         <div className="Content_Covered_title pb-3">
@@ -16,8 +17,8 @@ export default function PopularTbs(){
                             <h3>We cover various subjects from different fields. Explore each subject to learn more.</h3>
                         </div>
                     </div>
-                    {data && data.map((book,key)=>{
-                        return(<div className="col-md-3" key={key}>
+                    {data && data.map((book,key) => {
+                        return (<div className="col-md-3" key={key}>
                                     <div className="our_popular_text">
                                         <div className="our_popular_img">
                                             <BookImage isbn={book.ISBN13}/>
@@ -34,10 +35,13 @@ export default function PopularTbs(){
                                         </div>
                                     </div>
                                 </div>
-                        )})}
+                                )
+                            }
+                        )   
+                    }
 
                 <div className="col-md-12 btn1 text-center mt-5">
-                    <a href="#" className="pl-5 pr-5">View All</a> 
+                    <Link href="#"><a className="pl-5 pr-5">View All</a></Link>
                 </div>
 
                 </div>

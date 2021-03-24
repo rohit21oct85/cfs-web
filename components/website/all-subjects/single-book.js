@@ -19,7 +19,7 @@ export default function SingleBook({...props}){
                     <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star-half-empty"></i>
                 </div>
                 <div className="view_detail_btn">
-                    <Link href="#"><a>View Detail</a></Link>
+                    <Link href={`/${props.isbn}`}><a>View Detail</a></Link>
                 </div>
             </div>
         </div>

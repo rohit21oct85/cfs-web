@@ -25,11 +25,11 @@ function BookImage({isbn}) {
     return (
         <>
         {image && (<img src={image} style={{ width: "100%"}}/>)}
-        {!image && (
-        <div className="book_image_container">
-            <img src={image} style={{ width: "100%"}}/>
-        </div>
-        )}
+            {!image && (
+                <div className="book_image_container">
+                    <img src={image} style={{ width: "100%"}}/>
+                </div>
+            )}
         </>
     )
 }

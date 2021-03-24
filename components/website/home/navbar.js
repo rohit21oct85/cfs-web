@@ -48,7 +48,7 @@ export default function Navbar() {
         }
     }, [])    
 
-    const { data, isLoading } = useQuery('menus', getNavbarData)
+    const { data, isLoading } = useQuery('menus', getNavbarData,{ staleTime:Infinity })
     
     return (
         <>
