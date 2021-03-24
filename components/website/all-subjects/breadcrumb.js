@@ -1,10 +1,8 @@
-import {GetName} from '../../common/make-slug'
+import {GetName, createMarkup} from '../../common/make-slug'
 
 export default function BreadCrumb({...props}){
 
-    function createMarkup() {
-        return {__html: '&sol;'};
-    }
+    
     
     return(
         <section className="bg_banner_color pt-0 pb-0"> 
@@ -14,9 +12,9 @@ export default function BreadCrumb({...props}){
                         <div className="all_banner_text"> 
                             <h2>{GetName(props.heading)}</h2>
                             <ul className="breadcrumb">
-                                <li><a href="#">Home   </a><span dangerouslySetInnerHTML={createMarkup()}/></li>
-                                <li><a href="#"> TextBook Manual </a> <span dangerouslySetInnerHTML={createMarkup()}/></li>
-                                <li><a href="#">Maths   </a> <span dangerouslySetInnerHTML={createMarkup()}/></li> 
+                                <li><a href="#">Home   </a><span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li>
+                                <li><a href="#"> TextBook Manual </a> <span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li>
+                                <li><a href="#">Maths   </a> <span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li> 
                                 <li> Advanced Math</li>
                             </ul>
                         </div>

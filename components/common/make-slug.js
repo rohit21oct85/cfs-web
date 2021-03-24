@@ -13,10 +13,14 @@ const GetName = (str) => {
         return str.replaceAll('-', ' ');   
     }
 }
+function createMarkup(data) {
+    return {__html: data};
+}
 
 export {
     MakeSlug,
     SameSlug,
     GetString,
-    GetName
+    GetName,
+    createMarkup,
 }

@@ -3,12 +3,21 @@ import Navbar from '../components/website/home/navbar'
 import Footer from '../components/website/home/footer'
 import Follow from '../components/website/home/follow'
 import BreadCrumb from '../components/website/all-subjects/breadcrumb'
+import { createMarkup } from '../components/common/make-slug'
+import { useRouter } from "next/router";
+import { useQuery } from 'react-query'
+import {getBook} from '../libs/book'
 
 export default function Book(){
+    const router = useRouter();
+    console.log(router.query)
+    
+    const { data, isLoading, error } = useQuery([router.query.book], () => getBook({book_isbn: router.query.book}))
+
     return(<>
-        <Header/>
+        <Header/>{console.log(data)}
         <Navbar/>
-        <BreadCrumb/>
+        <BreadCrumb heading={""}/>
             
         <section className="section font_sz text_justify pt-5 pb-4">
             <div className="container">
@@ -69,7 +78,7 @@ export default function Book(){
                     <div className="col-md-12">
                         <div className="bg_chapter">
                             <div className="row"> 
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <div className="chapter">
                                         <label>Chapter</label>
                                         <select className="form-control">
@@ -77,7 +86,7 @@ export default function Book(){
                                         </select>
                                     </div>
                                 </div>
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <div className="chapter">
                                         <label>Section</label>
                                         <select className="form-control">
@@ -85,15 +94,25 @@ export default function Book(){
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4">
-                            <div className="chapter">
-                                    <label>Question</label>
-                                    <select className="form-control">
-                                        <option>Question 1QA - Provide two exam...</option>
-                                    </select>
+                                <div className="col-md-3">
+                                    <div className="chapter">
+                                            <label>Exercise</label>
+                                            <select className="form-control">
+                                                <option>Question 1QA - Provide two exam...</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="chapter">
+                                            <label>Question</label>
+                                            <select className="form-control">
+                                                <option>Question 1QA - Provide two exam...</option>
+                                            </select>
+                                    </div>
                                 </div>
                             </div>
+                                
+                            
                         </div>
                     </div>
                 </div>
@@ -207,11 +226,11 @@ export default function Book(){
         <h2><span className="price">$7.00</span> / <span className="month">month</span></h2>
         <p>Private, 1-on-1 lessons with the tutors instructor of your choice. </p>
         <ul className="include_list">
-        <li><span>&quest;</span> <div className="q_text"> <h4>Ask a question</h4> 
+        <li><span dangerouslySetInnerHTML={createMarkup('&quest;')}/> <div className="q_text"> <h4>Ask a question</h4> 
                                             <p>Ask 50 New Homework Questions</p></div> </li>
-        <li><span>&dollar;</span> <div className="q_text"> <h4>Homework Q&A </h4> 
+        <li><span dangerouslySetInnerHTML={createMarkup('&dollar;')}/> <div className="q_text"> <h4>Homework Q&A </h4> 
                                             <p>Unlimited Access to pre-existing Homework Q&A </p></div></li>
-        <li><span>&check;</span> <div className="q_text"> <h4>Unlimited Textbook</h4> 
+        <li><span dangerouslySetInnerHTML={createMarkup('&check;')}/> <div className="q_text"> <h4>Unlimited Textbook</h4> 
                                             <p>Unlimited Textbook Solutions Manual   </p></div> </li>
         </ul>
         <div className="btn1">

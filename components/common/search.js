@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import {searchData} from '../../libs/search'
 import BookImage from '../../components/common/book-image'
 
@@ -7,30 +7,37 @@ export default function Search({...props}){
     const [ display, setDisplay ] = useState('none');
     const [ searchedQuestions, setSearchedQuestions ] = useState(null);
     const [ searchedBooks, setSearchedBooks ] = useState(null);
+    const [ search, setSearch ] = useState(null);
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            if(search && search.length > 3 && search != ''){
+                setDisplay('block');
+                openSearch(search);
+            }else if(search === ""){
+                setDisplay('none');
+                setSearchedBooks(null)
+                setSearchedQuestions(null)
+            }
+          }, 1000);
+        return () => clearTimeout(delayDebounceFn)
+    },[search]);
+
     async function openSearch (e){
-        if(e.target.value === ""){
-            setDisplay('none');
-            setSearchedBooks(null)
-            setSearchedQuestions(null)
-        }else {
-            const debounce = setTimeout(async() => {
-                if(e.target.value.length >= 3){
-                    setDisplay('block');
-                    const data = await searchData(e.target.value);
-                    if(data){
-                        setSearchedBooks(data.data2.books);
-                        setSearchedQuestions(data.data1.questions);
-                    }
-                }
-                clearTimeout(debounce);
-            }, 1000);
-        }   
+        const data = await searchData(e);
+        if(data){
+            setSearchedBooks(data.data2.books);
+            setSearchedQuestions(data.data1.questions);
+            if(data && data.data1.questions.length == 0){
+                setDisplay('none');
+            }
+        }
     }
 
     return (
         <>
             <form>
-                <input type="text" placeholder={props.placeholder} className="form-control" onKeyUp={(e)=>{openSearch(e)}}/>
+                <input type="text" placeholder={props.placeholder} className="form-control" onChange={(e)=>{setSearch(e.target.value)}}/>
                 <button type="submit" className="search_btn">{props.btnText}</button>
             </form>
             
@@ -39,8 +46,8 @@ export default function Search({...props}){
                     <div className="books_bg1">
                         <div className="row">
                             <div className="col-md-12">
-                                <div className="books_bg2">
-                                    {searchedBooks && 
+                                <div className="books_bg2">{console.log(searchedBooks)}
+                                    {searchedBooks && searchedBooks.length != 0 &&
                                     <div className="books_titles">
                                         Books
                                     </div>}
@@ -61,16 +68,16 @@ export default function Search({...props}){
                             </div>
                             <div className="col-md-12">
                                 <div className="books_bg2">
-                                    {searchedQuestions && 
+                                    {searchedQuestions && searchedQuestions.length != 0 &&
                                     <div className="books_titles">
                                         TextBook Question
                                     </div>
                                     }
                                     {searchedQuestions && searchedQuestions.map((item,key)=>{
                                     return(<span key={key}>
-                                            <div className="picking_img1">
+                                            {/* <div className="picking_img1"> */}
                                                 {/* <img src="/images/search-img/picking_img1.jpg" className="img-fluid" alt=""/> */}
-                                            </div>
+                                            {/* </div> */}
                                             <div className="Picking_Cotton">
                                                 <h3>{item.question}</h3>
                                                 <p>{item.book_name} | {item.book_isbn}</p>
