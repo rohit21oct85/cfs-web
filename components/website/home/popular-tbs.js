@@ -40,7 +40,7 @@ export default function PopularTbs(){
                         )   
                     }
 
-                <div className="col-md-12 btn1 text-center mt-5">
+                <div className="col-md-12 btn1 text-center">
                     <Link href="#"><a className="pl-5 pr-5">View All</a></Link>
                 </div>
 
