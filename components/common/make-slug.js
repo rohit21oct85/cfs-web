@@ -17,10 +17,16 @@ function createMarkup(data) {
     return {__html: data};
 }
 
+const capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+
 export {
     MakeSlug,
     SameSlug,
     GetString,
     GetName,
     createMarkup,
+    capitalize,
 }

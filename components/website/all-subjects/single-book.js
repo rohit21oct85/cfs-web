@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function SingleBook({...props}){
     return(
-        <div className="col-md-3">
+        <div className="col-md-3 pbtm">
             <div className="our_popular_text">
                 <div className="our_popular_img">
                     {/* <img src={props.image} className="img-fluid" alt=""/> */}

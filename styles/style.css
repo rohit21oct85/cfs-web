@@ -147,6 +147,8 @@ header p i{color:#f53c20;}
 .text_tb_center{position:relative; top:50%; transform:translateY(-50%);}
 .Text_title h5{position:relative;}
 .Text_title h5:before {content:""; position:absolute; bottom:0px; left:0; height:4px; background:#f8d021; width:40px;}
+.Text_title2 h4{position:relative; font-size:16px; text-transform:uppercase;     font-weight: bold;}
+.Text_title2 h4:before {content:""; position:absolute; bottom:0px; left:0; height:4px; background:#f8d021; width:40px;}
 .btn1 a{display:inline-block; background:#f8d021; color:#fff; padding:8px 30px; margin-top:10px; border-radius:50px;}
 /*Textbook_Solutions end*/
 
@@ -255,6 +257,8 @@ footer .socail_icons li a:hover i{padding:0px; color:#fff;}
 .bg_colr_expert{background:#e7f7f7;}
 .typical_text h3{font-size:20px; font-weight:bold;}
 .typical_text h3 span{color:#f0c60d;}
+.typical_text h4{font-size:20px; font-weight:bold;}
+.typical_text h4 span{color:#f0c60d;}
 .red_text{color:#de5103;}
 .red_text1{color:#f62222 !important;    font-size: 15px;}
 .graf1 span{display:inline-block; position:relative; top:50%; transform:translateY(-50%);}
@@ -535,7 +539,12 @@ background: #f6d123;
 .prduct_details_text ul.rating li{font-weight:bold; padding:0 15px;     font-size: 16px; border-left:1px solid #555555;}
 .books_wtext li span{color:#555555;}
 .prduct_details_text p i{font-size:14px; color:#f5811b; letter-spacing:1px;}
-.prduct_details_text ul.books_wtext li {padding:0 10px; font-weight:bold;     font-size: 16px;}
+.prduct_details_text ul.books_wtext li {
+    padding: 6px 0px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 10px;
+}
 .prduct_details_text ul.books_wtext {border-top:1px solid #f2f2f2; margin-top:15px; padding-top:10px;}
 .prduct_details_text ul.books_wtext li span{font-weight:500;}
  
@@ -835,3 +844,31 @@ a.text-black.rev-btn {
 .bg_img_q_s_c{background:url(/images/bg_img_qsc.jpg) no-repeat center fixed;}
 .bg_img_q_s_c h3{color:#fff;}
 .Students_title h3{font-weight:bold;}
+.our_popular_text { 
+    margin-bottom: 0 !important;
+    height: 100%;
+}
+
+input.form-control, .form-control:focus { 
+    height: 50px; 
+}
+.banner form input.form-control:focus{height:50px;}
+
+.get-homework p {
+    font-size: 15px;
+}
+
+.Students_title h3 {
+    font-weight: bold;
+    font-size: 37px;
+}
+
+
+.features_text h4,.features_text h5{font-size:18px; font-weight:600; text-transform: capitalize; margin-top:15px;}
+.Why_us_title h3{    font-weight: bold;
+    color: #000;
+    font-size: 37px;}
+	
+	.f2feff_color{background:#f2feff;}
+	.features_bg .features_text p{padding:0px; font-size:14px; font-weight:500;}
+	.pbtm{margin-bottom:30px;}

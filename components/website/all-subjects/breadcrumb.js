@@ -1,11 +1,11 @@
-import {GetName, createMarkup} from '../../common/make-slug'
+import {GetName, createMarkup,capitalize} from '../../common/make-slug'
 
 export default function BreadCrumb({...props}){
 
     
     
     return(
-        <section className="bg_banner_color pt-0 pb-0"> 
+        <section className="bg_banner_color pt-0 pb-0">{console.log("console for testing in breadcrumb",props)} 
             <div className="container">
                 <div className="row"> 
                     <div className="col-md-12 text-left">
@@ -14,8 +14,8 @@ export default function BreadCrumb({...props}){
                             <ul className="breadcrumb">
                                 <li><a href="#">Home   </a><span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li>
                                 <li><a href="#"> TextBook Manual </a> <span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li>
-                                <li><a href="#">Maths   </a> <span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li> 
-                                <li> Advanced Math</li>
+                                <li><a href="#">{capitalize(props.sub_subject)}   </a> <span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li> 
+                                <li> {capitalize(props.subject)}</li>
                             </ul>
                         </div>
                     </div>

@@ -18,7 +18,7 @@ export default function PopularTbs(){
                         </div>
                     </div>
                     {data && data.map((book,key) => {
-                        return (<div className="col-md-3" key={key}>
+                        return (<div className="col-md-3 pbtm" key={key}>
                                     <div className="our_popular_text">
                                         <div className="our_popular_img">
                                             <BookImage isbn={book.ISBN13}/>

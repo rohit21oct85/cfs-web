@@ -5,72 +5,65 @@ import Follow from '../components/website/home/follow'
 import BreadCrumb from '../components/website/all-subjects/breadcrumb'
 import { createMarkup } from '../components/common/make-slug'
 import { useRouter } from "next/router";
-import { useQuery } from 'react-query'
-import {getBook} from '../libs/book'
+import { useQuery, useLazyQuery } from 'react-query'
+import {getBook,getChapters,getSections,getExercises} from '../libs/book'
+import {useState, useEffect} from 'react';
+import BookInfo from '../components/website/book-detail/book-info'
 
 export default function Book(){
     const router = useRouter();
-    console.log(router.query)
-    
-    const { data, isLoading, error } = useQuery([router.query.book], () => getBook({book_isbn: router.query.book}))
+    const [chapter, setChapter] = useState();
+    const [section, setSection] = useState();
+    const [exercise, setExercise] = useState();
+
+    const { data: book, isLoading:bookIsLoading, error:bookError } = useQuery([router.query.book], () => getBook({book_isbn: router.query.book}),{staleTime:Infinity})
+    const { data: chapters, isLoading: chapterIsLoading, error:chapterError } = useQuery([`${router.query.book}-chapter`], () => getChapters({book_isbn: router.query.book}),{staleTime:Infinity})
+
+    const { data: sections, isLoading: sectionIsLoading, error:sectionError } = useQuery([`${router.query.book}-${chapter}`], () => getSections({book_isbn: router.query.book,chapter_no: chapter}),{staleTime:Infinity})
+    const { data: exercises, isLoading: exerciseIsLoading, error:exerciseError } = useQuery([`${router.query.book}-${section}`], () => getExercises({book_isbn: router.query.book,chapter_no: chapter, section_no:section}),{staleTime:Infinity})
+
+    const handleChapter = async (e) => {
+        setChapter(e.target.value);
+    }
+
+    const handleSection = async (e) => {
+        setSection(e.target.value);
+    }
+
+    const handleExercise = async (e) => {
+        setExercise(e.target.value);
+    }
+
+    useEffect(() => {
+        if(chapters && chapters.length>0){
+            setChapter(chapters[0].chapter_no)
+        }
+        return () => {}
+    }, [chapters])
+
+    useEffect(() => {
+        if(sections && sections.length>0){
+            setSection(sections[0].section_no)
+        }
+        return () => {}
+    }, [sections])
+
+    useEffect(() => {
+        if(exercises && exercises.length>0){
+            setExercise(exercises[0].exercise)
+        }
+        return () => {}
+    }, [exercises])
+
+    if(bookIsLoading)
+    return <span>Loading</span>;
 
     return(<>
-        <Header/>{console.log(data)}
+        <Header/>
         <Navbar/>
-        <BreadCrumb heading={""}/>
-            
-        <section className="section font_sz text_justify pt-5 pb-4">
-            <div className="container">
-                <div className="row"> 
-                    <div className="col-md-3 text-center">
-                        <div className="prduct_details_img">
-                            <ul>
-                                <li><span><img src="/images/prduct_details_img.jpg" className="img-fluid" alt=""/></span></li>
-                                <li className="buy_with_amazon"><i className="fa fa-shopping-bag"></i> BUY WITH AMAZON</li>
-                            </ul>
-                        </div>
-                    </div>
+        <BreadCrumb heading={book[0].BookName} subject={book[0].subject_name} sub_subject={book[0].sub_subject_name}/>
         
-            <div className="col-md-8 ml-auto pd_b_left">
-                <div className="prduct_details_text">
-                    <h3>Introduction to Biotechnology 3rd Edition Solutions Manual (Bioengineering) </h3>
-                        <p><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></p>
-                            <ul className="rating">
-                                <li className="pl-0 border-left-0">4.9/5 Rating</li>
-                                <li> 233 Reviews</li>
-                            </ul>
-            
-                            <ul className="books_wtext">
-                                <li className="pl-0 border-left-0"><img src="/images/book1.jpg" className="img-fluid" alt=""/> Edition: <span>3rd Edition,</span></li>
-                                <li><img src="/images/book2.jpg" className="img-fluid" alt=""/> Author: <span>Crazy for study,</span></li>
-                                <li><img src="/images/book3.jpg" className="img-fluid" alt=""/> ISBN: <span>9780321766113</span></li>
-                            </ul>
-                
-                            <div className="subscription-box-points">
-                                <div className="book-subscription-box">
-                                    <h4>$7/month
-                                    <span>Subscription</span></h4>
-                                </div>
-                                <div className="book-subscription-box">
-                                    <img src="/images/subscribe-arrow.png" className="img-fluid" alt=""/>
-                                </div>
-                                <div className="book-subscription-box">
-                                    <ul>
-                                        <li><img src="/images/check.png" className="img-fluid" alt=""/> 797 step-by-step solutions</li>
-                                        <li><img src="/images/check.png" className="img-fluid" alt=""/>  Solved by professors & experts </li>
-                                        <li><img src="/images/check.png" className="img-fluid" alt=""/>  iOS, Android, & web </li>
-                                    </ul>
-                                </div>
-                            
-                                <div className="book-subscription-box">
-                                    <button type="submit" className="buybook_btn text-center">Get This Solutions </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <BookInfo bookData={book[0]}/> 
 
         <section className="section font_sz text_justify pt-5">
             <div className="container">
@@ -81,24 +74,30 @@ export default function Book(){
                                 <div className="col-md-3">
                                     <div className="chapter">
                                         <label>Chapter</label>
-                                        <select className="form-control">
-                                            <option>1 The Biotechnology Century and Its...</option>
+                                        <select className="form-control" onChange={handleChapter}>
+                                        {chapters && chapters.map((item,key)=>{
+                                            return (<option key={key} value={item.chapter_no}>{item.chapter_name}</option>)
+                                        })}
                                         </select>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
                                     <div className="chapter">
                                         <label>Section</label>
-                                        <select className="form-control">
-                                            <option>Chapter Question</option>
+                                        <select className="form-control" onChange={handleSection}>
+                                        {sections && sections.map((item,key)=>{
+                                            return(<option key={key} value={item.section_no}>{item.section_name}</option>)
+                                        })}
                                         </select>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
                                     <div className="chapter">
                                             <label>Exercise</label>
-                                            <select className="form-control">
-                                                <option>Question 1QA - Provide two exam...</option>
+                                            <select className="form-control" onChange={handleExercise}>
+                                            {exercises && exercises.map((item,key)=>{
+                                                return(<option key={key} value={item.excerise}>{item.excerise}</option>)
+                                            })}
                                             </select>
                                     </div>
                                 </div>
@@ -361,7 +360,7 @@ export default function Book(){
                             <h2>Students who viewed this book also checked out</h2> 
                         </div>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3 pbtm">
                         <div className="our_popular_text">
                             <div className="our_popular_img">
                                 <img src="/images/our-popular/img1.jpg" className="img-fluid" alt=""/>
@@ -375,7 +374,7 @@ export default function Book(){
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3 pbtm">
                         <div className="our_popular_text">
                             <div className="our_popular_img">
                                 <img src="/images/our-popular/img2.jpg" className="img-fluid" alt=""/>
@@ -391,7 +390,7 @@ export default function Book(){
                         </div>
                         </div>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3 pbtm">
                         <div className="our_popular_text">
                         <div className="our_popular_img">
                         <img src="/images/our-popular/img3.jpg" className="img-fluid" alt=""/>
@@ -407,7 +406,7 @@ export default function Book(){
                         </div>
                         </div>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3 pbtm">
                         <div className="our_popular_text">
                         <div className="our_popular_img">
                         <img src="/images/our-popular/img4.jpg" className="img-fluid" alt=""/>

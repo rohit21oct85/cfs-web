@@ -28,7 +28,7 @@ export default function Search({...props}){
         if(data){
             setSearchedBooks(data.data2.books);
             setSearchedQuestions(data.data1.questions);
-            if(data && data.data1.questions.length == 0){
+            if(data && data.data1.questions.length == 0 && data.data2.books.length == 0){
                 setDisplay('none');
             }
         }
@@ -54,7 +54,6 @@ export default function Search({...props}){
                                     {searchedBooks && searchedBooks.map((item,key)=>{
                                     return(<span key={key}>
                                             <div className="picking_img1">
-                                                {/* <img src="/images/search-img/picking_img1.jpg" className="img-fluid" alt=""/> */}
                                                 <BookImage isbn={item.ISBN13}/>
                                             </div>
                                             <div className="Picking_Cotton">
@@ -75,9 +74,6 @@ export default function Search({...props}){
                                     }
                                     {searchedQuestions && searchedQuestions.map((item,key)=>{
                                     return(<span key={key}>
-                                            {/* <div className="picking_img1"> */}
-                                                {/* <img src="/images/search-img/picking_img1.jpg" className="img-fluid" alt=""/> */}
-                                            {/* </div> */}
                                             <div className="Picking_Cotton">
                                                 <h3>{item.question}</h3>
                                                 <p>{item.book_name} | {item.book_isbn}</p>
