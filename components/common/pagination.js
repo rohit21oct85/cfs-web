@@ -33,7 +33,7 @@ export default function  Pagination({...props}) {
     
 
     return(
-        <div className="col-md-12 mt-4">{console.log(pages)}
+        <div className="col-md-12 mt-4">
             <div className="next_prew">
                 <ul>
                     <li><a href="#" className="border-left-0 " onClick={handlePrev}>Previous</a></li>

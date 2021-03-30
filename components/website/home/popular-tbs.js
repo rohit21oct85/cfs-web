@@ -9,7 +9,7 @@ export default function PopularTbs(){
 
     return (
         <section className="section our_popular_bg pt-5 pb-5">
-            <div className="container">{console.log("re-render")}
+            <div className="container">
                 <div className="row">
                     <div className="col-md-12 text-center mb-5">
                         <div className="Content_Covered_title pb-3">

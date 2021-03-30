@@ -30,7 +30,7 @@ export default function SubSubject(){
         <>
             <Header/>
             <Navbar/>
-            <BreadCrumb heading={router.query.subsubject}/>
+            <BreadCrumb heading={router.query.subsubject} subject={router.query.subject} sub_subject={router.query.subsubject}/>
             <BuySubscription/>
             { isLoading ? <>Loading ...</> : <AllBooks data={data} setPageNo={setPageNo} pageNo={pageNo}/> }
             <Follow/>

@@ -1,4 +1,4 @@
-import Search from '../../common/search'
+import Search from '../../common/search-comp'
 
 export default function Banner() {
     return (

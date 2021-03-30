@@ -3,7 +3,6 @@ import { apiUrl } from '../config/config'
 
 export async function getBook(param) {
     try {
-        // console.log(param.book_isbn,"param")
         const res = await axios.get(apiUrl + 'books/book/'+param.book_isbn)
         return res.data.data;
     }
@@ -14,9 +13,7 @@ export async function getBook(param) {
 
 export async function getChapters(param) {
     try {
-        // console.log(param.book_isbn,"param")
         const res = await axios.get(apiUrl + 'books/book/chapter/'+param.book_isbn)
-
         return res.data.chapters;
     }
     catch(e){
@@ -26,7 +23,6 @@ export async function getChapters(param) {
 
 export async function getSections(param) {
     try {
-        // console.log(param.book_isbn,"param")
         const res = await axios.get(apiUrl + 'books/book/chapter/section/'+param.book_isbn+'/'+param.chapter_no)
         return res.data.sections;
     }
@@ -37,9 +33,49 @@ export async function getSections(param) {
 
 export async function getExercises(param) {
     try {
-        // console.log(param.book_isbn,"param")
         const res = await axios.get(apiUrl + 'books/book/chapter/section/exercise/'+param.book_isbn+'/'+param.chapter_no+'/'+param.section_no)
         return res.data.excerises;
+    }
+    catch(e){
+        
+    }
+}
+
+export async function getProblems(param) {
+    try {
+        const res = await axios.get(apiUrl + 'books/book/chapter/section/exercise/problem/'+param.book_isbn+'/'+param.chapter_no+'/'+param.section_no+'/'+param.exercise_no)
+        return res.data.problems;
+    }
+    catch(e){
+        
+    }
+}
+
+export async function getRelatedBooks(param) {
+    try {
+        const res = await axios.get(apiUrl + 'books/related-books/'+param.sub_subject)
+        return res.data.data;
+    }
+    catch(e){
+        
+    }
+}
+
+export async function getProblemsDirectly(param) {
+    try {
+        const res = await axios.get(apiUrl + 'books/book/only-problem/'+param.book_isbn+'/'+param.chapter_no)
+        return res.data.problems;
+    }
+    catch(e){
+        
+    }
+}
+
+export async function searchQuestions(isbn, search) {
+    try {
+        console.log(isbn,search)
+        const res = await axios.get(apiUrl + 'books/book/search-question/'+isbn+'/'+search)
+        return res.data;
     }
     catch(e){
         

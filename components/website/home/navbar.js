@@ -10,7 +10,17 @@ export default function Navbar() {
     const [showMenu,setShowMenu] = useState(false);
     const [showAMenu,setShowAMenu] = useState(false);
     const [classname, setClassname] = useState('');
+    const [mobileMenuClass, setMobileMenuClass] = useState('');
     
+    const showMobileMenu = ()=>{
+        if(mobileMenuClass === 'show'){
+            setMobileMenuClass('')
+        }else{
+            setMobileMenuClass('show')
+        }
+        
+    }
+
     const handleClick =()=>{
         hideMenu()
     }
@@ -55,10 +65,10 @@ export default function Navbar() {
         <nav className={`navbar navbar-expand-lg navbar-light sticky-top ${homePClass}`}>
             <div className="container">
                 <Link href="/"><a className="navbar-brand"><img src={`/images/${homePImage}`} className="img-fluid" alt="logo"/></a></Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile_nav" aria-controls="mobile_nav" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-toggle="collapse" onClick={showMobileMenu} data-target="#mobile_nav" aria-controls="mobile_nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span> 
                 </button>
-                <div className="collapse navbar-collapse" id="mobile_nav">
+                <div className={`collapse navbar-collapse ${mobileMenuClass}`} id="mobile_nav">
             
                 {/* <ul className="navbar-nav navbar-light ml-auto"> */}
                 <ul className="navbar-nav ml-auto">

@@ -322,7 +322,7 @@ footer .socail_icons li a:hover i{padding:0px; color:#fff;}
 }
  .search_include_bg .homework_help_bg2:before,.search_include_bg .homework_help_bg3:before{display:none;}
  
- .font_sz h3{font-size:20px;}
+ .font_sz h3{font-size:18px;}
  .try_adjusting_text h3{font-weight:bold;}
  .try_adjusting_text ul{padding:0 15px;}
  .try_adjusting_text ul li{list-style:disc; color:#070707; font-weight:500; font-size:16px;}
@@ -830,7 +830,7 @@ a.text-black.rev-btn {
     transform: rotate(180deg);
 }
 
-.faq_bg_sctn{background:#b1c4f83b;} 
+
 .Recent_text h3{position:relative;}
 .Recent_text h2 span{border-bottom:1px solid #000;}
 .Recent_text h3:before{content:""; position:absolute; left:0px; bottom:-5px; height:5px; width:90px; background:#fbd834;}
@@ -841,7 +841,7 @@ a.text-black.rev-btn {
 .ans_pl a{font-size:14px;color:#03488e; font-weight:bold;}
 .text_q_nd_ans{border-bottom:1px dashed #fceb9f; margin-top: 16px;}
 
-.bg_img_q_s_c{background:url(/images/bg_img_qsc.jpg) no-repeat center fixed;}
+.bg_img_q_s_c{background:url(/images/bg_img_qsc.jpg) no-repeat center fixed; background-size:cover;}
 .bg_img_q_s_c h3{color:#fff;}
 .Students_title h3{font-weight:bold;}
 .our_popular_text { 
@@ -872,3 +872,392 @@ input.form-control, .form-control:focus {
 	.f2feff_color{background:#f2feff;}
 	.features_bg .features_text p{padding:0px; font-size:14px; font-weight:500;}
 	.pbtm{margin-bottom:30px;}
+		.help_service_title {
+    margin-bottom: 30px;
+}
+.services_boxes{position:relative; top:60%; transform:translateY(-50%);}
+.help_service {
+    background: #fff;
+    box-shadow: 0 0 45px rgb(0 0 0 / 20%);
+    border-radius: 7px;
+    padding: 30px 15px 15px 20px;
+    height: 100%;
+    cursor: pointer;
+}
+.services_title1 h3{font-weight: bold;
+    color: #000;
+    font-size: 37px;
+} 
+.help_service h4 {
+    position: relative; 
+    color: #373a5b;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3em;
+    margin-top: 20px;
+}
+
+.Assigment_icon {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50px;
+    background-color: #f1cd1d;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 15px 15px rgb(241 205 29 / 38%);
+}
+.service_icon {
+    width: 70px;
+    height: 70px;
+    transition: all .3s;
+    overflow: hidden;
+    line-height: 70px;
+    border-radius: 50px;
+    display: inline-block;
+    position: relative;
+}
+.service_icon i {
+    color: #fff;
+    font-size: 25px;
+}
+.Essay_icon {
+    background: #007ef7;
+    box-shadow: 0 3px 10px #007ef7;
+}
+.Dissertation_icon {
+    background: #2cae4e;
+    box-shadow: 0 3px 10px #2cae4e;
+}
+.last_icon {
+    background: #ea6538;
+    box-shadow: 0 3px 10px #ea6538;
+}
+
+.service_icon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -10px;
+    right: -10px;
+    transition: .3s;
+    background: rgba(255,255,255,.5);
+    border-radius: 50%;
+}
+.help_service:hover .service_icon:after {
+    content: "";
+    position: absolute;
+    transition: .3s;
+    width: 55px;
+    height: 60px;
+    background: rgba(255,255,255,.5);
+    border-radius: 50%;
+    z-index: 99;
+}
+
+.Term_Of_Use h2{font-size:28px; font-weight: 600; border-bottom: 2px solid #00919b;
+    margin-bottom: 20px;}
+.Term_Of_Use h3{font-size: 20px;
+    font-weight: 600;}
+.Term_Of_Use a{font-size:16px;}
+.Term_Of_Use p{font-size:14px; font-weight: 500;}
+.Term_Of_Use ul{margin-bottom:20px;}
+
+
+
+/*about us start*/
+.float_n_disply{display:inline-block}
+ 
+.about-banner p{color:#fff;}
+.about-banner .home-form-banner {
+    padding: 110px 0 60px 0;
+}
+.company_leaders1{background:#cee6f8;}
+.company_leaders1 h3{padding-bottom:15px; padding-top:20px;}
+.company_leaders1 .eff_Morgan img{width:100%; position: relative;  bottom: -7px;}
+/*.company_leaders1 h3,.company_leaders1 p{color:#fff; }*/
+.company_leaders1 h4{font-size:18px; color:#fff;}
+.company_leaders1 ul li{list-style:none; display:inline-block; color:#000;}
+.company_leaders1 ul li a{ display:inline-block; color:#000; font-size:16px; font-weight:500;}
+
+.company_leaders2 ul li a{ display:inline-block; color:#000; font-size:16px; font-weight:500;}
+
+@media (max-width:1199px){
+	.about_text p{font-size:12px !important;}
+	
+	}
+	
+	@media (max-width:991px){
+	.company_leaders1 .eff_Morgan img {
+    width: auto; 
+    bottom: 0;
+    background: #fff;
+    margin-top: 30px;
+}
+.about_text .xs-heading{margin-bottom:10px !important}
+.about_text .xs-heading .section-title{margin-top:0px !important;}	
+.about_text .col-md-12.col-lg-5.text-right.float-right{text-align:left !important;}
+.company_leaders1 ul li,.company_leaders2 ul li { 
+    padding-bottom: 30px;}
+	.about_text h4{font-size:16px;}
+	.about_text .xs-heading .section-title.ptop_mobile{padding-top:30px;}
+	}
+
+/*about us end*/
+
+#section {
+  width: 500px;
+  height: 400px;
+  word-wrap: break-word;
+}
+
+.moretext {
+  display: none;
+}
+
+
+
+.faq_n_p .dynamic_boxes ul li { 
+    float: left;
+    margin: 1%;
+    margin-bottom: 0%;
+    background: #fbfbfb;
+    padding: 3%;
+    cursor: pointer;
+	width: 253px;
+    height: 200px;
+    box-shadow: 0 0 20px -5px #666;
+    border-radius: 30px;
+}
+
+.faq_n_p .dynamic_boxes ul li::before {
+    position: absolute;
+    content: "";
+    background: url(/assets/images/bean-sblu.svg) left center no-repeat;
+    width: 260px;
+    height: 320px;
+    left: 0;
+    z-index: -1;
+    background-size: 100% 100%;
+    top: -60px;
+}
+
+
+
+
+.faq_n_p .dynamic_boxes ul li a {
+    text-decoration: none;
+    color: #000;
+}
+.faq_n_p .dynamic_boxes ul li a h5 {
+    font-size: 15px;
+}
+.faq_n_p .icon_dyanamic img {
+    width: 104px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+.faq_n_p .dynamic_boxes ul li:hover {
+    background: #ececec;
+}
+
+
+
+
+
+
+  .overlay_books {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    transition: .5s ease;
+}
+
+.books1 {
+    position: relative;
+    overflow: hidden;
+    margin: 20px 0;
+	border: 5px solid #fff;
+    box-shadow: 0 0 5px rgb(0 0 0 / 40%);
+}
+
+.books1:hover .overlay_books {
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+  
+.bottom-overlay {
+    top: 100%;
+}
+
+.books1:hover .bottom-overlay {
+  top: 0;
+}
+
+        
+.books_text1 {
+    color: #fff;
+    font-size: 1.2vw;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    -webkit-transform: translate(-21%, -50%);
+    -ms-transform:translate(-21%, -50%);;
+    transform: translate(-21%, -50%);;
+    text-align: center;
+	font-weight:bold;
+} 
+.books_text1 a{
+    color: #fff;
+    font-size: 1.2vw;}
+	.books_text1 a:hover{color:#fff; text-shadow:0 2px 2px rgba(0,0,0,0.9);}
+ /*404 start*/
+ .cfsNotFound {
+    background: #f8d021;
+}
+.notFoundpage {
+    margin: auto;
+}
+.cfsNotFound h1 {
+    font-size: 170px;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 5px 5px 0 #ffbb00;
+    margin: 0;
+    padding-top: 80px;
+}
+.notFoundpage h2 {
+    font-size: 37px;
+    color: #fff;
+    text-shadow: 2px 3px 0 #ffbb00;
+    margin: 0 0 40px;
+    display: inline-block;
+    width: 100%;
+}
+.notFoundpage h3 {
+    font-size: 22px;
+    margin: 50px 0 0;
+    display: inline-block;
+    color: #264430;
+    font-weight: 500;
+    max-width: 750px;
+    margin: auto;
+}
+.notFoundpage a {
+    color: #0054FF;
+}
+.cfs_button_order a {
+    background: #f47504;
+    color: #fff;
+    padding: 10px 30px;
+    display: inline-block;
+    border-radius: 5px;
+    margin: 30px 0 0;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    margin-bottom: 100px;
+}
+/*404 end*/
+
+
+.pay_now h3{color: #1269ba;
+    font-size: 24px; width:80%; line-height:35px;
+    font-weight: bold;margin: auto;
+} 
+.plans-margin-2 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ffbc00;
+    padding-bottom: 10px;
+}
+.regular-font {
+    font-size: 14px;
+    color: #58595b;
+    line-height: 1.4;
+	font-weight:600;
+}
+.bold-font {
+    font-size: 17px;
+    font-weight: bold;
+    color: #1269ba;
+}
+.regular-font {
+    font-size: 13px;
+    color: #58595b;
+    line-height: 1.4;
+}
+.arrow-right-size {
+    font-size: 20px;
+}
+.pay_option1 ul{margin-top:10px;}
+.pay_option1 ul li{list-style:none; display:inline-block;}
+.pay_option1 ul li:nth-child(1) a {height:35px; text-align:center; display:inline-block; line-height:40px; padding:0 10px; border-radius:3px;
+    background: linear-gradient(to top, #f6b32c, #ffc107);
+}
+.pay_option1 ul li a img {
+    width: 80%; margin:auto;
+} 
+.pay_option1 ul li:nth-child(2) a {
+    background: linear-gradient(to top, #0c459f, #095daa); height:35px; text-align:center; display:inline-block; line-height:40px; padding:0 10px; border-radius:3px;
+}
+
+.Subscription_Plan{padding:0 20px; /*box-shadow:0 0 10px rgba(0,0,0,0.2);*/ height:100%;}
+.Subscription_text{border-left:1px dashed #e36304; padding-left:40px;}
+.Subscription_text ul li{font-weight:600; line-height:40px;}
+.Subscription_text ul li i{color:#e36304;}
+.Subscription_text h5{color:#e36304;}
+.billing_details p{font-size:15px; padding-top:20px;}
+
+.yellow-border {
+    background-color: #ffbc00;
+    height: 2px;
+}
+
+.tabs_book_study ul{border-bottom:2px solid rgb(118, 118, 118);}
+.tabs_book_study .nav-pills .nav-link{color: #444f4f; border-radius:0px; font-size: 1rem; font-weight:bold;  position:relative;}
+.tabs_book_study .nav-pills .nav-link.active, .tabs_book_study .nav-pills .show > .nav-link {
+    color: #444f4f;
+    background: none;
+     border-bottom: 6px solid #df6303; 
+    border-radius: 0;
+}
+
+.textbooks_text{padding:10px 15px; border-bottom:1px solid #ccc;}
+.textbooks_text:hover{background:rgba(255,190,0,0.2);}
+.textbooks_title h3{font-weight:bold;}
+.accounting_book{display:inline-block; width:80px; float:left;}
+.textbooks_result{padding-left:95px;}
+.textbooks_result h4{font-size:16px; font-weight:bold; color:#000;}
+.textbook_edition,.textbook_isbn{font-size:14px; font-weight:500; color:#000;}
+.textbook_authors{ display: -webkit-box;
+  -webkit-line-clamp: 1; font-size:14px; font-weight:500; color:#000;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.textbooks_bg{width:100%;}
+.view_step_img{margin-top:7px;}
+.view_step_img span img.img{width:40px; height:48px; display:inline-block; float:left;}
+.view_step_img .step-by-step{padding-left:55px; padding-top:5px; font-size:15px; font-weight:600;}
+.view_step_img .step-by-step span{display:block;}
+
+.study_slider.owl-theme .owl-nav{position:absolute; right:15px; top:-55px;}
+.study_slider.owl-theme .owl-nav button{border:1px solid #ccc;     padding: 3px 15px !important;}
+.study_slider.owl-theme .owl-nav [class*=owl-]:hover,.study_slider.owl-theme .owl-nav [class*=owl-]:focus {
+    background: #df6303; outline:none; color:#fff;}
+	
+	
+.study_slider {border-bottom:1px solid #eb7100; padding-bottom:15px;}
+	.study_slider .textbooks_text{border-bottom:none;}
+	.Qtion_n_Stion_text.Recent_text.related_a h2 {
+    font-size: 20px !important;
+}

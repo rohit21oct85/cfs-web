@@ -3,11 +3,9 @@ import '../styles/style.css'
 import '../public/fonts/font.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css'
 import { QueryClient, QueryClientProvider } from "react-query";
-// import { AuthProvider } from '../context/auth-provider'
 import  ErrorProvider  from '../context/error-provider'
 import { Provider } from 'next-auth/client'
-// import '../styles/owl.carousel.min.css'
-// import '../styles/owl.theme.default.min.css'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 const queryClient = new QueryClient();
 
@@ -17,6 +15,7 @@ function MyApp({ Component, pageProps }) {
 			<Provider session={pageProps.session}>
 				<ErrorProvider>
 					<QueryClientProvider client={queryClient}>
+						{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 						<Component {...pageProps} />
 					</QueryClientProvider>
 				</ErrorProvider>

@@ -1,8 +1,9 @@
 import {useState,useEffect} from 'react';
 import {searchData} from '../../libs/search'
-import BookImage from '../../components/common/book-image'
+import BookImage from './book-image'
+import Link from 'next/link'
 
-export default function Search({...props}){
+export default function SearchComp({...props}){
 
     const [ display, setDisplay ] = useState('none');
     const [ searchedQuestions, setSearchedQuestions ] = useState(null);
@@ -38,7 +39,7 @@ export default function Search({...props}){
         <>
             <form>
                 <input type="text" placeholder={props.placeholder} className="form-control" onChange={(e)=>{setSearch(e.target.value)}}/>
-                <button type="submit" className="search_btn">{props.btnText}</button>
+                    <Link href={`/search/${search}`}><button type="submit" className="search_btn">{props.btnText}</button></Link>
             </form>
             
             <div className="row" style={{display: `${display}`}}>
@@ -46,7 +47,7 @@ export default function Search({...props}){
                     <div className="books_bg1">
                         <div className="row">
                             <div className="col-md-12">
-                                <div className="books_bg2">{console.log(searchedBooks)}
+                                <div className="books_bg2">
                                     {searchedBooks && searchedBooks.length != 0 &&
                                     <div className="books_titles">
                                         Books
