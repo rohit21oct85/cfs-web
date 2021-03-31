@@ -29,25 +29,178 @@ export default function SubjectsWeCover(){
                     </div>;
 
     const marketing = <div id="marketing" className="tab-pane bg_shdow fade in active show">
-                        <h3>2</h3>
+                        <div className="row">
+                            <div className="col-md-5 text-center finance_img">
+                                <span>
+                                    <img src="../images/we-cover-img/finance.png" className="img-fluid" alt=""/>
+                                </span>
+                            </div>
+                            <div className="col-md-7"> 
+                                <div className="Text_title text_tb_center3 pb-3">
+                                    <h5 className="pb-2">Marketing</h5>
+                                    <h2> We have a team of experts in Marketing</h2>
+                                    <p>We have a team of marketing experts from top business schools who work incessantly <span>24/7 to solve all your queries</span> related to Marketing, provide textbook solutions manual and create your assignments. </p>
+                                    <p>Crazy For Study team of experts consists of professors, researchers and subject matter experts with a prolonged experience in the academic field. </p> 
+                                    <div className="btn1">
+                                        <ul>
+                                            <li>  <a href="#">Assignment Help</a></li>
+                                            <li>  <a href="#">Textbook Solution</a></li>
+                                            <li>  <a href="#">Q & A Solution</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>;
+
     const biology = <div id="biology" className="tab-pane bg_shdow fade in active show">
-                        <h3>3</h3>
+                        <div className="row">
+                            <div className="col-md-5 text-center finance_img">
+                                <span>
+                                    <img src="../images/we-cover-img/finance.png" className="img-fluid" alt=""/>
+                                </span>
+                            </div>
+                            <div className="col-md-7"> 
+                                <div className="Text_title text_tb_center3 pb-3">
+                                    <h5 className="pb-2">Biology</h5>
+                                    <h2> We have a team of experts in Biology</h2>
+                                    <p>We have a team of experts in different disciplines of Biology like Microbiology, Zoology, Genetics, Biotechnology, Bioinformatics and Earth Sciences. Crazyforstudy's experts work incessantly <span>24/7 to solve all your queries,</span> provide textbook solutions manual and create your assignments.</p>
+                                    <p>Crazy for study team of experts consists of professors, researchers and subject matter experts with a prolonged experience in the academic field. </p> 
+                                    <div className="btn1">
+                                        <ul>
+                                            <li>  <a href="#">Assignment Help</a></li>
+                                            <li>  <a href="#">Textbook Solution</a></li>
+                                            <li>  <a href="#">Q & A Solution</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>;
+
     const accounts = <div id="accounts" className="tab-pane bg_shdow fade in active show">
-                        <h3>4</h3>
+                        <div className="row">
+                            <div className="col-md-5 text-center finance_img">
+                                <span>
+                                    <img src="../images/we-cover-img/finance.png" className="img-fluid" alt=""/>
+                                </span>
+                            </div>
+                            <div className="col-md-7"> 
+                                <div className="Text_title text_tb_center3 pb-3">
+                                    <h5 className="pb-2">Accounts</h5>
+                                    <h2> We have a team of experts in Finance</h2>
+                                    <p>We have a team of experts in Accounts who work incessantly <span>24/7 to solve all your queries</span> related to Accounts, provide textbook solutions manual and create your assignments. </p>
+                                    <p>Crazy for study's team of experts consists of professors, researchers and accounts experts with a prolonged experience in the academic field. </p> 
+                                    <div className="btn1">
+                                        <ul>
+                                            <li>  <a href="#">Assignment Help</a></li>
+                                            <li>  <a href="#">Textbook Solution</a></li>
+                                            <li>  <a href="#">Q & A Solution</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>;
+
     const socialscience = <div id="socialscience" className="tab-pane bg_shdow fade in active show">
-                            <h3>5</h3>
+                            <div className="row">
+                                <div className="col-md-5 text-center finance_img">
+                                    <span>
+                                        <img src="../images/we-cover-img/finance.png" className="img-fluid" alt=""/>
+                                    </span>
+                                </div>
+                                <div className="col-md-7"> 
+                                    <div className="Text_title text_tb_center3 pb-3">
+                                        <h5 className="pb-2">Social Science</h5>
+                                        <h2> We have a team of experts in Social Science</h2>
+                                        <p>We have a team of experts in Social Science who work incessantly <span>24/7 to solve all your queries</span> related to Social Science, provide textbook solutions manual and create your assignments. </p>
+                                        <p>Our team of experts consists of professors, researchers and social science experts with a prolonged experience in the academic field. </p> 
+                                        <div className="btn1">
+                                            <ul>
+                                                <li>  <a href="#">Assignment Help</a></li>
+                                                <li>  <a href="#">Textbook Solution</a></li>
+                                                <li>  <a href="#">Q & A Solution</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>;
+
     const chemistry =  <div id="chemistry" className="tab-pane bg_shdow fade in active show">
-                            <h3>6</h3>
+                            <div className="row">
+                                <div className="col-md-5 text-center finance_img">
+                                    <span>
+                                        <img src="../images/we-cover-img/finance.png" className="img-fluid" alt=""/>
+                                    </span>
+                                </div>
+                                <div className="col-md-7"> 
+                                    <div className="Text_title text_tb_center3 pb-3">
+                                        <h5 className="pb-2">Chemistry</h5>
+                                        <h2> We have a team of experts in Chemistry</h2>
+                                        <p>We have a team of experts in different disciplines of Chemistry like Organic Chemistry, Biochemistry, Physical Chemistry and Inorganic Chemistry. Our experts work incessantly <span>24/7 to solve all your queries,</span> provide textbook solutions manual and create your assignments.</p>
+                                        <p>Crazy for study team of experts consists of professors, researchers and chemistry experts with a prolonged experience in the academic field. </p> 
+                                        <div className="btn1">
+                                            <ul>
+                                                <li>  <a href="#">Assignment Help</a></li>
+                                                <li>  <a href="#">Textbook Solution</a></li>
+                                                <li>  <a href="#">Q & A Solution</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>;
+
     const economics =  <div id="economics" className="tab-pane bg_shdow fade in active show">
-                            <h3>7</h3>
+                            <div className="row">
+                                <div className="col-md-5 text-center finance_img">
+                                    <span>
+                                        <img src="../images/we-cover-img/finance.png" className="img-fluid" alt=""/>
+                                    </span>
+                                </div>
+                                <div className="col-md-7"> 
+                                    <div className="Text_title text_tb_center3 pb-3">
+                                        <h5 className="pb-2">Economics</h5>
+                                        <h2> We have a team of experts in Economics</h2>
+                                        <p>We have a team of experts in Economics who work incessantly <span>24/7 to solve all your queries</span> related to Microeconomics and Macroeconomics, provide textbook solutions manual and create your assignments. </p>
+                                        <p>CFS team of experts consists of professors, researchers and Economics experts with a prolonged experience in the academic field. </p> 
+                                        <div className="btn1">
+                                            <ul>
+                                                <li>  <a href="#">Assignment Help</a></li>
+                                                <li>  <a href="#">Textbook Solution</a></li>
+                                                <li>  <a href="#">Q & A Solution</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>;
+
     const physics = <div id="physics" className="tab-pane bg_shdow fade in active show">
-                        <h3>8</h3> 
+                        <div className="row">
+                            <div className="col-md-5 text-center finance_img">
+                                <span>
+                                    <img src="../images/we-cover-img/finance.png" className="img-fluid" alt=""/>
+                                </span>
+                            </div>
+                            <div className="col-md-7"> 
+                                <div className="Text_title text_tb_center3 pb-3">
+                                    <h5 className="pb-2">Physics</h5>
+                                    <h2> We have a team of experts in Physics</h2>
+                                    <p>We have a team of experts in Physics who work incessantly <span>24/7 to solve all your queries</span> related to Physics, provide textbook solutions manual and create your assignments. </p>
+                                    <p>CFS team of physics experts consists of professors, researchers and physics experts with a prolonged experience in the academic field. </p> 
+                                    <div className="btn1">
+                                        <ul>
+                                            <li>  <a href="#">Assignment Help</a></li>
+                                            <li>  <a href="#">Textbook Solution</a></li>
+                                            <li>  <a href="#">Q & A Solution</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>;
 
     useEffect(() => {
