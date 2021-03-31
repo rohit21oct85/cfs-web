@@ -2,6 +2,8 @@ import '../styles/bootstrap.css'
 import '../styles/style.css'
 import '../public/fonts/font.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css'
+import '../node_modules/react-datepicker/dist/react-datepicker.min.css'
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import  ErrorProvider  from '../context/error-provider'
 import { Provider } from 'next-auth/client'

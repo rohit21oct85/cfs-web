@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Header from '../../components/website/home/header'
 import Navbar from '../../components/website/home/navbar'
 import Footer from '../../components/website/home/footer'
@@ -15,16 +14,13 @@ import { searchData } from '../../libs/search'
 export default function Search() {
     const router = useRouter();
 
-    const { data:searchDataBQ, isLoading:searchIsLoading, error:searchError } = useQuery([router.query.search], () => searchData(router.query.search),{staleTime:Infinity})
+    const { data:searchDataBQ, isLoading:searchIsLoading, error:searchError } = useQuery([router.query.search], () => searchData({searchText:router.query.search,limit:10}),{staleTime:Infinity})
     console.log(searchDataBQ, searchIsLoading)
     if(searchIsLoading)
         return <div>Loading ...</div> 
 
     return(
         <>
-            <Head>
-                <title>Crazy For Study</title>{console.log("in search")}
-            </Head>
             <Header/>
             <Navbar/>
             <SearchTab/>

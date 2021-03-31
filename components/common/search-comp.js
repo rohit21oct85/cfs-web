@@ -25,7 +25,8 @@ export default function SearchComp({...props}){
     },[search]);
 
     async function openSearch (e){
-        const data = await searchData(e);
+        
+        const data = await searchData({search:e,limit:3});
         if(data){
             setSearchedBooks(data.data2.books);
             setSearchedQuestions(data.data1.questions);

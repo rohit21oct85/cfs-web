@@ -1261,3 +1261,11 @@ input.form-control, .form-control:focus {
 	.Qtion_n_Stion_text.Recent_text.related_a h2 {
     font-size: 20px !important;
 }
+
+.customDatePickerWidth, 
+.customDatePickerWidth > div.react-datepicker-wrapper, 
+.customDatePickerWidth > div > div.react-datepicker__input-container
+.customDatePickerWidth > div > div.react-datepicker__input-container input {
+   display: block;
+}
+

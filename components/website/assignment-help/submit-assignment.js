@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function SubmitAssignment() {
     return(
         <section className="banner_assign_ment">
@@ -50,7 +52,7 @@ export default function SubmitAssignment() {
                                 </div>
                             </div>
                             <div className="form-group col-md-12 submit_btn1">
-                                <button type="submit" className="btn form-control">Submit</button>
+                                <Link href="online-assignment-help-2"><button type="submit" className="btn form-control">Submit</button></Link>
                             </div>
                         </form>
                     </div>
