@@ -1,4 +1,4 @@
-import Search from '../../common/search'
+import SearchComp from '../../common/search-comp'
 
 export default function QandASearch() {
     return (
@@ -13,7 +13,7 @@ export default function QandASearch() {
                             <input type="text" placeholder="Search your homework question" className="form-control pl-5"/>
                             <button type="submit" className="search_btn"><i className="fa fa-search"></i> Search</button>
                         </form> */}
-                        <Search placeholder={"Search your homework question"} btnText={"Search"}/>
+                        <SearchComp placeholder={"Search your homework question"} btnText={"Search"}/>
                         </div>
                     </div>
                     </div>
