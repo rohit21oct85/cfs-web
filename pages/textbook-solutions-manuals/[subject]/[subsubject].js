@@ -25,14 +25,17 @@ export default function SubSubject(){
     const router = useRouter();
 
     const { data, isLoading, error } = useQuery([router.query.subsubject, pageNo], () => getBooks({sub_subject_name: router.query.subsubject, pageno : pageNo}))
-    
+
+    if(isLoading)
+        return <div id="loading"></div>
+
     return (
         <>
             <Header/>
             <Navbar/>
             <BreadCrumb heading={router.query.subsubject} subject={router.query.subject} sub_subject={router.query.subsubject}/>
             <BuySubscription/>
-            { isLoading ? <>Loading ...</> : <AllBooks data={data} setPageNo={setPageNo} pageNo={pageNo}/> }
+            <AllBooks data={data} setPageNo={setPageNo} pageNo={pageNo}/>
             <Follow/>
             <Footer/>
         </>

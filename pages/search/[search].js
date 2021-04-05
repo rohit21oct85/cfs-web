@@ -17,7 +17,7 @@ export default function Search() {
     const { data:searchDataBQ, isLoading:searchIsLoading, error:searchError } = useQuery([router.query.search], () => searchData({searchText:router.query.search,limit:10}),{staleTime:Infinity})
     console.log(searchDataBQ, searchIsLoading)
     if(searchIsLoading)
-        return <div>Loading ...</div> 
+        return <div id="loading"></div>
 
     return(
         <>

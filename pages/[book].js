@@ -105,7 +105,7 @@ export default function Book(){
     }
 
     if(chapterIsLoading)
-    return <span>Loading</span>;
+    return <div id="loading"></div>;
 
     return(
         <>
@@ -349,7 +349,7 @@ export default function Book(){
             <Subscription/>
             <Description/>
             <Details/>
-            <Reviews/>
+            <Reviews reviews={books && books[0].reviews}/>
             <RelatedTbs data={relatedBooks}/>
             <Faq/>
             <Follow/>

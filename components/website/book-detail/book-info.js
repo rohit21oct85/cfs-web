@@ -17,10 +17,16 @@ export default function BookInfo({...props}){
             <div className="col-md-8 ml-auto pd_b_left">
                 <div className="prduct_details_text">
                     <h3>{props.bookData && props.bookData.BookName} ({props.bookData && props.bookData.sub_subject_name}) </h3>
-                        <p><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></p>
+                        <p> 
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                        </p>
                             <ul className="rating">
-                                <li className="pl-0 border-left-0">4.9/5 Rating</li>
-                                <li> 233 Reviews</li>
+                                <li className="pl-0 border-left-0">{props.bookData && props.bookData.ratingAv ? props.bookData.ratingAv : 0 }/5 Rating</li>
+                                <li> {props.bookData && props.bookData.totalReviews} Reviews</li>
                             </ul>
             
                             <ul className="books_wtext">

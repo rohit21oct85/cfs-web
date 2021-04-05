@@ -1,12 +1,10 @@
-import Header from '../components/website/home/header'
-import Navbar from '../components/website/home/navbar'
-import Footer from '../components/website/home/footer'
-import Follow from '../components/website/home/follow'
+import DashboardNavbar from '../../components/website/dashboard/dashobard-navbar'
+import SideBar from '../../components/website/dashboard/sidebar'
 import Link from 'next/link'
 import {useEffect, useState} from 'react';
 import Router from 'next/router'
 import { useSession } from 'next-auth/client'
-import AccessDenied from '../components/access-denied'
+import AccessDenied from '../../components/access-denied'
 import { signOut } from 'next-auth/client'
 
 async function SignOut () {
@@ -23,7 +21,7 @@ async function SignOut () {
 
 
 
-export default function  Profile() {
+export default function  MyProfile() {
     const [ session, loading ] = useSession()
     console.log(session)
     // const [user,setUser] = useState(null);
@@ -43,12 +41,11 @@ export default function  Profile() {
 
     return (
         <>
-            <Header/>
-            <Navbar/>
+            <DashboardNavbar/>
+            <SideBar/>
             <h1>Profile</h1>
             <Link href="#"><a onClick={SignOut}>SignOut</a></Link>
-            <Follow/>
-            <Footer/>
+
         </>
     )
 }
