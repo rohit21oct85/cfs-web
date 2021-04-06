@@ -140,7 +140,7 @@ return (
 										<span key={provider.id}>
 										{provider.id === "credentials" ? <span></span> :
 											<li key={provider.name}>
-												<a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id, {callbackUrl : 'http://localhost:3000/dashboard'})}}>
+												<a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id, {callbackUrl : `${process.env.NEXTAUTH_URL}/dashboard`})}}>
 													<i className={`fa fa-${provider.id}`}></i> {provider.name}
 												</a>
 											</li>

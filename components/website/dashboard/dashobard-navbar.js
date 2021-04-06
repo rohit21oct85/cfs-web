@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function DashboardNavbar(){
     return( <>
             <nav className="navbar navbar_dashboard1 p-l-5 p-r-5">
@@ -5,7 +7,7 @@ export default function DashboardNavbar(){
                     <li>
                         <div className="navbar-header">
                             <a href="#" className="bars"></a>
-                            <a className="navbar-brand" href="#"><span className="m-l-60"><img src="/images/logo.png" className="img-fluid" alt="logo" width="100"/></span></a>
+                            <Link href="/"><a className="navbar-brand"><span className="m-l-60"><img src="/images/logo.png" className="img-fluid" alt="logo" width="100"/></span></a></Link>
                         </div>
                     </li>      
                 </ul>
