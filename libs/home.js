@@ -10,3 +10,14 @@ export async function getNavbarData() {
         
     }
 }
+
+export async function getPopularBooks() {
+    try {
+        const res = await axios.get(apiUrl + 'books/popular-books')
+        return res.data.data;
+    }
+    catch(e){
+        
+    }
+}
+

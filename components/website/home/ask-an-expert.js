@@ -1,9 +1,10 @@
+
 export default function AskExpert(){
     return (
         <section className="section bg_colr1 ">
             <div className="container">
                 <div className="row">
-                    <div className="col-md-6"><span><img src="../images/homework-qa.png" className="img-fluid" alt=""/></span>
+                    <div className="col-md-6"><span><img src="/images/homework-qa.png" className="img-fluid" alt=""/></span>
                     </div>
                     <div className="col-md-6">
                         <div className="Text_title text_tb_center pb-3">

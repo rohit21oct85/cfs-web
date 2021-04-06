@@ -12,7 +12,6 @@ import PopularTbs from '../components/website/home/popular-tbs'
 import SubscribeHere from '../components/website/home/subscribe-here'
 import TutorCollege from '../components/website/home/tutor-college'
 import Follow from '../components/website/home/follow'
-import {getNavbarData} from '../libs/home'
 
 // export const getStaticProps = async () => {
 // 	const { data } = await getNavbarData();
