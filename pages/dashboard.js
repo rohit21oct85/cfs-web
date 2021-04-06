@@ -27,8 +27,7 @@ export default function  Dashboard() {
     
     return (
         <>  
-            {/* <h1>Dashboard</h1>
-            <Link href="#"><a onClick={SignOut}>SignOut</a></Link> */}
+            
             {/* <Header/> */}
             <DashboardNavbar/>
             <SideBar/>
@@ -48,10 +47,10 @@ export default function  Dashboard() {
                         </div>
                     </div>
                 </div>
-           
+                
                 <div className="container-fluid">
                     <div className="row clearfix mt-4">
-                        <div className="col-xl-12">
+                        <div className="col-xl-12"><Link href="#"><a onClick={SignOut}>SignOut</a></Link>
                             <div className="banner banner-color mt-0">
                                 <div className="row img_bannet_ft" style={{width:"100%"}}>
                                     <div className="col-xl-2 col-sm-12 col-lg-2 col-md-3">

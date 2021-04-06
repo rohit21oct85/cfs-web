@@ -16,7 +16,6 @@ export async function setLogin(data) {
 }
 
 export async function setSignUp(data) {
-    console.log(data);
     try {
         const res = await axios.post(apiUrl + 'student/register', data)
         if(res.status === 200){

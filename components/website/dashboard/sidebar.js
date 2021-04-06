@@ -192,14 +192,14 @@ export default function SideBar(){
                                     </li>
                                 </ul>
                             </li> 
-                            <Link href="dashboard"><li className="active open"><a href="#"><i className="fa fa-home"></i><span>Dashboard</span></a></li></Link>
-                            <Link href="/user/my-orders"><li><a><i className="fas fa-paste"></i><span>My Order</span> </a></li></Link>
-                            <Link href="/user/my-profile"><li><a href="profile.php"><i className="fa fa-user-circle"></i><span>My Profile</span> </a></li></Link>
-                            <Link href="/user/my-tbs"><li><a href="my-textbook.php"><i className="fas fa-map"></i><span>My Textbook</span> </a></li></Link>
-                            <Link href="/user/my-subs"><li><a href="my-subscription.php"><i className="fas fa-id-card"></i><span>My Subscription</span> </a></li></Link>
-                            <Link href="/user/ask-a-question"><li><a href="#"><i className="fas fa-question-circle"></i><span>Ask a Question</span> </a></li></Link>
-                            <Link href="/user/my-questions"><li><a href="my_question.php"><i className="fas fa-comments"></i><span>My Question</span> </a></li></Link>
-                            <Link href="/user/faq"><li><a href="#"><i className="fas fa-question"></i><span>FAQ</span> </a></li></Link>
+                            <Link href="/dashboard"><li className="active open"><a href=""><i className="fa fa-home"></i><span>Dashboard</span></a></li></Link>
+                            <Link href="/user/my-orders"><li><a href=""><i className="fas fa-paste"></i><span>My Order</span> </a></li></Link>
+                            <Link href="/user/my-profile"><li><a href=""><i className="fa fa-user-circle"></i><span>My Profile</span> </a></li></Link>
+                            <Link href="/user/my-tbs"><li><a href=""><i className="fas fa-map"></i><span>My Textbook</span> </a></li></Link>
+                            <Link href="/user/my-subs"><li><a href=""><i className="fas fa-id-card"></i><span>My Subscription</span> </a></li></Link>
+                            <Link href="/user/ask-a-question"><li><a href=""><i className="fas fa-question-circle"></i><span>Ask a Question</span> </a></li></Link>
+                            <Link href="/user/my-question"><li><a href=""><i className="fas fa-comments"></i><span>My Question</span> </a></li></Link>
+                            <Link href="/user/faq"><li><a href=""><i className="fas fa-question"></i><span>FAQ</span> </a></li></Link>
                         </ul>
                     </div>
                 </div>
