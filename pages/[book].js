@@ -111,7 +111,7 @@ export default function Book(){
         <>
             <Header/>
             <Navbar/>
-            <BreadCrumb heading={books && books[0] && books[0].BookName} subject={books && books[0] && books[0].subject_name} sub_subject={books && books[0] && books[0].sub_subject_name}/>
+            <BreadCrumb type={"TextBook Manual"} heading={books && books[0] && books[0].BookName} subject={books && books[0] && books[0].subject_name} sub_subject={books && books[0] && books[0].sub_subject_name}/>
             <BookInfo bookData={books && books[0]}/> 
 
             <section className="section font_sz text_justify pt-5">
