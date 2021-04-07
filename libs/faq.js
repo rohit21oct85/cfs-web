@@ -10,3 +10,13 @@ export async function getFaqCategory() {
         
     }
 }
+
+export async function getCategoryFaqs(param) {
+    try {
+        const res = await axios.get(apiUrl + 'faq/get-category-content/'+param)
+        return res.data;
+    }
+    catch(e){
+        
+    }
+}

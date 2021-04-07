@@ -78,7 +78,7 @@ export default function Navbar() {
                         </Link>
                     </li>  
                     <li className="nav-item dropdown megamenu-li dmenu" onMouseEnter={()=>{openMenu()}}>
-                        <a className="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solutions Manual  </a>
+                        <Link href="/textbook-solutions-manuals"><a className="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solutions Manual  </a></Link>
                         {showMenu &&
                         <div className={`dropdown-menu megamenu sm-menu border-top ${classname}`} aria-labelledby="dropdown01"  onMouseLeave={()=>hideMenu()}>
                             <div className="row">
@@ -99,9 +99,9 @@ export default function Navbar() {
                         }
                     </li> 
                     <li className="nav-item dmenu dropdown" onMouseEnter={()=>{openMenuA()}}>
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <Link href="/writing-help"><a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Writing Help
-                        </a>
+                        </a></Link>
                         {showAMenu && 
                         <div className={`dropdown-menu sm-menu ${classname}`} aria-labelledby="navbarDropdown" onMouseLeave={()=>hideMenuA()}>
                             <Link href="/writing/online-assignment-help"><a className="dropdown-item"><img src="/images/nav-icons/online-assignment-help.png" className="img-fluid" alt=""/> Assignment Help </a></Link>
