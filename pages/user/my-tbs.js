@@ -1,6 +1,6 @@
 import DashboardNavbar from '../../components/website/dashboard/dashobard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 export default function MyTbs(){
 
     const [fields, setFields] = useState([{ value: null }])

@@ -18,10 +18,18 @@ import  ErrorProvider  from '../context/error-provider'
 import { Provider } from 'next-auth/client'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import {useEffect} from 'react'
+import { useRouter } from "next/router";
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }) {
-	useEffect( () => { document.querySelector("body").classList.add("web_font1") } );
+	const router = useRouter();
+	useEffect( () => { 
+		router.pathname.includes('user') || router.pathname.includes('dashboard') 
+		? 
+			document.querySelector("body").classList.add("theme_blush")
+		:
+			document.querySelector("body").classList.add("web_font1")
+	});
 
 	return (
 			// <AuthProvider>
