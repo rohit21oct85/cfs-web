@@ -24,12 +24,21 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }) {
 	const router = useRouter();
 	useEffect( () => { 
-		router.pathname.includes('user') || router.pathname.includes('dashboard') 
-		? 
-			document.querySelector("body").classList.add("theme_blush")
-		:
+		if(router.pathname.includes('user') || router.pathname.includes('dashboard')) 
+			{
+				document.querySelector("body").classList.add("theme_blush")
+				document.querySelector("body").classList.remove("web_font1")
+			}
+		else{
+			document.querySelector("body").classList.remove("theme_blush")
 			document.querySelector("body").classList.add("web_font1")
+		}
 	});
+	// if (session)
+	// 	{ document.querySelector("body").classList.add("theme_blush") }
+	// else{
+	// 	document.querySelector("body").classList.add("web_font1")
+	// }
 
 	return (
 			// <AuthProvider>

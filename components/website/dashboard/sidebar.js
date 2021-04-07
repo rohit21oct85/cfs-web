@@ -199,7 +199,7 @@ export default function SideBar(){
                             <Link href="/user/my-subs"><li><a href=""><i className="fas fa-id-card"></i><span>My Subscription</span> </a></li></Link>
                             <Link href="/user/ask-a-question"><li><a href=""><i className="fas fa-question-circle"></i><span>Ask a Question</span> </a></li></Link>
                             <Link href="/user/my-question"><li><a href=""><i className="fas fa-comments"></i><span>My Question</span> </a></li></Link>
-                            <Link href="/user/faq"><li><a href=""><i className="fas fa-question"></i><span>FAQ</span> </a></li></Link>
+                            <Link href="/faq"><li><a href=""><i className="fas fa-question"></i><span>FAQ</span> </a></li></Link>
                         </ul>
                     </div>
                 </div>
