@@ -1,12 +1,16 @@
-import Header from '../../components/website/home/header'
-import Navbar from '../../components/website/home/navbar'
-import Footer from '../../components/website/home/footer'
-import Follow from '../../components/website/home/follow'
-import SearchComp from '../../components/common/search-comp'
+import Header from '../components/website/home/header'
+import Navbar from '../components/website/home/navbar'
+import Footer from '../components/website/home/footer'
+import Follow from '../components/website/home/follow'
+import SearchComp from '../components/common/search-comp'
 // import Breadcrumb from '../../components/website/all-subjects/breadcrumb'
+import getFaqCategory from '../libs/faq'
+import { useQuery } from 'react-query'
 
 export default function Faq()
-{
+    // const { data: faqs, isLoading:faqIsLoading, error:faqError } = useQuery(['faq-category'], () => getFaqCategory(),{staleTime:Infinity})
+
+    {
     return(
         <>
         <Header/>

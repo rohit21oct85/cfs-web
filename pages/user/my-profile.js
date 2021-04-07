@@ -22,6 +22,7 @@ async function SignOut () {
 
 
 export default function  MyProfile() {
+
     const [ session, loading ] = useSession()
     if (!session) { return  (<><AccessDenied/></>) }
     
