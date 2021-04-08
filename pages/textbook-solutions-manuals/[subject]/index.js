@@ -12,10 +12,12 @@ import { useRouter } from "next/router";
 import BrowseBySubjects from '../../../components/website/all-subjects/browse-by-subjects';
 import InstantAccess from '../../../components/website/all-subjects/instant-access';
 import About from '../../../components/website/all-subjects/about';
+import {getSubSubject} from '../../../libs/subsubject'
 
 export default function Subject(){
     const router = useRouter();
-
+    const { data: subSubjects, isLoading:subSubjectIsLoading, error:subSubjectError } = useQuery([router.query.subject], () => getSubSubject( router.query.subject ),{staleTime:Infinity})
+    
     return(
         <>
             <Header/>
@@ -24,7 +26,7 @@ export default function Subject(){
             <AskAnExpert/>
             <CollegeTextbooks/>         
             <StepByStep/>
-            <BrowseBySubjects/>
+            <BrowseBySubjects data={subSubjects}/>
             <About/>
             <InstantAccess/>
             <WhatStudentsThink/>
