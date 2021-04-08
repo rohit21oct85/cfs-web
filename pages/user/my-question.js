@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import DashboardNavbar from '../../components/website/dashboard/dashobard-navbar'
+import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
 
 export default function MyQuestion(){

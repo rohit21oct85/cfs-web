@@ -1,4 +1,4 @@
-import DashboardNavbar from '../../components/website/dashboard/dashobard-navbar'
+import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
 import {useState, useEffect} from 'react'
 export default function MyTbs(){
@@ -12,7 +12,6 @@ export default function MyTbs(){
     }
 
     function handleAdd() {
-        console.log("Dasd")
         const values = [...fields];
         values.push({ value: null });
         setFields(values);

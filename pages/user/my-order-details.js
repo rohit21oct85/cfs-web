@@ -1,5 +1,6 @@
-import DashboardNavbar from '../../components/website/dashboard/dashobard-navbar'
+import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
+import  OwlCarousel  from "../../components/common/owl-carousel";
 
 export default function MyOrderDetails(){
 
@@ -31,73 +32,75 @@ export default function MyOrderDetails(){
                                 <p>Trusted by students of : </p>
                             </div>
                             <div className="col-lg-9 col-md-8 col-sm-8">
-                                <div className="owl-carousel owl-theme slider1 slider_bg">
+                                {/* <div className="owl-carousel owl-theme slider1 slider_bg"> */}
+                                <OwlCarousel  className="owl-carousel owl-theme slider1 slider_bg" loop autoplay={true} nav margin={10}>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student1.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student1.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student2.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student2.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student3.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student3.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student4.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student4.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student5.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student5.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student1.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student1.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student2.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student2.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student3.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student3.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student1.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student1.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student1.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student1.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student1.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student1.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student1.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student1.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="text_with-img text-center">
-                                        <span><img src="assets/images/student1.png" className="img-fluid" alt=""/></span>
+                                        <span><img src="/images/student1.png" className="img-fluid" alt=""/></span>
                                         </div>
                                     </div>
-                                </div>
+                                    {/* </div> */}
+                                </OwlCarousel>
                             </div>
                             </div>
                         </div>
@@ -330,9 +333,9 @@ export default function MyOrderDetails(){
                                             <div className="text-center Earn_Referral Complete_Profile Pay_From_Wallet">
                                                 <h5 className=" ml-auto Add_Money pay mt-2 mb-0"><span>Pay From Wallet </span></h5>
                                                 <a href="#" className="btn  ml-auto  pay Add_Money">
-                                                <img src="assets/images/paypal.png" className="img-fluid" alt="paypal"/></a><br/> 
+                                                <img src="/images/paypal.png" className="img-fluid" alt="paypal"/></a><br/> 
                                                 <a href="#" className="btn ml-auto Add_Money">
-                                                <img src="assets/images/razorpay.png" className="img-fluid" alt="razorpay"/></a>
+                                                <img src="/images/razorpay.png" className="img-fluid" alt="razorpay"/></a>
                                             </div>
                                         </div>
                                     </div>
@@ -398,9 +401,9 @@ export default function MyOrderDetails(){
                                             <div className="body">
                                                 <div className="text-center Earn_Referral mt-4 Complete_Profile">
                                                     <h4 className="m-t-2 Credits_Earned">Proceed by clicking</h4>
-                                                    <a href="#" className="btn  ml-auto Complete pay mt-2"><img src="assets/images/paypal.png" className="img-fluid" alt="paypal"/> </a>
+                                                    <a href="#" className="btn  ml-auto Complete pay mt-2"><img src="/images/paypal.png" className="img-fluid" alt="paypal"/> </a>
                                                     or
-                                                    <a href="#" className="btn mt-4 mb-4  ml-auto Add_Money"><img src="assets/images/razorpay.png" className="img-fluid" alt="razorpay"/>  </a>
+                                                    <a href="#" className="btn mt-4 mb-4  ml-auto Add_Money"><img src="/images/razorpay.png" className="img-fluid" alt="razorpay"/>  </a>
                                                     <br/>
                                                     <a href="#" className="btn  ml-auto Complete pay mt-2">Pay From Wallet </a><br/>
                                                     <p className="mt-5">Lorem ilupsm please make the payment so that we could quickly create an amazing Case Study create an amazing Case Study for you
@@ -419,7 +422,7 @@ export default function MyOrderDetails(){
                                         <div className="chat-header clearfix">
                                         <div className="row">
                                             <div className="col-lg-6 col-md-6 col-sm-12 Referral_Points">
-                                                <img src="assets/images/avatar2.jpg" alt="avatar"/>
+                                                <img src="/images/avatar2.jpg" alt="avatar"/>
                                                 <div className="chat-about">
                                                     <div className="chat-with">Aiden Chavez</div>
                                                     <div className="chat-num-messages">already 8 messages</div>
@@ -446,9 +449,9 @@ export default function MyOrderDetails(){
                                                 <div className="message my-message">
                                                     <p>Are we meeting today? Project has been already finished and I have results to show you.</p>
                                                     <div className="row">
-                                                    <div className="col-sm-6 col-lg-4"><a href="#"><img src="assets/images/image2.jpg" alt="" className="img-fluid img-thumbnail"/></a> </div>
-                                                    <div className="col-sm-6 col-lg-4"><a href="#"> <img src="assets/images/image3.jpg" alt="" className="img-fluid img-thumbnail"/></a> </div>
-                                                    <div className="col-sm-6 col-lg-4"><a href="#"> <img src="assets/images/image4.jpg" alt="" className="img-fluid img-thumbnail"/> </a> </div>
+                                                    <div className="col-sm-6 col-lg-4"><a href="#"><img src="/images/image2.jpg" alt="" className="img-fluid img-thumbnail"/></a> </div>
+                                                    <div className="col-sm-6 col-lg-4"><a href="#"> <img src="/images/image3.jpg" alt="" className="img-fluid img-thumbnail"/></a> </div>
+                                                    <div className="col-sm-6 col-lg-4"><a href="#"> <img src="/images/image4.jpg" alt="" className="img-fluid img-thumbnail"/> </a> </div>
                                                     </div>
                                                 </div>
                                             </li>

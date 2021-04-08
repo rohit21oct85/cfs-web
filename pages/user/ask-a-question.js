@@ -1,4 +1,4 @@
-import DashboardNavbar from '../../components/website/dashboard/dashobard-navbar'
+import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
 import Link from 'next/link'
 import {useState } from 'react'

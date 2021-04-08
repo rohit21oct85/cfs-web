@@ -3548,8 +3548,8 @@ body.theme-blush  {
 }
 @font-face {
     font-family: "Nucleo Outline";
-    /* src: url("../fonts/nucleo-outline.html"); */
-    /* src: url("../fonts/nucleo-outline.html") format("embedded-opentype"), url("../fonts/nucleo-outline-2.html") format("woff2"), url("../fonts/nucleo-outline-3.html") format("woff"), url("../fonts/nucleo-outline-4.html") format("truetype"); */
+    /* src: url("../../public/fonts/dashboard/fonts/nucleo-outline.html");
+    src: url("../../public/fonts/dashboard/fonts/nucleo-outline.html") format("embedded-opentype"), url("../../public/fonts/dashboard/fonts/nucleo-outline-2.html") format("woff2"), url("../../public/fonts/dashboard/fonts/nucleo-outline-3.html") format("woff"), url("../../public/fonts/dashboard/fonts/nucleo-outline-4.html") format("truetype"); */
     font-weight: normal;
     font-style: normal;
 }
@@ -6212,7 +6212,7 @@ body.theme-blush  {
 }
 @font-face {
     font-family: Material-Design-Iconic-Font;
-    /* src: url(../fonts/Material-Design-Iconic-Fontd1f1.woff2?v=2.2.0) format("woff2"), url(../fonts/Material-Design-Iconic-Fontd1f1.woff?v=2.2.0) format("woff"), url(../fonts/Material-Design-Iconic-Fontd1f1.ttf?v=2.2.0) format("truetype"); */
+    src: url(../../public/fonts/dashboard/fonts/Material-Design-Iconic-Fontd1f1.woff2) format("woff2"), url(../../public/fonts/dashboard/fonts/Material-Design-Iconic-Fontd1f1.woff?v=2.2.0) format("woff"), url(../../public/fonts/dashboard/fonts/Material-Design-Iconic-Fontd1f1.ttf?v=2.2.0) format("truetype");
 }
 .zmdi {
     display: inline-block;

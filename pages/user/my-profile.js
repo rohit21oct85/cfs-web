@@ -1,7 +1,6 @@
-import DashboardNavbar from '../../components/website/dashboard/dashobard-navbar'
+import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
 import Link from 'next/link'
-import {useEffect, useState} from 'react';
 import Router from 'next/router'
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
@@ -34,8 +33,8 @@ export default function  MyProfile() {
             {/* <Link href="#"><a onClick={SignOut}>SignOut</a></Link> */}
             <aside id="leftsidebar" className="sidebar">
                 <ul className="nav nav-tabs">
-                    <li className="nav-item"><a className="nav-link" data-toggle="tab" href="myaccount.php" target="_blank"><i className="zmdi zmdi-home"></i></a></li>
-                    <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#user">My Profile</a></li>
+                    <li className="nav-item"><Link href="/dashboard"><a className="nav-link" data-toggle="tab" href="" target="_blank"><i className="zmdi zmdi-home"></i></a></Link></li>
+                    <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#user">profProfile</a></li>
                 </ul>
                 <div className="tab-content">
                     <div className="tab-pane stretchLeft active" id="user">
@@ -105,7 +104,7 @@ export default function  MyProfile() {
                         <i className="zmdi zmdi-edit"></i>
                         </button>
                         <ul className="breadcrumb float-md-right">
-                            <li className="breadcrumb-item"><a href="myaccount.php"> Dashboard</a></li>
+                            <li className="breadcrumb-item"><Link href="/dashboard"><a> Dashboard</a></Link></li>
                             <li className="breadcrumb-item active">Profile</li>
                         </ul>
                     </div>
