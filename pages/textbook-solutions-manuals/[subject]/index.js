@@ -18,6 +18,9 @@ export default function Subject(){
     const router = useRouter();
     const { data: subSubjects, isLoading:subSubjectIsLoading, error:subSubjectError } = useQuery([router.query.subject], () => getSubSubject( router.query.subject ),{staleTime:Infinity})
     
+    if(subSubjectIsLoading)
+        return <div id="loading"></div>;
+
     return(
         <>
             <Header/>

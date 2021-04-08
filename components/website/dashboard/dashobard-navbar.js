@@ -110,7 +110,7 @@ export default function DashboardNavbar(){
             
                     <li className="dropdown float-right pt_sty">
                         <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <i className="zmdi zmdi-notifications"></i> 
+                            <i className="fa fa-bell"></i> 
                         </a>
                         <ul className="dropdown-menu pullDown">
                             <li className="body">

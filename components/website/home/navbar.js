@@ -18,7 +18,6 @@ export default function Navbar() {
         }else{
             setMobileMenuClass('show')
         }
-        
     }
 
     const handleClick =()=>{
@@ -46,6 +45,7 @@ export default function Navbar() {
         setShowMenu(false);
         setClassname('show');
     }
+    
     const [homePClass, setHomePClass] = useState('');
     const [homePImage, setHomePImage] = useState('logo.png');
     
