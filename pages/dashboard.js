@@ -2,12 +2,17 @@ import DashboardNavbar from '../components/website/dashboard/dashboard-navbar'
 import SideBar from '../components/website/dashboard/sidebar'
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../components/access-denied'
-
+import Router from 'next/router'
+import { useEffect } from 'react';
 
 export default function  Dashboard() {
-    const [ session, loading ] = useSession()
 
-    if (!session) { return  (<><AccessDenied/></>) }
+    const [ session, loading ] = useSession()
+    
+    // if (!session) { return  (<><AccessDenied/></>) }
+    useEffect(() => {
+        if (!session) { Router.push('/auth/signin') }
+    }, [])
     
     return (
         <>  

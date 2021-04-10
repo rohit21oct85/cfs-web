@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import { useRouter } from "next/router";
+import { useSession } from 'next-auth/client'
 
 export default function SideBar(){
     const router = useRouter();
-
+    const [ session, loading ] = useSession();
+    
     return (
         <aside id="leftsidebar" className="sidebar sidebar_color sidebar_left">
             <div className="tab-content">
@@ -13,7 +15,7 @@ export default function SideBar(){
                             <li className="mb-0 border-bottom-0">
                                 <div className="user-info  border-bottom-0">
                                     <div className="image circle">
-                                        <a href="#"><img src="/images/my-pics.jpg" className="profile-pic" alt="User"/></a>
+                                        <a href="#"><img src={session && session.user.image} className="profile-pic" alt="User"/></a>
                                         <div className="profile_pic_change">
                                             <div className="p-image">
                                                 <i className="fa fa-camera upload-button"></i>
@@ -22,7 +24,7 @@ export default function SideBar(){
                                         </div>
                                     </div>
                                     <div className="detail">
-                                        <h4> Ashton Cox <span>Student</span></h4>
+                                        <h4> {session && session.user.name} <span>Student</span></h4>
                                     </div>
                                 </div>
                             </li>

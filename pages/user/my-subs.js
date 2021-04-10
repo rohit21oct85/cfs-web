@@ -1,15 +1,15 @@
 import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
-import {useState } from 'react'
+import {useState, useEffect } from 'react'
 import Link from 'next/link'
 
 export default function MySubs(){
-
     const [display, setDisplay] = useState('none');
 
     const openCollapse = () => {
         display == 'none' ? setDisplay('block') : setDisplay('none')
     }
+
     return(
         <>
         <DashboardNavbar/>
@@ -24,7 +24,7 @@ export default function MySubs(){
                     </div>
                     <div className="col-lg-5 col-md-6 col-sm-12">
                         <ul className="breadcrumb float-md-right">
-                        <li className="breadcrumb-item"><a href="myaccount.php"> Dashboard</a></li>
+                        <li className="breadcrumb-item"><Link href="/dashboard"><a> Dashboard</a></Link></li>
                         <li className="breadcrumb-item active">My Subscription</li>
                         </ul>
                     </div>

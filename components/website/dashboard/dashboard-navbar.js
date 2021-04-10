@@ -5,6 +5,7 @@ import { useQuery } from 'react-query'
 import { MakeSlug } from '../../common/make-slug'
 import { signOut } from 'next-auth/client'
 import Router from 'next/router'
+import { useSession } from 'next-auth/client'
 
 export default function DashboardNavbar(){
     const [ showNotification, setShowNotification ] = useState(false);
@@ -12,7 +13,8 @@ export default function DashboardNavbar(){
     const [ classname, setClassname ] = useState('');
     const [showMenu,setShowMenu] = useState(false);
     const [showAMenu,setShowAMenu] = useState(false);
-
+    const [ session, loading ] = useSession();
+    
     async function SignOut () {
         localStorage.removeItem('access_token_student')
         localStorage.removeItem('refresh_token_student')
@@ -81,6 +83,12 @@ export default function DashboardNavbar(){
     }
 
     const { data, isLoading } = useQuery('menus', getNavbarData,{ staleTime:Infinity})
+    
+    // if (!session) { return  (<><AccessDenied/></>) }
+    useEffect(() => {
+        console.log(session)
+        if (session !== undefined && !session) { Router.push('/auth/signin') }
+    }, [])
 
     return( <>
             <nav className="navbar navbar_dashboard1 p-l-5 p-r-5">
@@ -130,11 +138,11 @@ export default function DashboardNavbar(){
                         </div>}
                     </li>
                     <li className={`nav-item dmenu float-right pt_sty dropdown ${classname}`} onMouseEnter={openDropdown}>
-                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span className="my_pics_img m-r-60 mt-0"><img src="/images/my-pics.jpg" alt="User" className="img-fluid"/></span></a>
+                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span className="my_pics_img m-r-60 mt-0"><img src={session && session.user.image} alt="User" className="img-fluid"/></span></a>
                         {showDropdown && <><div className={`dropdown-menu sm-menu ${classname}`} aria-labelledby="navbarDropdown" onMouseLeave={()=>{hideDropdown()}}>
-                            <a className="dropdown-item" href="#"> Dashboard</a>
-                            <a className="dropdown-item" href="#"> My Orders</a>
-                            <a className="dropdown-item" href="#"> My Profile</a>
+                            <Link href="/dashboard"><a className="dropdown-item" href="#"> Dashboard</a></Link>
+                            <Link href="/user/my-orders"><a className="dropdown-item" href="#"> My Orders</a></Link>
+                            <Link href="/user/my-profile"><a className="dropdown-item" href="#"> My Profile</a></Link>
                             <a className="dropdown-item" href="#" onClick={SignOut}><i className="fas fa-sign-out-alt"></i> Logout </a>
                         </div></>}
                     </li>

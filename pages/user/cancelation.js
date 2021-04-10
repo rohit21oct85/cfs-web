@@ -1,7 +1,10 @@
 import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
+import { useEffect } from 'react';
+import Link from 'next/link'
 
 export default function Cancelation(){
+
     return(
         <>
         <DashboardNavbar/>
@@ -16,7 +19,7 @@ export default function Cancelation(){
                     </div>
                     <div className="col-lg-5 col-md-6 col-sm-12">
                         <ul className="breadcrumb float-md-right">
-                        <li className="breadcrumb-item"><a href="myaccount.php"> Dashboard</a></li>
+                        <li className="breadcrumb-item"><Link href="/dashboard"><a href="myaccount.php"> Dashboard</a></Link></li>
                         <li className="breadcrumb-item active">Offer</li>
                         </ul>
                     </div>

@@ -2,9 +2,17 @@ import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar
 import SideBar from '../../components/website/dashboard/sidebar'
 import Link from 'next/link'
 import {useState } from 'react'
+import dynamic from 'next/dynamic';
+
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+// const CKEditor = dynamic(() => import("@ckeditor/ckeditor5-react"), { ssr: false })
+// const  ClassicEditor  = dynamic(() => import("@ckeditor/ckeditor5-build-classic"), { ssr: false })
 
 export default function AskQuestion(){
    const [display, setDisplay] = useState(false);
+   
    const [modalClass, setModalClass] = useState(false);
    const openDialog =  () => {
       setDisplay('block')
@@ -40,7 +48,7 @@ export default function AskQuestion(){
             </div>
             <div className="col-lg-5 col-md-6 col-sm-12">
                <ul className="breadcrumb float-md-right">
-                  <li className="breadcrumb-item"><a href="myaccount.php"> Dashboard</a></li>
+                  <li className="breadcrumb-item"><Link href="/dashboard"><a> Dashboard</a></Link></li>
                   <li className="breadcrumb-item active">Ask a Question</li>
                </ul>
             </div>
@@ -102,8 +110,26 @@ export default function AskQuestion(){
                                     </select>
                                  </div>
                                  <div className="col-sm-6 col-md-6 form-group">
-                                    <label className="mb-0">Question</label>
-                                    <textarea name="editor1"></textarea>
+                                 {/* <CKEditor
+                                    editor={ ClassicEditor }
+                                    data="<p>Hello from CKEditor 5!</p>"
+                                    onReady={ editor => {
+                                          // You can store the "editor" and use when it is needed.
+                                          console.log( 'Editor is ready to use!', editor );
+                                    } }
+                                    onChange={ ( event, editor ) => {
+                                          const data = editor.getData();
+                                          console.log( { event, editor, data } );
+                                    } }
+                                    onBlur={ ( event, editor ) => {
+                                          console.log( 'Blur.', editor );
+                                    } }
+                                    onFocus={ ( event, editor ) => {
+                                          console.log( 'Focus.', editor );
+                                    } }
+                                 /> */}
+                                    {/* <label className="mb-0">Question</label>
+                                    <textarea name="editor1"></textarea> */}
                                  </div>
                                  <div className="col-md-6 col-sm-6">
                                     <div className="row">

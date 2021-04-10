@@ -1,8 +1,9 @@
 import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
-import {useState, useEffect} from 'react'
-export default function MyTbs(){
+import {useState, useEffect} from 'react'  
+import Link from 'next/link'
 
+export default function MyTbs(){
     const [fields, setFields] = useState([{ value: null }])
 
     function handleChange(i, event) {
@@ -35,7 +36,7 @@ export default function MyTbs(){
                             </div>
                             <div className="col-lg-9 col-md-6 col-sm-12 ml-auto text-right">
                                 <ul className="breadcrumb breadcrumb2 float-md-right pt-0 pb-0">
-                                    <li className="breadcrumb-item breadcrumb_cuspom"><a href="myaccount.php">Dashboard  </a></li>
+                                    <li className="breadcrumb-item breadcrumb_cuspom"><Link href="/dashboard"><a>Dashboard  </a></Link></li>
                                     <li className="breadcrumb-item active breadcrumb_cuspom"> My Textbook</li>
                                 </ul>
                             </div>

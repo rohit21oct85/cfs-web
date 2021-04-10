@@ -1,10 +1,11 @@
 import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
 import Link from 'next/link'
-import Router from 'next/router'
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
 import { signOut } from 'next-auth/client'
+import {useEffect} from 'react'
+import Router from 'next/router'
 
 async function SignOut () {
     console.log("removing...")
@@ -23,7 +24,10 @@ async function SignOut () {
 export default function  MyProfile() {
 
     const [ session, loading ] = useSession()
-    if (!session) { return  (<><AccessDenied/></>) }
+    // if (!session) { return  (<><AccessDenied/></>) }
+    useEffect(() => {
+        if (!session) { Router.push('/auth/signin') }
+    }, [])
     
 
     return (
@@ -34,7 +38,7 @@ export default function  MyProfile() {
             <aside id="leftsidebar" className="sidebar">
                 <ul className="nav nav-tabs">
                     <li className="nav-item"><Link href="/dashboard"><a className="nav-link" data-toggle="tab" href="" target="_blank"><i className="zmdi zmdi-home"></i></a></Link></li>
-                    <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#user">profProfile</a></li>
+                    <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#user">Profile</a></li>
                 </ul>
                 <div className="tab-content">
                     <div className="tab-pane stretchLeft active" id="user">
@@ -44,7 +48,7 @@ export default function  MyProfile() {
                                 <div className="user-info m-b-20 p-b-15">
                                 {/* <!--<div className="image"><a href="#"><img src="assets/images/profile_av.jpg" alt="User"/></a></div>--> */}
                                     <div className="image circle">
-                                <a href=""><img src="/images/my-pics.jpg" className="profile-pic" alt="User"/></a>
+                                <a href=""><img src={session && session.user.image} className="profile-pic" alt="User"/></a>
                                 <div className="profile_pic_change">
                                 <div className="p-image">
                                     <i className="fa fa-camera upload-button"></i>
@@ -119,7 +123,7 @@ export default function  MyProfile() {
                                 <div className="user-info">
                                     <div className="image circle">
 
-                                <a href=""><img src="/images/my-pics.jpg" className="profile-pic circle" alt="User"/></a>
+                                <a href=""><img src={session && session.user.image} className="profile-pic circle" alt="User"/></a>
                                 <div className="profile_pic_change">
                                 <div className="p-image p-image2">
                                     <i className="fa fa-camera upload-button"></i>
