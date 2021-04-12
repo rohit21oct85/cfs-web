@@ -121,9 +121,9 @@ body{font-family: 'Aspira'; font-size:15px;}
     overflow: hidden;
     overflow-y: scroll; box-shadow:0 0 4px rgba(0,0,0,0.3);}
  .books_bg2{margin-bottom:10px;} 
-.books_titles{border-bottom:1px solid #ccc; margin-bottom:10px; font-weight:500;}
+.books_titles{border-bottom:1px solid #ccc; margin-bottom:10px; font-weight:500;    text-align: left;}
 .picking_img1{display:inline-block; width:38px; padding-right:5px;}
-.Picking_Cotton{display:inline-block; vertical-align:top; width:90%;}
+.Picking_Cotton{ text-align: left;display:inline-block; vertical-align:top; width:90%;}
 .Picking_Cotton h3{font-weight:bold; font-size:14px; margin-bottom:1px; display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -133,7 +133,7 @@ body{font-family: 'Aspira'; font-size:15px;}
   -webkit-box-orient: vertical;
   overflow: hidden; margin-bottom:0px;}
   .Picking_Cotton p span{font-size:11px; color:#323232;}
-  .View_All_results{background:#fff; font-size:14px; box-shadow:0 0 4px rgba(0,0,0,0.3);}
+  .View_All_results{  text-align: left;background:#fff; font-size:14px; box-shadow:0 0 4px rgba(0,0,0,0.3);}
   .View_All_results  a{background:#fff; font-size:16px; padding:10px 15px; display:inline-block;} 
 /*banner end*/
 
@@ -1535,9 +1535,10 @@ button.btn.dropdown-toggle.btn-round.btn-simple {
 	 no-repeat center center;	
 	z-index: 99999;
 }
-
 .search_prodt1 { 
     position: absolute;
     width: 100%;
     z-index: 9;
 }
+
+

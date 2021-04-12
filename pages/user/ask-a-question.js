@@ -1,8 +1,11 @@
 import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
+import BlockHeader from '../../components/website/dashboard/block-header'
 import Link from 'next/link'
 import {useState } from 'react'
 import dynamic from 'next/dynamic';
+import { useSession } from 'next-auth/client'
+import AccessDenied from '../../components/access-denied'
 
 // import { CKEditor } from '@ckeditor/ckeditor5-react';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -11,6 +14,7 @@ import dynamic from 'next/dynamic';
 // const  ClassicEditor  = dynamic(() => import("@ckeditor/ckeditor5-build-classic"), { ssr: false })
 
 export default function AskQuestion(){
+   const [ session, loading ] = useSession()
    const [display, setDisplay] = useState(false);
    
    const [modalClass, setModalClass] = useState(false);
@@ -34,26 +38,14 @@ export default function AskQuestion(){
       }
    }
 
+   if (!session) { return  (<><AccessDenied/></>) }
+   
    return(
       <>
       <DashboardNavbar/>
       <SideBar/>
       <section className="content user profile-page">
-      <div className="block-header">
-         <div className="row">
-            <div className="col-lg-7 col-md-6 col-sm-12">
-               <h2>Hi,  Ashton Cox 
-                  <small>Student, ipex College</small>
-               </h2>
-            </div>
-            <div className="col-lg-5 col-md-6 col-sm-12">
-               <ul className="breadcrumb float-md-right">
-                  <li className="breadcrumb-item"><Link href="/dashboard"><a> Dashboard</a></Link></li>
-                  <li className="breadcrumb-item active">Ask a Question</li>
-               </ul>
-            </div>
-         </div>
-      </div>
+      <BlockHeader/>
       <div className="container-fluid">
          <div className="row clearfix mt-4">
             <div className="col-md-12">

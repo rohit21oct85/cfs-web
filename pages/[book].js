@@ -349,7 +349,7 @@ export default function Book(){
             <Subscription/>
             <Description/>
             <Details/>
-            <Reviews reviews={books && books[0].reviews}/>
+            <Reviews reviews={books && books[0] && books[0].reviews}/>
             <RelatedTbs data={relatedBooks}/>
             <Faq/>
             <Follow/>

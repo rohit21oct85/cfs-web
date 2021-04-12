@@ -4,15 +4,13 @@ import { useSession } from 'next-auth/client'
 import AccessDenied from '../components/access-denied'
 import Router from 'next/router'
 import { useEffect } from 'react';
+import BlockHeader from '../components/website/dashboard/block-header'
 
 export default function  Dashboard() {
 
     const [ session, loading ] = useSession()
     
-    // if (!session) { return  (<><AccessDenied/></>) }
-    useEffect(() => {
-        if (!session) { Router.push('/auth/signin') }
-    }, [])
+    if (!session) { return  (<><AccessDenied/></>) }
     
     return (
         <>  
@@ -21,22 +19,7 @@ export default function  Dashboard() {
             <DashboardNavbar/>
             <SideBar/>
             <section className="content user profile-page">
-                <div className="block-header">
-                    <div className="row">
-                        <div className="col-lg-7 col-md-6 col-sm-12">
-                            <h2>Hi,  Ashton Cox 
-                                <small>Student, ipex College</small>
-                            </h2>
-                        </div>
-                        <div className="col-lg-5 col-md-6 col-sm-12">
-                            <ul className="breadcrumb float-md-right">
-                                <li className="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li className="breadcrumb-item active">My Account</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
+                <BlockHeader/>                
                 <div className="container-fluid">
                     <div className="row clearfix mt-4">
                         <div className="col-xl-12">

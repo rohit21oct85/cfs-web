@@ -22,7 +22,7 @@ export default function DashboardNavbar(){
         localStorage.removeItem('student_email')
         // Router.push('login')
         // signOut({ callbackUrl: 'http://localhost:3000/auth/signin' });
-        const data = await signOut({redirect: false, callbackUrl: "/auth/signin"})
+        const data = await signOut({redirect: false, callbackUrl: "api/auth/signin"})
         Router.push(data.url)
     }
 
@@ -83,12 +83,6 @@ export default function DashboardNavbar(){
     }
 
     const { data, isLoading } = useQuery('menus', getNavbarData,{ staleTime:Infinity})
-    
-    // if (!session) { return  (<><AccessDenied/></>) }
-    useEffect(() => {
-        console.log(session)
-        if (session !== undefined && !session) { Router.push('/auth/signin') }
-    }, [])
 
     return( <>
             <nav className="navbar navbar_dashboard1 p-l-5 p-r-5">

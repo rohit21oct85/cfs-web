@@ -1,3 +1,5 @@
+import BuyBookSub from '../../common/buy-book-sub'
+
 export default function BuySubscription(){
     return (
         <section className="section bg_colr2 pt-4 pb-4">
@@ -15,9 +17,10 @@ export default function BuySubscription(){
                                 <li><i className="fa fa-check-circle"></i> Unlimited access to textbook Solutions </li>
                                 <li><i className="fa fa-check-circle"></i> Unlimited access to Q/A library </li>
                                 </ul>
-                            <div className="btn1">
+                            {/* <div className="btn1">
                                 <a href="#">Buy Subscription</a>
-                            </div>
+                            </div> */}
+                            <BuyBookSub/>
                         </div>
                     </div>
                 </div> 

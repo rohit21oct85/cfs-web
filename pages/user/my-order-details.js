@@ -2,8 +2,13 @@ import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar
 import SideBar from '../../components/website/dashboard/sidebar'
 import  OwlCarousel  from "../../components/common/owl-carousel";
 import Link from 'next/link'
+import { useSession } from 'next-auth/client'
+import AccessDenied from '../../components/access-denied'
 
 export default function MyOrderDetails(){
+    const [ session, loading ] = useSession();
+
+    if (!session) { return  (<><AccessDenied/></>) }
 
     return(
         <>
