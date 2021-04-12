@@ -1,6 +1,11 @@
 import Link from 'next/link'
+import { useRouter } from "next/router";
+import { useSession } from 'next-auth/client'
 
 export default function SideBar(){
+    const router = useRouter();
+    const [ session, loading ] = useSession();
+    
     return (
         <aside id="leftsidebar" className="sidebar sidebar_color sidebar_left">
             <div className="tab-content">
@@ -10,7 +15,7 @@ export default function SideBar(){
                             <li className="mb-0 border-bottom-0">
                                 <div className="user-info  border-bottom-0">
                                     <div className="image circle">
-                                        <a href="#"><img src="/images/my-pics.jpg" className="profile-pic" alt="User"/></a>
+                                        <a href="#"><img src={session && session.user.image} className="profile-pic" alt="User"/></a>
                                         <div className="profile_pic_change">
                                             <div className="p-image">
                                                 <i className="fa fa-camera upload-button"></i>
@@ -19,7 +24,7 @@ export default function SideBar(){
                                         </div>
                                     </div>
                                     <div className="detail">
-                                        <h4> Ashton Cox <span>Student</span></h4>
+                                        <h4> {session && session.user.name} <span>Student</span></h4>
                                     </div>
                                 </div>
                             </li>
@@ -192,14 +197,14 @@ export default function SideBar(){
                                     </li>
                                 </ul>
                             </li> 
-                            <Link href="/dashboard"><li className="active open"><a href=""><i className="fa fa-home"></i><span>Dashboard</span></a></li></Link>
-                            <Link href="/user/my-orders"><li><a href=""><i className="fas fa-paste"></i><span>My Order</span> </a></li></Link>
-                            <Link href="/user/my-profile"><li><a href=""><i className="fa fa-user-circle"></i><span>My Profile</span> </a></li></Link>
-                            <Link href="/user/my-tbs"><li><a href=""><i className="fas fa-map"></i><span>My Textbook</span> </a></li></Link>
-                            <Link href="/user/my-subs"><li><a href=""><i className="fas fa-id-card"></i><span>My Subscription</span> </a></li></Link>
-                            <Link href="/user/ask-a-question"><li><a href=""><i className="fas fa-question-circle"></i><span>Ask a Question</span> </a></li></Link>
-                            <Link href="/user/my-question"><li><a href=""><i className="fas fa-comments"></i><span>My Question</span> </a></li></Link>
-                            <Link href="/faqs"><li><a href=""><i className="fas fa-question"></i><span>FAQ</span> </a></li></Link>
+                            <Link href="/dashboard"><li className={router.pathname == '/dashboard' ? 'active open' : ''}><a href=""><i className="fa fa-home"></i><span>Dashboard</span></a></li></Link>
+                            <Link href="/user/my-orders"><li className={router.pathname == '/user/my-orders' ? 'active open' : ''}><a href=""><i className="fa fa-paste"></i><span>My Order</span> </a></li></Link>
+                            <Link href="/user/my-profile"><li className={router.pathname == '/user/my-profile' ? 'active open' : ''}><a href=""><i className="fa fa-user-circle"></i><span>My Profile</span> </a></li></Link>
+                            <Link href="/user/my-tbs"><li className={router.pathname == '/user/my-tbs' ? 'active open' : ''}><a href=""><i className="fa fa-map"></i><span>My Textbook</span> </a></li></Link>
+                            <Link href="/user/my-subs"><li className={router.pathname == '/user/my-subs' ? 'active open' : ''}><a href=""><i className="fa fa-id-card"></i><span>My Subscription</span> </a></li></Link>
+                            <Link href="/user/ask-a-question"><li className={router.pathname == '/user/ask-a-question' ? 'active open' : ''}><a href=""><i className="fa fa-question-circle"></i><span>Ask a Question</span> </a></li></Link>
+                            <Link href="/user/my-question"><li className={router.pathname == '/user/my-question' ? 'active open' : ''}><a href=""><i className="fa fa-comments"></i><span>My Question</span> </a></li></Link>
+                            <Link href="/faqs"><li className={router.pathname == '/faqs' ? 'active open' : ''}><a href=""><i className="fa fa-question"></i><span>FAQ</span> </a></li></Link>
                         </ul>
                     </div>
                 </div>

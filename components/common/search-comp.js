@@ -43,7 +43,7 @@ export default function SearchComp({...props}){
                     <Link href={`/search/${search}`}><button type="submit" className="search_btn">{props.btnText}</button></Link>
             </form>
             
-            <div className="row" style={{display: `${display}`}}>
+            <div className="row search_prodt1" style={{display: `${display}`}}>
                 <div className="col-md-12">
                     <div className="books_bg1">
                         <div className="row">

@@ -1,14 +1,15 @@
-import DashboardNavbar from '../../components/website/dashboard/dashobard-navbar'
+import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
-import {useState } from 'react'
+import {useState, useEffect } from 'react'
+import Link from 'next/link'
 
 export default function MySubs(){
-
     const [display, setDisplay] = useState('none');
 
     const openCollapse = () => {
         display == 'none' ? setDisplay('block') : setDisplay('none')
     }
+
     return(
         <>
         <DashboardNavbar/>
@@ -23,7 +24,7 @@ export default function MySubs(){
                     </div>
                     <div className="col-lg-5 col-md-6 col-sm-12">
                         <ul className="breadcrumb float-md-right">
-                        <li className="breadcrumb-item"><a href="myaccount.php"> Dashboard</a></li>
+                        <li className="breadcrumb-item"><Link href="/dashboard"><a> Dashboard</a></Link></li>
                         <li className="breadcrumb-item active">My Subscription</li>
                         </ul>
                     </div>
@@ -97,7 +98,7 @@ export default function MySubs(){
                                                         </h3>
                                                     </div>
                                                     <div className="col-md-3 mt-auto mb-auto ml-auto">
-                                                        <a href="ask_cancellation.php" className="order-sub-cancel"> Cancel Subscription Pack</a> 
+                                                        <Link href="/user/cancelation"><a className="order-sub-cancel">Cancel Subscription Pack</a></Link>
                                                     </div>
                                                 </div>
                                                 </div>
@@ -163,7 +164,7 @@ export default function MySubs(){
                             </div>
                         </div>
                         <ul className="recipt_m">
-                            <li><a href="ask_cancellation.php" className="btn ml-auto mt-0 mb-0 cancel-sub" > Cancel Subscription Pack</a></li>
+                            <li><Link href="/user/cancelation"><a className="btn ml-auto mt-0 mb-0 cancel-sub">Cancel Subscription Pack</a></Link></li>
                         </ul>
                         </div>
                     </div>

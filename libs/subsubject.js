@@ -13,3 +13,14 @@ export async function getBooks( param ) {
 
     }
 }
+
+export async function getSubSubject( param ) {
+    try {
+        console.log(param)
+        const res = await axios.get(apiUrl + `subsubject/${param}`)
+        return res.data;
+    }
+    catch(e){
+
+    }
+}

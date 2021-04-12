@@ -1,29 +1,18 @@
-import DashboardNavbar from '../components/website/dashboard/dashobard-navbar'
+import DashboardNavbar from '../components/website/dashboard/dashboard-navbar'
 import SideBar from '../components/website/dashboard/sidebar'
-import Link from 'next/link'
-import {useEffect, useState} from 'react';
-import Router from 'next/router'
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../components/access-denied'
-import { signOut } from 'next-auth/client'
-import Head from 'next/head'
-
-async function SignOut () {
-    localStorage.removeItem('access_token_student')
-    localStorage.removeItem('refresh_token_student')
-    localStorage.removeItem('student_name')
-    localStorage.removeItem('student_email')
-    // Router.push('login')
-    // signOut({ callbackUrl: 'http://localhost:3000/auth/signin' });
-    const data = await signOut({redirect: false, callbackUrl: "/auth/signin"})
-    Router.push(data.url)
-}
-
+import Router from 'next/router'
+import { useEffect } from 'react';
 
 export default function  Dashboard() {
-    const [ session, loading ] = useSession()
 
-    if (!session) { return  (<><AccessDenied/></>) }
+    const [ session, loading ] = useSession()
+    
+    // if (!session) { return  (<><AccessDenied/></>) }
+    useEffect(() => {
+        if (!session) { Router.push('/auth/signin') }
+    }, [])
     
     return (
         <>  
@@ -50,7 +39,7 @@ export default function  Dashboard() {
                 
                 <div className="container-fluid">
                     <div className="row clearfix mt-4">
-                        <div className="col-xl-12"><Link href="#"><a onClick={SignOut}>SignOut</a></Link>
+                        <div className="col-xl-12">
                             <div className="banner banner-color mt-0">
                                 <div className="row img_bannet_ft" style={{width:"100%"}}>
                                     <div className="col-xl-2 col-sm-12 col-lg-2 col-md-3">
