@@ -52,7 +52,6 @@ export default function Navbar() {
     const [homePImage, setHomePImage] = useState('logo.png');
     
     useEffect(() => {
-        console.log(router.pathname)
         if(router.pathname !== '/' && router.pathname !== '/paynow'){
             setHomePClass('bg_white_nav')
             setHomePImage('logo_w.jpg')

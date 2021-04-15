@@ -55,6 +55,7 @@ export default function SearchComp({...props}){
                                     </div>}
                                     {searchedBooks && searchedBooks.map((item,key)=>{
                                     return(<span key={key}>
+                                        <Link href={item.ISBN13}><a>
                                             <div className="picking_img1">
                                                 <BookImage isbn={item.ISBN13}/>
                                             </div>
@@ -62,7 +63,8 @@ export default function SearchComp({...props}){
                                                 <h3>{item.BookName}</h3>
                                                 <p>{item.Author1}</p>
                                                 <p><span>ISBN10 - {item.ISBN10} | ISBN13 - {item.ISBN13}</span></p>
-                                            </div>
+                                            </div></a>
+                                        </Link>
                                         </span>)
                                     })}
                                 </div>
@@ -76,11 +78,13 @@ export default function SearchComp({...props}){
                                     }
                                     {searchedQuestions && searchedQuestions.map((item,key)=>{
                                     return(<span key={key}>
+                                        <Link href={item.book_isbn}><a>
                                             <div className="Picking_Cotton">
                                                 <h3>{item.question}</h3>
                                                 <p>{item.book_name} | {item.book_isbn}</p>
                                                 <p><span>Chapter Name: {item.chapter_name}, Chapter No: {item.chapter_no}</span></p>
-                                            </div>
+                                            </div></a>
+                                        </Link>
                                         </span>)
                                     })}
                                 </div>
@@ -88,7 +92,7 @@ export default function SearchComp({...props}){
                         </div>
                     </div>
                     <div className="col-md-12 View_All_results">
-                        <a href="#">View All results</a> 
+                    <Link href={`/search/${search}`}><a>View All results</a></Link>
                     </div>
                 </div>
             </div>

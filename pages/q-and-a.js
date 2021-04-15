@@ -9,6 +9,9 @@ import TryCrazy from '../components/website/q-and-a/try-crazy-for-study'
 import BuySubscription from '../components/website/q-and-a/buy-subscription'
 import HowItWorks from '../components/common/how-it-works'
 import StudyHelp from '../components/common/study-help'
+import About from '../components/website/textbook-solutions-manuals/about'
+import WhyChooseOnline from '../components/website/textbook-solutions-manuals/why-choose-online'
+import WhatStudentsThink from '../components/website/assignment-help/what-students-think'
 
 export default function QandA() {
     return(
@@ -22,8 +25,11 @@ export default function QandA() {
             <AskExpert/>
             <TryCrazy/>
             <BuySubscription/>
+            <About/>
             <HowItWorks/>
             <StudyHelp/>
+            <WhyChooseOnline/>
+            <WhatStudentsThink/>
             <Follow/>
             <Footer/>
         </>

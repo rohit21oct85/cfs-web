@@ -1,10 +1,11 @@
 import {useState, useEffect} from 'react';
 
 export default function  Pagination({...props}) {
-    
     const handleClick = (e) => {
         e.preventDefault();
-        props.setPageNo(e.target.innerText - 1);
+        if(e.target.innerText != 0){
+            props.setPageNo(e.target.innerText - 1);
+        }
     }
 
     const handlePrev = (e) => {
@@ -16,7 +17,8 @@ export default function  Pagination({...props}) {
 
     const handleNext = (e) => {
         e.preventDefault();
-        if(props.pageNo < pages-1){
+        // console.log(props.pageNo, pages)
+        if(props.pageNo < pages){
             props.setPageNo(props.pageNo + 1)
         }
     }

@@ -14,6 +14,7 @@ import { useQuery } from 'react-query'
 import {getBook, getChapters, getSections, getExercises, getRelatedBooks, getProblems, getProblemsDirectly, searchQuestions} from '../libs/book'
 import {useState, useEffect} from 'react';
 import BookInfo from '../components/website/book-detail/book-info'
+import Highlighter from "react-highlight-words";
 
 export default function Book(){
     const router = useRouter();
@@ -26,6 +27,7 @@ export default function Book(){
     const [display, setDisplay] = useState();
     const [colMd6, setColMd6] = useState();
     const [searchedItems, setSearchedItems] = useState();
+    const [selectedQuestion, setselectedQuestion] = useState();
     
     const { data: books, isLoading:bookIsLoading, error:bookError } = useQuery([router.query.book], () => getBook({book_isbn: router.query.book}),{staleTime:Infinity})
     const { data: chapters, isLoading: chapterIsLoading, error:chapterError } = useQuery([`${router.query.book}-chapter`], () => getChapters({book_isbn: router.query.book}),{staleTime:Infinity})
@@ -50,6 +52,17 @@ export default function Book(){
     const handleExercise = async (e) => {
         setExercise(e.target.value);
     }
+
+    const clickedQues = (data) => {
+        setselectedQuestion(data)
+    }
+    
+    useEffect(() => {
+        if(problems && problems.length>0){
+            setselectedQuestion(problems[0].problem_no+" : "+ problems[0].question)
+        }
+        return () => {}
+    }, [problems])
 
     useEffect(() => {
         if(books && books.length>0){
@@ -233,8 +246,18 @@ export default function Book(){
                                     <div className="col-md-12 pb-4">
                                         <div className="Qtion_n_Stion_text Qtion_n_Stion_text_scroll">
                                             {searchedItems && searchedItems.length>0 ? searchedItems.map((item,key) => {
-                                                return(
-                                                    <div className="bg_yellow_qa" key={key}> <strong>Q :</strong> {item.question} : {item.problem_no}</div>
+                                                return(<>
+                                                        <div className="bg_yellow_qa" key={key} onClick={()=>{clickedQues(item.problem_no+" : "+item.question)}}> <strong>Q : {item.problem_no} </strong>
+                                                            <Highlighter
+                                                                highlightClassName="YourHighlightClass"
+                                                                searchWords={[search]}
+                                                                autoEscape={true}
+                                                                caseSensitive={false}
+                                                                textToHighlight={item.question}
+                                                            />
+                                                        </div>
+                                                        {/* <div className="bg_yellow_qa" key={key}> <strong>Q :{item.problem_no}</strong>{item.question}</div> */}
+                                                    </>
                                                 )
                                             }): <div> <strong>No Results Found</strong></div>}
                                         </div>
@@ -245,13 +268,13 @@ export default function Book(){
                                         {problemIsLoading ? 'loading...' :
                                             problems && problems.map((item,key)=>{
                                                 return(
-                                                    <div className="bg_yellow_qa" key={key}> <strong>Q :</strong> {item.question} : {item.problem_no}</div>
+                                                    <div className="bg_yellow_qa" key={key} onClick={()=>{clickedQues(item.problem_no+" : "+item.question)}}> <strong>Q  : {item.problem_no }</strong> {item.question}</div>
                                                 )
                                             })}
                                         {problemDirectIsLoading ? 'loading...' :
                                             problemsDirect && problemsDirect.map((item,key)=>{
                                                 return(
-                                                    <div className="bg_yellow_qa" key={key}> <strong>Q :</strong> {item.question} : {item.problem_no}</div>
+                                                    <div className="bg_yellow_qa" key={key} onClick={()=>{clickedQues(item.problem_no+" : "+item.question)}}> <strong>Q  : {item.problem_no }</strong> {item.question}</div>
                                                 )
                                             })}
                                         </div>
@@ -275,7 +298,7 @@ export default function Book(){
                                     </div>
                                 </div> */}
 
-                                <div className="bg_qand_ans box_sdw_n pl-0 pr-0">  
+                                {/* <div className="bg_qand_ans box_sdw_n pl-0 pr-0">  
                                     <div className="col-md-12 pb-4">
                                         <div className="Qtion_n_Stion_text">
                                             <h3 className="mb-4"><span>Question and Solution </span></h3>
@@ -314,14 +337,14 @@ export default function Book(){
                                             </div>
                                         </div>
                                     </div> 
-                                </div>
+                                </div> */}
                         
                                 <div className="bg_qand_ans box_sdw_n pl-0 pr-0">    
                                     <div className="col-md-12 pb-4">
                                         <div className="Qtion_n_Stion_text">
                                             <h3 className="mb-4"><span>Question and Solution</span></h3>
                                             <div className="read_more_q">  
-                                                <span className="qustion_mark">Q:</span>  <div className="read_more_text">Question 4QA - Describe how pharmacogenomics will influence the treatment of human diseases which will be considerable during the next couple of years. To stay in a strong competitive position, weâ€™re constantly buying new pieces of earthmoving Mr. Gerrard: Iâ€™ve been talking with my accountant about our capital expansion needs, which will be considerable during the next couple of years. To stay in a strong competitive position, weâ€™re constantly buying new pieces of earthmoving </div> 
+                                                <span className="qustion_mark">Q:</span>  <div className="read_more_text">{selectedQuestion}</div> 
                                             </div> 
                                         </div>
                                     </div> 

@@ -2,6 +2,8 @@ import Header from '../components/website/home/header'
 import Navbar from '../components/website/home/navbar'
 import Footer from '../components/website/home/footer'
 import Follow from '../components/website/home/follow'
+import Paypal from '../components/common/paypal'
+
 
 export default function PayNow(){
 
@@ -44,7 +46,8 @@ export default function PayNow(){
                             <div className="pay_option1">
                                 <h4><strong>Subscribe With:</strong></h4>
                                 <ul>
-                                <li><a href="#"><img src="/images/pay-1.png" className="img-fluid" alt=""/></a></li>
+                                <li><Paypal amt={0.01}/></li>
+                                {/* <li><a href="#"><img src="/images/pay-1.png" className="img-fluid" alt=""/></a></li> */}
                                 <li><a href="#"><img src="/images/pay-2.png" className="img-fluid" alt=""/></a></li>
                                 </ul>
                             </div>
