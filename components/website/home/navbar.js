@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { getNavbarData } from '../../../libs/home'
 import { useQuery } from 'react-query'
 import { MakeSlug } from '../../common/make-slug'
+import { useSession } from 'next-auth/client'
 
 export default function Navbar() {
     const router = useRouter();
@@ -11,7 +12,8 @@ export default function Navbar() {
     const [showAMenu,setShowAMenu] = useState(false);
     const [classname, setClassname] = useState('');
     const [mobileMenuClass, setMobileMenuClass] = useState('');
-    
+    const [ session, loading ] = useSession();
+
     const showMobileMenu = ()=>{
         if(mobileMenuClass === 'show'){
             setMobileMenuClass('')
@@ -50,7 +52,7 @@ export default function Navbar() {
     const [homePImage, setHomePImage] = useState('logo.png');
     
     useEffect(() => {
-        if(router.pathname !== '/'){
+        if(router.pathname !== '/' && router.pathname !== '/paynow'){
             setHomePClass('bg_white_nav')
             setHomePImage('logo_w.jpg')
         }
@@ -58,7 +60,7 @@ export default function Navbar() {
         }
     }, [])    
 
-    const { data, isLoading } = useQuery('menus', getNavbarData,{ staleTime:Infinity})
+    const { data, isLoading } = useQuery('menus', getNavbarData, {staleTime:Infinity})
     
     return (
         <>
@@ -107,7 +109,12 @@ export default function Navbar() {
                             <Link href="/writing/online-assignment-help"><a className="dropdown-item"><img src="/images/nav-icons/online-assignment-help.png" className="img-fluid" alt=""/> Assignment Help </a></Link>
                         </div>}
                     </li>
-                    <li className="nav-item login_signup_top"><Link href="/auth/signin"><a className="nav-link">Login / Signup <i className="fa fa-user"></i></a></Link></li> 
+                    {session !== undefined && !session 
+                    ?
+                    <li className="nav-item login_signup_top"><Link href="/auth/signin"><a className="nav-link">Login / Signup <i className="fa fa-user"></i></a></Link></li>
+                    : 
+                    <li className="nav-item login_signup_top"><Link href="/user/my-profile"><a className="nav-link">My Profile <i className="fa fa-user"></i></a></Link></li>
+                    } 
                 </ul>
                 </div>
             </div>

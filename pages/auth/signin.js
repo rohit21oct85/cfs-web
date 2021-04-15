@@ -6,8 +6,6 @@ import {useEffect} from 'react'
 import { useSession } from 'next-auth/client'
 import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
-
-
 export default function SignIn({ csrfToken, providers }) {
 	const [ session, loading ] = useSession();
 	const [success, setSuccess] = useState(null);
@@ -20,19 +18,12 @@ export default function SignIn({ csrfToken, providers }) {
 	const passwordRef = useRef();
  	
 	useEffect(() => {
-		if (session && session.expires){
-			Router.push('/dashboard')
-		}
+		// console.log(session)
+		// if (session && session.expires){
+		// 	Router.push('/dashboard')
+		// }
 	}, [session])
 
-	// useEffect(() => {
-	// 	
-	// 	return () => {
-	// 		setSuccess(null);
-	// 	}
-	// }, [success, router.query])
-
-	
 
 	const submitForm = async (e) => {
 		e.preventDefault();
@@ -46,7 +37,7 @@ export default function SignIn({ csrfToken, providers }) {
 			return false;
 		}else{
 			setLoader(true);
-			const response = await signIn('credentials',{ email, password, callbackUrl: `${window.location.origin}/dashboard`})
+			const response = await signIn('credentials',{ email, password })
 			if(response && response.error != null){
 				setError("Email or password not matched");
 				setLoader(false);
@@ -140,7 +131,8 @@ return (
 										<span key={provider.id}>
 										{provider.id === "credentials" ? <span></span> :
 											<li key={provider.name}>
-												<a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id, {callbackUrl : `${process.env.NEXTAUTH_URL}/dashboard`})}}>
+												{/* <a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id, {callbackUrl : `${process.env.NEXTAUTH_URL}/dashboard`})}}> */}
+												<a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id,{ callbackUrl : ""})}}>
 													<i className={`fa fa-${provider.id}`}></i> {provider.name}
 												</a>
 											</li>

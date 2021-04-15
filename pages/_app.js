@@ -19,6 +19,8 @@ import { Provider } from 'next-auth/client'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import {useEffect} from 'react'
 import { useRouter } from "next/router";
+import Head from 'next/head'
+
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }) {
@@ -42,14 +44,16 @@ function MyApp({ Component, pageProps }) {
 
 	return (
 			// <AuthProvider>
-			<Provider session={pageProps.session}>
-				<ErrorProvider>
-					<QueryClientProvider client={queryClient}>
-						{/* <ReactQueryDevtools initialIsOpen={false} /> */}
-						<Component {...pageProps} />
-					</QueryClientProvider>
-				</ErrorProvider>
-			</Provider>
+			<>
+				<Provider session={pageProps.session}>
+					<ErrorProvider>
+						<QueryClientProvider client={queryClient}>
+							{/* <ReactQueryDevtools initialIsOpen={false} /> */}
+							<Component {...pageProps} />
+						</QueryClientProvider>
+					</ErrorProvider>
+				</Provider>
+			</>
 			// </AuthProvider>
 		)
 	}

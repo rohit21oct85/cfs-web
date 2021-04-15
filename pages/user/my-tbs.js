@@ -1,10 +1,14 @@
 import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
-import {useState, useEffect} from 'react'  
+import BlockHeader from '../../components/website/dashboard/block-header'
+import {useState} from 'react'  
 import Link from 'next/link'
+import { useSession } from 'next-auth/client'
+import AccessDenied from '../../components/access-denied'
 
 export default function MyTbs(){
     const [fields, setFields] = useState([{ value: null }])
+    const [ session, loading ] = useSession()
 
     function handleChange(i, event) {
         const values = [...fields];
@@ -24,25 +28,14 @@ export default function MyTbs(){
         setFields(values);
     }
 
+    if (!session) { return  (<><AccessDenied/></>) }
+    
     return(
         <>
         <DashboardNavbar/>
         <SideBar/>
         <section className="content user profile-page">
-                    <div className="block-header">
-                        <div className="row">
-                            <div className="col-lg-3 col-md-6 col-sm-12 Referral_Points">
-                                <h2>Hi, Ashton Cox <small>Student, ipex College</small></h2>
-                            </div>
-                            <div className="col-lg-9 col-md-6 col-sm-12 ml-auto text-right">
-                                <ul className="breadcrumb breadcrumb2 float-md-right pt-0 pb-0">
-                                    <li className="breadcrumb-item breadcrumb_cuspom"><Link href="/dashboard"><a>Dashboard  </a></Link></li>
-                                    <li className="breadcrumb-item active breadcrumb_cuspom"> My Textbook</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
+                    <BlockHeader/>
                     <div className="container-fluid">
                         <div className="row clearfix mt-4">
                             <div className="col-md-12">

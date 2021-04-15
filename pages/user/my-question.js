@@ -2,8 +2,13 @@ import Link from 'next/link'
 import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
 import BlockHeader from '../../components/website/dashboard/block-header'
+import { useSession } from 'next-auth/client'
+import AccessDenied from '../../components/access-denied'
 
 export default function MyQuestion(){
+   const [ session, loading ] = useSession();
+
+   if (!session) { return  (<><AccessDenied/></>) }
 
          return(
             <>
@@ -37,22 +42,22 @@ export default function MyQuestion(){
                                        </label>
                                     </div>
                                     <div className="form-check-inline">
-                                       <label className="form-check-label" for="radio1">
+                                       <label className="form-check-label" htmlFor="radio1">
                                        <input type="radio" className="form-check-input" id="radio1" name="optradio" value="option1" /> All Question 
                                        </label>
                                     </div>
                                     <div className="form-check-inline">
-                                       <label className="form-check-label" for="radio2">
+                                       <label className="form-check-label" htmlFor="radio2">
                                        <input type="radio" className="form-check-input" id="radio2" name="optradio" value="option2"/> Pending Question  
                                        </label>
                                     </div>
                                     <div className="form-check-inline">
-                                       <label className="form-check-label" for="radio3">
+                                       <label className="form-check-label" htmlFor="radio3">
                                        <input type="radio" className="form-check-input" id="radio3" name="optradio" value="Answered Question "/> Answered Question  
                                        </label>
                                     </div>
                                     <div className="form-check-inline">
-                                       <label className="form-check-label" for="radio4">
+                                       <label className="form-check-label" htmlFor="radio4">
                                        <input type="radio" className="form-check-input" id="radio4" name="optradio" value="Rejected Question"/> Rejected Question       
                                        </label>
                                     </div>

@@ -1,30 +1,22 @@
 import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
 import SideBar from '../../components/website/dashboard/sidebar'
+import BlockHeader from '../../components/website/dashboard/block-header'
 import { useEffect } from 'react';
 import Link from 'next/link'
+import { useSession } from 'next-auth/client'
+import AccessDenied from '../../components/access-denied'
 
 export default function Cancelation(){
+    const [ session, loading ] = useSession();
 
+    if (!session) { return  (<><AccessDenied/></>) }
+    
     return(
         <>
         <DashboardNavbar/>
         <SideBar/>
         <section className="content user profile-page">
-            <div className="block-header">
-                <div className="row">
-                    <div className="col-lg-7 col-md-6 col-sm-12">
-                    <h2>Hi,  Ashton Cox 
-                        <small>Student, ipex College</small>
-                        </h2>
-                    </div>
-                    <div className="col-lg-5 col-md-6 col-sm-12">
-                        <ul className="breadcrumb float-md-right">
-                        <li className="breadcrumb-item"><Link href="/dashboard"><a href="myaccount.php"> Dashboard</a></Link></li>
-                        <li className="breadcrumb-item active">Offer</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <BlockHeader/>
             <div className="container-fluid">
                 <div className="row clearfix mt-4">
                     <div className="col-md-12">

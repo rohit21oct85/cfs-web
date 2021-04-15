@@ -2,34 +2,24 @@ import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar
 import SideBar from '../../components/website/dashboard/sidebar'
 import {useState, useEffect } from 'react'
 import Link from 'next/link'
+import BlockHeader from '../../components/website/dashboard/block-header';
+import { useSession } from 'next-auth/client'
+import AccessDenied from '../../components/access-denied'
 
 export default function MySubs(){
     const [display, setDisplay] = useState('none');
-
+    const [ session, loading ] = useSession()
     const openCollapse = () => {
         display == 'none' ? setDisplay('block') : setDisplay('none')
     }
+    if (!session) { return  (<><AccessDenied/></>) }
 
     return(
         <>
         <DashboardNavbar/>
         <SideBar/>
         <section className="content user profile-page">
-            <div className="block-header">
-                <div className="row">
-                    <div className="col-lg-7 col-md-6 col-sm-12">
-                        <h2>Hi, Ashton Cox 
-                            <small>Student, ipex College</small>
-                        </h2>
-                    </div>
-                    <div className="col-lg-5 col-md-6 col-sm-12">
-                        <ul className="breadcrumb float-md-right">
-                        <li className="breadcrumb-item"><Link href="/dashboard"><a> Dashboard</a></Link></li>
-                        <li className="breadcrumb-item active">My Subscription</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <BlockHeader/>
             <div className="container-fluid">
                 <div className="row clearfix mt-4">
                     <div className="col-md-12">

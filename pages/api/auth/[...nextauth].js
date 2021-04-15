@@ -28,8 +28,7 @@ export default NextAuth({
         // Add logic here to look up the user from the credentials supplied
         const user = await setLogin(credentials);
         if (user) {
-		// Any object returned will be saved in `user` property of the JWT
-
+		      // Any object returned will be saved in `user` property of the JWT
           return user
         } else {
           // If you return null or false then the credentials will be rejected
@@ -61,7 +60,8 @@ export default NextAuth({
     jwt: true,
 
     // Seconds - How long until an idle session expires and is no longer valid.
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 2 * 24 * 60 * 60, // 2 days
+    // maxAge: 30 * 24 * 60 * 60, // 30 days
 
     // Seconds - Throttle how frequently to write to database to extend a session.
     // Use it to limit write operations. Set to 0 to always update the database.
@@ -101,7 +101,11 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
 	redirect: async (url, baseUrl) => {
-		return Promise.resolve(url)
+    // console.log(url, baseUrl)
+		// return Promise.resolve(url)
+    return url.startsWith(baseUrl)
+      ? Promise.resolve(url)
+      : Promise.resolve(baseUrl)
 	}
     // async signIn(index) { return true },
     // async signIn(user, account, profile) { return true },

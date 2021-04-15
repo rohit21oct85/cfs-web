@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
 import { signOut } from 'next-auth/client'
-import {useEffect} from 'react'
 import Router from 'next/router'
 
 async function SignOut () {
@@ -19,17 +18,10 @@ async function SignOut () {
     Router.push(data.url)
 }
 
-
-
 export default function  MyProfile() {
-
     const [ session, loading ] = useSession()
-    // if (!session) { return  (<><AccessDenied/></>) }
-    useEffect(() => {
-        if (!session) { Router.push('/auth/signin') }
-    }, [])
+    if (!session) { return  (<><AccessDenied/></>) }
     
-
     return (
         <>
             <DashboardNavbar/>
