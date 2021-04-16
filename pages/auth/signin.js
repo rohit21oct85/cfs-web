@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/client'
 import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
 export default function SignIn({ csrfToken, providers }) {
+	
 	const [ session, loading ] = useSession();
 	const [success, setSuccess] = useState(null);
 	const [loader, setLoader] = useState(false);
@@ -167,3 +168,10 @@ SignIn.getInitialProps = async (context) => {
     providers: await providers()
   }
 }
+
+// export async function getServerSideProps(context){
+// 	const providers = await providers()
+// 	return {
+// 	  props: { providers }
+// 	}
+// }
