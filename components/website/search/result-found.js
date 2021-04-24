@@ -6,7 +6,7 @@ import Pagination from '../../common/pagination'
   
 export default function ResultsFound({...props}){
     const [classn, setClassN]= useState('books');
-    
+    console.log(classn,"state")
     return(
         <>
         <section className="section font_sz bg_colr_expert pt-2 pb-0">
@@ -94,7 +94,7 @@ export default function ResultsFound({...props}){
                                         <li><a href="#">Next</a></li>
                                     </ul>
                                 </div>
-                            </div> */}{console.log(props)}
+                            </div> */}
                             <Pagination setPageNo={props.setPageNoB} pageNo={props.pageNoB} total={props.dataB.total}/>
                         </div>
 

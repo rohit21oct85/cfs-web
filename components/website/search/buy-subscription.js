@@ -7,21 +7,21 @@ export default function BuySubscription() {
             <div className="row">
             <div className="col-md-6 text-center">
             <div className="text_homework_help homework_help_bg1">
-            <span className="icon"><img src="assets/images/ask-question-icon.png" className="img-fluid" alt=""/></span>
+            <span className="icon"><img src="/images/ask-question-icon.png" className="img-fluid" alt=""/></span>
             <h3><span>50 Question</span>
             to ask every month</h3>
             </div>
             </div>
             <div className="col-md-6 text-center">
             <div className="text_homework_help homework_help_bg2">
-            <span className="icon"><img src="assets/images/ask-question-icon.png" className="img-fluid" alt=""/></span>
+            <span className="icon"><img src="/images/ask-question-icon.png" className="img-fluid" alt=""/></span>
             <h3><span>50 Question</span>
             to ask every month</h3>
             </div>
             </div>
             <div className="col-md-6 ml-auto mr-auto text-center">
             <div className="text_homework_help homework_help_bg3">
-            <span className="icon"><img src="assets/images/ask-question-icon.png" className="img-fluid" alt=""/></span>
+            <span className="icon"><img src="/images/ask-question-icon.png" className="img-fluid" alt=""/></span>
             <h3><span>50 Question</span>
             to ask every month</h3>
             </div>

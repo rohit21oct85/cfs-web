@@ -1540,5 +1540,13 @@ button.btn.dropdown-toggle.btn-round.btn-simple {
     width: 100%;
     z-index: 9;
 }
-
-
+.view_step_img span img {
+    width: 40px !important;
+    height: 48px;
+    display: inline-block;
+    float: left;
+}
+.web_font1 .all_banner_text {
+    padding: 40px 0;
+    position: relative;
+}
