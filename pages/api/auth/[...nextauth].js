@@ -100,14 +100,15 @@ export default NextAuth({
   // when an action is performed.
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
-	redirect: async (url, baseUrl) => {
-    // console.log(url, baseUrl)
-		// return Promise.resolve(url)
-    return url.startsWith(baseUrl)
-      ? Promise.resolve(url)
-      : Promise.resolve(baseUrl)
-	}
-    // async signIn(index) { return true },
+    redirect: async (url, baseUrl) => {
+      // return Promise.resolve(url)
+      return url.startsWith(baseUrl)
+        ? Promise.resolve(url)
+        : Promise.resolve(baseUrl)
+    },
+    async signIn(user, account, profile) { 
+      return true 
+    },
     // async signIn(user, account, profile) { return true },
     // async redirect(url, baseUrl) { console.log(url,baseUrl);return baseUrl },
     // async session(session, user) { return session },
