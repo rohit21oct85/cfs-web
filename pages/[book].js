@@ -374,7 +374,7 @@ export default function Book(){
             <Details/>
             <Reviews reviews={books && books[0] && books[0].reviews}/>
             <RelatedTbs data={relatedBooks}/>
-            <Faq/>
+            <Faq data={books && books[0] && books[0].faqs}/>
             <Follow/>
             <Footer/>
         </>

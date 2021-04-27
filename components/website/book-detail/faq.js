@@ -2,10 +2,11 @@ import Link from 'next/link'
 import {useState} from 'react'
 
 
-export default function Faq(){
+export default function Faq({...props}){
     const [whichCollapse, setWhichCollapse] = useState()
 
-    const openCollapse = (string) =>{
+    const openCollapse = (e,string) =>{
+        e.preventDefault();
         setWhichCollapse(string)
     }
     
@@ -21,12 +22,22 @@ export default function Faq(){
 
                     <div className="col-md-6 ml-auto">
                         <ul className="faq-list">
-                            <li>
-                                <a data-toggle="collapse" className="collapsed" href="#faq1" onClick={()=>{openCollapse('faq1')}}>What are CrazyForStudy step-by-step Shuler: Bioprocess Engineering_c3 (3rd Edition) (Prentice Hall International Series in the Physical and Chemical Engineering Sciences) 3rd Edition Solutions Manuals? <i className="fa fa-angle-up"></i></a>
-                                <div id="faq1" className={"collapse" + (whichCollapse == 'faq1' ? 'show' : '' )} data-parent=".faq-list" >
-                                    <p className="first-para"><strong>Answer : </strong>CrazyForStudy Solution Manuals are written by vetted CrazyForStudy 18 experts, and rated by students - so you know you're getting high quality answers. Solutions Manuals are available for thousands of the most popular college and high school textbooks in subjects such as Math, Science (<a href="#">Physics</a>, <a href="#">Chemistry</a>, <a href="#">Biology</a>), Engineering (<a href="#">Mechanical</a>, <a href="#">Electrical</a>, <a href="#">Civil</a>), <a href="#">Business</a> and more. Understanding Shuler: Bioprocess Engineering_c3 (3rd Edition) (Prentice Hall International Series in the Physical and Chemical Engineering Sciences) 3rd Edition homework has never been easier than with CrazyForStudy.</p>
-                                </div>
-                            </li>
+                            {props.data && props.data.map((item,key)=>{
+                                return(
+                                    <li key={key}>
+                                        <a data-toggle="collapse" className="collapsed" href="#" onClick={(e)=>{openCollapse(e,`faq${key}`)}}>{item.question}<i className="fa fa-angle-up"></i></a>
+                                        <div id="" className={"collapse" + (whichCollapse == `faq${key}` ? 'show' : '' )} data-parent=".faq-list" >
+                                            <p className="first-para"><strong>Answer : </strong>{item.answer}</p>
+                                        </div>
+                                    </li>
+                                )
+                            })}
+                            {/*<li>
+                                    <a data-toggle="collapse" className="collapsed" href="#faq1" onClick={()=>{openCollapse('faq1')}}>What are CrazyForStudy step-by-step Shuler: Bioprocess Engineering_c3 (3rd Edition) (Prentice Hall International Series in the Physical and Chemical Engineering Sciences) 3rd Edition Solutions Manuals? <i className="fa fa-angle-up"></i></a>
+                                    <div id="faq1" className={"collapse" + (whichCollapse == 'faq1' ? 'show' : '' )} data-parent=".faq-list" >
+                                        <p className="first-para"><strong>Answer : </strong>CrazyForStudy Solution Manuals are written by vetted CrazyForStudy 18 experts, and rated by students - so you know you're getting high quality answers. Solutions Manuals are available for thousands of the most popular college and high school textbooks in subjects such as Math, Science (<a href="#">Physics</a>, <a href="#">Chemistry</a>, <a href="#">Biology</a>), Engineering (<a href="#">Mechanical</a>, <a href="#">Electrical</a>, <a href="#">Civil</a>), <a href="#">Business</a> and more. Understanding Shuler: Bioprocess Engineering_c3 (3rd Edition) (Prentice Hall International Series in the Physical and Chemical Engineering Sciences) 3rd Edition homework has never been easier than with CrazyForStudy.</p>
+                                    </div>
+                                </li>
                             <li>
                                 <a data-toggle="collapse" href="#faq2" className="collapsed" onClick={()=>{openCollapse('faq2')}}>Why is CrazyForStudy better than downloaded Shuler: Bioprocess Engineering_c3 (3rd Edition) (Prentice Hall International Series in the Physical and Chemical Engineering Sciences) 3rd Edition PDF solution manuals? <i className="fa fa-angle-up"></i></a>
                                 <div id="faq2" className={"collapse" + (whichCollapse == 'faq2' ? 'show' : '' )} data-parent=".faq-list">
@@ -50,7 +61,7 @@ export default function Faq(){
                                 <div id="faq5" className={"collapse" + (whichCollapse == 'faq5' ? 'show' : '' )} data-parent=".faq-list">
                                     <p><strong>Answer : </strong>You can <a target="_blank" href="">download</a> our homework help app on iOS to access solutions manuals on your mobile device. Asking a study question in a snap - just take a pic.</p>
                                 </div>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
 

@@ -25,6 +25,12 @@ export default function SignIn({ csrfToken, providers }) {
 		// }
 	}, [session])
 
+	let redirectUrl = `${process.env.NEXTAUTH_URL}/dashboard`;
+
+	useEffect(() => {
+		const url = new URL(location.href);
+		redirectUrl = url.searchParams.get("callbackUrl");
+	});
 
 	const submitForm = async (e) => {
 		e.preventDefault();
@@ -133,7 +139,7 @@ return (
 										{provider.id === "credentials" ? <span></span> :
 											<li key={provider.name}>
 												{/* <a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id, {callbackUrl : `${process.env.NEXTAUTH_URL}/dashboard`})}}> */}
-												<a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id,{ callbackUrl : ""})}}>
+												<a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id,{ callbackUrl : redirectUrl })}}>
 													<i className={`fa fa-${provider.id}`}></i> {provider.name}
 												</a>
 											</li>

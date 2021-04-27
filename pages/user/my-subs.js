@@ -67,7 +67,7 @@ export default function MySubs(){
                                                     <div className="col-md-4">
                                                         <div className="d-md-flex align-items-center">
                                                             <div className="receipt-img">
-                                                            <img className="order-book-img" src="assets/images/cfs-dumt-img.png" draggable="false"/>
+                                                            <img className="order-book-img" src="/images/cfs-dumt-img.png" draggable="false"/>
                                                             </div>
                                                             <div className="receipt-txt">
                                                             <h4 className="order-type-collpse">testedtestedtestedtestedtestedtestedtestedtestedtestedt..</h4>

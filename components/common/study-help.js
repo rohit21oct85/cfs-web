@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getNavbarData } from '../../libs/home'
 import Link from 'next/link'
 import { useQuery } from 'react-query'
+import { MakeSlug } from '../common/make-slug'
 
 export default function StudyHelp() {
 
@@ -24,7 +25,8 @@ export default function StudyHelp() {
                             <ul>
                                 <li><strong>{item.subject}:</strong></li>
                                 {item.sub_subject.map((it,key)=>{
-                                    return  <li key={key}><Link href={{pathname:`${'textbook-solutions-manuals/'+item.subject.toLowerCase().replace(/ /g,"-")+'/'+it.sub_subject.toLowerCase().replace(/ /g,"-")}`}}><a className={`${key === 0 ? 'border-left-0' : ''}`}>{it.sub_subject}</a></Link></li>
+                                    // return  <li key={key}><Link href={{pathname:`${'textbook-solutions-manuals/'+item.subject.toLowerCase().replace(/ /g,"-")+'/'+it.sub_subject.toLowerCase().replace(/ /g,"-")}`}}><a className={`${key === 0 ? 'border-left-0' : ''}`}>{it.sub_subject}</a></Link></li>
+                                    return  <li key={key}><Link href={`/textbook-solutions-manuals/${MakeSlug(item.subject)+'/'+MakeSlug(it.sub_subject)}`} key={key}><a className={`${key === 0 ? 'border-left-0' : ''}`}>{it.sub_subject}</a></Link></li>
                                 })}
                             </ul>
                         </div>
