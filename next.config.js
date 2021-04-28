@@ -5,9 +5,9 @@ module.exports = {
         // NEXTAUTH_URL:`http://localhost:3000`
 
 
-        basePath:'https://cfs-web-prod.herokuapp.com/',   // used for SEO purposes to get the basePath
+        basePath:'https://cfs-web-prod.herokuapp.com',   // used for SEO purposes to get the basePath
         HOST:`https://cfs-admin-panel.herokuapp.com`,
-        NEXTAUTH_URL:`https://cfs-web-prod.herokuapp.com/`
+        NEXTAUTH_URL:`https://cfs-web-prod.herokuapp.com`
     },
 }
 

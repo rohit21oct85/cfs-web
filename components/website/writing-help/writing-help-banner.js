@@ -13,7 +13,7 @@ export default function WritingHelpBanner(){
                                 <li><span><img src="/images/writing-icons/delivery-truck.png" className="img-fluid" alt=""/></span> On Time Delivery </li>
                                 <li><span><img src="/images/writing-icons/good-rating.png" className="img-fluid" alt=""/></span> 4.9/5 Star Rating</li>
                             </ul>
-                        </div>writing-help
+                        </div>
                     </div> 
                     <div className="col-md-6">
                         <span><img src="/images/writing-help-banner.png" className="img-fluid"/></span>
