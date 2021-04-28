@@ -8,7 +8,7 @@ export default function BookInfo({...props}){
                     <div className="col-md-3 text-center">
                         <div className="prduct_details_img">
                             <ul>
-                                <li><span><BookImage isbn={props.bookData && props.bookData.ISBN13}/></span></li>
+                                <li><span><BookImage isbn={props.bookData && props.bookData.ISBN13} bookname={props.bookData && props.bookData.BookName}/></span></li>
                                 <li className="buy_with_amazon"><i className="fa fa-shopping-bag"></i> BUY WITH AMAZON</li>
                             </ul>
                         </div>

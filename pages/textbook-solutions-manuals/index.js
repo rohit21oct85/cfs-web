@@ -16,14 +16,14 @@ import Head from 'next/head'
 import { useRouter } from "next/router";
 
 export default function TextbookSolutionsManuals(){
-
+    
     const router = useRouter();
     const title = "Step-by-step Textbook Solutions Manual & Textbook Answers"
     const description = "Struggling with textbook solutions? We have all the textbook answers that you need! Get step-by-step textbook solutions manual by our experts."
     const keywords = "Textbook Solutions, Textbook Solutions Manual, Textbook Solutions Manuals, Textbook Solution Manual, Textbook Solution Manuals, Free Textbook Solutions, Textbook Answers, Textbook Solution"
     const copyright = `Copyright ${new Date().getFullYear()} Crazyforstudy.com`
     const path = process.env.basePath + router.pathname
-
+    
     return(
         <>  
             <Head>
@@ -53,7 +53,6 @@ export default function TextbookSolutionsManuals(){
                 <meta name="twitter:description" content={description} />
                 <meta name="twitter:site" content="@CrazyForStudy1"/>
                 <meta name="twitter:image" content="#SameAsBookImageURL" />
-                
             </Head>
             <Header/>
             <Navbar/>

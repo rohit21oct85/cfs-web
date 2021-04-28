@@ -15,9 +15,16 @@ import {getBook, getChapters, getSections, getExercises, getRelatedBooks, getPro
 import {useState, useEffect} from 'react';
 import BookInfo from '../components/website/book-detail/book-info'
 import Highlighter from "react-highlight-words";
+import { capitalize } from "../components/common/make-slug";
+import Head from 'next/head'
 
 export default function Book(){
     const router = useRouter();
+    // const regex = /\d+/g; //for retriveing both numbers isbn13 and isbn10 from the url
+    const regex = /\d{13}/g; //for retriveing just the isbn 13 digit
+    const data = router.query.book != undefined ? router.query.book.match(regex) : router.query.book;
+    const ISBN13 = data ? data[0] : null; 
+    // console.log(ISBN13)
     const [chapter, setChapter] = useState();
     const [section, setSection] = useState();
     const [exercise, setExercise] = useState();
@@ -28,7 +35,7 @@ export default function Book(){
     const [colMd6, setColMd6] = useState();
     const [searchedItems, setSearchedItems] = useState();
     const [selectedQuestion, setselectedQuestion] = useState();
-    
+
     const { data: books, isLoading:bookIsLoading, error:bookError } = useQuery([router.query.book], () => getBook({book_isbn: router.query.book}),{staleTime:Infinity})
     const { data: chapters, isLoading: chapterIsLoading, error:chapterError } = useQuery([`${router.query.book}-chapter`], () => getChapters({book_isbn: router.query.book}),{staleTime:Infinity})
     const { data: sections, isLoading: sectionIsLoading, error:sectionError } = useQuery([`${router.query.book}-${chapter}`], () => getSections({book_isbn: router.query.book,chapter_no: chapter}),{staleTime:Infinity})
@@ -120,8 +127,44 @@ export default function Book(){
     if(chapterIsLoading)
     return <div id="loading"></div>;
 
+    //seo starts
+    const title = `${capitalize(books[0].BookName)} Solutions`
+    const description = `Get Access ${capitalize(books[0].BookName)} ${books[0].Edition}  Solutions manual now. Our Textbook Solutions manual are written by Crazyforstudy experts`
+    const keywords = `${capitalize(books[0].BookName)} ${books[0].Edition} Solutions manual, ${capitalize(books[0].BookName)} ${books[0].Edition} ${books[0].ISBN10} ${books[0].ISBN13} ISBN-13: ${books[0].ISBN13}`
+    const copyright = `Copyright ${new Date().getFullYear()} Crazyforstudy.com`
+    const path = process.env.basePath + router.asPath
+    //seo ends
+
     return(
         <>
+            <Head>
+                <title>{title}</title>
+                <meta name="description" content={description}></meta>
+                <meta name="keywords" content={keywords}></meta>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="copyright" content={copyright} />
+                <meta name="author" content="crazyforstudy.com" />
+                <meta name="robots" content="index, follow"/>
+                <link rel="canonical" href={path}/>
+                
+                {/* og:Meta Title */}
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={description} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={path} />
+                <meta property="og:image" content="#SameAsBookImageURL" />
+                <meta property="og:locale" content="en_US" />
+                <meta name="og_site_name" property="og:site_name" content="Crazyforstudy.com"/>
+
+                {/* Twitter */}
+                <meta name="twitter:widgets:csp" content="on"/>
+                <meta name="twitter:card" content="summary_large_image"/>
+                <meta name="twitter:title" content={title}/>
+                <meta name="twitter:description" content={description} />
+                <meta name="twitter:site" content="@CrazyForStudy1"/>
+                <meta name="twitter:image" content="#SameAsBookImageURL" />
+            </Head>
             <Header/>
             <Navbar/>
             <BreadCrumb type={"TextBook Manual"} heading={books && books[0] && books[0].BookName} subject={books && books[0] && books[0].subject_name} sub_subject={books && books[0] && books[0].sub_subject_name}/>

@@ -26,7 +26,7 @@ export default function SignIn({ csrfToken, providers }) {
 	}, [session])
 
 	let redirectUrl = `${process.env.NEXTAUTH_URL}/dashboard`;
-
+	console.log('redirect-url',redirectUrl);
 	useEffect(() => {
 		const url = new URL(location.href);
 		redirectUrl = url.searchParams.get("callbackUrl");
@@ -139,6 +139,7 @@ return (
 										{provider.id === "credentials" ? <span></span> :
 											<li key={provider.name}>
 												{/* <a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id, {callbackUrl : `${process.env.NEXTAUTH_URL}/dashboard`})}}> */}
+												{console.log(redirectUrl)}
 												<a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id,{ callbackUrl : redirectUrl })}}>
 													<i className={`fa fa-${provider.id}`}></i> {provider.name}
 												</a>
