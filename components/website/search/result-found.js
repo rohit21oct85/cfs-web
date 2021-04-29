@@ -3,10 +3,11 @@ import  OwlCarousel  from "../../common/owl-carousel";
 import Link from 'next/link'
 import BookImage from '../../common/book-image'
 import Pagination from '../../common/pagination'
-  
+import { MakeSlug } from '../../common/make-slug'
+
 export default function ResultsFound({...props}){
     const [classn, setClassN]= useState('books');
-    console.log(classn,"state")
+
     return(
         <>
         <section className="section font_sz bg_colr_expert pt-2 pb-0">
@@ -46,7 +47,7 @@ export default function ResultsFound({...props}){
                                     return( <div className="col-md-4 textbooks_title" key={key}>
                                                 <div className="textbooks_text">
                                                     <div className="">
-                                                        <Link href={"/"+item.ISBN13}>
+                                                        <Link href={`/textbook-solutions-manuals/isbn-${item.ISBN13}-${MakeSlug(item.BookName)}-${MakeSlug(item.Edition)}`}>
                                                             <a>
                                                                 <span className="accounting_book">
                                                                     {/* <img src="/images/accounting_book.jpg" className="img-fluid" alt=""/> */}
@@ -55,7 +56,7 @@ export default function ResultsFound({...props}){
                                                             </a>
                                                         </Link>
                                                         <div className="textbooks_result">
-                                                            <Link href={"/"+item.ISBN13}>
+                                                            <Link href={`/textbook-solutions-manuals/isbn-${item.ISBN13}-${MakeSlug(item.BookName)}-${MakeSlug(item.Edition)}`}>
                                                                 <a href="#">
                                                                     <div className="accounting_textbook1">
                                                                         <h4>{item.BookName}</h4>
@@ -65,7 +66,7 @@ export default function ResultsFound({...props}){
                                                                 </a>
                                                             </Link>
                                                             <div className="view_step_img">
-                                                            <Link href={"/"+item.ISBN13}>
+                                                            <Link href={`/textbook-solutions-manuals/isbn-${item.ISBN13}-${MakeSlug(item.BookName)}-${MakeSlug(item.Edition)}`}>
                                                                 <a href="#">
                                                                     <span>
                                                                         <BookImage isbn={item.ISBN13}/>

@@ -19,7 +19,6 @@ import { Provider } from 'next-auth/client'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import {useEffect} from 'react'
 import { useRouter } from "next/router";
-import Head from 'next/head'
 
 const queryClient = new QueryClient();
 

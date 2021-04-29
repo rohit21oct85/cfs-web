@@ -7,7 +7,6 @@ export default function Header() {
 	return (
 		<>
 		<Head>
-			<html lang="en" prefix="og: http://ogp.me/ns#"></html>
 			<link rel="icon" href="/favicon.ico" />
 			{/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>  */}
 			<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>{/* needed for owl carousal */}

@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useQuery } from 'react-query'
 import { searchData,searchDataIndividual, searchDataIndividualQ } from '../../libs/search'
 import { useState } from 'react'
+
 export default function Search() {
     const router = useRouter();
     const [pageNoQ, setPageNoQ] = useState(0);
