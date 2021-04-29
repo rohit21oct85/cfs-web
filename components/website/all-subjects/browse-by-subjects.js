@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { MakeSlug } from '../../common/make-slug'
 
 export default function BrowseBySubjects({...props}){
     return(
@@ -16,7 +17,7 @@ export default function BrowseBySubjects({...props}){
 									<img src="/images/tbs-books/economics.jpg" className="img-fluid" alt=""/>
 									<div className="overlay_books bottom-overlay"> 
 										<div className="books_text1">
-											<Link href={item.subject+'/'+item.sub_subject}><a> {item.sub_subject}</a></Link>
+											<Link href={MakeSlug(item.subject)+'/'+MakeSlug(item.sub_subject)}><a> {item.sub_subject}</a></Link>
 										</div>
 									</div>
 								</div>

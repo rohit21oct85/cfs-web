@@ -20,7 +20,7 @@ export default function SingleBook({...props}){
                     <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star-half-empty"></i>
                 </div>
                 <div className="view_detail_btn">
-                    <Link href={`/${props.isbn}`}><a>View Detail</a></Link>
+                    <Link href={`/textbook-solutions-manuals/isbn-${props.isbn}-${MakeSlug(props.bookname)}-${MakeSlug(props.edition)}`}><a>View Detail</a></Link>
                 </div>
             </div>
         </div>

@@ -17,6 +17,7 @@ function BookImage({isbn,bookname}) {
             }
         }
        fetchCoverImage();
+       return () => {setImage('')}
     },[isbn])
     return (
         <>

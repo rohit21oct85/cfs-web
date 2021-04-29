@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react';
 import {searchData} from '../../libs/search'
 import BookImage from './book-image'
 import Link from 'next/link'
+import {MakeSlug} from '../common/make-slug'
 
 export default function SearchComp({...props}){
 
@@ -55,7 +56,7 @@ export default function SearchComp({...props}){
                                     </div>}
                                     {searchedBooks && searchedBooks.map((item,key)=>{
                                     return(<span key={key}>
-                                        <Link href={item.ISBN13}><a>
+                                        <Link href={`/textbook-solutions-manuals/isbn-${item.ISBN13}-${MakeSlug(item.BookName)}-${MakeSlug(item.Edition)}`}><a>
                                             <div className="picking_img1">
                                                 <BookImage isbn={item.ISBN13}/>
                                             </div>
