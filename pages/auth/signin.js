@@ -44,7 +44,7 @@ export default function SignIn({ csrfToken, providers }) {
 			return false;
 		}else{
 			setLoader(true);
-			const response = await signIn('credentials',{ email, password })
+			const response = await signIn('credentials',{ email, password, callbackUrl : redirectUrl})
 			if(response && response.error != null){
 				setError("Email or password not matched");
 				setLoader(false);
@@ -139,7 +139,7 @@ return (
 										{provider.id === "credentials" ? <span></span> :
 											<li key={provider.name}>
 												{/* <a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id, {callbackUrl : `${process.env.NEXTAUTH_URL}/dashboard`})}}> */}
-												{console.log(providers)}
+												{console.log(redirectUrl)}
 												<a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id,{ callbackUrl : redirectUrl })}}>
 													<i className={`fa fa-${provider.id}`}></i> {provider.name}
 												</a>

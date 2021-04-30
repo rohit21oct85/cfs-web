@@ -108,6 +108,7 @@ export default NextAuth({
         : Promise.resolve(baseUrl)
     },
     async signIn(user, account, profile) { 
+      console.log(user,account,profile)
       return true 
     },
     // async signIn(user, account, profile) { return true },
