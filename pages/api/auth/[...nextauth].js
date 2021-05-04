@@ -28,6 +28,7 @@ export default NextAuth({
         // Add logic here to look up the user from the credentials supplied
         const user = await setLogin(credentials);
         if (user) {
+          // console.log(user);
 		      // Any object returned will be saved in `user` property of the JWT
           return user
         } else {

@@ -22,6 +22,13 @@ const capitalize = (s) => {
     return s.charAt(0).toUpperCase() + s.slice(1)
   }
 
+function replaceAll(str,mapObj){
+    var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
+
+    return str.replace(re, function(matched){
+        return mapObj[matched];
+    });
+}
 export {
     MakeSlug,
     SameSlug,
@@ -29,4 +36,5 @@ export {
     GetName,
     createMarkup,
     capitalize,
+    replaceAll,
 }

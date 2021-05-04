@@ -1661,3 +1661,35 @@ new writing */
     line-height: 0;
     text-shadow: 1px 4px 3px rgb(208 201 201 / 40%);
 }
+.theme-blush .dropdown-menu.megamenu.sm-menu.border-top.show {
+    background: #f7f8fa;
+    padding: 0 15px;
+    border-bottom: 4px solid #ea8b22;
+    left: 0!important;
+    right: 0!important;
+    position: absolute;
+    margin: auto;
+    max-width: 1170px;
+}
+.navbar-nav.nav_right1 { 
+    text-align: right !important;
+}
+.theme-blush .navbar-nav li.nav-item.dmenu.Writing_help_top.dp_n {
+    margin-right: 50px !important;
+}
+ul.nav.nav-tabs.profile_editbtn {
+    display: inline-block;
+    width: 100%;
+}
+ul.nav.nav-tabs.profile_editbtn li:last-child {
+    float: right; 
+}
+ul.nav.nav-tabs.profile_editbtn li:last-child a {
+    background: #888;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 42px;
+    color: #fff; 
+}
