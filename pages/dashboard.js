@@ -5,7 +5,7 @@ import AccessDenied from '../components/access-denied'
 import Router from 'next/router'
 import { useEffect } from 'react';
 import BlockHeader from '../components/website/dashboard/block-header'
-
+import Link from 'next/link'
 export default function  Dashboard() {
 
     const [ session, loading ] = useSession()
@@ -55,10 +55,10 @@ export default function  Dashboard() {
                                     <li>
                                         <div className="pl-0">
                                             <span>
-                                                <p className="file_prsn">Your profile is 100% completed <a href="#" className="float-right"><i className="fa fa-pencil-square"></i> Edit Profile</a></p>
+                                                <p className="file_prsn">Your profile is 20% completed <Link href="/user/my-profile"><a  className="float-right"><i className="fa fa-pencil-square"></i> Edit Profile</a></Link></p>
                                             </span>
                                             <div className="progress progress_wdth">
-                                                <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style={{width: "70%"}}>
+                                                <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style={{width: "70%"}}>
                                                 </div>
                                             </div>
                                         </div>

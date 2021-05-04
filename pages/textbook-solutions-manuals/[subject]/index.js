@@ -50,6 +50,7 @@ export default function Book(){
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [keywords, setKeywords] = useState();
+    const [altText, setAlttext] = useState();
 
     //example call commented out as a reminder
     // const { data: books, isLoading:bookIsLoading, error:bookError } = useQuery([router.query.book], () => getBook({book_isbn: ISBN13}),{staleTime:Infinity})
@@ -93,12 +94,13 @@ export default function Book(){
         if(books && books.length>0){
             setRelatedBook(books[0].sub_subject_name)
 
-             //seo starts
+            //seo starts
             let mapObj = { '#BookName#' : books[0].BookName, '#edition#': books[0].Edition };
             setTitle(replaceAll(books[0].MetaTitle, mapObj));
             setDescription(replaceAll(books[0].MetaDescription, mapObj));
             setKeywords(replaceAll(books[0].MetaKeywords, mapObj));
-             //seo ends
+            setAlttext(replaceAll(books[0].AltImage, mapObj));
+            //seo ends
         }
         return () => {}
     }, [books])
@@ -165,7 +167,7 @@ export default function Book(){
             <Header/>
             <Navbar/>
             <BreadCrumb type={"TextBook Manual"} heading={books && books[0] && books[0].BookName} subject={books && books[0] && books[0].subject_name} sub_subject={books && books[0] && books[0].sub_subject_name}/>
-            <BookInfo bookData={books && books[0]}/> 
+            <BookInfo bookData={books && books[0]} altText={altText}/> 
 
             <section className="section font_sz text_justify pt-5">
                 <div className="container"> 

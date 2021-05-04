@@ -13,6 +13,8 @@ export default function SignIn({ csrfToken, providers }) {
 	const [loader, setLoader] = useState(false);
 	const [disabled, setDisabled] = useState(true)
 	const [error, setError] = useState(null);
+	const [display, setDisplay] = useState('none');
+	const [display1, setDisplay1] = useState('block');
 
 	const router = useRouter()
 	const emailRef = useRef();
@@ -56,6 +58,11 @@ export default function SignIn({ csrfToken, providers }) {
 		}
 	}
 
+	const forgot = (e) =>{
+		setDisplay('block')
+		setDisplay1('none')
+	}
+
 	const agreePolicy = (e)=>{
 		if(e.target.checked){
 			setDisabled(false);
@@ -78,7 +85,7 @@ return (
 							<img src="/images/logo1.png" className="img-fluid" alt="logo"/> 
 						</div>
 					</div>
-					<div className="col-md-5 ml-auto"> 
+					<div className="col-md-5 ml-auto" style={{display:`${display1}`}}> 
 						{/* <form className="row form_banner form_banner_login" method='post' action='/api/auth/callback/credentials'> */}
 						<form className="row form_banner form_banner_login" method='post' onSubmit={submitForm}>
 							<input name='csrfToken' type='hidden' defaultValue={csrfToken}/>
@@ -106,7 +113,7 @@ return (
 											</div>
 										</div>
 										<div className="form-group text-right forgot_passw col-md-6"> 
-											<a href="#">Forgot password?</a> 
+											<a href="#" onClick={()=>{forgot()}}>Forgot password?</a> 
 										</div>
 									</div> 
 								</div>
@@ -162,6 +169,89 @@ return (
 							</div>
 						</form>
 					</div>
+					<div id="forGotPass1" className="show_signin" style={{display:`${display}`,marginBottom:"15px"}}>
+							<div className="bg_clr_frgot"> 
+								<h4  className="modal-title text-center">Forgot<span> password?</span> </h4>
+								<p className="sub_headings text-center">Please Enter Your Registered Email ID</p>
+								<form action="" className="login-register cool-b4-form" style={{float:"inherit"}}>
+									<div className="row">
+										<div className="col-md-12">
+											<div className="form-group bdr_log_up mb-3"> 
+													<input type="text" className="form-control" placeholder="Enter Your Email ID"/> 
+													<span  className="error">Please Enter Password</span>
+											</div>
+										</div>
+										<div className="col-md-12 mt-4">
+											<button type="button" className="btn btn-block btn-danger btn-login buttons" id="submitMobile">Submit</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<div id="verifyOTPdata" className="show_signin" style={{display:"none",marginBottom:"15px"}}>
+							<div className="bg_clr_frgot">
+								<h4  className="modal-title text-center">Verify Your <span> Email ID</span> </h4>
+								<p className="sub_headings text-center">4 digit Verification Code has been sent to <br/> Your registered Email ID</p>
+								<form action="" className="login-register cool-b4-form" style={{float:"inherit"}}>
+									<div className="row">
+									<div className="col-md-12 mb-3">
+										<div className="form-group otpVerify">
+										<input type="text" className="" maxLength="1" id="one" placeholder=""/>
+										<input type="text" className="" maxLength="1" id="two" placeholder=""/>
+										<input type="text" className="" maxLength="1" id="three" placeholder=""/>
+										<input type="text" className="" maxLength="1" id="four" placeholder=""/>
+										</div>
+									</div>
+									<div className="col-md-12">
+										<button type="button" className="btn btn-block btn-danger btn-login buttons" id="submitCode">Submit</button>
+									</div>
+									<div className="col-md-12">
+										<p className="text-center resendOtp"><a href="" className="link-anchor">Resend Verification Code</a></p>
+									</div>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<div id="changePassword" className="show_signin" style={{display:"none",marginBottom:"15px"}}>
+							<div className="bg_clr_frgot">
+								<h4  className="modal-title text-center"> Change<span> Password?</span> </h4>
+								<p className="sub_headings text-center">Please Enter New Password</p>
+								<form action="" className="login-register cool-b4-form" style={{float:"inherit"}}>
+									<div className="row">
+										<div className="col-md-12">
+											<div className="form-group bdr_log_up"> 
+												<input type="text" className="form-control" name="E-mail" placeholder="New Password"/>  
+												<span  className="error">Please Enter Password</span>
+												<span className="fa fa-eye field-icon toggle-password"></span>
+											</div>
+										</div>
+										<div className="col-md-12 mb-4">
+											<div className="form-group bdr_log_up"> 
+												<input type="text" className="form-control" name="E-mail" placeholder="Confirm Password"/> 
+												<span  className="error">Please Enter Password</span>
+												<span className="fa fa-eye field-icon toggle-password"></span>
+											</div>
+										</div>
+										<div className="col-md-12 mt-4">
+											<button type="button" className="btn btn-block btn-danger btn-login buttons" id="confirmPass">Submit</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div id="successChanged" className="show_signin" style={{display:"none",marginBottom:"15px"}}>
+							<div className="bg_clr_frgot">
+								<div className="congratulation_text text-center">
+									<img src="/images/like.png" className="img-fluid mb-2" alt=""/>
+									<h4  className="modal-title text-center">Password Changed <span>Successfully </span></h4>
+									<div className="col-md-12">
+										<button type="button" className="btn btn-block btn-danger btn-login buttons" id="LoginAgain" style={{margin:"13px 0px",textTransform: "none"}}>Click here to Login</button>
+									</div>
+								</div>              
+							</div>
+						</div>
 				</div>
 			</div>
 		</section>
