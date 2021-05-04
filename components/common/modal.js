@@ -37,7 +37,7 @@ export default function Modal({...props}){
                                             <div className="form-row"> 
                                                 <div className="col-sm-12 col-md-6 form-group">
                                                     <label>Name </label>
-                                                    <input type="text" className="form-control" placeholder="Enter Institution Name"/>
+                                                    <input type="text" className="form-control" placeholder="Enter Name"/>
                                                 </div>            
                                                 <div className="col-sm-12 col-md-6 form-group">
                                                     <label>Give Your Rating  </label>
