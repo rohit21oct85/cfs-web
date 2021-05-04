@@ -16,9 +16,10 @@ import {getBook, getChapters, getSections, getExercises, getRelatedBooks, getPro
 import {useState, useEffect} from 'react';
 import BookInfo from '../../../components/website/book-detail/book-info'
 import Highlighter from "react-highlight-words";
-import { capitalize } from "../../../components/common/make-slug";
+import { replaceAll } from "../../../components/common/make-slug";
 import Head from 'next/head'
 import Subject from './subject'
+import Seo from '../../../components/common/seo'
 
 export default function Book(){
     //changed the name of the file from [book].js to index.js and moved to textbook-solutions-manual
@@ -86,12 +87,18 @@ export default function Book(){
         return () => {}
     }, [problems])
 
+    
+    
     useEffect(() => {
         if(books && books.length>0){
             setRelatedBook(books[0].sub_subject_name)
-            setTitle(`${capitalize(books[0].BookName)} Solutions`);
-            setDescription(`Get Access ${capitalize(books[0].BookName)} ${books[0].Edition}  Solutions manual now. Our Textbook Solutions manual are written by Crazyforstudy experts`);
-            setKeywords(`${capitalize(books[0].BookName)} ${books[0].Edition} Solutions manual, ${capitalize(books[0].BookName)}, ${books[0].Edition}, ${books[0].ISBN10}, ${books[0].ISBN13}, ISBN-13: 978-${books[0].ISBN10}`);
+
+             //seo starts
+            let mapObj = { '#BookName#' : books[0].BookName, '#edition#': books[0].Edition };
+            setTitle(replaceAll(books[0].MetaTitle, mapObj));
+            setDescription(replaceAll(books[0].MetaDescription, mapObj));
+            setKeywords(replaceAll(books[0].MetaKeywords, mapObj));
+             //seo ends
         }
         return () => {}
     }, [books])
@@ -149,43 +156,12 @@ export default function Book(){
     return <div id="loading"></div>;
 
     //seo starts
-    // const title = `${capitalize(books[0].BookName)} Solutions`
-    // const description = `Get Access ${capitalize(books[0].BookName)} ${books[0].Edition}  Solutions manual now. Our Textbook Solutions manual are written by Crazyforstudy experts`
-    // const keywords = `${capitalize(books[0].BookName)} ${books[0].Edition} Solutions manual, ${capitalize(books[0].BookName)}, ${books[0].Edition}, ${books[0].ISBN10}, ${books[0].ISBN13}, ISBN-13: 978-${books[0].ISBN10}`
-    const copyright = `Copyright ${new Date().getFullYear()} Crazyforstudy.com`
     const path = process.env.basePath + router.asPath
     //seo ends
 
     return(
         <>
-            <Head>
-                <title>{title}</title>
-                <meta name="description" content={description}></meta>
-                <meta name="keywords" content={keywords}></meta>
-                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="copyright" content={copyright} />
-                <meta name="author" content="crazyforstudy.com" />
-                <meta name="robots" content="index, follow"/>
-                <link rel="canonical" href={path}/>
-                
-                {/* og:Meta Title */}
-                <meta property="og:title" content={title} />
-                <meta property="og:description" content={description} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content={path} />
-                <meta property="og:image" content="#SameAsBookImageURL" />
-                <meta property="og:locale" content="en_US" />
-                <meta name="og_site_name" property="og:site_name" content="Crazyforstudy.com"/>
-
-                {/* Twitter */}
-                <meta name="twitter:widgets:csp" content="on"/>
-                <meta name="twitter:card" content="summary_large_image"/>
-                <meta name="twitter:title" content={title}/>
-                <meta name="twitter:description" content={description} />
-                <meta name="twitter:site" content="@CrazyForStudy1"/>
-                <meta name="twitter:image" content="#SameAsBookImageURL" />
-            </Head>
+            <Seo path={path} title={title} description={description} keywords={keywords}/>
             <Header/>
             <Navbar/>
             <BreadCrumb type={"TextBook Manual"} heading={books && books[0] && books[0].BookName} subject={books && books[0] && books[0].subject_name} sub_subject={books && books[0] && books[0].sub_subject_name}/>

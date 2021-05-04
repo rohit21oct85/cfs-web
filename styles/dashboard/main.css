@@ -20965,15 +20965,15 @@ h4.ans_s {
 
 
 
-.theme-blush .dropdown-menu.megamenu.sm-menu.border-top.show {
+theme-blush .dropdown-menu.megamenu.sm-menu.border-top.show {
     background: #f7f8fa;
-    padding: 0px 15px;
+    padding: 0 15px;
     border-bottom: 4px solid #ea8b22;
-	left: 0 !important;
-    right: auto !important;
-    position: absolute; 
+    left: 0!important;
+    right: 0!important;
+    position: absolute;
     margin: auto;
-    width: 100%;
+    max-width: 1170px;
 }
 .nav_pding {
     padding-top: 20px;

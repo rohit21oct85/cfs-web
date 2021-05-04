@@ -96,9 +96,9 @@ export default function  MyProfile() {
                         </h2>
                     </div>
                     <div className="col-lg-5 col-md-6 col-sm-12">
-                        <button className="btn btn-white btn-icon btn-round float-right m-l-10" type="button">
+                        {/* <button className="btn btn-white btn-icon btn-round float-right m-l-10" type="button">
                         <i className="zmdi zmdi-edit"></i>
-                        </button>
+                        </button> */}
                         <ul className="breadcrumb float-md-right">
                             <li className="breadcrumb-item"><Link href="/dashboard"><a> Dashboard</a></Link></li>
                             <li className="breadcrumb-item active">Profile</li>
@@ -183,8 +183,13 @@ export default function  MyProfile() {
                     </div>
                     <div className="col-lg-8 col-md-12">
                         <div className="card">
-                            <ul className="nav nav-tabs">
-                                <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#Account">Account</a></li>
+                            {/* <ul className="nav nav-tabs profile_editbtn">
+                                <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#Account"><i className="fa fa-edit"></i></a></li>
+                            </ul> */}
+                            
+                            <ul class="nav nav-tabs profile_editbtn">
+                                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Account">Account</a></li>
+                                <li class="nav-item"><a class="nav-link " href=""><i class="zmdi zmdi-edit"></i></a></li>
                             </ul>
                             <div className="tab-content">
                                 <div className="tab-pane body active" id="Account">
