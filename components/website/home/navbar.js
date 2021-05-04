@@ -114,7 +114,7 @@ export default function Navbar() {
                     ?
                     <li className="nav-item login_signup_top"><Link href="/auth/signin"><a className="nav-link">Login / Signup <i className="fa fa-user"></i></a></Link></li>
                     : 
-                    <li className="nav-item login_signup_top"><Link href="/user/my-profile"><a className="nav-link">My Profile <i className="fa fa-user"></i></a></Link></li>
+                    <li className="nav-item login_signup_top"><Link href="/dashboard"><a className="nav-link">My Profile <i className="fa fa-user"></i></a></Link></li>
                     } 
                 </ul>
                 </div>

@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import Providers from "next-auth/providers"
-import { setLogin } from '../../../libs/auth'
+import { setLogin, saveGoogleUser } from '../../../libs/auth'
+
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export default NextAuth({
@@ -33,10 +34,10 @@ export default NextAuth({
           return user
         } else {
           // If you return null or false then the credentials will be rejected
-          return null
+          // return null
           // You can also Reject this callback with an Error or with a URL:
           // throw new Error('error message') // Redirect to error page
-          // throw '/path/to/redirect'        // Redirect to a URL
+          throw `${process.env.NEXTAUTH_URL}/auth/signin`       // Redirect to a URL
         }
       }
     })
@@ -108,13 +109,17 @@ export default NextAuth({
         ? Promise.resolve(url)
         : Promise.resolve(baseUrl)
     },
-    async signIn(user, account, profile) { 
-      console.log(user,account,profile)
-      return true 
+    signIn : async (user, account, profile) => { 
+      if(!user.student){
+        user.fullname = user.name;
+        const res = await saveGoogleUser(user);
+        if(res.status == 200) {
+          return true 
+        }
+      }
     },
-    // async signIn(user, account, profile) { return true },
-    // async redirect(url, baseUrl) { console.log(url,baseUrl);return baseUrl },
-    // async session(session, user) { return session },
+    async session(session, user) { 
+      return session },
     // async jwt(token, user, account, profile, isNewUser) { return token }
   },
 

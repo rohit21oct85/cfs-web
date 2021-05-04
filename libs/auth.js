@@ -28,3 +28,17 @@ export async function setSignUp(data) {
         }
     }
 }
+
+export async function saveGoogleUser(data){
+    try {
+        const res = await axios.post(apiUrl + 'student/savegoogle', data)
+        // if(res.status === 200){
+        //     return res;
+        // }
+    }
+    catch(e){
+        if(e.response.status === 409){
+            return 409
+        }
+    }
+}

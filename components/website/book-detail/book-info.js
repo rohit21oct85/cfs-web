@@ -9,7 +9,7 @@ export default function BookInfo({...props}){
                     <div className="col-md-3 text-center">
                         <div className="prduct_details_img">
                             <ul>
-                                <li><span><BookImage isbn={props.bookData && props.bookData.ISBN13} altText={props.bookData && props.bookData.AltImage}/></span></li>
+                                <li><span><BookImage isbn={props.bookData && props.bookData.ISBN13} altText={props.altText && props.altText}/></span></li>
                                 <li className="buy_with_amazon"><i className="fa fa-shopping-bag"></i> BUY WITH AMAZON</li>
                             </ul>
                         </div>
@@ -17,7 +17,7 @@ export default function BookInfo({...props}){
 
             <div className="col-md-8 ml-auto pd_b_left">
                 <div className="prduct_details_text">
-                    <h3>{props.bookData && props.bookData.BookName} {props.bookData && props.bookData.Edition} Solutions </h3>
+                    <h3>{props.bookData && props.bookData.DisplayTitle ? props.bookData.DisplayTitle : props.bookData.BookName+' '+props.bookData.Edition+' Solutions' }</h3>
                         <p> 
                             <i className="fa fa-star"></i>
                             <i className="fa fa-star"></i>

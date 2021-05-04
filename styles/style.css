@@ -1693,3 +1693,7 @@ ul.nav.nav-tabs.profile_editbtn li:last-child a {
     line-height: 42px;
     color: #fff; 
 }
+ul.rating a {
+    color: #000;
+    font-size: 16px;
+}
