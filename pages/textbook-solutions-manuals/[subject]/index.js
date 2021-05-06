@@ -47,6 +47,8 @@ export default function Book(){
     const [selectedQuestion, setselectedQuestion] = useState();
 
     //seo 
+    const [seo, setSeo] = useState(false);
+    const [similarBooks, setSimilarBooks] = useState(false);
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [keywords, setKeywords] = useState();
@@ -91,29 +93,32 @@ export default function Book(){
     
     
     useEffect(() => {
-        if(books && books.length>0){
-            setRelatedBook(books[0].sub_subject_name)
-
+        if(books && books.length > 0){
+            books[0].similarBooks.length > 0 ? setSimilarBooks(books[0].similarBooks) : setRelatedBook(books[0].sub_subject_name)
+            
             //seo starts
-            let mapObj = { '#BookName#' : books[0].BookName, '#edition#': books[0].Edition };
-            setTitle(replaceAll(books[0].MetaTitle, mapObj));
-            setDescription(replaceAll(books[0].MetaDescription, mapObj));
-            setKeywords(replaceAll(books[0].MetaKeywords, mapObj));
-            setAlttext(replaceAll(books[0].AltImage, mapObj));
-            //seo ends
+            setSeo(books[0].seo)
+            if(seo){
+                let mapObj = { '#BookName#' : books[0].BookName, '#edition#': books[0].Edition };
+                setTitle(replaceAll(books[0].MetaTitle, mapObj));
+                setDescription(replaceAll(books[0].MetaDescription, mapObj));
+                setKeywords(replaceAll(books[0].MetaKeywords, mapObj));
+                setAlttext(replaceAll(books[0].AltImage, mapObj));
+                //seo ends
+            }
         }
         return () => {}
     }, [books])
 
     useEffect(() => {
-        if(chapters && chapters.length>0){
+        if(chapters && chapters.length > 0){
             setChapter(chapters[0].chapter_no)
         }
         return () => {}
     }, [chapters])
 
     useEffect(() => {
-        if(sections && sections.length>0){
+        if(sections && sections.length > 0){
             if(sections[0] && sections[0].section_no != ""){
                 setSection(sections[0].section_no)
                 setDirectProblem(false);
@@ -163,7 +168,7 @@ export default function Book(){
 
     return(
         <>
-            <Seo path={path} title={title} description={description} keywords={keywords}/>
+            {seo && <Seo path={path} title={title} description={description} keywords={keywords}/>}
             <Header/>
             <Navbar/>
             <BreadCrumb type={"TextBook Manual"} heading={books && books[0] && books[0].BookName} subject={books && books[0] && books[0].subject_name} sub_subject={books && books[0] && books[0].sub_subject_name}/>
@@ -414,7 +419,7 @@ export default function Book(){
             <Description/>
             <Details/>
             <Reviews reviews={books && books[0] && books[0].reviews}/>
-            <RelatedTbs data={relatedBooks}/>
+            <RelatedTbs data={similarBooks ? similarBooks : relatedBooks}/>
             <Faq data={books && books[0] && books[0].faqs}/>
             <Follow/>
             <Footer/>

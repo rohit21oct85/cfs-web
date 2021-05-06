@@ -49,7 +49,7 @@ export default function  SignUp({providers}) {
                         'fullname':name,
                         'email':email,
                         'password':password,
-                        'school':school
+                        'college':school
                     });
             if(res === 409){
                 setError("User with the same email already exists");

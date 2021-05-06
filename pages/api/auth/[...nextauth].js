@@ -1,4 +1,5 @@
 import NextAuth from "next-auth"
+import { session } from "next-auth/client";
 import Providers from "next-auth/providers"
 import { setLogin, saveGoogleUser } from '../../../libs/auth'
 
@@ -110,17 +111,43 @@ export default NextAuth({
         : Promise.resolve(baseUrl)
     },
     signIn : async (user, account, profile) => { 
-      if(!user.student){
-        user.fullname = user.name;
-        const res = await saveGoogleUser(user);
-        if(res.status == 200) {
-          return true 
+      try{
+        if(!user.student){
+          user.fullname = user.name;
+          user.img = user.image;
+          user.social_id = user.id;
+          // console.log(user,"user")
+          const res = await saveGoogleUser(user);
+          // console.log(res.data.accessToken,res.status);
+          if(res && res.status == 200) {
+            // console.log("user created")
+            user.accessToken = res.data.accessToken
+            return true 
+          }else{
+            console.log("user exists")
+            user.accessToken = res.data.accessToken
+          }
         }
+      }catch(e){
+        console.log(e)
       }
     },
-    async session(session, user) { 
-      return session },
-    // async jwt(token, user, account, profile, isNewUser) { return token }
+    async jwt(token, user, account, profile, isNewUser) { 
+      console.log(user,"JWT")
+      if(user && user.student){
+        token.user = user.student
+        token.user.accessToken = user.accessToken
+        token.user.refreshToken = user.refreshToken
+      }else{
+        user && (token.user = user);
+      } 
+      return token 
+    },
+    async session(session, user) {
+      session.user = user.user;
+      return session 
+    },
+    
   },
 
   // Events are useful for logging
@@ -128,5 +155,5 @@ export default NextAuth({
   events: {},
 
   // Enable debug messages in the console if you are having problems
-  debug: true,
+  debug: false,
 })
