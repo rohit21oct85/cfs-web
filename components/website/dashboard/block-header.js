@@ -8,7 +8,7 @@ export default function BlockHeader(){
         <div className="block-header">
             <div className="row">
             <div className="col-lg-7 col-md-6 col-sm-12">
-            <h2>Hi,  {session && session.user.name} 
+            <h2>Hi,  {session && session.user.fullname} 
                     <small>Student, ipex College</small>
                 </h2>
             </div>

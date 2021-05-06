@@ -49,7 +49,7 @@ export default function  MyProfile() {
                                 </div>
                             </div>
                                 <div className="detail">
-                                    <h4>Shalini</h4>
+                                    <h4>{session && session.user.fullname}</h4>
                                 </div>
                                 <div className="row">
                                     <div className="col-12">
@@ -77,7 +77,7 @@ export default function  MyProfile() {
                                 <p>Noida, India</p>
                                 <hr/>
                                 <small className="text-muted">Email address: </small>
-                                <p>Shalini@example.com</p>
+                                <p>{session && session.user.email}</p>
                                 <hr/>
                                 <small className="text-muted">Phone: </small>
                                 <p>+ 202-555-0191</p>
@@ -125,7 +125,7 @@ export default function  MyProfile() {
                             </div>
 
                                     <div className="detail">
-                                        <h4> Shalini</h4>
+                                        <h4>{session && session.user.fullname}</h4>
                                     </div>
                                 </div>
                                 </div>
@@ -226,25 +226,25 @@ export default function  MyProfile() {
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>First Name</label>
-                                            <input type="text" className="form-control" placeholder="Shalini"/>
+                                            <input type="text" className="form-control" name="fname" placeholder="first name"/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>Last Name</label>
-                                            <input type="text" className="form-control" placeholder="Deao"/>
+                                            <input type="text" className="form-control" name="lame" placeholder="last name"/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>DOB</label>
-                                            <input type="text" className="form-control" name="dob" value="27/06/1987" placeholder="Enter Your Date of Birth"/>
+                                            <input type="text" className="form-control" name="dob" placeholder="Enter Your Date of Birth"/>
                                         </div>
                                     </div>
                                         <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>Email Id</label>
-                                            <input type="text" className="form-control" placeholder="Shalini@gmail.com" readOnly/>
+                                            <input type="text" className="form-control" placeholder={session && session.user.email} readOnly/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
@@ -252,35 +252,35 @@ export default function  MyProfile() {
                                         <label>Level of education</label>
                                         <select name="education" required className="form-control">
                                             <option value="">-Select Academic-</option>
-                                            <option value="1">Undergraduate</option>
-                                            <option value="2">Master</option>
-                                            <option value="3">Specialized</option>
-                                            <option value="4">PhD</option>
+                                            <option value="undergraduate">Undergraduate</option>
+                                            <option value="masters">Master</option>
+                                            <option value="specialized">Specialized</option>
+                                            <option value="phd">PhD</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>College</label>
-                                            <input type="text" className="form-control" placeholder="ipex College"/>
+                                            <input type="text" className="form-control" name="college" placeholder="College name"/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>Facebook Id</label>
-                                            <input type="text" className="form-control" placeholder="Facebook Id"/>
+                                            <input type="text" className="form-control" name="facebookId" placeholder="Facebook Id"/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>Twitter Id</label>
-                                            <input type="text" className="form-control" placeholder="Twitter Id"/>
+                                            <input type="text" className="form-control" name="twitterId" placeholder="Twitter Id"/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>Instagram Id</label>
-                                            <input type="text" className="form-control" placeholder="Instagram Id"/>
+                                            <input type="text" className="form-control" name="instagramId" placeholder="Instagram Id"/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">

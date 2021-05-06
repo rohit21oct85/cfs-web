@@ -6,15 +6,17 @@ import Router from 'next/router'
 import { useEffect } from 'react';
 import BlockHeader from '../components/website/dashboard/block-header'
 import Link from 'next/link'
-export default function  Dashboard() {
+import {getUser} from '../libs/auth'
+import { useQuery } from 'react-query'
 
-    const [ session, loading ] = useSession()
+export default function  Dashboard() {
+    const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser(),{staleTime:Infinity})
     
+    const [ session, loading ] = useSession()
     if (!session) { return  (<><AccessDenied/></>) }
     
     return (
         <>  
-            
             {/* <Header/> */}
             <DashboardNavbar/>
             <SideBar/>

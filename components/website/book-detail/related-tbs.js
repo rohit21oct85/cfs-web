@@ -18,7 +18,7 @@ export default function RelatedTbs({...props}){
                                         {/* <img src="/images/our-popular/img1.jpg" className="img-fluid" alt=""/> */}
                                         <BookImage isbn={item.ISBN13}/>
                                     </div>
-                                    <div className="our_popular_title">{item.BookName}
+                                    <div className="our_popular_title">{item.DisplayTitle ? item.DisplayTitle : item.BookName} 
                                     </div>
                                     <div className="our_popular_isbn_no">ISBN: <span>{item.ISBN13} </span>
                                     </div>

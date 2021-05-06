@@ -24,7 +24,7 @@ export default function SideBar(){
                                         </div>
                                     </div>
                                     <div className="detail">
-                                        <h4> {session && session.user.name} <span>Student</span></h4>
+                                        <h4> {session && session.user.fullname} <span>Student</span></h4>
                                     </div>
                                 </div>
                             </li>

@@ -6,6 +6,7 @@ import {useEffect} from 'react'
 import { useSession } from 'next-auth/client'
 import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
+import {sendResetEmail, verifyOtp, changePassword} from '../../libs/auth'
 export default function SignIn({ csrfToken, providers }) {
 	
 	const [ session, loading ] = useSession();
@@ -13,12 +14,22 @@ export default function SignIn({ csrfToken, providers }) {
 	const [loader, setLoader] = useState(false);
 	const [disabled, setDisabled] = useState(true)
 	const [error, setError] = useState(null);
-	const [display, setDisplay] = useState('none');
-	const [display1, setDisplay1] = useState('block');
+	const [userid, setUserId] = useState(null);
+	const [whichSegment, setWhichSegment] = useState('signin');
+	const [otp, setOtp] = useState();
+	const [code, setCode] = useState({
+		1: "",
+		2: "",
+		3: "",
+		4: "",
+	  });
 
 	const router = useRouter()
 	const emailRef = useRef();
 	const passwordRef = useRef();
+	const forgotEmailRef = useRef();
+	const chPRef = useRef();
+	const conchPRef = useRef();
  	
 	useEffect(() => {
 		// console.log(session)
@@ -26,6 +37,13 @@ export default function SignIn({ csrfToken, providers }) {
 		// 	Router.push('/dashboard')
 		// }
 	}, [session])
+
+	useEffect(() => {
+		let timerError = setTimeout(() => setError(''), 3000);
+		return () => {
+			clearTimeout(timerError);
+		}
+	}, [error])
 
 	let redirectUrl = `${process.env.NEXTAUTH_URL}/dashboard`;
 	console.log('redirect-url',redirectUrl);
@@ -59,8 +77,7 @@ export default function SignIn({ csrfToken, providers }) {
 	}
 
 	const forgot = (e) =>{
-		setDisplay('block')
-		setDisplay1('none')
+		setWhichSegment('email-link')
 	}
 
 	const agreePolicy = (e)=>{
@@ -69,6 +86,56 @@ export default function SignIn({ csrfToken, providers }) {
 		}else{
 			setDisabled(true);
 		}
+	}
+
+	const sendForgotEmail = async (e) =>{
+		e.preventDefault();
+		const email = forgotEmailRef.current.value;
+		const res = await sendResetEmail(email);
+		if(res.status == 200){
+			setWhichSegment('otp');
+			setError("Reset Code Sent to your Email Id");
+		}else{
+			setError("User Email not Found");
+		}
+	}
+	const onchangeReset = (e) =>{
+		setCode({...code , [e.target.name] : e.target.value})
+	}
+
+	const handleResetCode = async (e) =>{
+		e.preventDefault();
+		setOtp(code['1']+code['2']+code['3']+code['4'])
+		const res = await verifyOtp(otp);
+		if(res.status == 200){
+			setUserId(res.data.userId);
+			setWhichSegment('change-p');
+			setError("OTP matched");
+		}else{
+			setError("otp doesnt match");
+		}
+	}
+
+	const changePasswordT = async(e) =>{
+		e.preventDefault();
+		const changeP = chPRef.current.value;
+		const confirmchangeP = conchPRef.current.value;
+		var n = changeP.localeCompare(confirmchangeP);
+		if(n != 0){
+			setError('password mismatch')
+		}else{
+			const res =  await changePassword(changeP, userid, otp)
+			if(res.status == 200){
+				setWhichSegment('success');
+				setError("password chnaged successfully");
+			}else{
+				setError("password couldnt be changed");
+			}
+		}
+	}
+
+	const setSignin = async()=>{
+		setWhichSegment('signin')
 	}
 
 return (
@@ -85,7 +152,7 @@ return (
 							<img src="/images/logo1.png" className="img-fluid" alt="logo"/> 
 						</div>
 					</div>
-					<div className="col-md-5 ml-auto" style={{display:`${display1}`}}> 
+					<div className="col-md-5 ml-auto" style={{display: whichSegment == 'signin' ? 'block' : 'none' }}> 
 						{/* <form className="row form_banner form_banner_login" method='post' action='/api/auth/callback/credentials'> */}
 						<form className="row form_banner form_banner_login" method='post' onSubmit={submitForm}>
 							<input name='csrfToken' type='hidden' defaultValue={csrfToken}/>
@@ -128,7 +195,7 @@ return (
 							<div className="form-group col-md-12 trems_privacy text-center"> 
 								<div className="form-check">
 									<label className="form-check-label">
-										<input type="checkbox" className="form-check-input" value="" onChange={agreePolicy}/> By clicking on "Sign In" you're agreeing to ou <span>Terms of Use & Privacy.</span>
+										<input type="checkbox" className="form-check-input"  onChange={agreePolicy}/> By clicking on "Sign In" you're agreeing to ou <span>Terms of Use & Privacy.</span>
 									</label>
 								</div>
 							</div>
@@ -169,27 +236,27 @@ return (
 							</div>
 						</form>
 					</div>
-					<div id="forGotPass1" className="show_signin" style={{display:`${display}`,marginBottom:"15px"}}>
+					<div id="forGotPass1" className="show_signin col-md-5 ml-auto" style={{display: whichSegment == 'email-link' ? 'block' : 'none',marginBottom:"70px"}}>
 							<div className="bg_clr_frgot"> 
 								<h4  className="modal-title text-center">Forgot<span> password?</span> </h4>
 								<p className="sub_headings text-center">Please Enter Your Registered Email ID</p>
-								<form action="" className="login-register cool-b4-form" style={{float:"inherit"}}>
+								<form action="" onSubmit={sendForgotEmail} method="post" className="login-register cool-b4-form" style={{float:"inherit"}}>
 									<div className="row">
 										<div className="col-md-12">
 											<div className="form-group bdr_log_up mb-3"> 
-													<input type="text" className="form-control" placeholder="Enter Your Email ID"/> 
-													<span  className="error">Please Enter Password</span>
+													<input type="email" ref={forgotEmailRef} className="form-control" required placeholder="Enter Your Email ID"/> 
+													<span  className="error">{error}</span>
 											</div>
 										</div>
 										<div className="col-md-12 mt-4">
-											<button type="button" className="btn btn-block btn-danger btn-login buttons" id="submitMobile">Submit</button>
+											<button type="submit" className="btn btn-block btn-danger btn-login buttons" id="submitMobile" >Submit</button>
 										</div>
 									</div>
 								</form>
 							</div>
 						</div>
 
-						<div id="verifyOTPdata" className="show_signin" style={{display:"none",marginBottom:"15px"}}>
+						<div id="verifyOTPdata" onSubmit={handleResetCode} className="show_signin" style={{display:whichSegment == 'otp' ? 'block' : 'none',marginBottom:"15px"}}>
 							<div className="bg_clr_frgot">
 								<h4  className="modal-title text-center">Verify Your <span> Email ID</span> </h4>
 								<p className="sub_headings text-center">4 digit Verification Code has been sent to <br/> Your registered Email ID</p>
@@ -197,14 +264,15 @@ return (
 									<div className="row">
 									<div className="col-md-12 mb-3">
 										<div className="form-group otpVerify">
-										<input type="text" className="" maxLength="1" id="one" placeholder=""/>
-										<input type="text" className="" maxLength="1" id="two" placeholder=""/>
-										<input type="text" className="" maxLength="1" id="three" placeholder=""/>
-										<input type="text" className="" maxLength="1" id="four" placeholder=""/>
+											<input type="text" required className="" maxLength="1" id="one" placeholder="" name="1" onChange={(e)=>onchangeReset(e)}/>
+											<input type="text" required className="" maxLength="1" id="two" placeholder="" name="2" onChange={(e)=>onchangeReset(e)}/>
+											<input type="text" required className="" maxLength="1" id="three" placeholder="" name="3" onChange={(e)=>onchangeReset(e)}/>
+											<input type="text" required className="" maxLength="1" id="four" placeholder="" name="4" onChange={(e)=>onchangeReset(e)}/>
 										</div>
+										<span className="error">{error}</span>
 									</div>
 									<div className="col-md-12">
-										<button type="button" className="btn btn-block btn-danger btn-login buttons" id="submitCode">Submit</button>
+										<button type="submit" className="btn btn-block btn-danger btn-login buttons" id="submitCode">Submit</button>
 									</div>
 									<div className="col-md-12">
 										<p className="text-center resendOtp"><a href="" className="link-anchor">Resend Verification Code</a></p>
@@ -214,7 +282,7 @@ return (
 							</div>
 						</div>
 
-						<div id="changePassword" className="show_signin" style={{display:"none",marginBottom:"15px"}}>
+						<div id="changePassword" onSubmit={changePasswordT} className="show_signin" style={{display:whichSegment == 'change-p' ? 'block' : 'none',marginBottom:"15px"}}>
 							<div className="bg_clr_frgot">
 								<h4  className="modal-title text-center"> Change<span> Password?</span> </h4>
 								<p className="sub_headings text-center">Please Enter New Password</p>
@@ -222,32 +290,32 @@ return (
 									<div className="row">
 										<div className="col-md-12">
 											<div className="form-group bdr_log_up"> 
-												<input type="text" className="form-control" name="E-mail" placeholder="New Password"/>  
-												<span  className="error">Please Enter Password</span>
+												<input type="password" className="form-control" name="chnageP" ref={chPRef} required placeholder="New Password"/>  
+												{/* <span  className="error">Please Enter Password</span> */}
 												<span className="fa fa-eye field-icon toggle-password"></span>
 											</div>
 										</div>
 										<div className="col-md-12 mb-4">
 											<div className="form-group bdr_log_up"> 
-												<input type="text" className="form-control" name="E-mail" placeholder="Confirm Password"/> 
-												<span  className="error">Please Enter Password</span>
+												<input type="password" className="form-control" name="confirmchangeP" required ref={conchPRef} placeholder="Confirm Password"/> 
+												<span  className="error">{error}</span>
 												<span className="fa fa-eye field-icon toggle-password"></span>
 											</div>
 										</div>
 										<div className="col-md-12 mt-4">
-											<button type="button" className="btn btn-block btn-danger btn-login buttons" id="confirmPass">Submit</button>
+											<button type="submit" className="btn btn-block btn-danger btn-login buttons" id="confirmPass">Submit</button>
 										</div>
 									</div>
 								</form>
 							</div>
 						</div>
-						<div id="successChanged" className="show_signin" style={{display:"none",marginBottom:"15px"}}>
+						<div id="successChanged" className="show_signin" style={{display:whichSegment == 'success' ? 'block' : 'none',marginBottom:"15px"}}>
 							<div className="bg_clr_frgot">
 								<div className="congratulation_text text-center">
 									<img src="/images/like.png" className="img-fluid mb-2" alt=""/>
 									<h4  className="modal-title text-center">Password Changed <span>Successfully </span></h4>
 									<div className="col-md-12">
-										<button type="button" className="btn btn-block btn-danger btn-login buttons" id="LoginAgain" style={{margin:"13px 0px",textTransform: "none"}}>Click here to Login</button>
+										<button type="button" className="btn btn-block btn-danger btn-login buttons" id="LoginAgain" style={{margin:"13px 0px",textTransform: "none"}} onClick={setSignin}>Click here to Login</button>
 									</div>
 								</div>              
 							</div>
