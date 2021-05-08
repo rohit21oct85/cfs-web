@@ -6,15 +6,20 @@ import {useState } from 'react'
 import dynamic from 'next/dynamic';
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
-
-// import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {getUser} from '../../libs/profile'
+import { useQuery } from 'react-query'
+import { getNavbarData } from '../../libs/home'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from 'ckeditor5-classic-with-mathtype';
 
 // const CKEditor = dynamic(() => import("@ckeditor/ckeditor5-react"), { ssr: false })
 // const  ClassicEditor  = dynamic(() => import("@ckeditor/ckeditor5-build-classic"), { ssr: false })
 
 export default function AskQuestion(){
    const [ session, loading ] = useSession()
+   const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
+   const { data: menu, isLoading:menuIsLoading, error:menuError } = useQuery('menus', getNavbarData,{ staleTime:Infinity})
+
    const [display, setDisplay] = useState(false);
    
    const [modalClass, setModalClass] = useState(false);
@@ -42,10 +47,10 @@ export default function AskQuestion(){
    
    return(
       <>
-      <DashboardNavbar/>
-      <SideBar/>
+      <DashboardNavbar data={user}/>
+      <SideBar data={user}/>
       <section className="content user profile-page">
-      <BlockHeader/>
+      <BlockHeader data={user}/>
       <div className="container-fluid">
          <div className="row clearfix mt-4">
             <div className="col-md-12">
@@ -75,7 +80,7 @@ export default function AskQuestion(){
                                  <div className="col-sm-6 col-md-6 form-group">
                                     <label className="mb-0">Main Subject</label>
                                     <select className="form-control">
-                                       <option value=""> Select Subject</option>
+                                       <option value="">Select Subject</option>
                                        <option value="">Accounting</option>
                                        <option value="">Science/Math</option>
                                        <option value="">Finance</option>
@@ -91,7 +96,7 @@ export default function AskQuestion(){
                                  <div className="col-sm-6 col-md-6 form-group">
                                     <label className="mb-0">Sub Subject</label>
                                     <select className="form-control">
-                                       <option value=" "> Select One </option>
+                                       <option value=""> Select One </option>
                                        <option value=""> Physics </option>
                                        <option value=""> Biology </option>
                                        <option value=""> Advanced Mathematics </option>
@@ -102,24 +107,49 @@ export default function AskQuestion(){
                                     </select>
                                  </div>
                                  <div className="col-sm-6 col-md-6 form-group">
-                                 {/* <CKEditor
+                                 <CKEditor
                                     editor={ ClassicEditor }
-                                    data="<p>Hello from CKEditor 5!</p>"
-                                    onReady={ editor => {
-                                          // You can store the "editor" and use when it is needed.
-                                          console.log( 'Editor is ready to use!', editor );
-                                    } }
+                                    config={{
+                                        toolbar: {
+                                            items: [
+                                                'MathType', 'ChemType','heading', 
+                                                '|',
+                                                'bold',
+                                                'italic',
+                                                'link',
+                                                'bulletedList',
+                                                'numberedList',
+                                                'imageUpload',
+                                                'mediaEmbed',
+                                                'insertTable',
+                                                'blockQuote',
+                                                'undo',
+                                                'redo'
+                                            ]
+                                        },
+                                    }}
+                                    onReady={editor => {
+                                        // You can store the "editor" and use when it is needed.
+                                        // console.log("Editor is ready to use!", editor);
+                                        editor.editing.view.change(writer => {
+                                          writer.setStyle(
+                                            "height",
+                                            "300px",
+                                            editor.editing.view.document.getRoot()
+                                          );
+                                          writer.setStyle(
+                                            "width",
+                                            "465px",
+                                            editor.editing.view.document.getRoot()
+                                          );
+                                        });
+                                    }}
+                                    data=""
                                     onChange={ ( event, editor ) => {
-                                          const data = editor.getData();
-                                          console.log( { event, editor, data } );
+                                        const data = editor.getData();
+                                        console.log(data)
                                     } }
-                                    onBlur={ ( event, editor ) => {
-                                          console.log( 'Blur.', editor );
-                                    } }
-                                    onFocus={ ( event, editor ) => {
-                                          console.log( 'Focus.', editor );
-                                    } }
-                                 /> */}
+                                 />
                                     {/* <label className="mb-0">Question</label>
                                     <textarea name="editor1"></textarea> */}
                                  </div>

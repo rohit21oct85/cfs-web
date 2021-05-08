@@ -7,7 +7,7 @@ import { signOut } from 'next-auth/client'
 import Router from 'next/router'
 import { useSession } from 'next-auth/client'
 
-export default function DashboardNavbar(){
+export default function DashboardNavbar({...props}){
     const [ showNotification, setShowNotification ] = useState(false);
     const [ showDropdown, setShowDropdown ] = useState(false);
     const [ classname, setClassname ] = useState('');
@@ -132,7 +132,7 @@ export default function DashboardNavbar(){
                         </div>}
                     </li>
                     <li className={`nav-item dmenu float-right pt_sty dropdown ${classname}`} onMouseEnter={openDropdown}>
-                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span className="my_pics_img m-r-60 mt-0"><img src={session && session.user.image} alt="User" className="img-fluid"/></span></a>
+                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span className="my_pics_img m-r-60 mt-0"><img src={props.data && props.data.img} alt="User" className="img-fluid"/></span></a>
                         {showDropdown && <><div className={`dropdown-menu sm-menu ${classname}`} aria-labelledby="navbarDropdown" onMouseLeave={()=>{hideDropdown()}}>
                             <Link href="/dashboard"><a className="dropdown-item" href="#"> Dashboard</a></Link>
                             <Link href="/user/my-orders"><a className="dropdown-item" href="#"> My Orders</a></Link>

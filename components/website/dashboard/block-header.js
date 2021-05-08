@@ -1,15 +1,12 @@
-import { useSession } from 'next-auth/client'
 import Link from 'next/link';
 
-export default function BlockHeader(){
-    const [ session, loading ] = useSession();
-
+export default function BlockHeader({...props}){
     return(
         <div className="block-header">
             <div className="row">
             <div className="col-lg-7 col-md-6 col-sm-12">
-            <h2>Hi,  {session && session.user.fullname} 
-                    <small>Student, ipex College</small>
+            <h2>Hi, {props.data && props.data.fullname} 
+                    <small>Student, {props.data && props.data.college}</small>
                 </h2>
             </div>
             <div className="col-lg-5 col-md-6 col-sm-12">

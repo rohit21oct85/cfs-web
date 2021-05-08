@@ -1,10 +1,8 @@
 import Link from 'next/link'
 import { useRouter } from "next/router";
-import { useSession } from 'next-auth/client'
 
-export default function SideBar(){
+export default function SideBar({...props}){
     const router = useRouter();
-    const [ session, loading ] = useSession();
     
     return (
         <aside id="leftsidebar" className="sidebar sidebar_color sidebar_left">
@@ -15,7 +13,7 @@ export default function SideBar(){
                             <li className="mb-0 border-bottom-0">
                                 <div className="user-info  border-bottom-0">
                                     <div className="image circle">
-                                        <a href="#"><img src={session && session.user.image} className="profile-pic" alt="User"/></a>
+                                        <a href="#"><img src={props.data && props.data.img} className="profile-pic" alt="User"/></a>
                                         <div className="profile_pic_change">
                                             <div className="p-image">
                                                 <i className="fa fa-camera upload-button"></i>
@@ -24,7 +22,7 @@ export default function SideBar(){
                                         </div>
                                     </div>
                                     <div className="detail">
-                                        <h4> {session && session.user.fullname} <span>Student</span></h4>
+                                        <h4> {props.data && props.data.fullname} <span>Student</span></h4>
                                     </div>
                                 </div>
                             </li>
@@ -243,13 +241,13 @@ export default function SideBar(){
                             </li>
                             <li>
                                 <small className="text-muted">Location: </small>
-                                <p>Noida, India</p>
+                                <p>{props.data && props.data.Country}</p>
                                 <hr/>
                                 <small className="text-muted">Email address: </small>
-                                <p>Charlotte@example.com</p>
+                                <p>{props.data&& props.data.email}</p>
                                 <hr/>
                                 <small className="text-muted">Phone: </small>
-                                <p>+ 202-555-0191</p>
+                                <p>{props.data&& props.data.Contact}</p>
                             </li>
                         </ul>
                     </div>

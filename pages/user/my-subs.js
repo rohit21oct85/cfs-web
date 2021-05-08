@@ -5,10 +5,14 @@ import Link from 'next/link'
 import BlockHeader from '../../components/website/dashboard/block-header';
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
+import { useQuery } from 'react-query'
+import {getUser} from '../../libs/profile'
 
 export default function MySubs(){
+    const [ session, loading ] = useSession();
     const [display, setDisplay] = useState('none');
-    const [ session, loading ] = useSession()
+    const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
+
     const openCollapse = () => {
         display == 'none' ? setDisplay('block') : setDisplay('none')
     }
@@ -16,10 +20,10 @@ export default function MySubs(){
 
     return(
         <>
-        <DashboardNavbar/>
-        <SideBar/>
+        <DashboardNavbar data={user}/>
+        <SideBar data={user}/>
         <section className="content user profile-page">
-            <BlockHeader/>
+            <BlockHeader data={user}/>
             <div className="container-fluid">
                 <div className="row clearfix mt-4">
                     <div className="col-md-12">

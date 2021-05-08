@@ -124,8 +124,9 @@ export default NextAuth({
             user.accessToken = res.data.accessToken
             return true 
           }else{
-            console.log("user exists")
             user.accessToken = res.data.accessToken
+            // console.log("user exists")
+            // console.log(user,'ssss', res.data);
           }
         }
       }catch(e){
@@ -133,7 +134,7 @@ export default NextAuth({
       }
     },
     async jwt(token, user, account, profile, isNewUser) { 
-      console.log(user,"JWT")
+      // console.log(user,"JWT")
       if(user && user.student){
         token.user = user.student
         token.user.accessToken = user.accessToken

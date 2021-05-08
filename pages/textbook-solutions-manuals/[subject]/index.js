@@ -16,7 +16,7 @@ import {getBook, getChapters, getSections, getExercises, getRelatedBooks, getPro
 import {useState, useEffect} from 'react';
 import BookInfo from '../../../components/website/book-detail/book-info'
 import Highlighter from "react-highlight-words";
-import { replaceAll } from "../../../components/common/make-slug";
+import { replaceAll, MakeSlug } from "../../../components/common/make-slug";
 import Head from 'next/head'
 import Subject from './subject'
 import Seo from '../../../components/common/seo'
@@ -29,13 +29,19 @@ export default function Book(){
     const router = useRouter();
     // const regex = /\d+/g; //for retriveing both numbers isbn13 and isbn10 from the url
     const regex = /\d{13}/g; //for retriveing just the isbn 13 digit
-    
+    //regex for checking if the url contains chapter no then that chapter is selected in the dropdown
+    const chapterRegex =  /(?:chapter-)([a-z0-9]+)/;
+    //regex for checking if the url contains question no then that question is selected in the dropdown
+    const problemRegex =  /(?:problem-)([a-z0-9]+)/;  //if u want to match the underscore also /[^\w]|_/g
+
     //commented bcz moved book inside subject so as to match the url
     // const data = router.query.book != undefined ? router.query.book.match(regex) : router.query.book;
     const data = router.query.subject != undefined ? router.query.subject.match(regex) : router.query.subject;
     const ISBN13 = data ? data[0] : null; 
     
+    const [question, setQuestion] = useState();
     const [chapter, setChapter] = useState();
+    const [chapterName, setChapterName] = useState();
     const [section, setSection] = useState();
     const [exercise, setExercise] = useState();
     const [relatedBook, setRelatedBook] = useState();
@@ -53,6 +59,7 @@ export default function Book(){
     const [description, setDescription] = useState();
     const [keywords, setKeywords] = useState();
     const [altText, setAlttext] = useState();
+    const [robots, setRobots] = useState("index, follow");
 
     //example call commented out as a reminder
     // const { data: books, isLoading:bookIsLoading, error:bookError } = useQuery([router.query.book], () => getBook({book_isbn: ISBN13}),{staleTime:Infinity})
@@ -67,8 +74,13 @@ export default function Book(){
     const { data: relatedBooks, isLoading: relatedBooksIsLoading, error:relatedBooksError } = useQuery([`${relatedBook}-related-books`], () => getRelatedBooks({sub_subject: relatedBook}),{staleTime:Infinity,enabled: !!ISBN13,})
     
     // const { data: searchedItems, isLoading: searchIsLoading, error:searchError } = useQuery([search], () => searchQuestions({book_isbn:ISBN13,search:search}),{staleTime:Infinity})
+    
     const handleChapter = async (e) => {
         setChapter(e.target.value);
+        // console.log(e.target.options[e.target.selectedIndex].dataset.chapter)
+        const chapterValue = e.target.options[e.target.selectedIndex].dataset.chapter
+        setChapterName(e.target.options[e.target.selectedIndex].dataset.chapter)
+        router.push(`/textbook-solutions-manuals/${MakeSlug(chapterValue)}-${MakeSlug(books[0].Edition)}-chapter-${e.target.value}-solutions-${ISBN13}`, undefined, { shallow: true })
     }
 
     const handleSection = async (e) => {
@@ -79,18 +91,41 @@ export default function Book(){
         setExercise(e.target.value);
     }
 
+    const handleQuestion = async (e) => {
+        // console.log(e.target.options[e.target.selectedIndex].dataset.question)
+        setQuestion(e.target.value)
+        const questionValue = e.target.options[e.target.selectedIndex].dataset.question
+        setselectedQuestion(e.target.value + ' ' + questionValue)
+        if(questionValue){
+            router.push(`/textbook-solutions-manuals/${MakeSlug(questionValue)}-chapter-${chapter}-problem-${MakeSlug(e.target.value)}-solutions-${ISBN13}`, undefined, { shallow: true })
+            setRobots("index, follow")
+        }else{
+            router.push(`/textbook-solutions-manuals/${MakeSlug(chapterName)}-${MakeSlug(books[0].Edition)}-chapter-${chapter}-problem-${MakeSlug(e.target.value)}-solutions-${ISBN13}`, undefined, { shallow: true })            
+            setRobots("noindex, nofollow")
+        }
+    }
+
     const clickedQues = (data) => {
         setselectedQuestion(data)
     }
-    
+
     useEffect(() => {
-        if(problems && problems.length>0){
-            setselectedQuestion(problems[0].problem_no+" : "+ problems[0].question)
+        if(problems && problems.length > 0 || problemsDirect && problemsDirect.length > 0){
+            const slug = router.query.subject != undefined && router.query.subject.match(problemRegex) // 01-2020
+            const QUESTION = slug ? slug[1] : null;
+            if(QUESTION){
+                setQuestion(QUESTION)
+                console.log(QUESTION, problems)
+                const ques = (problems && problems.length > 0) 
+                                ? problems.filter(item => (item.problem_no.toLowerCase() === QUESTION)) 
+                                : problemsDirect.filter(item => (item.problem_no.toLowerCase() === QUESTION)) // dont use triple ===
+                ques.length > 0 && setselectedQuestion(ques[0].problem_no + " : " + ques[0].question)  //used for the first time, since if we change the question that has no question_name only has question_no. 
+            }else{
+                setselectedQuestion(problems[0].problem_no + " : " + problems[0].question)
+            }
         }
         return () => {}
-    }, [problems])
-
-    
+    }, [problems, problemsDirect])
     
     useEffect(() => {
         if(books && books.length > 0){
@@ -112,7 +147,16 @@ export default function Book(){
 
     useEffect(() => {
         if(chapters && chapters.length > 0){
-            setChapter(chapters[0].chapter_no)
+            const slug = router.query.subject != undefined && router.query.subject.match(chapterRegex) // 01-2020
+            const CHAPTER = slug ? slug[1] : null;
+            if(CHAPTER){
+                setChapter(CHAPTER)
+                const chap = chapters.filter(item => (item.chapter_no === CHAPTER));
+                setChapterName(chap[0].chapter_name)  //used for the first time, since if we change the question that has no question_name only has question_no.    
+            }else{
+                setChapter(chapters[0].chapter_no)
+                setChapterName(chapters[0].chapter_name)   //used for the first time, since if we change the question that has no question_name only has question_no.    
+            }
         }
         return () => {}
     }, [chapters])
@@ -168,7 +212,7 @@ export default function Book(){
 
     return(
         <>
-            {seo && <Seo path={path} title={title} description={description} keywords={keywords}/>}
+            {seo && <Seo path={path} title={title} description={description} keywords={keywords} robots={robots}/>}
             <Header/>
             <Navbar/>
             <BreadCrumb type={"TextBook Manual"} heading={books && books[0] && books[0].BookName} subject={books && books[0] && books[0].subject_name} sub_subject={books && books[0] && books[0].sub_subject_name}/>
@@ -183,9 +227,9 @@ export default function Book(){
                                     <div className={`col-md-3 ${colMd6}`}>
                                         <div className="chapter">
                                             <label>Chapter</label>
-                                            <select className="form-control" onChange={handleChapter}>
+                                            <select className="form-control" onChange={handleChapter} value={chapter}>
                                             {chapters && chapters.map((item,key)=>{
-                                                return (<option key={key} value={item.chapter_no}>{item.chapter_no} - {item.chapter_name}</option>)
+                                                return (<option key={key} value={item.chapter_no} data-chapter={item.chapter_name.substring(0, 50)}>{item.chapter_no} - {item.chapter_name}</option>)
                                             })}
                                             </select>
                                         </div>
@@ -213,14 +257,14 @@ export default function Book(){
                                     <div className={`col-md-3 ${colMd6}`}>
                                         <div className="chapter">
                                                 <label>Question</label>
-                                                <select className="form-control">
+                                                <select className="form-control" onChange={handleQuestion} id="handle-question" value={question}>
                                                 
                                                 {sections && problems && problems.map((item,key)=>{
-                                                    return(<option key={key} value={item.problem}>{item.problem_no} - {item.question}</option>)
+                                                    return(<option key={key} value={item.problem_no.toLowerCase()} data-question={item.question.substring(0, 50)}>{item.problem_no} - {item.question.substring(0, 50)} . ..</option>)
                                                 })}
 
                                                 {problemsDirect && problemsDirect.map((item,key)=>{
-                                                    return(<option key={key} value={item.problem}>{item.problem_no}</option>)
+                                                    return(<option key={key} value={item.problem_no.toLowerCase()} data-question={item.question.substring(0, 50)}>{item.problem_no} - {item.question.substring(0, 50)} . ..</option>)
                                                 })}
                                                 </select>
                                         </div>
@@ -389,7 +433,7 @@ export default function Book(){
                                     <div className="col-md-12 pb-4">
                                         <div className="Qtion_n_Stion_text">
                                             <h3 className="mb-4"><span>Question and Solution</span></h3>
-                                            <div className="read_more_q">  
+                                            <div className="read_more_q">
                                                 <span className="qustion_mark">Q:</span>  <div className="read_more_text">{selectedQuestion}</div> 
                                             </div> 
                                         </div>
@@ -419,8 +463,8 @@ export default function Book(){
             <Description/>
             <Details/>
             <Reviews reviews={books && books[0] && books[0].reviews}/>
-            <RelatedTbs data={similarBooks ? similarBooks : relatedBooks}/>
-            <Faq data={books && books[0] && books[0].faqs}/>
+            <RelatedTbs data={similarBooks ? similarBooks : relatedBooks} heading={books[0].similarHeading && books[0].similarHeading}/>
+            <Faq data={books && books[0] && books[0].faqs} heading={books[0].faqHeading && books[0].faqHeading}/>
             <Follow/>
             <Footer/>
         </>

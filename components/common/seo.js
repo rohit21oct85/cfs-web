@@ -12,7 +12,7 @@ export default function Seo({...props}){
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <meta name="copyright" content={copyright} />
             <meta name="author" content="crazyforstudy.com" />
-            <meta name="robots" content="index, follow"/>
+            <meta name="robots" content={props.robots}/>
             <link rel="canonical" href={props.path}/>
             
             {/* og:Meta Title */}

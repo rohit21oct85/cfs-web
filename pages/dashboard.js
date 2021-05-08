@@ -6,22 +6,22 @@ import Router from 'next/router'
 import { useEffect } from 'react';
 import BlockHeader from '../components/website/dashboard/block-header'
 import Link from 'next/link'
-import {getUser} from '../libs/auth'
+import {getUser} from '../libs/profile'
 import { useQuery } from 'react-query'
 
 export default function  Dashboard() {
-    const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser(),{staleTime:Infinity})
-    
     const [ session, loading ] = useSession()
+    const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email : session.user.email}),{ staleTime : Infinity, enabled : !!session })
+        
     if (!session) { return  (<><AccessDenied/></>) }
     
     return (
         <>  
             {/* <Header/> */}
-            <DashboardNavbar/>
-            <SideBar/>
+            <DashboardNavbar data={user}/>
+            <SideBar data={user}/>
             <section className="content user profile-page">
-                <BlockHeader/>                
+                <BlockHeader data={user}/>                
                 <div className="container-fluid">
                     <div className="row clearfix mt-4">
                         <div className="col-xl-12">

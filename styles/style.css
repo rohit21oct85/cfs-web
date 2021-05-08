@@ -1735,3 +1735,20 @@ ul.rating a {
 }
 .bg_clr_frgot .bdr_log_up .field-icon{position:absolute; top:13px; right:13px; color:#f44336;}
 .bg_clr_frgot  h4 span{color:#ffbc00; font-weight:bold;}
+
+ul.nav.nav-tabs.profile_editbtn li {
+    display: inline-block;
+}
+
+.theme-blush .dropdown-menu .dropdown-item { 
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 14px;
+    padding: .25rem 10px;
+    font-weight: 500;
+}
+
+.theme-blush .dropdown-menu.megamenu.sm-menu.border-top.show .row {
+    margin: 0 auto;
+}
+    
