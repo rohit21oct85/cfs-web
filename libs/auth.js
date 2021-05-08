@@ -70,12 +70,3 @@ export async function changePassword(pass, id, otp){
         console.log(e)
     }
 }
-export async function getUser(){
-    try{
-        const res = await authAxios.post(apiUrl + 'student/get-user')
-        return res;
-    }catch(e){
-        return e
-        console.log(e)
-    }
-}

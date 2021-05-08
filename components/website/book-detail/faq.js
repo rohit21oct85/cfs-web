@@ -16,7 +16,7 @@ export default function Faq({...props}){
                 <div className="row">
                     <div className="col-md-12 text-center mb-5">
                         <div className="Content_Covered_title pb-3">
-                            <h2>CrazyForStudy Frequently asked questions</h2> 
+                            <h2>{props.heading ? props.heading : "CrazyForStudy Frequently asked questions"}</h2> 
                         </div>
                     </div>
 

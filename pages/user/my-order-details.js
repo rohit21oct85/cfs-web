@@ -4,6 +4,7 @@ import  OwlCarousel  from "../../components/common/owl-carousel";
 import Link from 'next/link'
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
+import {getUser} from '../../libs/profile'
 
 export default function MyOrderDetails(){
     const [ session, loading ] = useSession();

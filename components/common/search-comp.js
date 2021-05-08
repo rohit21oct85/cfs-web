@@ -79,9 +79,11 @@ export default function SearchComp({...props}){
                                     }
                                     {searchedQuestions && searchedQuestions.map((item,key)=>{
                                     return(<span key={key}>
-                                        <Link href={item.book_isbn}><a>
+                                        {/* router.push(`/textbook-solutions-manuals/${MakeSlug(questionValue)}-chapter-${chapter}-problem-${MakeSlug(e.target.value)}-solutions-${ISBN13}`, undefined, { shallow: true }) */}
+                                        <Link href={`/textbook-solutions-manuals/${MakeSlug(item.question.substring(0,50))}-chapter-${item.chapter_no}-problem-${MakeSlug(item.problem_no)}-solutions-${item.book_isbn}`}><a>
+                                        {/* <Link href={{pathname: `/textbook-solutions-manuals/${MakeSlug(item.question.substring(0,50))}-chapter-${item.chapter_no}-problem-${MakeSlug(item.problem_no)}-solutions-${item.book_isbn}`, query: { section_no: `${MakeSlug(item.section_no)}`, excerise: `${MakeSlug(item.excerise)}`  }}}><a> */}
                                             <div className="Picking_Cotton">
-                                                <h3>{item.question}</h3>
+                                                <h3>{item.question}</h3>{console.log(item)}
                                                 <p>{item.book_name} | {item.book_isbn}</p>
                                                 <p><span>Chapter Name: {item.chapter_name}, Chapter No: {item.chapter_no}</span></p>
                                             </div></a>

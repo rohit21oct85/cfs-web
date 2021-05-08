@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import Link from 'next/link'
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
+import {getUser} from '../../libs/profile'
 
 export default function Cancelation(){
     const [ session, loading ] = useSession();

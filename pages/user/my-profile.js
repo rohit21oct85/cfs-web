@@ -1,10 +1,14 @@
 import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar'
+import BlockHeader from '../../components/website/dashboard/block-header'
 import SideBar from '../../components/website/dashboard/sidebar'
 import Link from 'next/link'
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
 import { signOut } from 'next-auth/client'
 import Router from 'next/router'
+import {useState ,useEffect} from 'react'
+import { useQuery } from 'react-query'
+import {getCountries,getUser,editUserProfile} from '../../libs/profile'
 
 async function SignOut () {
     console.log("removing...")
@@ -20,13 +24,59 @@ async function SignOut () {
 
 export default function  MyProfile() {
     const [ session, loading ] = useSession()
-    if (!session) { return  (<><AccessDenied/></>) }
+    const [loader, setLoader ] = useState()
+    const [formData, setFormData] = useState({
+        fullname: '',
+        dob:'',
+        Country: '',
+        Zipcode: '',
+        Address: '',
+        college: '',
+        Contact: '',
+        img:"",
+    });
+    const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
+    const { data: countries, isLoading:countriesIsLoading, error:countriesError } = useQuery(['country-list'], () => getCountries(),{staleTime:Infinity})
     
+    useEffect(()=>{
+        if(user){
+            setFormData({
+                ...formData,
+                ['fullname']: user.fullname,
+                ['email']: user.email,
+                ['Country']: user.Country,
+                ['dob']: user.dob,
+                ['Zipcode']: user.Zipcode,
+                ['Address']: user.Address,
+                ['college']: user.college,
+                ['Contact']: user.Contact,
+                ['img']: user.img,
+            });
+        }
+    },[user])
+
+    if (!session) { return  (<><AccessDenied/></>) }
+
+    const handleProfile = (e) =>{
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const saveForm = async (e) => {
+        setLoader(true);
+        setFormData({ ...formData, ['email']: session.user.email})
+        const res = await editUserProfile(formData);
+        if(res){
+            
+        }setLoader(false)
+    }
+
     return (
         <>
-            <DashboardNavbar/>
-            <SideBar/>
-            {/* <Link href="#"><a onClick={SignOut}>SignOut</a></Link> */}
+            <DashboardNavbar data={formData}/>
+            {/* <SideBar data={formData}/> */}
             <aside id="leftsidebar" className="sidebar">
                 <ul className="nav nav-tabs">
                     <li className="nav-item"><Link href="/dashboard"><a className="nav-link" data-toggle="tab" href="" target="_blank"><i className="zmdi zmdi-home"></i></a></Link></li>
@@ -38,9 +88,8 @@ export default function  MyProfile() {
                         <ul className="list">
                             <li>
                                 <div className="user-info m-b-20 p-b-15">
-                                {/* <!--<div className="image"><a href="#"><img src="assets/images/profile_av.jpg" alt="User"/></a></div>--> */}
                                     <div className="image circle">
-                                <a href=""><img src={session && session.user.image} className="profile-pic" alt="User"/></a>
+                                <a href=""><img src={formData && formData.img} className="profile-pic" alt="User"/></a>
                                 <div className="profile_pic_change">
                                 <div className="p-image">
                                     <i className="fa fa-camera upload-button"></i>
@@ -49,9 +98,9 @@ export default function  MyProfile() {
                                 </div>
                             </div>
                                 <div className="detail">
-                                    <h4>{session && session.user.fullname}</h4>
+                                    <h4>{formData &&formData.fullname}</h4>
                                 </div>
-                                <div className="row">
+                                {/* <div className="row">
                                     <div className="col-12">
                                         <a title="facebook" href=""><i className="zmdi zmdi-facebook"></i></a>
                                         <a title="twitter" href=""><i className="zmdi zmdi-twitter"></i></a>
@@ -69,18 +118,18 @@ export default function  MyProfile() {
                                         <h5 className="m-b-5">37</h5>
                                         <small>Order</small>
                                     </div>
-                                </div>
+                                </div> */}
                                 </div>
                             </li>
                             <li>
                                 <small className="text-muted">Location: </small>
-                                <p>Noida, India</p>
+                                <p>{formData && formData.Country}</p>
                                 <hr/>
                                 <small className="text-muted">Email address: </small>
-                                <p>{session && session.user.email}</p>
+                                <p>{formData && formData.email}</p>
                                 <hr/>
                                 <small className="text-muted">Phone: </small>
-                                <p>+ 202-555-0191</p>
+                                <p>{formData && formData.Contact}</p>
                             </li>
                         </ul>
                     </div>
@@ -88,7 +137,8 @@ export default function  MyProfile() {
                 </div>
             </aside>
             <section className="content user profile-page">
-                <div className="block-header">
+                <BlockHeader data={formData}/>
+                {/* <div className="block-header">
                     <div className="row">
                     <div className="col-lg-7 col-md-6 col-sm-12">
                         <h2>Profile
@@ -96,16 +146,13 @@ export default function  MyProfile() {
                         </h2>
                     </div>
                     <div className="col-lg-5 col-md-6 col-sm-12">
-                        {/* <button className="btn btn-white btn-icon btn-round float-right m-l-10" type="button">
-                        <i className="zmdi zmdi-edit"></i>
-                        </button> */}
                         <ul className="breadcrumb float-md-right">
                             <li className="breadcrumb-item"><Link href="/dashboard"><a> Dashboard</a></Link></li>
                             <li className="breadcrumb-item active">Profile</li>
                         </ul>
                     </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="container-fluid">
                     <div className="row clearfix mt-4">
                     <div className="col-lg-4 col-md-12">
@@ -115,7 +162,7 @@ export default function  MyProfile() {
                                 <div className="user-info">
                                     <div className="image circle">
 
-                                <a href=""><img src={session && session.user.image} className="profile-pic circle" alt="User"/></a>
+                                <a href=""><img src={formData && formData.img} className="profile-pic circle" alt="User"/></a>
                                 <div className="profile_pic_change">
                                 <div className="p-image p-image2">
                                     <i className="fa fa-camera upload-button"></i>
@@ -125,7 +172,7 @@ export default function  MyProfile() {
                             </div>
 
                                     <div className="detail">
-                                        <h4>{session && session.user.fullname}</h4>
+                                        <h4>{formData && formData.fullname}</h4>
                                     </div>
                                 </div>
                                 </div>
@@ -187,9 +234,9 @@ export default function  MyProfile() {
                                 <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#Account"><i className="fa fa-edit"></i></a></li>
                             </ul> */}
                             
-                            <ul class="nav nav-tabs profile_editbtn">
-                                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Account">Account</a></li>
-                                <li class="nav-item"><a class="nav-link " href=""><i class="zmdi zmdi-edit"></i></a></li>
+                            <ul className="nav nav-tabs profile_editbtn">
+                                <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#Account">Account</a></li>
+                                <li className="nav-item"><a className="nav-link " href=""><i className="zmdi zmdi-edit"></i></a></li>
                             </ul>
                             <div className="tab-content">
                                 <div className="tab-pane body active" id="Account">
@@ -199,7 +246,7 @@ export default function  MyProfile() {
                                 <div className="form-group">
                                     <input type="password" className="form-control" placeholder="New Password">
                                 </div> --> */}
-                                <button className="btn btn-info btn-round" id="changepass"> Changes Password</button>
+                                {/* <button className="btn btn-info btn-round" id="changepass"> Changes Password</button> */}
 
                                 <div className="row clearfix" id="changepass2" style={{display:"none"}}>
                                     <div className="col-lg-6 col-md-12">
@@ -225,68 +272,57 @@ export default function  MyProfile() {
                                 <div className="row clearfix">
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
-                                        <label>First Name</label>
-                                            <input type="text" className="form-control" name="fname" placeholder="first name"/>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6 col-md-12">
-                                        <div className="form-group">
-                                        <label>Last Name</label>
-                                            <input type="text" className="form-control" name="lame" placeholder="last name"/>
+                                        <label>Name</label>
+                                            <input type="text" className="form-control" name="fullname" placeholder="first name" onChange={handleProfile} defaultValue={formData && formData.fullname}/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>DOB</label>
-                                            <input type="text" className="form-control" name="dob" placeholder="Enter Your Date of Birth"/>
+                                            <input type="text" className="form-control" name="dob" placeholder="Enter Your Date of Birth" onChange={handleProfile} defaultValue={formData && formData.dob}/>
                                         </div>
                                     </div>
                                         <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>Email Id</label>
-                                            <input type="text" className="form-control" placeholder={session && session.user.email} readOnly/>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6 col-md-12">
-                                        <div className="form-group">
-                                        <label>Level of education</label>
-                                        <select name="education" required className="form-control">
-                                            <option value="">-Select Academic-</option>
-                                            <option value="undergraduate">Undergraduate</option>
-                                            <option value="masters">Master</option>
-                                            <option value="specialized">Specialized</option>
-                                            <option value="phd">PhD</option>
-                                            </select>
+                                            <input type="text" className="form-control" placeholder="email" defaultValue={formData && formData.email} readOnly/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>College</label>
-                                            <input type="text" className="form-control" name="college" placeholder="College name"/>
+                                            <input type="text" className="form-control" name="college" placeholder="College name" defaultValue={formData && formData.college} onChange={handleProfile}/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
-                                        <label>Facebook Id</label>
-                                            <input type="text" className="form-control" name="facebookId" placeholder="Facebook Id"/>
+                                        <label>Phone no</label>
+                                            <input type="text" className="form-control" name="Contact" placeholder="phone no" defaultValue={formData && formData.Contact}  onChange={handleProfile}/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
-                                        <label>Twitter Id</label>
-                                            <input type="text" className="form-control" name="twitterId" placeholder="Twitter Id"/>
+                                        <label>Address</label>
+                                            <input type="text" className="form-control" name="Address" placeholder="Address" defaultValue={formData && formData.Address}  onChange={handleProfile}/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
-                                        <label>Instagram Id</label>
-                                            <input type="text" className="form-control" name="instagramId" placeholder="Instagram Id"/>
+                                        <label>Zipcode</label>
+                                            <input type="text" className="form-control" name="Zipcode" placeholder="Zipcode" defaultValue={formData && formData.Zipcode}  onChange={handleProfile}/>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <div className="form-group">
                                         <label>Country</label>
-                                            <input type="text" className="form-control" placeholder="Indonesia"/>
+                                        <select name="education" required className="form-control" name="Country"  onChange={handleProfile} value={formData && formData.Country}>
+                                            <option value="">Select Country</option>
+                                            {countries && countries.map((item,key)=>{
+                                                return (
+                                                    <option key={key} value={item.slug}>{item.title}</option>
+                                                )
+                                            })}
+                                            </select>
                                         </div>
                                     </div>
 
@@ -297,7 +333,7 @@ export default function  MyProfile() {
                                         </div>
                                     </div>--> */}
                                     <div className="col-md-12">
-                                        <button className="btn btn-primary btn-round" >Update Changes</button>
+                                        <button onClick={saveForm} className="btn btn-primary btn-round" >{loading ? "updating" : "Update Changes"}</button>
                                     </div>
                                 </div>
                                 </div>

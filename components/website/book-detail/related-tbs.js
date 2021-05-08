@@ -7,7 +7,7 @@ export default function RelatedTbs({...props}){
                 <div className="row">
                     <div className="col-md-12 text-center mb-5">
                         <div className="Content_Covered_title pb-3">
-                            <h2>Students who viewed this book also checked out</h2> 
+                            <h2>{props.heading ? props.heading : "Students who viewed this book also checked out"}</h2> 
                         </div>
                     </div>
                     {props.data && props.data.map((item,key)=>{
