@@ -20858,7 +20858,7 @@ h4.ans_s {
 }
 .detail h4{font-size:14px !important; font-weight:500; margin-top:7px !important; color:#030303;}
 .detail h4 span{display:block;}
-.profile_pic_change{display:none;}
+/* .profile_pic_change{display:none;} */
 .sidebar .user-info .image {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;

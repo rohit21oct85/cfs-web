@@ -6,6 +6,7 @@ import { MakeSlug } from '../../common/make-slug'
 import { signOut } from 'next-auth/client'
 import Router from 'next/router'
 import { useSession } from 'next-auth/client'
+import {getNotifications} from '../../../libs/question'
 
 export default function DashboardNavbar({...props}){
     const [ showNotification, setShowNotification ] = useState(false);
@@ -81,8 +82,9 @@ export default function DashboardNavbar({...props}){
     const handleClick =()=>{
         hideMenu()
     }
-
+    const isRead = 'all';
     const { data, isLoading } = useQuery('menus', getNavbarData,{ staleTime:Infinity})
+    const { data: notifications, isLoading:notificationsIsLoading, error:notificationsError } = useQuery([`notifications-${isRead}`], () => getNotifications({user_Id : session.user._id, type: 'QA'}, isRead),{ staleTime : Infinity, enabled : !!session })
 
     return( <>
             <nav className="navbar navbar_dashboard1 p-l-5 p-r-5">
@@ -132,7 +134,7 @@ export default function DashboardNavbar({...props}){
                         </div>}
                     </li>
                     <li className={`nav-item dmenu float-right pt_sty dropdown ${classname}`} onMouseEnter={openDropdown}>
-                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span className="my_pics_img m-r-60 mt-0"><img src={props.data && props.data.img} alt="User" className="img-fluid"/></span></a>
+                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span className="my_pics_img m-r-60 mt-0"><img src={props.data && props.data.img ? props.data.img : "/images/profile_av.jpg"} alt="User" className="img-fluid"/></span></a>
                         {showDropdown && <><div className={`dropdown-menu sm-menu ${classname}`} aria-labelledby="navbarDropdown" onMouseLeave={()=>{hideDropdown()}}>
                             <Link href="/dashboard"><a className="dropdown-item" href="#"> Dashboard</a></Link>
                             <Link href="/user/my-orders"><a className="dropdown-item" href="#"> My Orders</a></Link>
@@ -160,17 +162,21 @@ export default function DashboardNavbar({...props}){
                         <ul className={`dropdown-menu pullDown ${classname}`} onMouseLeave={()=>{hideNotification()}}>
                             <li className="body">
                                 <ul className="menu list-unstyled">
-                                    <li>
-                                        <a href="#">
-                                            <div className="media">
-                                            <img className="media-object" src="/images/pic2.png" alt=""/>
-                                                <div className="media-body">
-                                                    <span className="name">Ashton Cox <span className="time">30min ago</span></span>
-                                                    <span className="message">There are many variations of passages</span>                                        
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    {notifications && notifications.data.map((item,key)=>{
+                                        return(
+                                            <li key={key}>
+                                                <a href="#">
+                                                    <div className="media">
+                                                    <img className="media-object" src="/images/pic2.png" alt=""/>
+                                                        <div className="media-body">
+                                                            <span className="name">Ashton Cox <span className="time">30min ago</span></span>
+                                                            <span className="message">There are many variations of passages</span>                                        
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        )
+                                    })}
                                 </ul>
                             </li>
                             <li className="footer"> <a href="#">View All</a> </li>

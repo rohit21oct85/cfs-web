@@ -7,11 +7,24 @@ import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
 import { useQuery } from 'react-query'
 import {getUser} from '../../libs/profile'
+import {getMyTextBooks,addTextBooks} from '../../libs/question'
 
 export default function MyTbs(){
     const [fields, setFields] = useState([{ value: null }])
     const [ session, loading ] = useSession()
     const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
+    const { data: textbooks, isLoading:textbooksIsLoading, error:textbooksError } = useQuery(['textbooks'], () => getMyTextBooks({user_Id:session.user._id}),{staleTime:Infinity, enabled: !!session})
+    const [formData, setFormData] = useState();
+
+
+    const handleIsbn = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+    }
+
+    const addTextBookData = async (e) => {
+        e.preventDefault();
+        const res = await addTextBooks(formData.isbn);
+    }
 
     function handleChange(i, event) {
         const values = [...fields];
@@ -65,16 +78,20 @@ export default function MyTbs(){
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td><span className="">1</span></td>
-                                                    <td><span className="textbook-t">9780134686516</span></td>
-                                                    <td>Available</td>
-                                                    <td><a href="#" className="btn btn-info btn-sm btn-rounded view-reciept-btn">View Now</a></td>
-                                                    <td>
-                                                        <span className="trash_textbooks"><a href=""><i className="fa fa-trash"></i></a></span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
+                                                {textbooks && textbooks.data.map((item,key)=>{
+                                                    return(
+                                                        <tr key={key}>
+                                                            <td><span className="">{key}</span></td>
+                                                            <td><span className="textbook-t">{item.book_isbn}</span></td>
+                                                            <td>{item.book_name ? 'Available' : 'Not Available'}</td>
+                                                            <td><a href="#" className="btn btn-info btn-sm btn-rounded view-reciept-btn">{item.book_name ? 'View Now' : 'Will be available in 3-4 working Days.' }</a></td>
+                                                            <td>
+                                                                <span className="trash_textbooks"><a href=""><i className="fa fa-trash"></i></a></span>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })}    
+                                                {/* <tr>
                                                     <td><span className="">2</span></td>
                                                     <td><span className="textbook-t">9780134686516</span></td>
                                                     <td>Available</td>
@@ -100,7 +117,7 @@ export default function MyTbs(){
                                                     <td>
                                                         <span className="trash_textbooks"><a href=""><i className="fa fa-trash"></i></a></span>
                                                     </td>
-                                                </tr>
+                                                </tr> */}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -124,18 +141,16 @@ export default function MyTbs(){
                                                         <label className="col-sm-12 control-label" htmlFor="field1">Fill ISBN (13)</label>
                                                     </div>
                                                     <div className="col-md-8 form-group">
-                                                        <form name="textbookfrm" id="textbookfrm" action="" method="POST" role="form" autoComplete="off">
+                                                        <form onSubmit={addTextBookData} id="textbookfrm" method="POST">
                                                             <div className="col-sm-10">
                                                                 <div className="dynamic-wrap">
                                                                     <div className="form">
-                                                                        
-                                                                            
                                                                                 {/* <input className="form-control isbncls" name="fields[]" type="text" minLength="13" maxLength="13" pattern="[0-9]+" title="ISBN (13)" placeholder="ISBN Number" required="required"/> */}
                                                                                 {fields.map((field, idx) => {
                                                                                     return (
                                                                                         <div className="entry input-group" key={idx}>
                                                                                             <label className="barcode1234"><i className="fa fa-barcode"></i></label>
-                                                                                            <input className="form-control isbncls" name="fields[]" type="text" minLength="13" maxLength="13" pattern="[0-9]+" title="ISBN (13)" placeholder="ISBN Number" required="required"/>
+                                                                                            <input className="form-control isbncls" name="isbn" type="text" minLength="13" maxLength="13" pattern="[0-9]+" title="ISBN (13)" placeholder="ISBN Number" required="required" onChange={handleIsbn}/>
                                                                                             <span className="input-group-btn">
                                                                                                 {idx == 0 ? 
                                                                                                 <button className="btn btn-add btn-add_more" type="button" onClick={handleAdd}>

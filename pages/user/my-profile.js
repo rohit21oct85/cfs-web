@@ -89,7 +89,7 @@ export default function  MyProfile() {
                             <li>
                                 <div className="user-info m-b-20 p-b-15">
                                     <div className="image circle">
-                                <a href=""><img src={formData && formData.img} className="profile-pic" alt="User"/></a>
+                                <a href=""><img src={formData.img ? formData.img : "/images/profile_av.jpg"} className="profile-pic" alt="User"/></a>
                                 <div className="profile_pic_change">
                                 <div className="p-image">
                                     <i className="fa fa-camera upload-button"></i>
@@ -161,13 +161,13 @@ export default function  MyProfile() {
                                 <div className="profile-image">
                                 <div className="user-info">
                                     <div className="image circle">
-
-                                <a href=""><img src={formData && formData.img} className="profile-pic circle" alt="User"/></a>
+                                    {console.log(formData.img)}
+                                <a href=""><img src={formData.img ? formData.img : "/images/profile_av.jpg"} className="profile-pic circle" alt="User"/></a>
                                 <div className="profile_pic_change">
-                                <div className="p-image p-image2">
-                                    <i className="fa fa-camera upload-button"></i>
-                                    <input className="file-upload" type="file" accept="image/*"/>
-                                </div>
+                                    <div className="p-image p-image2">
+                                        <i className="fa fa-camera upload-button"></i>
+                                        <input className="file-upload" type="file" accept="image/*"/>
+                                    </div>
                                 </div>
                             </div>
 

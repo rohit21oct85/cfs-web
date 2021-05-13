@@ -13,7 +13,7 @@ export default function SideBar({...props}){
                             <li className="mb-0 border-bottom-0">
                                 <div className="user-info  border-bottom-0">
                                     <div className="image circle">
-                                        <a href="#"><img src={props.data && props.data.img} className="profile-pic" alt="User"/></a>
+                                        <a href="#"><img src={props.data && props.data.img ? props.data.img : "/images/profile_av.jpg"} className="profile-pic" alt="User"/></a>
                                         <div className="profile_pic_change">
                                             <div className="p-image">
                                                 <i className="fa fa-camera upload-button"></i>

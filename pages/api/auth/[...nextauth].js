@@ -122,11 +122,13 @@ export default NextAuth({
           if(res && res.status == 200) {
             // console.log("user created")
             user.accessToken = res.data.accessToken
+            user._id = res.data.student._id
             return true 
           }else{
             user.accessToken = res.data.accessToken
+            user._id = res.data.student._id
+            user.Subscribe = res.data.student.Subscribe
             // console.log("user exists")
-            // console.log(user,'ssss', res.data);
           }
         }
       }catch(e){
@@ -134,7 +136,6 @@ export default NextAuth({
       }
     },
     async jwt(token, user, account, profile, isNewUser) { 
-      // console.log(user,"JWT")
       if(user && user.student){
         token.user = user.student
         token.user.accessToken = user.accessToken

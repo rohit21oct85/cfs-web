@@ -7,11 +7,14 @@ import { useEffect } from 'react';
 import BlockHeader from '../components/website/dashboard/block-header'
 import Link from 'next/link'
 import {getUser} from '../libs/profile'
+import {getNotifications} from '../libs/question'
 import { useQuery } from 'react-query'
 
 export default function  Dashboard() {
     const [ session, loading ] = useSession()
+    const isRead = false;
     const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email : session.user.email}),{ staleTime : Infinity, enabled : !!session })
+    const { data: notifications, isLoading:notificationsIsLoading, error:notificationsError } = useQuery([`notifications-${isRead}`], () => getNotifications({user_Id : session.user._id, type: 'QA'}, isRead),{ staleTime : Infinity, enabled : !!session })
         
     if (!session) { return  (<><AccessDenied/></>) }
     
@@ -48,7 +51,7 @@ export default function  Dashboard() {
                         <div className="row progress_bar_dshbd">
                             <div className="col-md-3">
                                 <ul>
-                                    <li className="Complete_Your_Profile pt-2"><a href="#">Complete Your Profile</a></li>
+                                    <li className="Complete_Your_Profile pt-2"><Link href="/user/my-profile"><a href="#">Complete Your Profile</a></Link></li>
                                 </ul>
                             </div>
                             
@@ -103,7 +106,7 @@ export default function  Dashboard() {
                                     <div className="home_work_text">
                                         <h2 className="mt-0 my_acc">Stuck on your Homework <span>Question?</span> </h2>
                                         <p className="">Ask your homework question directly to the professor. Our expert will provide you (step-by-step) solutions.  </p>
-                                        <a href="#">Ask a Question</a>
+                                        <Link href="/user/ask-a-question"><a>Ask a Question</a></Link>
                                         <small>50 of 50 Homework Questions left </small>
                                     </div>
                                 </div> 
@@ -124,7 +127,7 @@ export default function  Dashboard() {
                                 </div>
                                 <div className="body">
                                     <ul className="row list-unstyled c_review">
-                                        <li className="col-12 border_btm_notify">
+                                        {/* <li className="col-12 border_btm_notify">
                                             <div className="avatar">
                                                 <a href=""><img className="img-fluid" src="/images/avatar-s-10.png" alt="user"/></a>
                                             </div>                                
@@ -150,16 +153,20 @@ export default function  Dashboard() {
                                                 <h4 className="c_name">Your Question is solved: 1. How does a project manager price out</h4>  
                                                 <small className="">03.:44PM</small>
                                             </div>                                
-                                        </li>
-                                        <li className="col-12 border_btm_notify">
-                                            <div className="avatar">
-                                                <a href="#"><img className="img-fluid" src="/images/avatar-s-10.png" alt="user"/></a>
-                                            </div>                                
-                                            <div className="comment-action">
-                                                <h4 className="c_name">Your Question is solved: 1. How does a project manager price out</h4>  
-                                                <small className="">03.:44PM</small>
-                                            </div>                                
-                                        </li>
+                                        </li> */}
+                                        {notifications && notifications.data.map((item,key)=>{
+                                            return(
+                                                <li className="col-12 border_btm_notify" key={key}>
+                                                    <div className="avatar">
+                                                        <a href="#"><img className="img-fluid" src="/images/avatar-s-10.png" alt="user"/></a>
+                                                    </div>                                
+                                                    <div className="comment-action">
+                                                        <h4 className="c_name">{item.title}</h4>  
+                                                        <small className="">{item.created_at}</small>
+                                                    </div>                                
+                                                </li>
+                                            )
+                                        })}
                                     </ul>
                                 </div>
                             </div>
