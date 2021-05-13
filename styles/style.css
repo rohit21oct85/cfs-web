@@ -1751,4 +1751,6 @@ ul.nav.nav-tabs.profile_editbtn li {
 .theme-blush .dropdown-menu.megamenu.sm-menu.border-top.show .row {
     margin: 0 auto;
 }
-    
+.upload-button { 
+    line-height: 35px !important; 
+}

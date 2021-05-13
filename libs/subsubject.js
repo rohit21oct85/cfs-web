@@ -24,3 +24,25 @@ export async function getSubSubject( param ) {
 
     }
 }
+
+export async function getSubjects( param ) {
+    try {
+        console.log(param)
+        const res = await axios.get(apiUrl + `subsubject/all`)
+        return res.data;
+    }
+    catch(e){
+
+    }
+}
+
+export async function askQuestion( param ) {
+    try {
+        console.log(param)
+        const res = await axios.get(apiUrl + `/ask-question`)
+        return res.data;
+    }
+    catch(e){
+
+    }
+}

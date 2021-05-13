@@ -3,10 +3,10 @@ import Navbar from '../components/website/home/navbar'
 import Footer from '../components/website/home/footer'
 import Follow from '../components/website/home/follow'
 import Paypal from '../components/common/paypal'
-
+import Razorpay from '../components/common/razorpay'
+import StripePay from '../components/common/stripe'
 
 export default function PayNow(){
-
     return(
         <>
         <Header/>
@@ -46,9 +46,10 @@ export default function PayNow(){
                             <div className="pay_option1">
                                 <h4><strong>Subscribe With:</strong></h4>
                                 <ul>
-                                <li><Paypal amt={0.01}/></li>
+                                <li><Paypal/></li>
                                 {/* <li><a href="#"><img src="/images/pay-1.png" className="img-fluid" alt=""/></a></li> */}
-                                <li><a href="#"><img src="/images/pay-2.png" className="img-fluid" alt=""/></a></li>
+                                <li><Razorpay/></li>
+                                {/* <li><StripePay/></li> */}
                                 </ul>
                             </div>
                         </div>
