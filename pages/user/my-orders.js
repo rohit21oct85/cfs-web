@@ -85,8 +85,8 @@ export default function MyOrders(){
                                              </h3>
                                           </div>
                                           <div className="col-md-3 mt-auto mb-auto ml-auto">
-                                             <a href="my-order-detail.php" className="order-sub-cancel">Pay 50% in Advance</a>
-                                             <a href="my-order-detail.php" className="order-sub-cancel">View Now</a>
+                                             <a href="#" className="order-sub-cancel">Pay 50% in Advance</a>
+                                             <a href="#" className="order-sub-cancel">View Now</a>
                                           </div>
                                        </div>
                                     </div>
@@ -140,8 +140,8 @@ export default function MyOrders(){
                                              </h3>
                                           </div>
                                           <div className="col-md-3 mt-auto mb-auto ml-auto">
-                                             <a href="my-order-detail.php" className="order-sub-cancel">Pay 50% in Advance</a>
-                                             <a href="my-order-detail.php" className="order-sub-cancel">View Now</a>
+                                             <a href="#" className="order-sub-cancel">Pay 50% in Advance</a>
+                                             <a href="#" className="order-sub-cancel">View Now</a>
                                           </div>
                                        </div>
                                     </div>
@@ -227,8 +227,8 @@ export default function MyOrders(){
                   </div>
                </div>
                <ul className="recipt_m">
-                  <li><a href="my-order-detail.php" className="btn ml-auto mt-0 mb-0 aafiate_v">Pay 50% in Advance </a></li>
-                  <li><a href="my-order-detail.php" className="btn ml-auto mt-0 mb-0 current_offer">View Now</a></li>
+                  <li><a href="#" className="btn ml-auto mt-0 mb-0 aafiate_v">Pay 50% in Advance </a></li>
+                  <li><a href="#" className="btn ml-auto mt-0 mb-0 current_offer">View Now</a></li>
                </ul>
             </div>
          </div>

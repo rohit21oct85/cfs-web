@@ -2,7 +2,7 @@ import DashboardNavbar from '../../components/website/dashboard/dashboard-navbar
 import SideBar from '../../components/website/dashboard/sidebar'
 import BlockHeader from '../../components/website/dashboard/block-header'
 import Link from 'next/link'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import dynamic from 'next/dynamic';
 import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
@@ -13,10 +13,26 @@ import { useQuery } from 'react-query'
 import { getNavbarData } from '../../libs/home'
 import {MakeSlug} from '../../components/common/make-slug'
 import MyQuestion from '../user/my-question'
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from 'ckeditor5-classic-with-mathtype';
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from 'ckeditor5-classic-with-mathtype';
+// import ClassicEditor from '../../components/common/ckeditor'
+// import  CKEditor  from '../../components/common/ckeditor1'
 
 export default function AskQuestion(){
+   //ckeditor
+
+   const editorRef = useRef()
+   const [ editorLoaded, setEditorLoaded ] = useState( false )
+   const { CKEditor, ClassicEditor} = editorRef.current || {}
+   
+   useEffect( () => {
+      editorRef.current = {
+        CKEditor: require( '@ckeditor/ckeditor5-react' ).CKEditor, //Added .CKEditor
+        ClassicEditor: require( 'ckeditor5-classic-with-mathtype' ).default,
+      }
+      setEditorLoaded( true )
+  }, [] );
+
    const [ session, loading ] = useSession()
    const [display, setDisplay] = useState(false);
    const [subject, setSubject] = useState();
@@ -59,7 +75,7 @@ export default function AskQuestion(){
 
    const getSelectedSubject = (e) => {
       const subjectId = e.target.options[e.target.selectedIndex].dataset.subjectid
-      setFormData({...formData, subject: e.target.value,subject_id: subjectId})
+      setFormData({...formData, subject: e.target.value,subject_id: subjectId, user_Id : session.user._id, type :'QA'})
       setSubject(e.target.value)
    }
 
@@ -74,8 +90,8 @@ export default function AskQuestion(){
    }
 
    const askQuestion = async () => {
+      // setFormData({...formData, user_Id : session.user._id, type :'QA'})
       setIsLoading(true)
-      setFormData({...formData, user_Id : session.user._id, type :'QA'})
       const res = await askAQuestion(formData);
       if(res.error == false){
          setIsLoading(false)
@@ -101,7 +117,7 @@ export default function AskQuestion(){
                   <div className="col-md-12 pt-3" style={{boxShadow: "-1px 3px 6px #f4750436"}}>
                      <div className="row page-nav-menu-row">
                         <div className="col-md-6 text-right">
-                           <a className="active-nav font-weight-bold page-nav-menu" href="ask-user-question.php">Ask a Question</a>
+                           <a className="active-nav font-weight-bold page-nav-menu" href="#">Ask a Question</a>
                         </div>
                         <div className="col-md-6 text-left">
                               <Link href="/user/my-question"><a className="font-weight-bold page-nav-menu">My Question Status</a></Link>
@@ -142,7 +158,7 @@ export default function AskQuestion(){
                                     </select>
                                  </div>
                                  <div className="col-sm-6 col-md-6 form-group">
-                                 <CKEditor
+                                 {/* <CKEditor
                                     editor={ ClassicEditor }
                                     config={{
                                         toolbar: {
@@ -184,9 +200,47 @@ export default function AskQuestion(){
                                         const data = editor.getData();
                                         setFormData({...formData, question: data})
                                     }}
-                                 />
+                                 /> */}
                                     {/* <label className="mb-0">Question</label>
                                     <textarea name="editor1"></textarea> */}
+                                    { editorLoaded ? <CKEditor
+                                       editor = { ClassicEditor }
+                                       config = {{
+                                          toolbar: {
+                                             items: [
+                                                'MathType', 'ChemType','heading', 
+                                                '|',
+                                                'bold',
+                                                'italic',
+                                                'link',
+                                                'bulletedList',
+                                                'numberedList',
+                                                'imageUpload',
+                                                'mediaEmbed',
+                                                'insertTable',
+                                                'blockQuote',
+                                                'undo',
+                                                'redo'
+                                             ]
+                                          },
+                                       }}
+                                       onReady={ editor => {
+                                          // console.log('Editor is ready to use!', editor);
+                                          editor.editing.view.change(writer => {
+                                             writer.setStyle(
+                                             "height",
+                                             "300px",
+                                             editor.editing.view.document.getRoot()
+                                             );
+                                          });          
+                                       }}
+                                       onChange={( event, editor ) => {
+                                          const data = editor.getData();
+                                          setFormData({ ...formData, question:data })
+                                       }}
+                                    /> 
+                                    : 
+                                    <p> Error! Kindly Reload </p> }
                                  </div>
                                  <div className="col-md-6 col-sm-6">
                                     <div className="row">

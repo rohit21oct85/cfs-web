@@ -118,10 +118,13 @@ export default function Book(){
                 console.log(QUESTION, problems)
                 const ques = (problems && problems.length > 0) 
                                 ? problems.filter(item => (item.problem_no.toLowerCase() === QUESTION)) 
-                                : problemsDirect.filter(item => (item.problem_no.toLowerCase() === QUESTION)) // dont use triple ===
+                                : problemsDirect.filter(item => (item.problem_no.toLowerCase() === QUESTION)) 
                 ques.length > 0 && setselectedQuestion(ques[0].problem_no + " : " + ques[0].question)  //used for the first time, since if we change the question that has no question_name only has question_no. 
             }else{
-                setselectedQuestion(problems[0].problem_no + " : " + problems[0].question)
+                if(problems && problems.length > 0)
+                    setselectedQuestion(problems[0].problem_no + " : " + problems[0].question)
+                else
+                    setselectedQuestion(problemsDirect[0].problem_no + " : " + problemsDirect[0].question) ///added for case when dere is NULL in section.section_no 
             }
         }
         return () => {}
@@ -163,11 +166,16 @@ export default function Book(){
 
     useEffect(() => {
         if(sections && sections.length > 0){
-            if(sections[0] && sections[0].section_no != ""){
+            if(sections[0] && (sections[0].section_no != "NULL" && sections[0].section_no != "")){
                 setSection(sections[0].section_no)
                 setDirectProblem(false);
                 setDisplay('block')
                 setColMd6('');
+            }
+            if(sections[0] && sections[0].section_no == "NULL"){ //for when section_no is equal to NULL
+                setDirectProblem(true)
+                setDisplay('none')
+                setColMd6('col-md-6')
             }
         }else{
             setDirectProblem(true)

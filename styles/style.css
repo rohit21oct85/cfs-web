@@ -1754,3 +1754,160 @@ ul.nav.nav-tabs.profile_editbtn li {
 .upload-button { 
     line-height: 35px !important; 
 }
+
+ul.menu.list-unstyled.notification_scroll {
+    max-height: 240px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* //responsive */
+
+
+@media (max-width:1199px){
+    .tabs_frst1 {
+        overflow-y: hidden;
+        overflow-x: scroll;
+    }
+    .tabs_frst1::-webkit-scrollbar { 
+        height: 2px;
+    }
+    .tabs_frst1 ul.nav.nav-tabs.nav_tab_wecover {
+        white-space: nowrap;
+        width: 1085px;
+    }
+    
+    .web_font1 .banner_text h1{font-size: min(max(22px, 4vw), 37px);}
+    .web_font1 h2 { 
+    font-size: min(max(20px, 4vw), 27px);    
+    }
+    
+    .text_homework_help {
+        border-radius: 10px;
+        padding: 30px 15px;
+        margin: 0 4px;
+    }
+    .half-circle {
+        width: 105%; border: 7px solid #93cdef;}
+    .how_it_bg p{font-size:15px;}
+    }
+    
+    @media (max-width:991px){
+    .web_font1 .search_btn {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        border-radius: 5px;
+        height: 46px;
+        padding: 0 30px;}
+    .Picking_Cotton { 
+        width: 82%;}
+    .text_tb_center2 {
+        position: relative;
+        top: 10px;
+    }
+    .bg_colr1 { 
+        padding: 30px 0;
+    }
+    .our_popular_img {
+        height: 143px; 
+    }
+    .web_font1 footer p, .web_font1 footer ul li a, .web_font1 footer ul li {
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .web_font1 footer h3 {
+        font-size: 16px;
+    }
+    .web_font1 header p { 
+        font-size: 14px;
+    }
+    .btn1 a{font-size:16px;}
+    .our_popular_title { 
+        padding: 15px 8px 0;}
+    .our_popular_isbn_no, .our_popular_title, .star_rating {
+        padding: 0 8px;
+    }
+    .text_subscribe ul li { 
+        font-size: 15px;
+    }
+    .price_pr_month h2 {
+        color: #f8d021;
+        font-size: 25px;
+    }
+    .subscribe_here_bg h3 {
+        font-size: 23px;}
+    .web_font1 .shap_banner_bottom{display:none;}
+    
+    section.banner span img {
+        width: 260px;
+        max-width: 300px;
+    }
+      .web_font1 h4 {
+       
+        font-size: 18px;
+    }
+    .web_font1 .banner_text { 
+        padding: 15px;
+    }
+    .web_font1 h3 {
+        font-size: 15px;
+    }
+    .include_list li i {
+        color: #fff;
+        margin-right: 2px;}
+    
+    .include_list li{font-size:14px;}
+    .brand_icons ul li {
+        display: block;
+        width: 100%;
+        height:50px;
+        line-height: 50px;
+        text-align: center;
+        box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+        margin-bottom: 12px;
+    }
+    
+    footer .col-md-3.pl-4, footer .col-md-3.pl-4 {
+        padding-left: 15px !important; padding-top:30px;
+    }
+    .web_font1 header{display:none;}
+    }
+    
+    @media (max-width:767px){
+    .our_popular_img {
+        height: 250px;
+    }
+    
+    .how_it_bg {
+        width: 100%; 
+        border-bottom: 1px solid #ccc;
+        padding: 15px 0;
+    }
+    
+    .half-circle{dislay:none;}
+    .Why_us_title h3 {
+        
+        font-size: 22px;
+    }
+    .text_homework_help {
+         
+        margin: 10px 4px;
+    }
+    .homework_help_bg2:before, .homework_help_bg3:before{display:none;}
+    .col-md-6.typical_text.typical_text2 .col-md-7.pl-0 {
+        padding-left: 15px !important;
+    }
+    }

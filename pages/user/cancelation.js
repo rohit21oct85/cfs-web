@@ -121,7 +121,7 @@ export default function Cancelation(){
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="my-subscription.php" className="KeepMySubscription-btn">I don’t want to cancel
+                                        <a href="#" className="KeepMySubscription-btn">I don’t want to cancel
                                         </a>
                                     </div>
                                     </form>

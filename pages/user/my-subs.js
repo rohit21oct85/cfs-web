@@ -7,11 +7,13 @@ import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
 import { useQuery } from 'react-query'
 import {getUser} from '../../libs/profile'
+import {getMySubscription} from '../../libs/question'
 
 export default function MySubs(){
     const [ session, loading ] = useSession();
     const [display, setDisplay] = useState('none');
-    const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
+    const { data: user, isLoading: userIsLoading, error: userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
+    const { data: subscription, isLoading: textbooksIsLoading, error: textbooksError } = useQuery(['my-subscription'], () => getMySubscription({user_Id:session.user._id}),{staleTime:Infinity, enabled: !!session})
 
     const openCollapse = () => {
         display == 'none' ? setDisplay('block') : setDisplay('none')
@@ -20,7 +22,7 @@ export default function MySubs(){
 
     return(
         <>
-        <DashboardNavbar data={user}/>
+        <DashboardNavbar data={user}/>{console.log(subscription)}
         <SideBar data={user}/>
         <section className="content user profile-page">
             <BlockHeader data={user}/>
@@ -84,7 +86,7 @@ export default function MySubs(){
                                                     </div>
                                                     <div className="col-md-1 mt-auto mb-auto collapse-order-data text-left">
                                                         <p className="item-type-order">Amount</p>
-                                                        <h3>$5.00</h3>
+                                                        <h3>$7.00</h3>
                                                     </div>
                                                     <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
                                                         <p className="item-type-order">Status</p>

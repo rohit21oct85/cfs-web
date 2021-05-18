@@ -56,3 +56,26 @@ export async function addTextBooks(isbn) {
 }
 
 
+
+
+export async function getMySubscription( id ) {
+    try {
+        const res = await authAxios.get(apiUrl + `student/my-subscription-details`, id)
+        return res.data.data;
+    }
+    catch(e){
+
+    }
+}
+
+export async function deleteTextBook( user_Id, id ) {
+    try {
+        console.log(user_Id, "userid", id);
+        const res = await authAxios.post(apiUrl + `student/my-textbook-del`,{id: id, user_Id: user_Id});
+        console.log(res)
+        return res.data;
+    }
+    catch(e){
+
+    }
+}

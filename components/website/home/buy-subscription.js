@@ -13,14 +13,14 @@ export default function BuySubscription(){
                                 <h2> Get step by step answers <span className="d_b">from <span className="yellow">our</span> expert tutors</span></h2>
                                 <p>Get immediate access to 24/7 Homework Help, <span>step-by-step</span> solutions, instant homework answer to over 40 million Textbook solution </p>
                                 <ul className="include_list">
-                                <li><i className="fa fa-check-circle"></i> 50 Question to ask every month </li>
-                                <li><i className="fa fa-check-circle"></i> Unlimited access to textbook Solutions </li>
-                                <li><i className="fa fa-check-circle"></i> Unlimited access to Q/A library </li>
+                                    <li><i className="fa fa-check-circle"></i> 50 Question to ask every month </li>
+                                    <li><i className="fa fa-check-circle"></i> Unlimited access to textbook Solutions </li>
+                                    <li><i className="fa fa-check-circle"></i> Unlimited access to Q/A library </li>
                                 </ul>
-                            {/* <div className="btn1">
-                                <a href="#">Buy Subscription</a>
-                            </div> */}
-                            <BuyBookSub/>
+                                {/* <div className="btn1">
+                                    <a href="#">Buy Subscription</a>
+                                </div> */}
+                            <BuyBookSub classname="" text="Buy Subscription"/>
                         </div>
                     </div>
                 </div> 

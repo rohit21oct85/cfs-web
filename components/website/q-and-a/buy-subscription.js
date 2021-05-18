@@ -1,3 +1,5 @@
+import BuyBookSub from '../../common/buy-book-sub'
+
 export default function BuySubscription(){
     return (
         <section className="section bg_colr_expert pt-5 pb-5">
@@ -28,7 +30,8 @@ export default function BuySubscription(){
                     </div>
 
                     <div className="col-md-12 btn1 text-center mt-4">
-                        <a href="#" className="pl-5 pr-5 text-black">Buy Subscription</a>
+                        {/* <a href="#" className="pl-5 pr-5 text-black">Buy Subscription</a> */}
+                        <BuyBookSub classname="pl-5 pr-5 text-black" text="Buy Subscription"/>
                         <small className="text-black"><strong>$7/</strong> per month (cancle anytime)</small>
                     </div>
                 </div>
