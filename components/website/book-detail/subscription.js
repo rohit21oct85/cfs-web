@@ -1,4 +1,5 @@
 import { createMarkup } from '../../common/make-slug'
+import BuyBookSub from '../../common/buy-book-sub'
 
 export default function Subscription(){
     return(
@@ -19,9 +20,10 @@ export default function Subscription(){
         <li><span dangerouslySetInnerHTML={createMarkup('&check;')}/> <div className="q_text"> <h4>Unlimited Textbook</h4> 
                                             <p>Unlimited Textbook Solutions Manual   </p></div> </li>
         </ul>
-        <div className="btn1">
+        {/* <div className="btn1">
         <a href="#" className="text-black"> Subscribe Now</a>
-        </div>
+        </div> */}
+        <BuyBookSub classname="text-black" text=" Subscribe Now"/>
         </div>
         </div>
         </div> 

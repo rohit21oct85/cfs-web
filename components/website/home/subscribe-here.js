@@ -1,3 +1,5 @@
+import BuyBookSub from '../../common/buy-book-sub'
+
 export default function SubscribeHere(){
     return (
         <section className="section subscribe_here_bg">
@@ -23,7 +25,8 @@ export default function SubscribeHere(){
                         </ul>
                         </div>
                             <div className="btn1 text-left mt-3">
-                                <a href="#" className="">Subscribe Now</a>
+                                {/* <a href="#" className="">Subscribe Now</a> */}
+                                <BuyBookSub classname="" text="Subscribe Now"/>
                                 <small>Pay $7.00/month for Better Grades </small> 
                             </div>
                         </div>

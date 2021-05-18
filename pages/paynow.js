@@ -5,8 +5,23 @@ import Follow from '../components/website/home/follow'
 import Paypal from '../components/common/paypal'
 import Razorpay from '../components/common/razorpay'
 import StripePay from '../components/common/stripe'
+import { useSession } from 'next-auth/client'
+import { useEffect } from 'react';
+import { useRouter } from 'next/router'
+import AccessDenied from '../components/access-denied'
 
 export default function PayNow(){
+    const router = useRouter();
+    const [ session, loading ] = useSession();
+
+    useEffect(()=>{
+        if(session && session.user.Subscribe){
+            router.push('/user/my-subs')
+        }
+    },[session])
+
+    if (!session) { return  (<><AccessDenied/></>) }
+    
     return(
         <>
         <Header/>

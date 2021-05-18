@@ -15,7 +15,7 @@ export default function MyQuestion(){
    const [ session, loading ] = useSession();
    const [display, setDisplay ] = useState('none');
    const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
-   const { data: questions, isLoading:questionsIsLoading, error:questionsError } = useQuery([`user-questions-${flag}`], () => getQuestions({user_Id:session.user._id, type: 'QA'}, flag),{staleTime:Infinity, enabled: !!session})
+   const { data: questions, isLoading:questionsIsLoading, error:questionsError } = useQuery([`user-questions-${flag}`], () => getQuestions({user_Id: session.user._id, type: 'QA'}, flag),{staleTime:Infinity, enabled: !!session})
    
    const setFilter = () => {
       if(display == 'none'){
@@ -46,7 +46,7 @@ export default function MyQuestion(){
                                        <Link href="/user/ask-a-question"><a className="font-weight-bold page-nav-menu" >Ask a Question</a></Link>
                                     </div>
                                     <div className="col-md-6 text-left">
-                                       <a className="active-nav  font-weight-bold page-nav-menu" href="my_question.php">My Question Status</a>
+                                       <a className="active-nav  font-weight-bold page-nav-menu" href="#">My Question Status</a>
                                     </div>
                                  </div>
                               </div>

@@ -161,7 +161,7 @@ export default function DashboardNavbar({...props}){
                         {showNotification &&
                         <ul className={`dropdown-menu pullDown ${classname}`} onMouseLeave={()=>{hideNotification()}}>
                             <li className="body">
-                                <ul className="menu list-unstyled">
+                                <ul className="menu list-unstyled notification_scroll">
                                     {notifications && notifications.data.map((item,key)=>{
                                         return(
                                             <li key={key}>
@@ -170,7 +170,7 @@ export default function DashboardNavbar({...props}){
                                                     <img className="media-object" src="/images/pic2.png" alt=""/>
                                                         <div className="media-body">
                                                             <span className="name">Ashton Cox <span className="time">30min ago</span></span>
-                                                            <span className="message">There are many variations of passages</span>                                        
+                                                            <span className="message">{item.title}</span>                                        
                                                         </div>
                                                     </div>
                                                 </a>
@@ -179,7 +179,7 @@ export default function DashboardNavbar({...props}){
                                     })}
                                 </ul>
                             </li>
-                            <li className="footer"> <a href="#">View All</a> </li>
+                            <Link href="/user/notifications"><li className="footer"> <a href="#">View All</a> </li></Link>
                         </ul>}
                     </li>
                     <li className="float-right search_btn_top">

@@ -35,7 +35,7 @@ export default function Subject(){
                 <title>{title}</title>
                 <meta name="description" content={description}></meta>
                 <meta name="keywords" content={keywords}></meta>
-                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="copyright" content={copyright} />
                 <meta name="author" content="crazyforstudy.com" />

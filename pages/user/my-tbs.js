@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
 import { useQuery } from 'react-query'
 import {getUser} from '../../libs/profile'
-import {getMyTextBooks,addTextBooks} from '../../libs/question'
+import {getMyTextBooks, addTextBooks, deleteTextBook} from '../../libs/question'
 
 export default function MyTbs(){
     const [fields, setFields] = useState([{ value: null }])
@@ -44,6 +44,10 @@ export default function MyTbs(){
         setFields(values);
     }
 
+    const deleteTextBuk =  (id) => {
+        const data =  deleteTextBook(session.user._id, id);
+        console.log(data);
+    }
     if (!session) { return  (<><AccessDenied/></>) }
     
     return(
@@ -86,7 +90,7 @@ export default function MyTbs(){
                                                             <td>{item.book_name ? 'Available' : 'Not Available'}</td>
                                                             <td><a href="#" className="btn btn-info btn-sm btn-rounded view-reciept-btn">{item.book_name ? 'View Now' : 'Will be available in 3-4 working Days.' }</a></td>
                                                             <td>
-                                                                <span className="trash_textbooks"><a href=""><i className="fa fa-trash"></i></a></span>
+                                                                <span className="trash_textbooks" onClick={()=>{deleteTextBuk(item._id)}}><a href="#"><i className="fa fa-trash"></i></a></span>
                                                             </td>
                                                         </tr>
                                                     )

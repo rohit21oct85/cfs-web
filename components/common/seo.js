@@ -8,7 +8,7 @@ export default function Seo({...props}){
             <title>{props.title}</title>
             <meta name="description" content={props.description}></meta>
             <meta name="keywords" content={props.keywords}></meta>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <meta name="copyright" content={copyright} />
             <meta name="author" content="crazyforstudy.com" />

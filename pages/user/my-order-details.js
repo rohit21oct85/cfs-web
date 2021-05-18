@@ -25,7 +25,7 @@ export default function MyOrderDetails(){
                         <div className="col-lg-9 col-md-6 col-sm-12  ml-auto text-right">
                             <ul className="breadcrumb breadcrumb2 float-md-right pt-0 pb-0">
                             <li className="breadcrumb-item breadcrumb_cuspom"><Link href="/dashboard"><a> Dashboard  </a></Link></li>
-                            <li className="breadcrumb-item active breadcrumb_cuspom"><Link href="/user/my-orders"><a href="my-order.php"> My Order</a></Link></li>
+                            <li className="breadcrumb-item active breadcrumb_cuspom"><Link href="/user/my-orders"><a href="#"> My Order</a></Link></li>
                             <li className="breadcrumb-item active breadcrumb_cuspom">  Order Details</li>
                             </ul>
                         </div>
