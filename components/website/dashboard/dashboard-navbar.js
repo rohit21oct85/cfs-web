@@ -6,7 +6,8 @@ import { MakeSlug } from '../../common/make-slug'
 import { signOut } from 'next-auth/client'
 import Router from 'next/router'
 import { useSession } from 'next-auth/client'
-import {getNotifications} from '../../../libs/question'
+import {getNotifications, readNotification} from '../../../libs/question'
+
 
 export default function DashboardNavbar({...props}){
     const [ showNotification, setShowNotification ] = useState(false);
@@ -82,10 +83,22 @@ export default function DashboardNavbar({...props}){
     const handleClick =()=>{
         hideMenu()
     }
+
+    const markAsRead = async(id,type) => {
+        const res = await readNotification(id);
+        let url = "";
+        if(!res.error){
+            if(type == "QA"){
+                url = "/user/my-question";
+            }
+            Router.push(url)
+        }
+    }
+
     const isRead = 'all';
     const { data, isLoading } = useQuery('menus', getNavbarData,{ staleTime:Infinity})
     const { data: notifications, isLoading:notificationsIsLoading, error:notificationsError } = useQuery([`notifications-${isRead}`], () => getNotifications({user_Id : session.user._id, type: 'QA'}, isRead),{ staleTime : Infinity, enabled : !!session })
-
+    
     return( <>
             <nav className="navbar navbar_dashboard1 p-l-5 p-r-5">
                 <ul className="nav navbar-nav navbar-left nav_left1 mr-auto">
@@ -163,17 +176,20 @@ export default function DashboardNavbar({...props}){
                             <li className="body">
                                 <ul className="menu list-unstyled notification_scroll">
                                     {notifications && notifications.data.map((item,key)=>{
+
                                         return(
-                                            <li key={key}>
-                                                <a href="#">
-                                                    <div className="media">
-                                                    <img className="media-object" src="/images/pic2.png" alt=""/>
-                                                        <div className="media-body">
-                                                            <span className="name">Ashton Cox <span className="time">30min ago</span></span>
-                                                            <span className="message">{item.title}</span>                                        
+                                            <li key={key} onClick={()=>{markAsRead(item._id,item.type)}}>
+                                                <Link href="">
+                                                    <a>
+                                                        <div className="media">
+                                                            <img className="media-object" src="/images/pic2.png" alt=""/>
+                                                            <div className="media-body">
+                                                                <span className="name">Ashton Cox <span className="time">30min ago</span></span>
+                                                                <span className="message">{item.title}</span>                                        
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
+                                                </Link>
                                             </li>
                                         )
                                     })}

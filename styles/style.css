@@ -1760,7 +1760,9 @@ ul.menu.list-unstyled.notification_scroll {
     overflow: hidden;
     overflow-y: scroll;
 }
-
+.tble_scrollN_fx {
+    max-height: 300px;
+}
 
 
 

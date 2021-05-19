@@ -259,17 +259,18 @@ export default function SubjectsWeCover(){
                     </div>
             
                     <div className="col-md-12 pt-5">
-                        <ul className="nav nav-tabs nav_tab_wecover">
-                            <li className="active" onClick={()=>{showSubjectData('finance')}}><a data-toggle="tab" className={`ml-0 ${subjectForClassActive == 'finance' ? 'active' : ''}`}><span><img src="../images/wecover-icons/finance.png" className="img-fluid" alt=""/></span>Finance</a></li>
-                            <li onClick={()=>{showSubjectData('marketing')}}><a data-toggle="tab" className={`${subjectForClassActive == 'marketing' ? 'active' : ''}`}><span><img src="../images/wecover-icons/marketing.png" className="img-fluid" alt=""/></span>Marketing</a></li>
-                            <li onClick={()=>{showSubjectData('biology')}}><a data-toggle="tab" className={`${subjectForClassActive == 'biology' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Biology</a></li>
-                            <li onClick={()=>{showSubjectData('accounts')}}><a data-toggle="tab" className={`${subjectForClassActive == 'accounts' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Accounts</a></li>
-                            <li onClick={()=>{showSubjectData('socialscience')}}><a data-toggle="tab" className={`${subjectForClassActive == 'socialscience' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Social Science</a></li>
-                            <li onClick={()=>{showSubjectData('chemistry')}}><a data-toggle="tab" className={`${subjectForClassActive == 'chemistry' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Chemistry</a></li>
-                            <li onClick={()=>{showSubjectData('economics')}}><a data-toggle="tab" className={`${subjectForClassActive == 'economics' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Economics</a></li>
-                            <li onClick={()=>{showSubjectData('physics')}}><a data-toggle="tab" className={`mr-0 ${subjectForClassActive == 'physics' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Physics</a></li>
-                        </ul>
-
+                        <div className="tabs_frst1">
+                            <ul className="nav nav-tabs nav_tab_wecover">
+                                <li className="active" onClick={()=>{showSubjectData('finance')}}><a data-toggle="tab" className={`ml-0 ${subjectForClassActive == 'finance' ? 'active' : ''}`}><span><img src="../images/wecover-icons/finance.png" className="img-fluid" alt=""/></span>Finance</a></li>
+                                <li onClick={()=>{showSubjectData('marketing')}}><a data-toggle="tab" className={`${subjectForClassActive == 'marketing' ? 'active' : ''}`}><span><img src="../images/wecover-icons/marketing.png" className="img-fluid" alt=""/></span>Marketing</a></li>
+                                <li onClick={()=>{showSubjectData('biology')}}><a data-toggle="tab" className={`${subjectForClassActive == 'biology' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Biology</a></li>
+                                <li onClick={()=>{showSubjectData('accounts')}}><a data-toggle="tab" className={`${subjectForClassActive == 'accounts' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Accounts</a></li>
+                                <li onClick={()=>{showSubjectData('socialscience')}}><a data-toggle="tab" className={`${subjectForClassActive == 'socialscience' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Social Science</a></li>
+                                <li onClick={()=>{showSubjectData('chemistry')}}><a data-toggle="tab" className={`${subjectForClassActive == 'chemistry' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Chemistry</a></li>
+                                <li onClick={()=>{showSubjectData('economics')}}><a data-toggle="tab" className={`${subjectForClassActive == 'economics' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Economics</a></li>
+                                <li onClick={()=>{showSubjectData('physics')}}><a data-toggle="tab" className={`mr-0 ${subjectForClassActive == 'physics' ? 'active' : ''}`}><span><img src="../images/wecover-icons/biology.png" className="img-fluid" alt=""/></span>Physics</a></li>
+                            </ul>
+                        </div>
                         <div className="tab-content">
                             {html}
                             {/* <div id="finance" className="tab-pane bg_shdow fade in active show">

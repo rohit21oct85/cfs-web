@@ -33,6 +33,16 @@ export async function getNotifications(body, isRead) {
     }
 }
 
+export async function readNotification(id) {
+    try {
+        const res = await authAxios.patch(apiUrl + `student/update-notification/${id}`)
+        return res.data;
+    }
+    catch(e){
+        
+    }
+}
+
 export async function getMyTextBooks(id) {
     try {
         // isRead = isRead == 'all' ? '' : isRead;

@@ -6,10 +6,19 @@ import { useSession } from 'next-auth/client'
 import AccessDenied from '../../components/access-denied'
 import { useQuery } from 'react-query'
 import {getUser} from '../../libs/profile'
+import {useState} from 'react'
+import {getMySubscription} from '../../libs/question'
 
 export default function MyOrders(){
    const [ session, loading ] = useSession()
+   const [display, setDisplay] = useState();
    const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
+   const { data: subscription, isLoading: textbooksIsLoading, error: textbooksError } = useQuery(['my-subscription'], () => getMySubscription({user_Id:session.user._id}),{staleTime:Infinity, enabled: !!session})
+
+   const openCollapse = (data) => {
+      console.log(data)
+      setDisplay(data);
+  }
 
    if (!session) { return  (<><AccessDenied/></>) }
 
@@ -38,116 +47,65 @@ export default function MyOrders(){
                            </tr>
                         </thead>
                         <tbody>
-                           <tr>
-                              <td colSpan="4" style={{padding:"0px"}}>
-                                 <div className="card-header pl-0 pr-0">
-                                    <table style={{width: "100%"}}>
-                                       <tbody>
-                                          <tr>
-                                             <td className="w-25"><span>1</span></td>
-                                             <td className="w-25"><span className="textbook-t">2270</span></td>
-                                             <td className="w-25">
-                                                <span>26/03/2021</span>
-                                             </td>
-                                             <td className="w-25">
-                                                <button className="btn btn-link collapsed view-reciept-btn" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                                View Receipt
-                                                </button>
-                                             </td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div id="collapse1" className="collapse accod_tab" aria-labelledby="headingTwo2270" data-parent="#accordion">
-                                    <div className="card-body">
-                                       <div className="row">
-                                          <div className="col-md-4">
-                                             <div className="d-md-flex align-items-center">
-                                                <div className="receipt-img">
-                                                   <img className="order-book-img" src="/images/cfs-dumt-img.png" draggable="false"/>
-                                                </div>
-                                                <div className="receipt-txt">
-                                                   <h4 className="order-type-collpse">testedtestedtestedtestedtestedtestedtestedtestedtestedt..</h4>
+                           {subscription && subscription.transactions.map((item,key)=>{
+                              return(
+                                 <tr key={key}>
+                                 <td colSpan="4" style={{padding:"0px"}}>
+                                    <div className="card-header pl-0 pr-0">
+                                       <table style={{width: "100%"}}>
+                                          <tbody>
+                                             <tr>
+                                                <td className="w-25"><span>{key}</span></td>
+                                                <td className="w-25"><span className="textbook-t">{item.payment_id}</span></td>
+                                                <td className="w-25">
+                                                   <span>{item.SubscribeDate.substring(0,10)}</span>
+                                                </td>
+                                                <td className="w-25">
+                                                   <button className="btn btn-link collapsed view-reciept-btn" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" onClick={()=>{openCollapse(`collapse${key}`)}}>
+                                                   View Receipt
+                                                   </button>
+                                                </td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                    <div id="collapse1" className="collapse accod_tab" aria-labelledby="headingTwo2270" data-parent="#accordion" style={ display == `collapse${key}` ? {display:"block"} : {display:"none"} }>
+                                       <div className="card-body">
+                                          <div className="row">
+                                             <div className="col-md-4">
+                                                <div className="d-md-flex align-items-center">
+                                                   <div className="receipt-img">
+                                                      <img className="order-book-img" src="/images/cfs-dumt-img.png" draggable="false"/>
+                                                   </div>
+                                                   <div className="receipt-txt">
+                                                      <h4 className="order-type-collpse">{item.subscription_id}</h4>
+                                                   </div>
                                                 </div>
                                              </div>
-                                          </div>
-                                          <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
-                                             <p className="item-type-order">Item Type</p>
-                                             <h3>Assignment Help</h3>
-                                          </div>
-                                          <div className="col-md-1 mt-auto mb-auto collapse-order-data text-left">
-                                             <p className="item-type-order">Amount</p>
-                                             <h3>$5.00</h3>
-                                          </div>
-                                          <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
-                                             <p className="item-type-order">Status</p>
-                                             <h3>															Payment Pending
-                                             </h3>
-                                          </div>
-                                          <div className="col-md-3 mt-auto mb-auto ml-auto">
-                                             <a href="#" className="order-sub-cancel">Pay 50% in Advance</a>
-                                             <a href="#" className="order-sub-cancel">View Now</a>
+                                             <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
+                                                <p className="item-type-order">Item Type</p>
+                                                <h3>{item.type}</h3>
+                                             </div>
+                                             <div className="col-md-1 mt-auto mb-auto collapse-order-data text-left">
+                                                <p className="item-type-order">Amount</p>
+                                                <h3>$?</h3>
+                                             </div>
+                                             <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
+                                                <p className="item-type-order">Status</p>
+                                                <h3>															Active
+                                                </h3>
+                                             </div>
+                                             <div className="col-md-3 mt-auto mb-auto ml-auto">
+                                                <a href="#" className="order-sub-cancel">Pay 50% in Advance</a>
+                                                <a href="#" className="order-sub-cancel">View Now</a>
+                                             </div>
                                           </div>
                                        </div>
                                     </div>
-                                 </div>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td colSpan="4" style={{padding:"0px"}}>
-                                 <div className="card-header pl-0 pr-0">
-                                    <table style={{width: "100%"}}>
-                                       <tbody>
-                                          <tr>
-                                             <td className="w-25"><span>1</span></td>
-                                             <td className="w-25"><span className="textbook-t">2270</span></td>
-                                             <td className="w-25">
-                                                <span>26/03/2021</span>
-                                             </td>
-                                             <td className="w-25">
-                                                <button className="btn btn-link collapsed view-reciept-btn" data-toggle="collapse" data-target="#collapse2270" aria-expanded="false" aria-controls="collapse2270">
-                                                View Receipt
-                                                </button>
-                                             </td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div id="collapse2270" className="collapse accod_tab" aria-labelledby="headingTwo2270" data-parent="#accordion">
-                                    <div className="card-body">
-                                       <div className="row">
-                                          <div className="col-md-4">
-                                             <div className="d-md-flex align-items-center">
-                                                <div className="receipt-img">
-                                                   <img className="order-book-img" src="/images/cfs-dumt-img.png" draggable="false"/>
-                                                </div>
-                                                <div className="receipt-txt">
-                                                   <h4 className="order-type-collpse">testedtestedtestedtestedtestedtestedtestedtestedtestedt..</h4>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
-                                             <p className="item-type-order">Item Type</p>
-                                             <h3>Assignment Help</h3>
-                                          </div>
-                                          <div className="col-md-1 mt-auto mb-auto collapse-order-data text-left">
-                                             <p className="item-type-order">Amount</p>
-                                             <h3>$5.00</h3>
-                                          </div>
-                                          <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
-                                             <p className="item-type-order">Status</p>
-                                             <h3>															Payment Pending
-                                             </h3>
-                                          </div>
-                                          <div className="col-md-3 mt-auto mb-auto ml-auto">
-                                             <a href="#" className="order-sub-cancel">Pay 50% in Advance</a>
-                                             <a href="#" className="order-sub-cancel">View Now</a>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </td>
-                           </tr>
+                                 </td>
+                              </tr>
+                              )
+                           })}
                         </tbody>
                      </table>
                   </div>
