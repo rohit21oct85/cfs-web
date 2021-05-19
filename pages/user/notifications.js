@@ -12,7 +12,8 @@ import moment from 'moment';
 
 export default function Notifications(){
     const [ session, loading ] = useSession()
-    const isRead = false;
+    
+    const isRead = 'all';
     const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email : session.user.email}),{ staleTime : Infinity, enabled : !!session })
     const { data: notifications, isLoading:notificationsIsLoading, error:notificationsError } = useQuery([`notifications-${isRead}`], () => getNotifications({user_Id : session.user._id, type: 'QA'}, isRead),{ staleTime : Infinity, enabled : !!session })
     

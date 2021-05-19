@@ -9,10 +9,11 @@ import AccessDenied from '../../components/access-denied'
 import {getUser} from '../../libs/profile'
 import {getSubSubject,getSubjects} from '../../libs/subsubject'
 import {askAQuestion} from '../../libs/question'
-import { useQuery } from 'react-query'
+import { useQuery, useMutation,useQueryClient } from 'react-query'
 import { getNavbarData } from '../../libs/home'
 import {MakeSlug} from '../../components/common/make-slug'
 import MyQuestion from '../user/my-question'
+
 // import { CKEditor } from '@ckeditor/ckeditor5-react';
 // import ClassicEditor from 'ckeditor5-classic-with-mathtype';
 // import ClassicEditor from '../../components/common/ckeditor'
@@ -24,7 +25,8 @@ export default function AskQuestion(){
    const editorRef = useRef()
    const [ editorLoaded, setEditorLoaded ] = useState( false )
    const { CKEditor, ClassicEditor} = editorRef.current || {}
-   
+   const queryClient = useQueryClient()
+
    useEffect( () => {
       editorRef.current = {
         CKEditor: require( '@ckeditor/ckeditor5-react' ).CKEditor, //Added .CKEditor
@@ -44,6 +46,8 @@ export default function AskQuestion(){
    const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
    const { data: subjects, isLoading:subjectsIsLoading, error:subjectsError } = useQuery(['subjects'], () => getSubjects(),{staleTime:Infinity, enabled: !!session}) //only called when session would be present
    const { data: subsubjects, isLoading:subsubjectsIsLoading, error:subsubjectsError } = useQuery([subject], () => getSubSubject(subject),{staleTime:Infinity, enabled: !!subject}) //only called when subject would be present
+
+   const mutation = useMutation(askAQuestion)
 
    useEffect(() => {
       setSubscribed(localStorage.getItem('subscribed'));
@@ -92,10 +96,12 @@ export default function AskQuestion(){
    const askQuestion = async () => {
       // setFormData({...formData, user_Id : session.user._id, type :'QA'})
       setIsLoading(true)
-      const res = await askAQuestion(formData);
-      if(res.error == false){
-         setIsLoading(false)
-      }
+      mutation.mutate(formData, 
+         { onSuccess: (data, variables, context) => {
+            // console.log(variables);
+            // queryClient.setQueryData(['notifications-false', { user_Id : session.user._id, type: 'QA'} ], data)
+            setIsLoading(false)
+         }});
    }
    
    if (!session) { return  (<><AccessDenied/></>) }
