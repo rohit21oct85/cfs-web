@@ -49,7 +49,7 @@ export default function Notifications(){
                                 <h2><strong>My</strong> Notifications</h2>
                             </div>
                             <div className="body">
-                                <div className="table-responsive" id="accordion">
+                                <div className="table-responsive tble_scrollN_fx" id="accordion">
                                     <table className="table table-hover m-b-0 my-order-new my_subscrption_table">
                                         <thead>
                                         <tr className="table_title order">

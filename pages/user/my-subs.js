@@ -8,21 +8,23 @@ import AccessDenied from '../../components/access-denied'
 import { useQuery } from 'react-query'
 import {getUser} from '../../libs/profile'
 import {getMySubscription} from '../../libs/question'
+import moment from 'moment'
 
 export default function MySubs(){
     const [ session, loading ] = useSession();
-    const [display, setDisplay] = useState('none');
+    const [display, setDisplay] = useState();
     const { data: user, isLoading: userIsLoading, error: userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
     const { data: subscription, isLoading: textbooksIsLoading, error: textbooksError } = useQuery(['my-subscription'], () => getMySubscription({user_Id:session.user._id}),{staleTime:Infinity, enabled: !!session})
 
-    const openCollapse = () => {
-        display == 'none' ? setDisplay('block') : setDisplay('none')
+    const openCollapse = (data) => {
+        setDisplay(data);
     }
+
     if (!session) { return  (<><AccessDenied/></>) }
 
     return(
         <>
-        <DashboardNavbar data={user}/>{console.log(subscription)}
+        <DashboardNavbar data={user}/>
         <SideBar data={user}/>
         <section className="content user profile-page">
             <BlockHeader data={user}/>
@@ -47,60 +49,66 @@ export default function MySubs(){
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td colSpan="6" style={{padding:"0px"}}>
-                                            <div className="card-header pl-0 pr-0">
-                                                <table style={{width: "100%"}}>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="w-10"><span className="">1</span></td>
-                                                        <td className="w-15 "><span className="textbook-t">1212</span></td>
-                                                        <td className="w-15">08/20/2020</td>
-                                                        <td className="w-20">07/20/2021</td>
-                                                        <td className="w-20">
-                                                            <button className="btn btn-link collapsed view-reciept-btn" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" onClick={openCollapse}>
-                                                            View Receipt
-                                                            </button>
+                                        {subscription && subscription.transactions.map((item,key)=>{
+                                            if (item.type == "subscription"){
+                                                return(
+                                                    <tr key={key}>
+                                                        <td colSpan="6" style={{padding:"0px"}}>
+                                                            <div className="card-header pl-0 pr-0">
+                                                                <table style={{width: "100%"}}>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td className="w-10"><span className="">{key}</span></td>
+                                                                        <td className="w-15 "><span className="textbook-t">{item.payment_id}</span></td>
+                                                                        <td className="w-15">{item.SubscribeDate.substring(0,10)}</td>
+                                                                        <td className="w-20">07/20/2021</td>
+                                                                        <td className="w-20">
+                                                                            <button className="btn btn-link collapsed view-reciept-btn" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" onClick={()=>{openCollapse(`collapse${key}`)}}>
+                                                                            View Receipt
+                                                                            </button>
+                                                                        </td>
+                                                                        <td className="green-aci w-20">Active</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div id="collapse1" className="collapse accod_tab" aria-labelledby="headingTwo2270" data-parent="#accordion" style={ display == `collapse${key}` ? {display:"block"} : {display:"none"} }>
+                                                                <div className="card-body">
+                                                                <div className="row">
+                                                                    <div className="col-md-4">
+                                                                        <div className="d-md-flex align-items-center">
+                                                                            <div className="receipt-img">
+                                                                            <img className="order-book-img" src="/images/cfs-dumt-img.png" draggable="false"/>
+                                                                            </div>
+                                                                            <div className="receipt-txt">
+                                                                            <h4 className="order-type-collpse">{item.subscription_id}</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
+                                                                        <p className="item-type-order">Item Type</p>
+                                                                        <h3>{item.type}</h3>
+                                                                    </div>
+                                                                    <div className="col-md-1 mt-auto mb-auto collapse-order-data text-left">
+                                                                        <p className="item-type-order">Amount</p>
+                                                                        <h3>$7.00</h3>
+                                                                    </div>
+                                                                    <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
+                                                                        <p className="item-type-order">Status</p>
+                                                                        <h3>					Active
+                                                                        </h3>
+                                                                    </div>
+                                                                    <div className="col-md-3 mt-auto mb-auto ml-auto">
+                                                                        <Link href="/user/cancelation"><a className="order-sub-cancel">Cancel Subscription Pack</a></Link>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
                                                         </td>
-                                                        <td className="green-aci w-20">Active</td>
                                                     </tr>
-                                                </tbody>
-                                                </table>
-                                            </div>
-                                            <div id="collapse1" className="collapse accod_tab" aria-labelledby="headingTwo2270" data-parent="#accordion" style={{display: `${display}`}}>
-                                                <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-4">
-                                                        <div className="d-md-flex align-items-center">
-                                                            <div className="receipt-img">
-                                                            <img className="order-book-img" src="/images/cfs-dumt-img.png" draggable="false"/>
-                                                            </div>
-                                                            <div className="receipt-txt">
-                                                            <h4 className="order-type-collpse">testedtestedtestedtestedtestedtestedtestedtestedtestedt..</h4>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
-                                                        <p className="item-type-order">Item Type</p>
-                                                        <h3>Assignment Help</h3>
-                                                    </div>
-                                                    <div className="col-md-1 mt-auto mb-auto collapse-order-data text-left">
-                                                        <p className="item-type-order">Amount</p>
-                                                        <h3>$7.00</h3>
-                                                    </div>
-                                                    <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
-                                                        <p className="item-type-order">Status</p>
-                                                        <h3>															Payment Pending
-                                                        </h3>
-                                                    </div>
-                                                    <div className="col-md-3 mt-auto mb-auto ml-auto">
-                                                        <Link href="/user/cancelation"><a className="order-sub-cancel">Cancel Subscription Pack</a></Link>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                )
+                                            }  
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
