@@ -1,39 +1,65 @@
 import DatePicker from "react-datepicker";
 import { useState } from 'react'
+import { useRouter } from "next/router";
+import {saveAssignment2} from '../../../libs/assignment'
+import { useSession } from 'next-auth/client'
 
 export default function SubmitForm(){
-    const [startDate, setStartDate] = useState(new Date());
-    const [value,setValue]= useState(1);
-    const handleDateSelect = () => {
+   const router = useRouter();
+   const [session, loading ] = useSession()
+   const [loader, setLoader] = useState(false)
+   // console.log(router.query.online_assignment_help_2)
 
-    }
-    const handleDateChange = () => {
-    
-    }
+   const [startDate, setStartDate] = useState(new Date());
+   const [value, setValue] = useState(0);
+   const [words, setWords] = useState(0);
+   const [formData, setFormData] = useState({});
 
-    const increment = () => {
-        if(value<20){
-            setValue(value+1)
-        }
-    }
+   const handleTimeSelect = (e) => {
+      setFormData({...formData, [e.target.name]:e.target.value, user_Id : session.user._id ,id:router.query.online_assignment_help_2})
+   }
 
-    const decrement = () => {
-        if(value>1){
-            setValue(value-1)
-        }
-    }
+   const handleReference = (e) => {
+      setFormData({...formData, [e.target.name]:e.target.value, 'deadline_date': startDate,user_Id : session.user._id,id:router.query.online_assignment_help_2})
+   }
 
-    return(
-        <section className="banner_assignment_form bg_yellow">
+   const handleForm2 = async (e) => {
+      e.preventDefault();
+      setLoader(true)
+      const res =await saveAssignment2(formData)
+      if(res && !res.error){
+         router.push(`/user/my-order-details/${res.assignment._id}`)
+      }
+      setLoader(false)
+   }
+
+   const increment = () => {
+      if(value<20){
+         setValue(value => value + 1)
+         setWords(words => words + 250)
+         setFormData({...formData, 'pages': value+1,'deadline_date': startDate,user_Id : session.user._id ,id:router.query.online_assignment_help_2})
+      }
+   }
+
+   const decrement = () => {
+      if(value>1){
+         setValue(value - 1)
+         setWords(words - 250)
+         setFormData({...formData, 'pages': value-1,'deadline_date': startDate,user_Id : session.user._id ,id:router.query.online_assignment_help_2 })
+      }
+   }
+
+   return(
+      <section className="banner_assignment_form bg_yellow">
          <div className="container">
             <div className="row">
                <div className="col-md-9 m-auto">
-                  <form className="row form_banner">
+                  <form className="row form_banner" onSubmit={handleForm2}>
                      <div className="col-md-12">
                         <h2><span>Submit Your Assignment</span></h2>
                      </div>
                      <div className="form-group col-md-6">
-                        <select className="form-control">
+                        <select className="form-control" required name="deadline_time" onChange={handleTimeSelect}>
                            <option value="">Deadline Time*</option>
                            <option value="00:00">00:00</option>
                            <option value="01:00">01:00</option>
@@ -64,34 +90,50 @@ export default function SubmitForm(){
                      <div className="form-group col-md-6"> 
                         {/* <input required="" className="form-control datepicker" name="deadlineDate" type="text"  placeholder="Deadline Date*"   autoComplete="off"/>  */}
                         <div className="customDatePickerWidth">
-                            <DatePicker className="form-control" selected={startDate} onSelect={handleDateSelect} onChange={date => setStartDate(date)} />
+                              <DatePicker className="form-control" required selected={startDate} name="deadline_date" onChange={date => setStartDate(date)} />
                         </div>
                      </div>
                      <div className="col-md-12">
                         <div id='myform' method='POST' action='#' className="form-group row">
                            <div className="col-md-6">
-                              <input type='text' className="form-control" defaultValue={value} name='quantity' placeholder="No. of Pages*" />
+                              <input type='text' className="form-control" required defaultValue={value} name='pages' placeholder="No. of Pages*" readOnly/>
                            </div>
                            <div className="col-md-6">
                               <input type='button' value='-' className='qtyminus' field='quantity' onClick={()=>{decrement()}}/>
                               <input type='button' value='+' className='qtyplus' field='quantity' onClick={()=>{increment()}}/>
-                              <span>250 words</span>
+                              <span>{words} words</span>
                            </div>
                         </div>
                      </div>
                      <div className="form-group col-md-12">
-                        <select className="form-control">
-                           <option>Reference</option>
+                        <select className="form-control"  required name='reference' onChange={handleReference}>
+                           <option>Select</option>
+                           <option value="1">Vancouver</option>
+                           <option value="2">AGLC</option>
+                           <option value="3">APA</option>
+                           <option value="4">BMJ</option>
+                           <option value="5">Chicago</option>
+                           <option value="6">Footnotes</option>
+                           <option value="7">Footnotes and bibliography</option>
+                           <option value="8">Harvard</option>
+                           <option value="9">MHRA</option>
+                           <option value="10">MLA</option>
+                           <option value="11">Not Selected</option>
+                           <option value="12">Open</option>
+                           <option value="13">OSCOLA</option>
+                           <option value="14">Oxford</option>
+                           <option value="15">Turabian</option>
+                           <option value="11">Not Selected</option>
                         </select>
                      </div>
                   
-                    <div className="form-group m-auto sbmit_btn"> 
-                        <button type="submit" className="btn form-control mt-4">Submit</button> 
+                     <div className="form-group m-auto sbmit_btn"> 
+                        <button type="submit" className="btn form-control mt-4">{loader ? "Submitting" : "submit"}</button> 
                      </div>
                   </form>
                </div>
             </div>
          </div>
       </section>
-    )
+   )
 }

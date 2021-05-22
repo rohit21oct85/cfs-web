@@ -9,6 +9,12 @@ import '../styles/dashboard/color_skins.css'
 // import '../styles/dashboard/rtl.css'
 // import '../styles/dashboard/timeline.css'
 
+// tutor css
+// import '../styles/tutor/tutor-main.css'
+// import '../public/tutor/css/color_skins.css'
+// import '../public/tutor/css/custom.css'
+// import '../public/tutor/css/chatapp.css'
+
 import '../public/fonts/font.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css'
 import '../node_modules/react-datepicker/dist/react-datepicker.min.css'

@@ -406,7 +406,7 @@ input.form-control,input.form-control:focus{background:#f5f5f5; padding-left:11p
 .trash_iconadd:focus{ box-shadow:none;}
 .entry.input-group{margin-bottom:15px;}
 .submit_btn1 {padding:0 40px;}
-.submit_btn1 button{background:#f8d021; font-weight:600; font-size:24px; color:#fff;}
+.submit_btn1 button{background:#f8d021; font-weight:600; font-size:24px;}
 .submit_btn1 button:hover{color:#fff;}
 .list_banner1 li{margin-bottom:10px; font-weight:600;}
 .list_banner1 li img{margin-right:10px;}
