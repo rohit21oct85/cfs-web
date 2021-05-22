@@ -5,7 +5,7 @@ export default function PopularHelpServices(){
                 <div className="row"> 
                 <div className="col-md-12 text-center mb-5">
                     <div className="Content_Covered_title pb-3">
-                        <h2>Popular Writing Help Servicese? </h2> 
+                        <h2>Popular Writing Help Services? </h2> 
                     </div>
                 </div>
                 <div className="col-md-3 col-lg-2 col-sm-4 col-6 Industrybg">

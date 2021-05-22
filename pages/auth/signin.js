@@ -12,11 +12,12 @@ export default function SignIn({ csrfToken, providers }) {
 	const [ session, loading ] = useSession();
 	const [success, setSuccess] = useState(null);
 	const [loader, setLoader] = useState(false);
-	const [disabled, setDisabled] = useState(true)
+	const [disabled, setDisabled] = useState(false)
 	const [error, setError] = useState(null);
 	const [userid, setUserId] = useState(null);
 	const [whichSegment, setWhichSegment] = useState('signin');
 	const [otp, setOtp] = useState();
+	const [checkedState, setCheckedState] = useState(true);
 	const [code, setCode] = useState({
 		1: "",
 		2: "",
@@ -81,9 +82,12 @@ export default function SignIn({ csrfToken, providers }) {
 	}
 
 	const agreePolicy = (e)=>{
+		console.log(e.target.checked)
 		if(e.target.checked){
+			setCheckedState(true)
 			setDisabled(false);
 		}else{
+			setCheckedState(false)
 			setDisabled(true);
 		}
 	}
@@ -195,7 +199,7 @@ return (
 							<div className="form-group col-md-12 trems_privacy text-center"> 
 								<div className="form-check">
 									<label className="form-check-label">
-										<input type="checkbox" className="form-check-input"  onChange={agreePolicy}/> By clicking on "Sign In" you're agreeing to ou <span>Terms of Use & Privacy.</span>
+										<input type="checkbox" className="form-check-input" checked={checkedState} onChange={agreePolicy}/> By Signing in you agree to our <span> Conditions of Use and Privacy Notice.</span>
 									</label>
 								</div>
 							</div>

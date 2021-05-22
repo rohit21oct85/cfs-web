@@ -46,3 +46,13 @@ export async function askQuestion( param ) {
 
     }
 }
+
+export async function getAllSubSubject() {
+    try {
+        const res = await axios.get(apiUrl + `subsubject`)
+        return res.data;
+    }
+    catch(e){
+
+    }
+}
