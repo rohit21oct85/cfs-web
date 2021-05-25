@@ -16,7 +16,7 @@ export default function OnlineAssignmentHelp() {
   return (
     <>
       <Head>
-        <title>Crazy For Study</title>
+        <title>Crazy For Study | Online Assessment Help</title>
       </Head>
       <Header/>
       <Navbar/>

@@ -16,7 +16,7 @@ export default function BuyBookSub({...props}){
         }else{
             setLocation('/api/auth/signin?callbackUrl='+`${process.env.NEXTAUTH_URL}`+'/paynow')
         }   
-    },[])
+    },[session])
 
     return(
         <div className="btn1">

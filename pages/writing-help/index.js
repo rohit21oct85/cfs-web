@@ -9,10 +9,14 @@ import HelpService from '../../components/website/writing-help/help-service'
 import WhyChooseOurWriting from '../../components/website/writing-help/why-choose-our-writing'
 import PopularHelpServices from '../../components/website/writing-help/popular-help-services'
 import BannerBottom from '../../components/website/writing-help/banner-bottom'
+import Head from 'next/head'
 
 export default function WritingHelp(){
     return(
         <>
+        <Head>
+            <title>Crazy For Study | Writing Help</title>
+        </Head>
         <Header/>
         <Navbar/>
         <WritingHelpBanner/>

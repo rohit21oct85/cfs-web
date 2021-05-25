@@ -1,8 +1,8 @@
-import {createSubscription, saveTransactionDetails} from '../../libs/payment'
+import {createSubscription, saveTransactionDetails, createOrder} from '../../libs/payment'
 import { useState } from "react";
 import { useSession } from 'next-auth/client'
 
-export default function RazorPay(){
+export default function RazorPay({...props}){
     const [ session, loading ] = useSession()
     const [ isLoading, setIsLoading ] = useState(false)
 
@@ -51,7 +51,53 @@ export default function RazorPay(){
         e.preventDefault();
     }
 
+    const handleAssignmentPayment = async (e) => {
+        setIsLoading(true);
+        const res = await createOrder(props.amt * 100);
+        if(res.data){
+            setIsLoading(false);
+            const order_id = res.data.id
+            var options = {
+                "key": process.env.razor_pay_key, // Enter the Key ID generated from the Dashboard
+                "amount": props.amt * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "USD",
+                "name": "New Assignment",
+                "description": "crazy for study",
+                "image": "https://example.com/your_logo",
+                "order_id": order_id, 
+                "handler": function (response){
+                    alert(response.razorpay_payment_id);
+                    alert(response.razorpay_order_id);
+                    alert(response.razorpay_signature)
+                },
+                "theme": {
+                    "color" : "#f8d021",
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            rzp1.on('payment.failed', function (response){
+                    alert(response.error.code);
+                    alert(response.error.description);
+                    alert(response.error.source);
+                    alert(response.error.step);
+                    alert(response.error.reason);
+                    alert(response.error.metadata.order_id);
+                    alert(response.error.metadata.payment_id);
+            });
+        }
+        e.preventDefault();
+    }
+
     return(
-        <a onClick={handleRazor}>{ isLoading ? 'wait' : <img src="/images/pay-2.png" className="img-fluid" alt=""/> }</a>
+        <>
+        {
+            props.type != "assignment" 
+            ? 
+                <a onClick={handleRazor}>{ isLoading ? 'wait' : <img src="/images/pay-2.png" className="img-fluid" alt=""/> }</a> 
+            : 
+                <a onClick={handleAssignmentPayment}>{ isLoading ? 'wait' : <img src="/images/pay-2.png" className="img-fluid" alt=""/> }</a>
+        }
+        </>
     )
 }

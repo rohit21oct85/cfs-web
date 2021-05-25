@@ -6,16 +6,68 @@ import { useSession } from 'next-auth/client'
 import AccessDenied from '../../../components/access-denied'
 import {getUser} from '../../../libs/profile'
 import { useRouter } from "next/router";
+import { useEffect, useState } from 'react'
+import {  saveAssignmentLocal, getAssignmentInfo } from '../../../libs/assignment';
+import { useQuery } from 'react-query'
+import Razorpay from '../../../components/common/razorpay'
+import Head from 'next/head'
 
 export default function MyOrderDetails(){
     const [ session, loading ] = useSession();
+    const [data, setData] = useState();
+    const [discount, setDiscount] = useState();
+
     const router = useRouter();
     
-    console.log(router.query.my_order_details)
+    useEffect(()=>{
+        if(data){
+            setDiscount((data.pages * 10 * 30)/100)
+            
+        }
+    },[data])
+
+    useEffect(()=>{
+        const saveLocalAssignmentToDB = async(data) => {
+            const form = new FormData();
+            form.append('question',data.question)
+            form.append('subject',data.subject)
+            form.append('subject_id',data.subject_id)
+            form.append('sub_subject',data.sub_subject)
+            form.append('sub_subject_id',data.sub_subject_id)
+            form.append('file',data.image0)
+            form.append('deadline_time',data.deadline_time)
+            form.append('pages',data.pages)
+            form.append('deadline_date',data.deadline_date)
+            form.append('reference',data.reference)
+            form.append('user_Id',session?.user?._id);
+            const res =  await saveAssignmentLocal(form)
+            router.push(`/user/my-order-details/${res.assign._id}`, undefined, { shallow: true })
+            if(res.assign._id){
+                getAssignmentData(res.assign._id,session.user._id)
+            }
+        }       
+        
+        const getAssignmentData = async(id, user_id) => {
+            const res = await getAssignmentInfo(id, user_id);
+            setData(res.assignment);
+        }
+        
+        if(router.query.my_order_details==='local'){
+            const data = {...JSON.parse(localStorage.getItem('assignmentData1')),...JSON.parse(localStorage.getItem('assignmentData2'))}
+            saveLocalAssignmentToDB(data);
+        }else{
+            getAssignmentData(router.query.my_order_details, session?.user?._id);
+        }
+    },[session])
+    
     if (!session) { return  (<><AccessDenied/></>) }
 
     return(
         <>
+            <Head>
+                <link rel="icon" href="/favicon.ico" />
+                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            </Head>
             <DashboardNavbar/>
             <SideBar/>
             <section className="content user profile-page">
@@ -143,17 +195,17 @@ export default function MyOrderDetails(){
                                                     </div>
                                                     <div className="col-md-6 aas_details">
                                                         <div className="contain_data">
-                                                            <p className="detail_item head_ass">CFS20023_1_1998</p>
+                                                            <p className="detail_item head_ass">{data && data._id}</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 aas_details">
                                                         <div className="contain_data">
-                                                            <p className="detail_item">Manager Deadline  </p>
+                                                            <p className="detail_item">Manager Name  </p>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 aas_details">
                                                         <div className="contain_data">
-                                                            <p className="detail_item">	Jullia Wright</p>
+                                                            <p className="detail_item"> {data && data.tutor_name}</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 aas_details">
@@ -163,7 +215,7 @@ export default function MyOrderDetails(){
                                                     </div>
                                                     <div className="col-md-6 aas_details">
                                                         <div className="contain_data">
-                                                            <p className="detail_item">Sep 2,2020 5:00PM</p>
+                                                            <p className="detail_item">{data && data.deadline_date.substring(0,10) + ', ' + data.deadline_time}</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 aas_details">
@@ -173,7 +225,7 @@ export default function MyOrderDetails(){
                                                     </div>
                                                     <div className="col-md-6 aas_details">
                                                         <div className="contain_data">
-                                                            <p className="detail_item">	1</p>
+                                                            <p className="detail_item">	{data && data.pages}</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 aas_details">
@@ -183,7 +235,7 @@ export default function MyOrderDetails(){
                                                     </div>
                                                     <div className="col-md-6 aas_details">
                                                         <div className="contain_data">
-                                                            <p className="detail_item">AGLC</p>
+                                                            <p className="detail_item">{data && data.reference}</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 aas_details">
@@ -193,7 +245,7 @@ export default function MyOrderDetails(){
                                                     </div>
                                                     <div className="col-md-6 aas_details">
                                                         <div className="contain_data">
-                                                            <p className="detail_item"> Awaiting Payment</p>
+                                                            <p className="detail_item"> { data && data.payment_status }</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 aas_details">
@@ -203,7 +255,17 @@ export default function MyOrderDetails(){
                                                     </div>
                                                     <div className="col-md-6 aas_details">
                                                         <div className="contain_data">
-                                                            <p className="detail_item">Case Study Help Services</p>
+                                                            <p className="detail_item"> { data && data.subject }</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-6 aas_details">
+                                                        <div className="contain_data">
+                                                            <p className="detail_item"> Sub-Subject  </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-6 aas_details">
+                                                        <div className="contain_data">
+                                                            <p className="detail_item"> { data && data.sub_subject }</p>
                                                         </div>
                                                     </div>
                                                     </div>
@@ -302,37 +364,37 @@ export default function MyOrderDetails(){
                                         <ul className="new_friend_list list-unstyled row">
                                         <li className="col-lg-2 col-md-2 col-sm-6 col-4">
                                             <a href="#">
-                                                <span className="number">$1</span>
+                                                <span className="number">${data && data.pages * 10 + discount  }</span>
                                                 <h6 className="users_name Completed">Total cost of Case Study</h6>
                                             </a>
                                         </li>
                                         <li className="col-lg-2 col-md-2 col-sm-6 col-4">
                                             <a href="#">
-                                                <span className="number">#10</span>
+                                                <span className="number">${discount}</span>
                                                 <h6 className="users_name Rejected">Discount(30% OFF) </h6>
                                             </a>
                                         </li>
                                         <li className="col-lg-2 col-md-2 col-sm-6 col-4">
                                             <a href="#">
-                                                <span className="number">$20</span>
+                                                <span className="number">${data && data.pages * 10}</span>
                                                 <h6 className="users_name Active">Net amount to be Paid   </h6>
                                             </a>
                                         </li>
                                         <li className="col-lg-2 col-md-2 col-sm-6 col-4">
                                             <a href="#">
-                                                <span className="number">$30</span>
+                                                <span className="number">$0</span>
                                                 <h6 className="users_name Pending">Coupon Discount Availed   </h6>
                                             </a>
                                         </li>
                                         <li className="col-lg-2 col-md-2 col-sm-6 col-4">
                                             <a href="#">
-                                                <span className="number">$8</span>
+                                                <span className="number">${data && data.pages * 10}</span>
                                                 <h6 className="users_name">Amount to be paid later Amount</h6>
                                             </a>
                                         </li>
                                         <li className="col-lg-2 col-md-2 col-sm-6 col-4">
                                             <a href="#">
-                                                <span className="number">$12</span>
+                                                <span className="number">${data && (data.pages * 10) * 50 /100}</span>
                                                 <h6 className="users_name">Pay 50% in advance</h6>
                                             </a>
                                         </li>
@@ -344,8 +406,9 @@ export default function MyOrderDetails(){
                                                 <h5 className=" ml-auto Add_Money pay mt-2 mb-0"><span>Pay From Wallet </span></h5>
                                                 <a href="#" className="btn  ml-auto  pay Add_Money">
                                                 <img src="/images/paypal.png" className="img-fluid" alt="paypal"/></a><br/> 
-                                                <a href="#" className="btn ml-auto Add_Money">
-                                                <img src="/images/razorpay.png" className="img-fluid" alt="razorpay"/></a>
+                                                {/* <a href="#" className="btn ml-auto Add_Money">
+                                                <img src="/images/razorpay.png" className="img-fluid" alt="razorpay"/></a> */}
+                                                <Razorpay type="assignment" amt={data && (data.pages * 10 * 50)/100}/>
                                             </div>
                                         </div>
                                     </div>

@@ -7,16 +7,15 @@ import AccessDenied from '../../components/access-denied'
 import { useQuery } from 'react-query'
 import {getUser} from '../../libs/profile'
 import {useState} from 'react'
-import {getMySubscription} from '../../libs/question'
+import {getAllAssignments} from '../../libs/assignment'
 
 export default function MyOrders(){
    const [ session, loading ] = useSession()
    const [display, setDisplay] = useState();
    const { data: user, isLoading:userIsLoading, error:userError } = useQuery(['user-profile'], () => getUser({email:session.user.email}),{staleTime:Infinity, enabled: !!session})
-   const { data: subscription, isLoading: textbooksIsLoading, error: textbooksError } = useQuery(['my-subscription'], () => getMySubscription({user_Id:session.user._id}),{staleTime:Infinity, enabled: !!session})
+   const { data: assignments, isLoading: assignmentsIsLoading, error: assignmentsError } = useQuery(['my-orders'], () => getAllAssignments({user_Id:session.user._id}),{staleTime:Infinity, enabled: !!session})
 
    const openCollapse = (data) => {
-      console.log(data)
       setDisplay(data);
   }
 
@@ -47,7 +46,7 @@ export default function MyOrders(){
                            </tr>
                         </thead>
                         <tbody>
-                           {subscription && subscription.transactions.map((item,key)=>{
+                           {assignments && assignments.assignment.map((item,key)=>{
                               return(
                                  <tr key={key}>
                                  <td colSpan="4" style={{padding:"0px"}}>
@@ -56,9 +55,9 @@ export default function MyOrders(){
                                           <tbody>
                                              <tr>
                                                 <td className="w-25"><span>{key}</span></td>
-                                                <td className="w-25"><span className="textbook-t">{item.payment_id}</span></td>
+                                                <td className="w-25"><span className="textbook-t">{item._id}</span></td>
                                                 <td className="w-25">
-                                                   <span>{item.SubscribeDate.substring(0,10)}</span>
+                                                   <span>{item.deadline_date.substring(0,10)}</span>
                                                 </td>
                                                 <td className="w-25">
                                                    <button className="btn btn-link collapsed view-reciept-btn" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" onClick={()=>{openCollapse(`collapse${key}`)}}>
@@ -78,7 +77,7 @@ export default function MyOrders(){
                                                       <img className="order-book-img" src="/images/cfs-dumt-img.png" draggable="false"/>
                                                    </div>
                                                    <div className="receipt-txt">
-                                                      <h4 className="order-type-collpse">{item.subscription_id}</h4>
+                                                      <h4 className="order-type-collpse">{item.subscription_id}</h4>{item.question.substring(0,100)}
                                                    </div>
                                                 </div>
                                              </div>
@@ -88,16 +87,16 @@ export default function MyOrders(){
                                              </div>
                                              <div className="col-md-1 mt-auto mb-auto collapse-order-data text-left">
                                                 <p className="item-type-order">Amount</p>
-                                                <h3>$?</h3>
+                                                <h3>${(item.pages * 10)}</h3>
                                              </div>
                                              <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
                                                 <p className="item-type-order">Status</p>
-                                                <h3>															Active
+                                                <h3>{item.assignment_status}
                                                 </h3>
                                              </div>
                                              <div className="col-md-3 mt-auto mb-auto ml-auto">
-                                                <a href="#" className="order-sub-cancel">Pay 50% in Advance</a>
-                                                <a href="#" className="order-sub-cancel">View Now</a>
+                                                <Link href={`/user/my-order-details/${item._id}`}><a href="#" className="order-sub-cancel">Pay 50% in Advance</a></Link>
+                                                <Link href={`/user/my-order-details/${item._id}`}><a href="#" className="order-sub-cancel">View Now</a></Link>
                                              </div>
                                           </div>
                                        </div>

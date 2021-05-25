@@ -1,5 +1,5 @@
 import DatePicker from "react-datepicker";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from "next/router";
 import {saveAssignment2} from '../../../libs/assignment'
 import { useSession } from 'next-auth/client'
@@ -15,19 +15,31 @@ export default function SubmitForm(){
    const [words, setWords] = useState(0);
    const [formData, setFormData] = useState({});
 
+   const [url, setUrl] = useState('#');
+    useEffect(()=>{
+        if(session && session.user._id !== null){
+            setUrl('#')
+        }else{
+            setUrl('/api/auth/signin?callbackUrl='+`${process.env.NEXTAUTH_URL}`+'/user/my-order-details/local');
+        }
+    },[session])
+
    const handleTimeSelect = (e) => {
-      setFormData({...formData, [e.target.name]:e.target.value, user_Id : session.user._id ,id:router.query.online_assignment_help_2})
+      setFormData({...formData, [e.target.name]:e.target.value, user_Id : session?.user?._id ,id:router.query.online_assignment_help_2})
    }
 
    const handleReference = (e) => {
-      setFormData({...formData, [e.target.name]:e.target.value, 'deadline_date': startDate,user_Id : session.user._id,id:router.query.online_assignment_help_2})
+      setFormData({...formData, [e.target.name]:e.target.value, 'deadline_date': startDate, user_Id : session?.user?._id,id:router.query.online_assignment_help_2})
    }
 
    const handleForm2 = async (e) => {
       e.preventDefault();
       setLoader(true)
       const res =await saveAssignment2(formData)
-      if(res && !res.error){
+      if(formData.user_Id == undefined){
+         localStorage.setItem('assignmentData2', JSON.stringify(formData))
+         router.push(url)
+      }else{
          router.push(`/user/my-order-details/${res.assignment._id}`)
       }
       setLoader(false)
@@ -37,7 +49,7 @@ export default function SubmitForm(){
       if(value<20){
          setValue(value => value + 1)
          setWords(words => words + 250)
-         setFormData({...formData, 'pages': value+1,'deadline_date': startDate,user_Id : session.user._id ,id:router.query.online_assignment_help_2})
+         setFormData({...formData, 'pages': value+1,'deadline_date': startDate,user_Id : session?.user?._id ,id:router.query.online_assignment_help_2})
       }
    }
 
@@ -45,7 +57,7 @@ export default function SubmitForm(){
       if(value>1){
          setValue(value - 1)
          setWords(words - 250)
-         setFormData({...formData, 'pages': value-1,'deadline_date': startDate,user_Id : session.user._id ,id:router.query.online_assignment_help_2 })
+         setFormData({...formData, 'pages': value-1,'deadline_date': startDate,user_Id : session?.user?._id ,id:router.query.online_assignment_help_2 })
       }
    }
 
@@ -90,7 +102,7 @@ export default function SubmitForm(){
                      <div className="form-group col-md-6"> 
                         {/* <input required="" className="form-control datepicker" name="deadlineDate" type="text"  placeholder="Deadline Date*"   autoComplete="off"/>  */}
                         <div className="customDatePickerWidth">
-                              <DatePicker className="form-control" required selected={startDate} name="deadline_date" onChange={date => setStartDate(date)} />
+                              <DatePicker className="form-control" required selected={startDate} format='yyyy-MM-dd' name="deadline_date" onChange={date => setStartDate(date)} />
                         </div>
                      </div>
                      <div className="col-md-12">
@@ -107,7 +119,7 @@ export default function SubmitForm(){
                      </div>
                      <div className="form-group col-md-12">
                         <select className="form-control"  required name='reference' onChange={handleReference}>
-                           <option>Select</option>
+                           <option>Select reference</option>
                            <option value="1">Vancouver</option>
                            <option value="2">AGLC</option>
                            <option value="3">APA</option>

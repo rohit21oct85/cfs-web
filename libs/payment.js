@@ -28,3 +28,17 @@ export async function saveTransactionDetails(data) {
         }
     }
 }
+
+export async function createOrder(amt) {
+    try {
+        const res = await authAxios.post(apiUrl + 'payment/razorpay-create-order',{amt:amt})
+        if(res.status === 200){
+            return res.data;
+        }
+    }
+    catch(e){
+        if(e.response.status === 401){
+            return null;
+        }
+    }
+}

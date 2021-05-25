@@ -7,7 +7,7 @@ import { signOut } from 'next-auth/client'
 import Router from 'next/router'
 import { useSession } from 'next-auth/client'
 import {getNotifications, readNotification} from '../../../libs/question'
-
+import Head from 'next/head'
 
 export default function DashboardNavbar({...props}){
     const [ showNotification, setShowNotification ] = useState(false);
@@ -143,7 +143,7 @@ export default function DashboardNavbar({...props}){
                         </a></Link>
                         {showAMenu && 
                         <div className={`dropdown-menu sm-menu ${classname}`} aria-labelledby="navbarDropdown" onMouseLeave={()=>hideMenuA()}>
-                            <Link href="/writing/online-assignment-help"><a className="dropdown-item"><img src="/images/nav-icons/online-assignment-help.png" className="img-fluid" alt=""/> Assignment Help </a></Link>
+                            <Link href="/writing-help/online-assignment-help"><a className="dropdown-item"><img src="/images/nav-icons/online-assignment-help.png" className="img-fluid" alt=""/> Assignment Help </a></Link>
                         </div>}
                     </li>
                     <li className={`nav-item dmenu float-right pt_sty dropdown ${classname}`} onMouseEnter={openDropdown}>
