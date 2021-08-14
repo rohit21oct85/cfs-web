@@ -7,11 +7,10 @@ import HowItWorks from '../../../components/website/assignment-help-2/how-it-wor
 
 export default function OnlineAssignmentHelp2() {
 
-
   return (
     <>
         <Head>
-            <title>Crazy For Study</title>
+            <title>Crazy For Study | Online Assessment Help</title>
         </Head>
         <Header/>
         <Navbar/>

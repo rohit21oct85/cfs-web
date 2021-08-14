@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import { getSubjects, getSubSubject } from '../../../libs/subsubject'
 import { saveAssignment } from '../../../libs/assignment'
 import { MakeSlug } from '../../../components/common/make-slug'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Router from 'next/router'
 
@@ -13,16 +13,6 @@ export default function SubmitAssignment() {
     const [formData, setFormData] = useState({});
     const [session, loading ] = useSession()
     const [loader, setLoader] = useState(false)
-
-    const [url, setUrl] = useState('#');
-    useEffect(()=>{
-        if(session && session.user._id !== null){
-            // setUrl('online-assignment-help-2');
-            setUrl('#')
-        }else{
-            setUrl('/api/auth/signin?callbackUrl='+`${process.env.NEXTAUTH_URL}`+'/writing-help/online-assignment-help');
-        }
-    },[session])
 
     const { data: subjects, isLoading:subjectsIsLoading, error:subjectsError } = useQuery(['subjects'], () => getSubjects(),{staleTime:Infinity}) //only called when session would be present
     const { data: subsubjects, isLoading:subsubjectsIsLoading, error:subsubjectsError } = useQuery([subject], () => getSubSubject(subject),{staleTime:Infinity, enabled: !!subject}) //only called when subject would be present
@@ -61,12 +51,16 @@ export default function SubmitAssignment() {
         form.append('sub_subject_id',formData.sub_subject_id)
         form.append('user_Id',formData.user_Id)
         form.append('file',formData.image0)
-        const res = await saveAssignment(form);
-        setLoader(false)
-        if(res && !res.error){
-            Router.push(`/writing-help/online-assignment-help-2/${res.assign._id}`)
-        }else{
-            Router.push(url)
+        if(formData.user_Id == undefined){
+            localStorage.setItem('assignmentData1',JSON.stringify(formData))
+            Router.push(`/writing-help/online-assignment-help-2/local`)
+        }else{  
+            const res = await saveAssignment(form);
+            setLoader(false)
+            console.log(res)
+            if(res && !res.error){
+                Router.push(`/writing-help/online-assignment-help-2/${res.assign._id}`)
+            }
         }
     }
 

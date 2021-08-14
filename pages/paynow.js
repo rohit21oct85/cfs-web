@@ -63,7 +63,7 @@ export default function PayNow(){
                                 <ul>
                                 <li><Paypal/></li>
                                 {/* <li><a href="#"><img src="/images/pay-1.png" className="img-fluid" alt=""/></a></li> */}
-                                <li><Razorpay/></li>
+                                <li><Razorpay type="subscription"/></li>
                                 {/* <li><StripePay/></li> */}
                                 </ul>
                             </div>

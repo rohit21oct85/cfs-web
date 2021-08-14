@@ -1,5 +1,4 @@
 import { useSession } from 'next-auth/client'
-import { route } from 'next/dist/next-server/server/router';
 import Link from 'next/link';
 import { useRouter } from "next/router";
 import { useEffect,useState } from 'react';
@@ -16,7 +15,7 @@ export default function BuyBookSub({...props}){
         }else{
             setLocation('/api/auth/signin?callbackUrl='+`${process.env.NEXTAUTH_URL}`+'/paynow')
         }   
-    },[])
+    },[session])
 
     return(
         <div className="btn1">

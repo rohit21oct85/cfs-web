@@ -17,8 +17,8 @@ const authAxios = axios.create(config);
 
 authAxios.interceptors.request.use(async function(config) {
     const session = await getSession();
-    config.headers.Authorization = session.user.accessToken ?
-        `Bearer ${session.user.accessToken}` :
+    config.headers.Authorization = session.user.adat ?
+        `Bearer ${session.user.adat}` :
         ``;
     return config;
 });

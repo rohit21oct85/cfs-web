@@ -146,7 +146,7 @@ export default function Book(){
             }
         }
         return () => {}
-    }, [books])
+    }, [books,seo])
 
     useEffect(() => {
         if(chapters && chapters.length > 0){
@@ -237,7 +237,7 @@ export default function Book(){
                                             <label>Chapter</label>
                                             <select className="form-control" onChange={handleChapter} value={chapter}>
                                             {chapters && chapters.map((item,key)=>{
-                                                return (<option key={key} value={item.chapter_no} data-chapter={item.chapter_name.substring(0, 50)}>{item.chapter_no} - {item.chapter_name}</option>)
+                                                return (<option key={key} value={item.chapter_no} data-chapter={item.chapter_name && item.chapter_name.substring(0, 50)}>{item.chapter_no} - {item.chapter_name}</option>)
                                             })}
                                             </select>
                                         </div>
@@ -268,11 +268,10 @@ export default function Book(){
                                                 <select className="form-control" onChange={handleQuestion} id="handle-question" value={question}>
                                                 
                                                 {sections && problems && problems.map((item,key)=>{
-                                                    return(<option key={key} value={item.problem_no.toLowerCase()} data-question={item.question.substring(0, 50)}>{item.problem_no} - {item.question.substring(0, 50)} . ..</option>)
+                                                    return(<option key={key} value={item.problem_no.toLowerCase()} data-question={item.question && item.question.substring(0, 50)}>{item.problem_no} - {item.question && item.question.substring(0, 50)} . ..</option>)
                                                 })}
-
                                                 {problemsDirect && problemsDirect.map((item,key)=>{
-                                                    return(<option key={key} value={item.problem_no.toLowerCase()} data-question={item.question.substring(0, 50)}>{item.problem_no} - {item.question.substring(0, 50)} . ..</option>)
+                                                    return(<option key={key} value={item.problem_no.toLowerCase()} data-question={item.question && item.question.substring(0, 50)}>{item.problem_no} - {item.question && item.question.substring(0, 50)} . ..</option>)
                                                 })}
                                                 </select>
                                         </div>

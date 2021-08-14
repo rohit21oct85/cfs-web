@@ -4,7 +4,7 @@ import { apiUrl, authAxios } from '../config/config'
 
 export async function getCountries(data) {
     try {
-        const res = await authAxios.get(apiUrl + 'student/getcountries')
+        const res = await axios.get(apiUrl + 'student/getcountries')
         if(res.status === 200){
             return res.data;
         }
