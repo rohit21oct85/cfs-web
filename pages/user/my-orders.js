@@ -87,16 +87,16 @@ export default function MyOrders(){
                                              </div>
                                              <div className="col-md-1 mt-auto mb-auto collapse-order-data text-left">
                                                 <p className="item-type-order">Amount</p>
-                                                <h3>${(item.pages * 10)}</h3>
+                                                <h3>${(item.amount)}</h3>
                                              </div>
                                              <div className="col-md-2 mt-auto mb-auto collapse-order-data text-left">
                                                 <p className="item-type-order">Status</p>
-                                                <h3>{item.assignment_status}
-                                                </h3>
+                                                <h3>{item.payment_status == "unpaid" ? "payment pending" : (item.payment_status=="half-paid") ? "50% paid" : "payment paid fully" }
+                                                </h3> 
                                              </div>
                                              <div className="col-md-3 mt-auto mb-auto ml-auto">
-                                                <Link href={`/user/my-order-details/${item._id}`}><a href="#" className="order-sub-cancel">Pay 50% in Advance</a></Link>
-                                                <Link href={`/user/my-order-details/${item._id}`}><a href="#" className="order-sub-cancel">View Now</a></Link>
+                                                {item.payment_status == "paid-full" ? '' : <Link href={`/user/my-order-details/${item._id}`}><a href="#" className="order-sub-cancel" style={{pointerEvents: item.payment_status == "paid-full" ? 'none' : 'auto'}}>{item.payment_status == "unpaid" ? "Pay 50% in Advance" : (item.payment_status=="half-paid") ? "Pay remaining 50%" : "Payment Done" }</a></Link>}
+                                                <Link href={`/user/my-order-details/${item._id}`}><a href="#" className="order-sub-cancel" >View Now</a></Link>
                                              </div>
                                           </div>
                                        </div>

@@ -29,6 +29,21 @@ export async function saveTransactionDetails(data) {
     }
 }
 
+export async function saveTransactionDetailsForAssignment(data) {
+    try {
+        console.log("Dadasd")
+        const res = await authAxios.post(apiUrl + 'payment/save-transaction-assignment', data)
+        if(res.status === 200){
+            return res.data;
+        }
+    }
+    catch(e){
+        if(e.response.status === 401){
+            return null;
+        }
+    }
+}
+
 export async function createOrder(amt) {
     try {
         const res = await authAxios.post(apiUrl + 'payment/razorpay-create-order',{amt:amt})

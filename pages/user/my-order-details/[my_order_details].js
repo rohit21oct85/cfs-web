@@ -11,18 +11,29 @@ import {  saveAssignmentLocal, getAssignmentInfo } from '../../../libs/assignmen
 import { useQuery } from 'react-query'
 import Razorpay from '../../../components/common/razorpay'
 import Head from 'next/head'
+import useSocket from '../../../components/common/socket'
 
 export default function MyOrderDetails(){
+    const socket = useSocket(`${process.env.HOST}`);
+
     const [ session, loading ] = useSession();
     const [data, setData] = useState();
     const [discount, setDiscount] = useState();
 
     const router = useRouter();
-    
+    useEffect(() => {(socket)
+        if (socket) {
+            console.log("Socket Connected")
+            socket.on('connection', () => {
+                console.log(`I'm connected with the back-end`);
+                alert(`I'm connected with the back-end`);
+            });
+        }
+    }, [socket])
+
     useEffect(()=>{
         if(data){
-            setDiscount((data.pages * 10 * 30)/100)
-            
+            setDiscount((data.amount * 30)/100)
         }
     },[data])
 
@@ -347,10 +358,11 @@ export default function MyOrderDetails(){
                 <div className="container-fluid">
                     <div className="row clearfix">
                         <div className="col-lg-12 col-md-12 text-center col-sm-12 Marketing_Channel Thanks_lot">
-                            <h2>Thanks a lot for using our services. Please make the payment so that we could quickly create an amazing Case Study for you</h2>
+                            { data && data.payment_status == "unpaid" ? <h2>Thanks a lot for using our services. Please make the payment so that we could quickly create an amazing Case Study for you</h2> :(data && data.payment_status == "half-paid") ? <h2>Thanks for the Advance payment! Our experts will create the assignment that will get you the A+ Grade</h2> : <h2>Your assignment is finished! Get your full assignment here:</h2>}
                         </div>
                     </div>
                 </div>
+                { data && data.payment_status == "paid-full" ? <></> :
                 <div className="container-fluid">
                     <div className="row clearfix">
                         <div className="col-md-12 col-lg-12 Your_Order_Status">
@@ -364,7 +376,7 @@ export default function MyOrderDetails(){
                                         <ul className="new_friend_list list-unstyled row">
                                         <li className="col-lg-2 col-md-2 col-sm-6 col-4">
                                             <a href="#">
-                                                <span className="number">${data && data.pages * 10 + discount  }</span>
+                                                <span className="number">${data && data.amount + discount  }</span>
                                                 <h6 className="users_name Completed">Total cost of Case Study</h6>
                                             </a>
                                         </li>
@@ -376,7 +388,7 @@ export default function MyOrderDetails(){
                                         </li>
                                         <li className="col-lg-2 col-md-2 col-sm-6 col-4">
                                             <a href="#">
-                                                <span className="number">${data && data.pages * 10}</span>
+                                                <span className="number">${data && data.amount}</span>
                                                 <h6 className="users_name Active">Net amount to be Paid   </h6>
                                             </a>
                                         </li>
@@ -388,14 +400,14 @@ export default function MyOrderDetails(){
                                         </li>
                                         <li className="col-lg-2 col-md-2 col-sm-6 col-4">
                                             <a href="#">
-                                                <span className="number">${data && data.pages * 10}</span>
+                                                <span className="number">${data && data.amount}</span>
                                                 <h6 className="users_name">Amount to be paid later Amount</h6>
                                             </a>
                                         </li>
                                         <li className="col-lg-2 col-md-2 col-sm-6 col-4">
                                             <a href="#">
-                                                <span className="number">${data && (data.pages * 10) * 50 /100}</span>
-                                                <h6 className="users_name">Pay 50% in advance</h6>
+                                                <span className="number">${data && (data.amount) * 50 /100}</span>
+                                                <h6 className="users_name">{ data && data.payment_status == "unpaid" ? "Pay 50% in Advance" :(data && data.payment_status == "half-paid") ? "Pay Remaining 50%" : "Payment Already Done"}</h6>
                                             </a>
                                         </li>
                                         </ul>
@@ -408,7 +420,7 @@ export default function MyOrderDetails(){
                                                 <img src="/images/paypal.png" className="img-fluid" alt="paypal"/></a><br/> 
                                                 {/* <a href="#" className="btn ml-auto Add_Money">
                                                 <img src="/images/razorpay.png" className="img-fluid" alt="razorpay"/></a> */}
-                                                <Razorpay type="assignment" amt={data && (data.pages * 10 * 50)/100}/>
+                                                <Razorpay type="assignment" amt={data && (data.amount * 50)/100}/>
                                             </div>
                                         </div>
                                     </div>
@@ -417,7 +429,7 @@ export default function MyOrderDetails(){
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>}
                 <div className="container-fluid">
                     <div className="row clearfix">
                         <div className="col-lg-12 col-md-12">

@@ -9,6 +9,7 @@ import Router from 'next/router'
 import {useState ,useEffect} from 'react'
 import { useQuery } from 'react-query'
 import {getCountries,getUser,editUserProfile} from '../../libs/profile'
+// import { signIn } from 'next-auth/client'
 
 async function SignOut () {
     console.log("removing...")
@@ -56,6 +57,13 @@ export default function  MyProfile() {
     },[user])
 
     if (!session) { return  (<><AccessDenied/></>) }
+
+    //other way of doing the same thing without returning some component
+    // const isUser = !!session?.user
+    // useEffect(() => {
+    //     if (loading) return 
+    //     if (!isUser) signIn() 
+    // }, [isUser, loading])
 
     const handleProfile = (e) =>{
         setFormData({
@@ -333,7 +341,7 @@ export default function  MyProfile() {
                                         </div>
                                     </div>--> */}
                                     <div className="col-md-12">
-                                        <button onClick={saveForm} className="btn btn-primary btn-round" >{loading ? "updating" : "Update Changes"}</button>
+                                        <button onClick={saveForm} className="btn btn-primary btn-round" >{loader ? "updating" : "Update Changes"}</button>
                                     </div>
                                 </div>
                                 </div>

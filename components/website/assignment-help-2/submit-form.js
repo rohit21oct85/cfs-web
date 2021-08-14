@@ -49,7 +49,7 @@ export default function SubmitForm(){
       if(value<20){
          setValue(value => value + 1)
          setWords(words => words + 250)
-         setFormData({...formData, 'pages': value+1,'deadline_date': startDate,user_Id : session?.user?._id ,id:router.query.online_assignment_help_2})
+         setFormData({...formData, 'pages': value+1,'deadline_date': startDate,user_Id : session?.user?._id ,id:router.query.online_assignment_help_2,amount: ((value+1) * 10)})
       }
    }
 
@@ -57,7 +57,7 @@ export default function SubmitForm(){
       if(value>1){
          setValue(value - 1)
          setWords(words - 250)
-         setFormData({...formData, 'pages': value-1,'deadline_date': startDate,user_Id : session?.user?._id ,id:router.query.online_assignment_help_2 })
+         setFormData({...formData, 'pages': value-1,'deadline_date': startDate,user_Id : session?.user?._id ,id:router.query.online_assignment_help_2,amount: ((value+1) * 10) })
       }
    }
 
@@ -108,7 +108,7 @@ export default function SubmitForm(){
                      <div className="col-md-12">
                         <div id='myform' method='POST' action='#' className="form-group row">
                            <div className="col-md-6">
-                              <input type='text' className="form-control" required defaultValue={value} name='pages' placeholder="No. of Pages*" readOnly/>
+                              <input type='text' className="form-control" required value={value} name='pages' placeholder="No. of Pages*" readOnly/>
                            </div>
                            <div className="col-md-6">
                               <input type='button' value='-' className='qtyminus' field='quantity' onClick={()=>{decrement()}}/>

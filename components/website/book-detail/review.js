@@ -16,7 +16,7 @@ export default function Reviews({...props}){
     
     return(
         <>
-        <section className="section Reviews_Ratings text_justify mt-4"id="reviews" >
+        <section className="section Reviews_Ratings text_justify mt-4" id="reviews" >
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">

@@ -1,10 +1,15 @@
-import {createSubscription, saveTransactionDetails, createOrder} from '../../libs/payment'
+import {createSubscription, saveTransactionDetails, createOrder, saveTransactionDetailsForAssignment} from '../../libs/payment'
 import { useState } from "react";
 import { useSession } from 'next-auth/client'
+import { useRouter } from "next/router";
+import Router from 'next/router'
+import { useQueryClient } from 'react-query'
 
 export default function RazorPay({...props}){
+    const queryClient = useQueryClient()
     const [ session, loading ] = useSession()
     const [ isLoading, setIsLoading ] = useState(false)
+    const router = useRouter();
 
     const handleRazor = async (e) => {
         setIsLoading(true);
@@ -65,10 +70,23 @@ export default function RazorPay({...props}){
                 "description": "crazy for study",
                 "image": "https://example.com/your_logo",
                 "order_id": order_id, 
-                "handler": function (response){
-                    alert(response.razorpay_payment_id);
-                    alert(response.razorpay_order_id);
-                    alert(response.razorpay_signature)
+                "handler":async function (response){              
+                    const res = await saveTransactionDetailsForAssignment(
+                        { 
+                            payment_id: response.razorpay_payment_id,
+                            order_id: response.razorpay_order_id,
+                            signature: response.razorpay_signature,
+                            userEmail : session.user.email,
+                            userId : session.user._id,
+                            assignmentId : router.query.my_order_details,
+                        }
+                    )
+                    console.log(res);
+                    if(res.data){
+                        alert("payment made successfully");
+                        queryClient.invalidateQueries(`my-orders`)
+                        Router.push('/user/my-orders')
+                    }
                 },
                 "theme": {
                     "color" : "#f8d021",
