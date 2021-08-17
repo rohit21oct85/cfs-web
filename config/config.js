@@ -8,7 +8,7 @@ const config = {
     baseURL: apiUrl,
     headers: {
         'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "https://www.crazyforstudy.com",
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE',
     },
 };
