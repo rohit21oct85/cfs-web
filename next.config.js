@@ -11,9 +11,9 @@ module.exports = {
         // JWT_SIGNING_PRIVATE_KEY:`X_7FQqWRZXqNIWCsGYz9MfPJtsD6zj3vLTs3myNZ6cM`,
        
         // #aws
-        basePath:'https://65.0.252.57',   // used for SEO purposes to get the basePath
-        HOST:`https://65.0.252.57`,
-        NEXTAUTH_URL:"https://65.0.252.57",
+        basePath:'https://admin.crazyforstudy.com',   // used for SEO purposes to get the basePath
+        HOST:`https://admin.crazyforstudy.com`,
+        NEXTAUTH_URL:"https://admin.crazyforstudy.com",
         JWT_SIGNING_PRIVATE_KEY:`X_7FQqWRZXqNIWCsGYz9MfPJtsD6zj3vLTs3myNZ6cM`,
 
         razor_pay_key:'rzp_test_ANFdQNpgQn4gvm',
