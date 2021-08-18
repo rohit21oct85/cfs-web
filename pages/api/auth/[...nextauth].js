@@ -1,6 +1,8 @@
 import NextAuth from "next-auth"
+import { session } from "next-auth/client";
 import Providers from "next-auth/providers"
-import { setLogin } from '../../../libs/auth'
+import { setLogin, saveGoogleUser } from '../../../libs/auth'
+
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export default NextAuth({
@@ -28,15 +30,15 @@ export default NextAuth({
         // Add logic here to look up the user from the credentials supplied
         const user = await setLogin(credentials);
         if (user) {
-		// Any object returned will be saved in `user` property of the JWT
-
+          // console.log(user);
+		      // Any object returned will be saved in `user` property of the JWT
           return user
         } else {
           // If you return null or false then the credentials will be rejected
-          return null
+          // return null
           // You can also Reject this callback with an Error or with a URL:
           // throw new Error('error message') // Redirect to error page
-          // throw '/path/to/redirect'        // Redirect to a URL
+          throw `${process.env.NEXTAUTH_URL}/auth/signin`       // Redirect to a URL
         }
       }
     })
@@ -61,7 +63,8 @@ export default NextAuth({
     jwt: true,
 
     // Seconds - How long until an idle session expires and is no longer valid.
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 2 * 24 * 60 * 60, // 2 days
+    // maxAge: 30 * 24 * 60 * 60, // 30 days
 
     // Seconds - Throttle how frequently to write to database to extend a session.
     // Use it to limit write operations. Set to 0 to always update the database.
@@ -73,6 +76,7 @@ export default NextAuth({
   // option is set - or by default if no database is specified.
   // https://next-auth.js.org/configuration/options#jwt
   jwt: {
+    // signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
     // A secret to use for key generation (you should set this explicitly)
     // secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw',
     // Set to true to use encryption (default: false)
@@ -100,14 +104,52 @@ export default NextAuth({
   // when an action is performed.
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
-	redirect: async (url, baseUrl) => {
-		return Promise.resolve(url)
-	}
-    // async signIn(index) { return true },
-    // async signIn(user, account, profile) { return true },
-    // async redirect(url, baseUrl) { console.log(url,baseUrl);return baseUrl },
-    // async session(session, user) { return session },
-    // async jwt(token, user, account, profile, isNewUser) { return token }
+    redirect: async (url, baseUrl) => {
+      // return Promise.resolve(url)
+      return url.startsWith(baseUrl)
+        ? Promise.resolve(url)
+        : Promise.resolve(baseUrl)
+    },
+    signIn : async (user, account, profile) => { 
+      try{
+        if(!user.student){
+          user.fullname = user.name;
+          user.img = user.image;
+          user.social_id = user.id;
+          // console.log(user,"user")
+          const res = await saveGoogleUser(user);
+          // console.log(res.data.accessToken,res.status);
+          if(res && res.status == 200) {
+            // console.log("user created")
+            user.adat = res.data.accessToken
+            user._id = res.data.student._id
+            return true 
+          }else{
+            user.adat = res.data.accessToken
+            user._id = res.data.student._id
+            user.Subscribe = res.data.student.Subscribe
+            // console.log("user exists")
+          }
+        }
+      }catch(e){
+        console.log(e)
+      }
+    },
+    async jwt(token, user, account, profile, isNewUser) { 
+      if(user && user.student){
+        token.user = user.student
+        token.user.adat = user.adat
+        token.user.rdat = user.rdat
+      }else{
+        user && (token.user = user);
+      } 
+      return token 
+    },
+    async session(session, user) {
+      session.user = user.user;
+      return session 
+    },
+    
   },
 
   // Events are useful for logging

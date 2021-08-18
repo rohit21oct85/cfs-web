@@ -1,4 +1,5 @@
 import BookImage from '../../common/book-image'
+import Link from 'next/link'
 
 export default function BookInfo({...props}){
     return (
@@ -8,7 +9,7 @@ export default function BookInfo({...props}){
                     <div className="col-md-3 text-center">
                         <div className="prduct_details_img">
                             <ul>
-                                <li><span><BookImage isbn={props.bookData && props.bookData.ISBN13}/></span></li>
+                                <li><span><BookImage isbn={props.bookData && props.bookData.ISBN13} altText={props.altText && props.altText}/></span></li>
                                 <li className="buy_with_amazon"><i className="fa fa-shopping-bag"></i> BUY WITH AMAZON</li>
                             </ul>
                         </div>
@@ -16,11 +17,17 @@ export default function BookInfo({...props}){
 
             <div className="col-md-8 ml-auto pd_b_left">
                 <div className="prduct_details_text">
-                    <h3>{props.bookData && props.bookData.BookName} ({props.bookData && props.bookData.sub_subject_name}) </h3>
-                        <p><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></p>
+                    <h3>{props.bookData && props.bookData.DisplayTitle ? props.bookData.DisplayTitle : props.bookData.BookName+' '+props.bookData.Edition+' Solutions' }</h3>
+                        <p> 
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                        </p>
                             <ul className="rating">
-                                <li className="pl-0 border-left-0">4.9/5 Rating</li>
-                                <li> 233 Reviews</li>
+                                <li className="pl-0 border-left-0">{props.bookData && props.bookData.ratingAv ? props.bookData.ratingAv : 0 }/5 Rating</li>
+                                <li> {props.bookData && props.bookData.totalReviews} <a href="#reviews">Reviews</a></li>
                             </ul>
             
                             <ul className="books_wtext">

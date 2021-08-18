@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { apiUrl } from '../config/config'
+import { apiUrl, authAxios } from '../config/config'
 
 export async function setLogin(data) {
     try {
@@ -16,7 +16,6 @@ export async function setLogin(data) {
 }
 
 export async function setSignUp(data) {
-    console.log(data);
     try {
         const res = await axios.post(apiUrl + 'student/register', data)
         if(res.status === 200){
@@ -27,5 +26,47 @@ export async function setSignUp(data) {
         if(e.response.status === 409){
             return 409
         }
+    }
+}
+
+export async function saveGoogleUser(data){
+    try {
+        const res = await axios.post(apiUrl + 'student/savegoogle', data)
+        return res;
+        // if(res.status === 200){
+        //     return res;
+        // }
+    }
+    catch(e){
+        if(e.response.status === 409){
+            return e.response
+        }
+    }
+}
+export async function sendResetEmail(email){
+    try{
+        const res = await axios.post(apiUrl + 'student/sendreset', {email:email})
+        return res;
+    }catch(e){
+        return e
+        console.log(e)
+    }
+}
+export async function verifyOtp(otp){
+    try{
+        const res = await axios.post(apiUrl + 'student/verifyotp', {otp:otp})
+        return res;
+    }catch(e){
+        return e
+        console.log(e)
+    }
+}
+export async function changePassword(pass, id, otp){
+    try{
+        const res = await axios.post(apiUrl + 'student/changepassword', {password:pass, id:id, otp:otp})
+        return res;
+    }catch(e){
+        return e
+        console.log(e)
     }
 }

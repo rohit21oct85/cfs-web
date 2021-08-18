@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { getNavbarData } from '../../../libs/home'
 import { useQuery } from 'react-query'
 import { MakeSlug } from '../../common/make-slug'
+import { useSession } from 'next-auth/client'
 
 export default function Navbar() {
     const router = useRouter();
@@ -11,14 +12,14 @@ export default function Navbar() {
     const [showAMenu,setShowAMenu] = useState(false);
     const [classname, setClassname] = useState('');
     const [mobileMenuClass, setMobileMenuClass] = useState('');
-    
+    const [ session, loading ] = useSession();
+
     const showMobileMenu = ()=>{
         if(mobileMenuClass === 'show'){
             setMobileMenuClass('')
         }else{
             setMobileMenuClass('show')
         }
-        
     }
 
     const handleClick =()=>{
@@ -46,11 +47,12 @@ export default function Navbar() {
         setShowMenu(false);
         setClassname('show');
     }
+    
     const [homePClass, setHomePClass] = useState('');
     const [homePImage, setHomePImage] = useState('logo.png');
     
     useEffect(() => {
-        if(router.pathname !== '/'){
+        if(router.pathname !== '/' && router.pathname !== '/paynow'){
             setHomePClass('bg_white_nav')
             setHomePImage('logo_w.jpg')
         }
@@ -58,7 +60,7 @@ export default function Navbar() {
         }
     }, [])    
 
-    const { data, isLoading } = useQuery('menus', getNavbarData,{ staleTime:Infinity})
+    const { data, isLoading } = useQuery('menus', getNavbarData, {staleTime:Infinity})
     
     return (
         <>
@@ -78,14 +80,15 @@ export default function Navbar() {
                         </Link>
                     </li>  
                     <li className="nav-item dropdown megamenu-li dmenu" onMouseEnter={()=>{openMenu()}}>
-                        <a className="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solutions Manual  </a>
+                        <Link href="/textbook-solutions-manuals"><a className="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solutions Manual  </a></Link>
                         {showMenu &&
                         <div className={`dropdown-menu megamenu sm-menu border-top ${classname}`} aria-labelledby="dropdown01"  onMouseLeave={()=>hideMenu()}>
                             <div className="row">
                                 {data && data.map((item,key)=>{
                                     return(  
                                         <div className={`col-sm-6 nav_pding ${key % 2 == 1 ? 'nav_sm_menu_bg' : ''} col-lg-2 border-right mb-4`} key={key}>
-                                            <h6>{item.subject} <img src={`/images/nav-icons/${item.subject.toLowerCase().replace(/ /g,"-")}.png`} className="img-fluid" alt=""/> <i className="fa fa-angle-down"></i></h6>
+                                            {/* <h6>{item.subject} <img src={`/images/nav-icons/${item.subject.toLowerCase().replace(/ /g,"-")}.png`} className="img-fluid" alt=""/> <i className="fa fa-angle-down"></i></h6> */}
+                                            <Link href={`/textbook-solutions-manuals/${MakeSlug(item.subject)}`}><a><h6>{item.subject} <img src={`/images/nav-icons/${MakeSlug(item.subject)}.png`} className="img-fluid" alt=""/> <i className="fa fa-angle-down"></i></h6></a></Link>
                                             {item.sub_subject.map((it,key)=>{
                                                 return <Link href={`/textbook-solutions-manuals/${MakeSlug(item.subject)+'/'+MakeSlug(it.sub_subject)}`} key={key}><a className="dropdown-item" onClick={handleClick}>{it.sub_subject}</a></Link>
                                                 // return <Link href={{pathname:`${'textbook-solutions-manuals/'+item.subject.toLowerCase().replace(/ /g,"-")+'/'+it.sub_subject.toLowerCase().replace(/ /g,"-")}`}} key={key}><a className="dropdown-item">{it.sub_subject}</a></Link>
@@ -99,16 +102,20 @@ export default function Navbar() {
                         }
                     </li> 
                     <li className="nav-item dmenu dropdown" onMouseEnter={()=>{openMenuA()}}>
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <Link href="/writing-help"><a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Writing Help
-                        </a>
+                        </a></Link>
                         {showAMenu && 
                         <div className={`dropdown-menu sm-menu ${classname}`} aria-labelledby="navbarDropdown" onMouseLeave={()=>hideMenuA()}>
-                            <Link href="/writing/online-assignment-help"><a className="dropdown-item"><img src="/images/nav-icons/online-assignment-help.png" className="img-fluid" alt=""/> Assignment Help </a></Link>
+                            <Link href="/writing-help/online-assignment-help"><a className="dropdown-item"><img src="/images/nav-icons/online-assignment-help.png" className="img-fluid" alt=""/> Assignment Help </a></Link>
                         </div>}
                     </li>
-                    <li className="nav-item login_signup_top"><Link href="/auth/signin"><a className="nav-link">Login / Signup <i className="fa fa-user"></i></a></Link></li> 
-        
+                    {session !== undefined && !session 
+                    ?
+                    <li className="nav-item login_signup_top"><Link href="/auth/signin"><a className="nav-link">Login / Signup <i className="fa fa-user"></i></a></Link></li>
+                    : 
+                    <li className="nav-item login_signup_top"><Link href="/dashboard"><a className="nav-link">My Profile <i className="fa fa-user"></i></a></Link></li>
+                    } 
                 </ul>
                 </div>
             </div>

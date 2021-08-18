@@ -49,7 +49,7 @@ export default function  SignUp({providers}) {
                         'fullname':name,
                         'email':email,
                         'password':password,
-                        'school':school
+                        'college':school
                     });
             if(res === 409){
                 setError("User with the same email already exists");
@@ -126,7 +126,7 @@ export default function  SignUp({providers}) {
                         <span key={provider.id}>
                         {provider.id === "credentials" ? <span></span> :
                             <li key={provider.name}>
-                                <a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id, {callbackUrl : 'http://localhost:3000/dashboard'})}}>
+                                <a href="#" className={`${provider.id}_link`} onClick={(e) => { e.preventDefault(); signIn(provider.id, {callbackUrl : `${process.env.NEXTAUTH_URL}/dashboard`})}}>
                                     <i className={`fa fa-${provider.id}`}></i> {provider.name}
                                 </a>
                             </li>

@@ -13,7 +13,7 @@ export default function WhatStudentsThink() {
                     </div>
 
                     <div className="owl-carousel owl-theme  testimonial">
-                {/* <OwlCarousel items={5} className="owl-carousel" loop autoplay={true} nav margin={10}> */}
+                <OwlCarousel items={5} className="owl-carousel" loop autoplay={true} nav margin={10}>
                     <div className="item"><span className="img_testimonial"><img src="/images/testimonial-img/img1.png" className="" alt=""/></span>
                     <div className="text-center testimonial_text">
                     <h3>JOHN MANSELL</h3>
@@ -132,7 +132,7 @@ export default function WhatStudentsThink() {
                             </ul>
                         </div>
                     </div>
-                {/* </OwlCarousel> */}
+                </OwlCarousel>
                 </div>
             </div>
         </div>

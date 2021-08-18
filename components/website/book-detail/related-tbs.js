@@ -7,7 +7,7 @@ export default function RelatedTbs({...props}){
                 <div className="row">
                     <div className="col-md-12 text-center mb-5">
                         <div className="Content_Covered_title pb-3">
-                            <h2>Students who viewed this book also checked out</h2> 
+                            <h2>{props.heading ? props.heading : "Students who viewed this book also checked out"}</h2> 
                         </div>
                     </div>
                     {props.data && props.data.map((item,key)=>{
@@ -18,7 +18,7 @@ export default function RelatedTbs({...props}){
                                         {/* <img src="/images/our-popular/img1.jpg" className="img-fluid" alt=""/> */}
                                         <BookImage isbn={item.ISBN13}/>
                                     </div>
-                                    <div className="our_popular_title">{item.BookName}
+                                    <div className="our_popular_title">{item.DisplayTitle ? item.DisplayTitle : item.BookName} 
                                     </div>
                                     <div className="our_popular_isbn_no">ISBN: <span>{item.ISBN13} </span>
                                     </div>

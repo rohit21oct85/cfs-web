@@ -11,7 +11,7 @@ export default function AllBooks({...props}) {
                     <InputSearch/>
 
                     {props.data && props.data.data.length>0 ? props.data.data.map((item, key)=>{
-                        return ( <SingleBook key={key} image={"/images/our-popular/img1.jpg"} bookname={item.BookName} isbn={item.ISBN13}/> )
+                        return ( <SingleBook key={key} image={"/images/our-popular/img1.jpg"} bookname={item.BookName} isbn={item.ISBN13} edition={item.Edition}/> )
                     }): <div className="col-md-12 mt-4 text-center">No Data Found</div>}
 
                     {props.data && props.data.data.length>0 && <Pagination setPageNo={props.setPageNo} pageNo={props.pageNo} total={props.data.total}/>}

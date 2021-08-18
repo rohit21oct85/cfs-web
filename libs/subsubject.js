@@ -13,3 +13,46 @@ export async function getBooks( param ) {
 
     }
 }
+
+export async function getSubSubject( param ) {
+    try {
+        console.log(param)
+        const res = await axios.get(apiUrl + `subsubject/${param}`)
+        return res.data;
+    }
+    catch(e){
+
+    }
+}
+
+export async function getSubjects( param ) {
+    try {
+        console.log(param)
+        const res = await axios.get(apiUrl + `subsubject/all`)
+        return res.data;
+    }
+    catch(e){
+
+    }
+}
+
+export async function askQuestion( param ) {
+    try {
+        console.log(param)
+        const res = await axios.get(apiUrl + `/ask-question`)
+        return res.data;
+    }
+    catch(e){
+
+    }
+}
+
+export async function getAllSubSubject() {
+    try {
+        const res = await axios.get(apiUrl + `subsubject`)
+        return res.data;
+    }
+    catch(e){
+
+    }
+}

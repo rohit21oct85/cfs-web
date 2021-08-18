@@ -1,4 +1,5 @@
 import BookImage from '../../common/book-image'
+import {MakeSlug} from '../../common/make-slug'
 import Link from 'next/link'
 
 export default function SingleBook({...props}){
@@ -7,7 +8,7 @@ export default function SingleBook({...props}){
             <div className="our_popular_text">
                 <div className="our_popular_img">
                     {/* <img src={props.image} className="img-fluid" alt=""/> */}
-                    <BookImage isbn={props.isbn}/>
+                    <BookImage isbn={props.isbn} bookname={props.bookname}/>
                 </div>
                 <div className="our_popular_title">
                     {props.bookname} 
@@ -19,7 +20,7 @@ export default function SingleBook({...props}){
                     <i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star-half-empty"></i>
                 </div>
                 <div className="view_detail_btn">
-                    <Link href={`/${props.isbn}`}><a>View Detail</a></Link>
+                    <Link href={`/textbook-solutions-manuals/isbn-${props.isbn}-${MakeSlug(props.bookname)}-${MakeSlug(props.edition)}`}><a>View Detail</a></Link>
                 </div>
             </div>
         </div>

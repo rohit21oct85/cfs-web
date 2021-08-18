@@ -10,11 +10,11 @@ export default function BreadCrumb({...props}){
                 <div className="row"> 
                     <div className="col-md-12 text-left">
                         <div className="all_banner_text"> 
-                            <h2>{GetName(props.heading)}</h2>
+                            <h2>{capitalize(GetName(props.heading))}</h2>
                             <ul className="breadcrumb">
                                 <li><a href="#">Home   </a><span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li>
-                                <li><a href="#"> TextBook Manual </a> <span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li>
-                                <li><a href="#">{capitalize(props.subject)} </a> <span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li> 
+                                <li><a href="#"> {capitalize(props.type)} </a>{props.subject ? <span dangerouslySetInnerHTML={createMarkup('&sol;')}/>:''}</li>
+                                <li><a href="#">{capitalize(props.subject)} </a>{props.sub_subject? <span dangerouslySetInnerHTML={createMarkup('&sol;')}/>:''}</li> 
                                 <li>{capitalize(props.sub_subject)}</li>
                             </ul>
                         </div>

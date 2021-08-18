@@ -1,8 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios'
 
-
-function BookImage({isbn}) {
+function BookImage({isbn,altText}) {
     const [image, setImage] = useState('');
     
     useEffect(() => {
@@ -17,13 +16,14 @@ function BookImage({isbn}) {
             }
         }
        fetchCoverImage();
+       return () => {setImage('')}
     },[isbn])
     return (
         <>
-        {image && (<img src={image} style={{ width: "100%"}}/>)}
+        {image && (<img src={image} style={{ width: "100%"}} alt={altText}/>)}
             {!image && (
                 <div className="book_image_container">
-                    <img src={image} style={{ width: "100%"}}/>
+                    <img src={image} style={{ width: "100%"}} alt={altText}/>
                 </div>
             )}
         </>

@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react';
 import {searchData} from '../../libs/search'
 import BookImage from './book-image'
 import Link from 'next/link'
+import {MakeSlug} from '../common/make-slug'
 
 export default function SearchComp({...props}){
 
@@ -43,8 +44,8 @@ export default function SearchComp({...props}){
                     <Link href={`/search/${search}`}><button type="submit" className="search_btn">{props.btnText}</button></Link>
             </form>
             
-            <div className="row" style={{display: `${display}`}}>
-                <div className="col-md-12">
+            <div className="search_prodt1" style={{display: `${display}`}}>
+                <div className="">
                     <div className="books_bg1">
                         <div className="row">
                             <div className="col-md-12">
@@ -55,6 +56,7 @@ export default function SearchComp({...props}){
                                     </div>}
                                     {searchedBooks && searchedBooks.map((item,key)=>{
                                     return(<span key={key}>
+                                        <Link href={`/textbook-solutions-manuals/isbn-${item.ISBN13}-${MakeSlug(item.BookName)}-${MakeSlug(item.Edition)}`}><a>
                                             <div className="picking_img1">
                                                 <BookImage isbn={item.ISBN13}/>
                                             </div>
@@ -62,7 +64,8 @@ export default function SearchComp({...props}){
                                                 <h3>{item.BookName}</h3>
                                                 <p>{item.Author1}</p>
                                                 <p><span>ISBN10 - {item.ISBN10} | ISBN13 - {item.ISBN13}</span></p>
-                                            </div>
+                                            </div></a>
+                                        </Link>
                                         </span>)
                                     })}
                                 </div>
@@ -76,11 +79,15 @@ export default function SearchComp({...props}){
                                     }
                                     {searchedQuestions && searchedQuestions.map((item,key)=>{
                                     return(<span key={key}>
+                                        {/* router.push(`/textbook-solutions-manuals/${MakeSlug(questionValue)}-chapter-${chapter}-problem-${MakeSlug(e.target.value)}-solutions-${ISBN13}`, undefined, { shallow: true }) */}
+                                        <Link href={`/textbook-solutions-manuals/${MakeSlug(item.question.substring(0,50))}-chapter-${item.chapter_no}-problem-${MakeSlug(item.problem_no)}-solutions-${item.book_isbn}`}><a>
+                                        {/* <Link href={{pathname: `/textbook-solutions-manuals/${MakeSlug(item.question.substring(0,50))}-chapter-${item.chapter_no}-problem-${MakeSlug(item.problem_no)}-solutions-${item.book_isbn}`, query: { section_no: `${MakeSlug(item.section_no)}`, excerise: `${MakeSlug(item.excerise)}`  }}}><a> */}
                                             <div className="Picking_Cotton">
-                                                <h3>{item.question}</h3>
+                                                <h3>{item.question}</h3>{console.log(item)}
                                                 <p>{item.book_name} | {item.book_isbn}</p>
                                                 <p><span>Chapter Name: {item.chapter_name}, Chapter No: {item.chapter_no}</span></p>
-                                            </div>
+                                            </div></a>
+                                        </Link>
                                         </span>)
                                     })}
                                 </div>
@@ -88,7 +95,7 @@ export default function SearchComp({...props}){
                         </div>
                     </div>
                     <div className="col-md-12 View_All_results">
-                        <a href="#">View All results</a> 
+                    <Link href={`/search/${search}`}><a>View All results</a></Link>
                     </div>
                 </div>
             </div>
