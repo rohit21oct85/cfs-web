@@ -23,4 +23,12 @@ module.exports = {
         stripe_p_key:'pk_test_8tdoBYKAN0byYPGOMaYvvcQa',
         stripe_s_secret:'sk_test_ygam1fkRTDiqM8w1Msr0ITP6',
     },
+    async rewrites() {
+        return [
+          {
+            source: '/api/:path*',
+            destination: 'https://admin.crazyforstudy.com/:path*',
+          },
+        ]
+      },
 }
