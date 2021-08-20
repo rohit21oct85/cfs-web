@@ -1,5 +1,6 @@
 import { csrfToken, Provider } from 'next-auth/client'
-import { providers, signIn } from 'next-auth/client'
+// import { providers, signIn } from 'next-auth/client'
+import { getProviders, signIn } from 'next-auth/client'
 import { useRef, useState } from 'react';
 import NewNavbar from '../../components/common/new-navbar-login-signup'
 import {useEffect} from 'react'
@@ -8,6 +9,7 @@ import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
 import {sendResetEmail, verifyOtp, changePassword} from '../../libs/auth'
 export default function SignIn({ csrfToken, providers }) {
+// export default function SignIn({ providers }) {
 	
 	const [ session, loading ] = useSession();
 	const [success, setSuccess] = useState(null);
@@ -145,7 +147,6 @@ export default function SignIn({ csrfToken, providers }) {
 return (
     <>
 		<NewNavbar/>
-
 		<section className="login_banner pt-5 pb-5"> 
 			<div className="container">
 				<div className="row"> 
@@ -159,7 +160,7 @@ return (
 					<div className="col-md-5 ml-auto" style={{display: whichSegment == 'signin' ? 'block' : 'none' }}> 
 						{/* <form className="row form_banner form_banner_login" method='post' action='/api/auth/callback/credentials'> */}
 						<form className="row form_banner form_banner_login" method='post' onSubmit={submitForm}>
-							<input name='csrfToken' type='hidden' defaultValue={csrfToken}/>
+							{/* <input name='csrfToken' type='hidden' defaultValue={csrfToken}/> */}
 							<div className="col-md-12 bg_form_login">
 								<div className="col-md-12">
 									<h2><span>Sign In</span></h2>
@@ -211,7 +212,7 @@ return (
 							</div>
 				
 							<div className="col-md-12 text-center social_link_banner">
-								<ul>
+								<ul>console.log(providers)
 									{Object.values(providers).map(provider => (
 										<span key={provider.id}>
 										{provider.id === "credentials" ? <span></span> :
@@ -334,12 +335,12 @@ return (
 SignIn.getInitialProps = async (context) => {
   return {
     csrfToken: await csrfToken(context),
-    providers: await providers()
+    providers: await getProviders()
   }
 }
 
 // export async function getServerSideProps(context){
-// 	const providers = await providers()
+// 	const providers = await getProviders()
 // 	return {
 // 	  props: { providers }
 // 	}
