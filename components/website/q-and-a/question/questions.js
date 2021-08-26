@@ -1,5 +1,4 @@
 import Pagination from '../../../../components/common/pagination'
-import { Markup } from 'interweave';
 import parse from 'html-react-parser';
 
 export default function questions({...props}){
