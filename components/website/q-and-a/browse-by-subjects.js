@@ -8,7 +8,7 @@ export default function BrowseBySubjects({...props}){
           	<div className="container">
           		<div className="row"> 
           			<div className="col-md-12 Content_Covered_title mb-4 pb-2  text-center get-homework">
-                  		<h2>Browse by subjects in {props?.data?.data[0].subject}</h2>
+                  		<h2>Browse Q and A by subjects</h2>
                		</div>
 					{props.data && props.data.data.map((item,key)=>{
 						return(
@@ -17,7 +17,7 @@ export default function BrowseBySubjects({...props}){
 									<img src="/images/tbs-books/economics.jpg" className="img-fluid" alt=""/>
 									<div className="overlay_books bottom-overlay"> 
 										<div className="books_text1">
-											<Link href={MakeSlug(item.subject)+'/'+MakeSlug(item.sub_subject)}><a> {item.sub_subject}</a></Link>
+											<Link href={'q-and-a/'+MakeSlug(item.subject)}><a> {item.subject}</a></Link>
 										</div>
 									</div>
 								</div>

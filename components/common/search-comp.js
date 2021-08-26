@@ -8,6 +8,7 @@ export default function SearchComp({...props}){
 
     const [ display, setDisplay ] = useState('none');
     const [ searchedQuestions, setSearchedQuestions ] = useState(null);
+    const [ QA, setQA ] = useState(null);
     const [ searchedBooks, setSearchedBooks ] = useState(null);
     const [ search, setSearch ] = useState(null);
 
@@ -20,6 +21,7 @@ export default function SearchComp({...props}){
                 setDisplay('none');
                 setSearchedBooks(null)
                 setSearchedQuestions(null)
+                setQA(null)
             }
           }, 1000);
         return () => clearTimeout(delayDebounceFn)
@@ -31,7 +33,8 @@ export default function SearchComp({...props}){
         if(data){
             setSearchedBooks(data.data2.books);
             setSearchedQuestions(data.data1.questions);
-            if(data && data.data1.questions.length == 0 && data.data2.books.length == 0){
+            setQA(data.data3.questions);
+            if(data && data.data1.questions.length == 0 && data.data2.books.length == 0 && data.data3.questions.length == 0){
                 setDisplay('none');
             }
         }
@@ -83,11 +86,33 @@ export default function SearchComp({...props}){
                                         <Link href={`/textbook-solutions-manuals/${MakeSlug(item.question.substring(0,50))}-chapter-${item.chapter_no}-problem-${MakeSlug(item.problem_no)}-solutions-${item.book_isbn}`}><a>
                                         {/* <Link href={{pathname: `/textbook-solutions-manuals/${MakeSlug(item.question.substring(0,50))}-chapter-${item.chapter_no}-problem-${MakeSlug(item.problem_no)}-solutions-${item.book_isbn}`, query: { section_no: `${MakeSlug(item.section_no)}`, excerise: `${MakeSlug(item.excerise)}`  }}}><a> */}
                                             <div className="Picking_Cotton">
-                                                <h3>{item.question}</h3>{console.log(item)}
+                                                <h3>{item.question}</h3>
                                                 <p>{item.book_name} | {item.book_isbn}</p>
                                                 <p><span>Chapter Name: {item.chapter_name}, Chapter No: {item.chapter_no}</span></p>
                                             </div></a>
                                         </Link>
+                                        </span>)
+                                    })}
+                                </div>
+                            </div>
+                            <div className="col-md-12">
+                                <div className="books_bg2">
+                                    {QA && QA.length != 0 &&
+                                    <div className="books_titles">
+                                        Q and A
+                                    </div>
+                                    }
+                                    {QA && QA.map((item,key)=>{
+                                    return(<span key={key}>
+                                        {/* router.push(`/textbook-solutions-manuals/${MakeSlug(questionValue)}-chapter-${chapter}-problem-${MakeSlug(e.target.value)}-solutions-${ISBN13}`, undefined, { shallow: true }) */}
+                                        {/* <Link href={`/textbook-solutions-manuals/${MakeSlug(item.question.substring(0,50))}-chapter-${item.chapter_no}-problem-${MakeSlug(item.problem_no)}-solutions-${item.book_isbn}`}><a> */}
+                                        {/* <Link href={{pathname: `/textbook-solutions-manuals/${MakeSlug(item.question.substring(0,50))}-chapter-${item.chapter_no}-problem-${MakeSlug(item.problem_no)}-solutions-${item.book_isbn}`, query: { section_no: `${MakeSlug(item.section_no)}`, excerise: `${MakeSlug(item.excerise)}`  }}}><a> */}
+                                            <div className="Picking_Cotton">
+                                                <h3>{item.question}</h3>
+                                                {/* <p>{item.book_name} | {item.book_isbn}</p> */}
+                                                <p><span>Subject Name: {item.subject}, Sub Subject: {item.sub_subject}</span></p>
+                                            </div>
+                                            {/* </a></Link> */}
                                         </span>)
                                     })}
                                 </div>

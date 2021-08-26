@@ -1,6 +1,6 @@
 import { csrfToken, Provider } from 'next-auth/client'
-// import { providers, signIn } from 'next-auth/client'
-import { getProviders, signIn } from 'next-auth/client'
+import { providers, signIn } from 'next-auth/client'
+// import { getProviders, signIn } from 'next-auth/client'
 import { useRef, useState } from 'react';
 import NewNavbar from '../../components/common/new-navbar-login-signup'
 import {useEffect} from 'react'
@@ -160,7 +160,7 @@ return (
 					<div className="col-md-5 ml-auto" style={{display: whichSegment == 'signin' ? 'block' : 'none' }}> 
 						{/* <form className="row form_banner form_banner_login" method='post' action='/api/auth/callback/credentials'> */}
 						<form className="row form_banner form_banner_login" method='post' onSubmit={submitForm}>
-							{/* <input name='csrfToken' type='hidden' defaultValue={csrfToken}/> */}
+							<input name='csrfToken' type='hidden' defaultValue={csrfToken}/>
 							<div className="col-md-12 bg_form_login">
 								<div className="col-md-12">
 									<h2><span>Sign In</span></h2>
@@ -335,13 +335,14 @@ return (
 SignIn.getInitialProps = async (context) => {
   return {
     csrfToken: await csrfToken(context),
-    providers: await getProviders()
+    providers: await providers()
   }
 }
 
 // export async function getServerSideProps(context){
 // 	const providers = await getProviders()
+// 	const csrf = await csrfToken(context)
 // 	return {
-// 	  props: { providers }
+// 	  props: { providers, csrf }
 // 	}
 // }
