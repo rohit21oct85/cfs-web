@@ -20,6 +20,8 @@
     "axios": "^0.21.1",
     "ckeditor5-classic-with-mathtype": "^1.0.0",
     "font-awesome": "^4.7.0",
+    "html-react-parser": "^1.2.8",
+    "interweave": "^12.8.0",
     "moment": "^2.29.1",
     "next": "10.0.8",
     "next-auth": "^3.20.1",

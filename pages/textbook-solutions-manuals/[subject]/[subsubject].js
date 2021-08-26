@@ -27,7 +27,6 @@ import { capitalize } from "../../../components/common/make-slug";
 
 export default function SubSubject(){
     const [pageNo, setPageNo] = useState(0);
-
     const router = useRouter();
     const title = `Get Reliable ${capitalize(router.query.subsubject)} Textbook Solutions Manual`
     const description = `Get Access ${capitalize(router.query.subsubject)} Textbook Solutions from Crazy For Study. For ${capitalize(router.query.subsubject)} textbook answers, ${capitalize(router.query.subsubject)} Step-by-step solutions, ${capitalize(router.query.subsubject)} Solutions manual and Assignment Help, try Crazy For Study today!`

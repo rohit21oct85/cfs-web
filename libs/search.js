@@ -19,9 +19,10 @@ export async function searchData(params) {
         
         const res = await axios.all([
             axios.post(apiUrl + 'books/search-chapter-question',{search:searchT, limit:params.limit}),
-            axios.get(apiUrl + 'books/search-book-name-isbn/'+searchT+'/'+params.limit)
+            axios.get(apiUrl + 'books/search-book-name-isbn/'+searchT+'/'+params.limit),
+            axios.post(apiUrl + 'question/search-question',{search:searchT, limit:params.limit})
         ])
-        return {'data1':res[0].data,'data2':res[1].data};
+        return {'data1':res[0].data,'data2':res[1].data,'data3':res[2].data};
     }
     catch(e){
     }

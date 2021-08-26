@@ -1027,7 +1027,8 @@ input.form-control, input.form-control:focus {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: 0 !important;
+    /* top: 0 ; */
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -1913,3 +1914,116 @@ ul.menu.list-unstyled.notification_scroll {
         padding-left: 15px !important;
     }
     }
+
+
+    section.section.font_sz.text_justify.pt-5{padding-top:30px !important;}
+
+.tabs_frst1 .nav.nav-tabs.nav_tab_wecover li{
+    display: inline-block;
+}
+
+@media (max-width: 767px){
+.our_popular_bg .col-md-3 {
+    width: 50%;
+}
+.subscribe_here_bg {  
+    padding: 30px 0px;
+}
+.text_subscribe_here.text_tb_center {
+    margin-top: 10px;
+}
+footer .col-md-3.pl-5 {
+    padding-left: 15px !important;
+}
+footer .col-md-3.pl-4 { 
+    padding-top: 0px!important;
+}
+.web_font1 footer ul li a {
+    text-decoration: none;
+    line-height: 23px;
+}
+
+.web_font1 footer h3 {
+    margin-top: 20px;
+}
+.copyright .col-md-4.text-center {
+    width: 30%;
+}
+.copyright .col-md-4.text-right {
+    width: 70%;
+}
+section.section.mt-5.Follow_cfs {
+    margin-top: 20px !important;
+}
+section.section.brand_icons_bg.pt-5.pb-5 {
+    padding-bottom: 20px !important;
+}
+.Content_Covered_title h3 {
+    width: 100%;}
+.half-circle {
+    display: none;
+}
+
+.Study_Help_links ul li a { 
+    font-size: 12px; 
+    padding: 0 3px;}
+.Content_Covered_title h3 {
+    width: 100%;}
+section.section.Content_Covered.features_bg.pb-4.mt-5 {
+    margin-top: 20px !important;
+}
+section.section.Study_Help_bg.mt-5.mb-5.pb-5 {
+    padding-bottom: 20px !important;
+    margin-bottom: 20px !important;
+}
+ .web_font1 h1{font-size:25px;}
+
+.login_banner .all_banner_text.mt-5.login_banner_text {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+.social_link_banner ul li { 
+    margin: 0 4px;
+}
+.social_link_banner ul li a i {
+    
+    height: 40px;
+    width: 35px;
+    margin-right: 10px;
+    line-height: 40px;
+    
+}
+.social_link_banner ul li a { 
+    font-size: 13px;
+    height: 40px;
+    padding-right: 10px;
+    line-height: 40px;}
+
+.row.bg_width_fx .col-md-4.text-center {
+    margin-bottom: 20px;
+}
+.Study_Help_bg .Content_Covered_title:before{z-index:-1;}
+.subscription-box-points {
+    display: block;}
+.book-subscription-box {
+    margin-right: 10px;
+    display: none;
+}
+section.section.font_sz.text_justify.pt-5 {
+    padding-top: 0 !important;
+}
+
+}
+
+@media (max-width: 359px){
+ 
+.our_popular_img {
+    height: 150px;
+}
+.Book_Details_text ul {
+    width: 100%;}
+.Reviews_bg {
+    border: 1px solid #f7f7f7;
+    padding: 0 0px;
+}
+} 
