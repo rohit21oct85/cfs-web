@@ -17,7 +17,6 @@ export default function  Pagination({...props}) {
 
     const handleNext = (e) => {
         e.preventDefault();
-        // console.log(props.pageNo, pages)
         if(props.pageNo < pages){
             props.setPageNo(props.pageNo + 1)
         }

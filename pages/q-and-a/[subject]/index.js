@@ -13,10 +13,19 @@ import Services from '../../../components/website/q-and-a/services'
 import { useQuery } from 'react-query'
 import {getSubSubject} from '../../../libs/subsubject'
 import { useRouter } from "next/router";
+import Answer from './answer'
+
 export default function QandACategory() {
     const router = useRouter();
 
+    const regex = /\d{6}/g; //
+
+    const data = router.query.subject != undefined ? router.query.subject.match(regex) : router.query.subject;
+    const OLD_QID = data ? data[0] : null; 
+
     const { data: subsubjects, isLoading:subsubjectsIsLoading, error:subsubjectsError } = useQuery([router.query.subject], () => getSubSubject(router.query.subject),{staleTime:Infinity, enabled: !!router.query.subject}) //only called when subject would be present
+    if(OLD_QID)
+        return <Answer/>
 
     return(
         <>

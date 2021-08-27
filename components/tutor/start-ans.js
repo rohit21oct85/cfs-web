@@ -35,7 +35,6 @@ export default function StartAns(){
     useEffect(() => {
         async function getData(){
             const id = localStorage.getItem('mastered-subject-id');
-            console.log(id)
             const Books = await getBooks(id);
             setBooks(Books);
             setLoading(false);

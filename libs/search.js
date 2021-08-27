@@ -41,7 +41,6 @@ export async function searchDataIndividual(params) {
 
 export async function searchDataIndividualQ(params) {
     try {
-        console.log(params, "in question")
         const searchT = params.search ? params.search : params.searchText;
 
         const res = await axios.get(apiUrl + 'books/search-chapter-question/'+searchT+'/'+params.limit+'/'+params.pageno)

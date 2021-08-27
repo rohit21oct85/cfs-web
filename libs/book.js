@@ -73,7 +73,6 @@ export async function getProblemsDirectly(param) {
 
 export async function searchQuestions(isbn, search) {
     try {
-        console.log(isbn,search)
         const res = await axios.get(apiUrl + 'books/book/search-question/'+isbn+'/'+search)
         return res.data;
     }

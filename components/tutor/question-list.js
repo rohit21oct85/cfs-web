@@ -19,7 +19,6 @@ export default function QuestionList(){
         async function getData(){
             const chap = chapter_no == null ? "0" : chapter_no;
             const resp = await getChaptersAndQuestions(param.isbn, chap);
-            console.log(resp)
             if(resp.chapters){
                 setChapters(resp.chapters)
             }

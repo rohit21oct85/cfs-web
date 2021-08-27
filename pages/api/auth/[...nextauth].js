@@ -132,7 +132,7 @@ export default NextAuth({
           }
         }
       }catch(e){
-        console.log(e)
+        console.log(e,"hello world")
       }
     },
     async jwt(token, user, account, profile, isNewUser) { 
@@ -157,5 +157,5 @@ export default NextAuth({
   events: {},
 
   // Enable debug messages in the console if you are having problems
-  debug: false,
+  debug: true,
 })
