@@ -28,7 +28,7 @@ export default function QuestionsAndAnswers() {
             <Header/>
             <Navbar/>
             <BreadCrumb type={"Q & A"} heading={router.query.chieldsubject} subject={router.query.subject} sub_subject={router.query.subsubject}/>
-            <Questions data={qandas} heading={capitalize(GetName(router.query.chieldsubject))} setPageNo={setPageNo} pageNo={pageNo}/>
+            <Questions data={qandas} isLoading={qandasIsLoading} heading={capitalize(GetName(router.query.chieldsubject))} setPageNo={setPageNo} pageNo={pageNo}/>
             <AskFifty/>
             <HomeWork/>
             <RelatedTbs heading={"Students who viewed Socialogy Homework Questions and Answers also checked out"} subHeading={`Recently Added Top 4 ${router.query.subject} Textbook Solutions Manual`}/>

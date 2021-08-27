@@ -3,6 +3,9 @@ import {searchData} from '../../libs/search'
 import BookImage from './book-image'
 import Link from 'next/link'
 import {MakeSlug} from '../common/make-slug'
+import parse from 'html-react-parser';
+import { stringToSlug } from '../common/make-slug';
+import striptags from 'striptags';
 
 export default function SearchComp({...props}){
 
@@ -103,16 +106,22 @@ export default function SearchComp({...props}){
                                     </div>
                                     }
                                     {QA && QA.map((item,key)=>{
+                                        let child = "";
+                                        if(item.question.includes('<p>')){
+                                            child = stringToSlug(parse(striptags(item.question)).substr(0,90))+'-'+item.old_qid;
+                                        }else{
+                                            child = stringToSlug(striptags(parse(item.question)).substr(0,90))+'-'+item.old_qid
+                                        }
                                     return(<span key={key}>
                                         {/* router.push(`/textbook-solutions-manuals/${MakeSlug(questionValue)}-chapter-${chapter}-problem-${MakeSlug(e.target.value)}-solutions-${ISBN13}`, undefined, { shallow: true }) */}
-                                        {/* <Link href={`/textbook-solutions-manuals/${MakeSlug(item.question.substring(0,50))}-chapter-${item.chapter_no}-problem-${MakeSlug(item.problem_no)}-solutions-${item.book_isbn}`}><a> */}
+                                        <Link href={`/q-and-a/${child}`}><a>
                                         {/* <Link href={{pathname: `/textbook-solutions-manuals/${MakeSlug(item.question.substring(0,50))}-chapter-${item.chapter_no}-problem-${MakeSlug(item.problem_no)}-solutions-${item.book_isbn}`, query: { section_no: `${MakeSlug(item.section_no)}`, excerise: `${MakeSlug(item.excerise)}`  }}}><a> */}
                                             <div className="Picking_Cotton">
-                                                <h3>{item.question}</h3>
+                                                <h3 dangerouslySetInnerHTML={{__html:(parse(item.question)).substr(0,200)}}></h3>
                                                 {/* <p>{item.book_name} | {item.book_isbn}</p> */}
                                                 <p><span>Subject Name: {item.subject}, Sub Subject: {item.sub_subject}</span></p>
                                             </div>
-                                            {/* </a></Link> */}
+                                            </a></Link>
                                         </span>)
                                     })}
                                 </div>

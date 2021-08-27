@@ -15,7 +15,9 @@ export default function BreadCrumb({...props}){
                                 <li><a href="#">Home   </a><span dangerouslySetInnerHTML={createMarkup('&sol;')}/></li>
                                 <li><a href="#"> {capitalize(props.type)} </a>{props.subject ? <span dangerouslySetInnerHTML={createMarkup('&sol;')}/>:''}</li>
                                 <li><a href="#">{capitalize(props.subject)} </a>{props.sub_subject? <span dangerouslySetInnerHTML={createMarkup('&sol;')}/>:''}</li> 
-                                <li>{capitalize(props.sub_subject)}</li>
+                                <li><a href="#">{capitalize(GetName(props.sub_subject))} </a>{props.sub_sub_subject? <span dangerouslySetInnerHTML={createMarkup('&sol;')}/>:''}</li>
+                                {/* <li>{capitalize(props.sub_subject)}</li> */}
+                                <li>{capitalize(props.sub_sub_subject)}</li>
                             </ul>
                         </div>
                     </div>

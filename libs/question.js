@@ -80,9 +80,7 @@ export async function getMySubscription( id ) {
 
 export async function deleteTextBook( user_Id, id ) {
     try {
-        console.log(user_Id, "userid", id);
         const res = await authAxios.post(apiUrl + `student/my-textbook-del`,{id: id, user_Id: user_Id});
-        console.log(res)
         return res.data;
     }
     catch(e){

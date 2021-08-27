@@ -1,6 +1,5 @@
 import { csrfToken, Provider } from 'next-auth/client'
 import { providers, signIn } from 'next-auth/client'
-// import { getProviders, signIn } from 'next-auth/client'
 import { useRef, useState } from 'react';
 import NewNavbar from '../../components/common/new-navbar-login-signup'
 import {useEffect} from 'react'
@@ -9,7 +8,6 @@ import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
 import {sendResetEmail, verifyOtp, changePassword} from '../../libs/auth'
 export default function SignIn({ csrfToken, providers }) {
-// export default function SignIn({ providers }) {
 	
 	const [ session, loading ] = useSession();
 	const [success, setSuccess] = useState(null);
@@ -147,6 +145,7 @@ export default function SignIn({ csrfToken, providers }) {
 return (
     <>
 		<NewNavbar/>
+
 		<section className="login_banner pt-5 pb-5"> 
 			<div className="container">
 				<div className="row"> 
@@ -212,7 +211,7 @@ return (
 							</div>
 				
 							<div className="col-md-12 text-center social_link_banner">
-								<ul>console.log(providers)
+								<ul>
 									{Object.values(providers).map(provider => (
 										<span key={provider.id}>
 										{provider.id === "credentials" ? <span></span> :
@@ -340,9 +339,8 @@ SignIn.getInitialProps = async (context) => {
 }
 
 // export async function getServerSideProps(context){
-// 	const providers = await getProviders()
-// 	const csrf = await csrfToken(context)
+// 	const providers = await providers()
 // 	return {
-// 	  props: { providers, csrf }
+// 	  props: { providers }
 // 	}
 // }

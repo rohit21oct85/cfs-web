@@ -16,7 +16,6 @@ export async function getBooks( param ) {
 
 export async function getSubSubject( param ) {
     try {
-        console.log(param)
         const res = await axios.get(apiUrl + `subsubject/${param}`)
         return res.data;
     }
@@ -27,7 +26,6 @@ export async function getSubSubject( param ) {
 
 export async function getSubjects( param ) {
     try {
-        console.log(param)
         const res = await axios.get(apiUrl + `subsubject/all`)
         return res.data;
     }
@@ -38,7 +36,6 @@ export async function getSubjects( param ) {
 
 export async function askQuestion( param ) {
     try {
-        console.log(param)
         const res = await axios.get(apiUrl + `/ask-question`)
         return res.data;
     }
@@ -70,8 +67,18 @@ export async function getChildSubjects(param) {
 export async function getQandAChildSubjects(param) {
     try {
         let pagination = {pageno : param.pageno, limit: 10}
-        const res = await axios.post(apiUrl + `subsubject/questions/${GetName(param.child_subject)}`,pagination)
+        const res = await axios.post(apiUrl + `subsubject/questions/${param.child_subject}`,pagination)
         return res.data;
+    }
+    catch(e){
+
+    }
+}
+
+export async function getQandAnswer(param) {
+    try {
+        const res = await axios.post(apiUrl + `subsubject/get-answer/${param}`)
+        return res.data.data;
     }
     catch(e){
 

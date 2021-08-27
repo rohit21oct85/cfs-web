@@ -39,7 +39,6 @@ export default function RazorPay({...props}){
                             userId : session.user._id,
                         }
                     )
-                    console.log(res);
                     if(res.data){
                         session.user.Subscribe = true;
                         // console.log(session)

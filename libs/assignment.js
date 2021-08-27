@@ -3,9 +3,7 @@ import { apiUrl, authAxios } from '../config/config'
 
 export async function saveAssignment(data) {
     try {
-        console.log(data)
         const res = await authAxios.post(apiUrl + 'assignment/save-assignment', data)
-        console.log(res)
         return res.data;
     }
     catch(e){

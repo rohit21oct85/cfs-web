@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { MakeSlug } from '../../common/make-slug'
+import { MakeSlug,GetName,capitalize, MakeSlug2 } from '../../common/make-slug'
+import router from 'next/router'
 
 export default function BrowseBySubjects3({...props}){
     return(
@@ -11,13 +12,19 @@ export default function BrowseBySubjects3({...props}){
                         <h2>Browse by subjects in Business</h2>
                     </div>
 					{props.data && props.data.data.map((item,key)=>{
+						let child = "";
+						if(item.chield_subject.includes('-')){
+							child = item.chield_subject
+						}else{
+							child = MakeSlug2(item.chield_subject)
+						}
 						return(
                             <div className="col-md-4 col-lg-3" key={key}>
 								<div className="books1 animated wow fadeIn">
 									<img src="/images/tbs-books/economics.jpg" className="img-fluid" alt=""/>
 									<div className="overlay_books bottom-overlay"> 
 										<div className="books_text1">
-                                            <Link href={'/q-and-a/'+item.subject+'/'+MakeSlug(item.sub_subject)+"/"+MakeSlug(item.chield_subject)}><a> {item.chield_subject}</a></Link>
+                                            <Link href={'/q-and-a/'+item.subject+'/'+router.query.subsubject+"/"+child}><a> {capitalize(GetName(item.chield_subject))}</a></Link>
 										</div>
 									</div>
 								</div>

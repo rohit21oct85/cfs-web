@@ -1,6 +1,20 @@
 const MakeSlug = (str) => {
     return str.trim().toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');   
 }
+const MakeSlug2 = (str) => {
+    return str.trim().toLowerCase().replace(/ +/g,'-');     
+}
+const stringToSlug = (str)=> { // <-- removed the argument // <-- added this statement
+
+      str = str.replace(/^\s+|\s+$/g, ''); // trim
+      str = str.toLowerCase();
+      str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+               .replace(/\s+/g, '-') // collapse whitespace and replace by -
+               .replace(/-+/g, '-') // collapse dashes
+               .replace(/'+/g, '') // collapse '
+               .replace(/,+/g, ''); // collapse ,
+      return str;
+};
 const SameSlug = (str) => {
     return str.trim().replace(/[^\w ]+/g,'').replace(/ +/g,'-');   
 }
@@ -37,4 +51,6 @@ export {
     createMarkup,
     capitalize,
     replaceAll,
+    stringToSlug,
+    MakeSlug2
 }

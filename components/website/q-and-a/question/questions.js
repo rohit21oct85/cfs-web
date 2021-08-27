@@ -1,5 +1,9 @@
 import Pagination from '../../../../components/common/pagination'
 import parse from 'html-react-parser';
+import Link from 'next/link';
+import router from 'next/router';
+import { stringToSlug } from '../../../common/make-slug';
+import striptags from 'striptags';
 
 export default function questions({...props}){
     return(
@@ -13,14 +17,17 @@ export default function questions({...props}){
                             <h3 className="mb-4 font-14">Experts answer in as little as 30 minutes</h3>
                         </div>
                     </div>
-                    {props.data && props.data.data.map((item,key)=>{
+                    {props.isLoading ? "Please Wait. .." : props.data && props.data.data.length>0 ? props.data.data.map((item,key)=>{
+                        let name = <span dangerouslySetInnerHTML={{__html: parse(item.question)}}></span>
                         return(
                             <div className="text_q_nd_ans" key={key}>
                                 <div className="Qtion_n_Stion_text Recent_text">
                                     <div className="read_more_q">
                                     <span className="qustion_mark1">Q :</span>  
                                         <div className="ques_pl">
-                                            <p className="mb-0" dangerouslySetInnerHTML={{__html: parse(item.question.substr(0,200))}}></p>
+                                            {item.question.includes('<p>')
+                                            ? <p className="mb-0" dangerouslySetInnerHTML={{__html: `${striptags(item.question).substr(0,120)}`}}></p>
+                                            : <p className="mb-0" dangerouslySetInnerHTML={{__html: `${parse(item.question).substr(0,120)}`}}></p>}
                                         </div>
                                     </div>
                                 </div>
@@ -28,13 +35,20 @@ export default function questions({...props}){
                                     <div className="read_more_q">
                                     <span className="answer_mark1">A :</span> 
                                     <div className="ans_pl">
-                                        <p className="font-15"><a href="#">View Answer</a></p>
+                                        {/* {item.question.includes('<p>')
+                                        ? <p className="font-15"><Link href={`${'/q-and-a/'+router.query.subject+'/'+router.query.subsubject+'/'+router.query.chieldsubject+'/'+stringToSlug(parse(striptags(item.question)).substr(0,90))+'-'+item.old_qid}`}>View Answer</Link></p>
+                                        : <p className="font-15"><Link href={`${'/q-and-a/'+router.query.subject+'/'+router.query.subsubject+'/'+router.query.chieldsubject+'/'+stringToSlug(striptags(parse(item.question)).substr(0,90))+'-'+item.old_qid}`}>View Answer</Link></p>} */}
+                                        {item.question.includes('<p>')
+                                        ? <p className="font-15"><Link href={`${'/q-and-a/'+stringToSlug(parse(striptags(item.question)).substr(0,90))+'-'+item.old_qid}`}>View Answer</Link></p>
+                                        : <p className="font-15"><Link href={`${'/q-and-a/'+stringToSlug(striptags(parse(item.question)).substr(0,90))+'-'+item.old_qid}`}>View Answer</Link></p>}
                                     </div>
                                     </div>
                                 </div>
                             </div>
                         )
-                    })}
+                    }):
+                    <p>No Questions Found</p>
+                    }
                 </div>
                 {/* <div className="col-md-12 mt-2">
                     <div className="next_prew">
