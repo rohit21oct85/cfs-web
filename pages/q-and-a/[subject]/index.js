@@ -18,7 +18,7 @@ import Answer from './answer'
 export default function QandACategory() {
     const router = useRouter();
 
-    const regex = /\d{6}/g; //
+    const regex = /\d{5,6}/g; //
 
     const data = router.query.subject != undefined ? router.query.subject.match(regex) : router.query.subject;
     const OLD_QID = data ? data[0] : null; 
