@@ -25,7 +25,7 @@ const GetString = (str, length) => {
 }
 const GetName = (str) => {
     if(str){
-        return str?.replaceAll('-', ' ');   
+        return str.replace('-', ' ');   
     }
 }
 function createMarkup(data) {
