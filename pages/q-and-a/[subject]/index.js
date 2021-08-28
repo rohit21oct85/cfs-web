@@ -22,7 +22,7 @@ export default function QandACategory() {
 
     const data = router.query.subject != undefined ? router.query.subject.match(regex) : router.query.subject;
     const OLD_QID = data ? data[0] : null; 
-
+    console.log(OLD_QID)
     const { data: subsubjects, isLoading:subsubjectsIsLoading, error:subsubjectsError } = useQuery([router.query.subject], () => getSubSubject(router.query.subject),{staleTime:Infinity, enabled: !!router.query.subject}) //only called when subject would be present
     if(OLD_QID)
         return <Answer/>
