@@ -4,6 +4,7 @@ import { apiUrl, authAxios } from '../config/config'
 export async function setLogin(data) {
     try {
         const res = await axios.post(apiUrl + 'student/login',data)
+        console.log("in login api file")
         if(res.status === 200){
             return res.data;
         }

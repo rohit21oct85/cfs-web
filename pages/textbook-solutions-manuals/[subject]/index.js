@@ -9,7 +9,7 @@ import Subscription from '../../../components/website/book-detail/subscription'
 import Description from '../../../components/website/book-detail/description'
 import Details from '../../../components/website/book-detail/detail'
 import Reviews from '../../../components/website/book-detail/review'
-import BreadCrumb from '../../../components/website/all-subjects/breadcrumb'
+import BreadCrumb from '../../../components/website/textbook-solutions-manuals/tbs-breadcrumb'
 import { useRouter } from "next/router";
 import { useQuery } from 'react-query'
 import {getBook, getChapters, getSections, getExercises, getRelatedBooks, getProblems, getProblemsDirectly, searchQuestions} from '../../../libs/book'
@@ -51,6 +51,7 @@ export default function Book(){
     const [colMd6, setColMd6] = useState();
     const [searchedItems, setSearchedItems] = useState();
     const [selectedQuestion, setselectedQuestion] = useState();
+    const [selectedItem, setSelectedItem] = useState();
 
     //seo 
     const [seo, setSeo] = useState(false);
@@ -106,8 +107,9 @@ export default function Book(){
         }
     }
 
-    const clickedQues = (data) => {
+    const clickedQues = (data, key) => {
         setselectedQuestion(data)
+        setSelectedItem(key)
     }
 
     useEffect(() => {
@@ -346,7 +348,7 @@ export default function Book(){
                                         <div className="Qtion_n_Stion_text Qtion_n_Stion_text_scroll">
                                             {searchedItems && searchedItems.length>0 ? searchedItems.map((item,key) => {
                                                 return(
-                                                        <div className="bg_yellow_qa" key={key} onClick={()=>{clickedQues(item.problem_no+" : "+item.question)}}> <strong>Q : {item.problem_no} </strong>
+                                                        <div className="bg_yellow_qa" style={{backgroundColor: key == selectedItem ? "#d3d3d3" : "" }} key={key} onClick={()=>{clickedQues(item.problem_no+" : "+item.question, key)}}> <strong>Q : {item.problem_no} </strong>
                                                             <Highlighter
                                                                 highlightClassName="YourHighlightClass"
                                                                 searchWords={[search]}
@@ -366,13 +368,13 @@ export default function Book(){
                                         {problemIsLoading ? 'loading...' :
                                             problems && problems.map((item,key)=>{
                                                 return(
-                                                    <div className="bg_yellow_qa" key={key} onClick={()=>{clickedQues(item.problem_no+" : "+item.question)}}> <strong>Q  : {item.problem_no }</strong> {item.question}</div>
+                                                    <div className="bg_yellow_qa" style={{backgroundColor: key == selectedItem ? "#d3d3d3" : "" }} key={key} onClick={()=>{clickedQues(item.problem_no+" : "+item.question, key)}}> <strong>Q  : {item.problem_no }</strong> {item.question}</div>
                                                 )
                                             })}
                                         {problemDirectIsLoading ? 'loading...' :
                                             problemsDirect && problemsDirect.map((item,key)=>{
                                                 return(
-                                                    <div className="bg_yellow_qa" key={key} onClick={()=>{clickedQues(item.problem_no+" : "+item.question)}}> <strong>Q  : {item.problem_no }</strong> {item.question}</div>
+                                                    <div className="bg_yellow_qa" style={{backgroundColor: key == selectedItem ? "#d3d3d3" : "" }} key={key} onClick={()=>{clickedQues(item.problem_no+" : "+item.question, key)}}> <strong>Q  : {item.problem_no }</strong> {item.question}</div>
                                                 )
                                             })}
                                         </div>

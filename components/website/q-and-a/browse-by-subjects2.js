@@ -1,16 +1,19 @@
 import Link from 'next/link'
-import { MakeSlug } from '../../common/make-slug'
+import { capitalize, MakeSlug } from '../../common/make-slug'
+import { useRouter } from "next/router";
 
 export default function BrowseBySubjects2({...props}){
+    const router = useRouter();
+    
     return(
         <>
         <section className="section">
             <div className="container">
                 <div className="row">
                     <div className="col-md-12 Content_Covered_title mb-4 pb-2  text-center get-homework">
-                        <h2>Browse by subjects in Business</h2>
+                        <h2>Browse by subjects in {capitalize(props?.heading)}</h2>
                     </div>
-					{props.data && props.data.data.map((item,key)=>{
+					{props.data && props.data.data.length>0 ? props.data.data.map((item,key)=>{
 						return(
 							<div className="col-md-3 pbtm" key={key}>
 								<div className="our_popular_text">
@@ -23,7 +26,11 @@ export default function BrowseBySubjects2({...props}){
 								</div>
 							</div>
 						)
-					})}
+					}):
+                        <div className="col-lg-12 text-center">
+                            <span>No Subjects Found</span>
+                        </div>
+                    }
           		</div>
         	</div>
       	</section>

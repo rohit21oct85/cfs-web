@@ -9,9 +9,9 @@ export default function BrowseBySubjects3({...props}){
             <div className="container">
                 <div className="row">
                     <div className="col-md-12 Content_Covered_title mb-4 pb-2  text-center get-homework">
-                        <h2>Browse by subjects in Business</h2>
+                        <h2>Browse by subjects in {capitalize(GetName(props?.heading))}</h2>
                     </div>
-					{props.data && props.data.data.map((item,key)=>{
+					{props.data && props.data.data.length > 0 ? props.data.data.map((item,key)=>{
 						let child = "";
 						if(item.chield_subject.includes('-')){
 							child = item.chield_subject
@@ -30,7 +30,9 @@ export default function BrowseBySubjects3({...props}){
 								</div>
 							</div>
 						)
-					})}
+					}): <div className="col-lg-12 text-center">
+							<span>No Subjects Found</span>
+						</div>}
           		</div>
         	</div>
       	</section>

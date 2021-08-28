@@ -1,8 +1,6 @@
 import {GetName, createMarkup,capitalize} from '../../common/make-slug'
 
 export default function BreadCrumb({...props}){
-
-    
     
     return(
         <section className="bg_banner_color pt-0 pb-0">

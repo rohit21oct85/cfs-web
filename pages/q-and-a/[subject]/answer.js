@@ -3,7 +3,7 @@ import Header from '../../../components/website/home/header'
 import Navbar from '../../../components/website/home/navbar'
 import Footer from '../../../components/website/home/footer'
 import Follow from '../../../components/website/home/follow'
-import BreadCrumb from '../../../components/website/all-subjects/breadcrumb'
+import BreadCrumb from '../../../components/website/q-and-a/qa-breadcrumb'
 import Answer from '../../../components/website/q-and-a/answer/answer'
 import { useQuery } from 'react-query'
 import { getQandAnswer } from '../../../libs/subsubject'
@@ -14,7 +14,7 @@ import { useState } from 'react'
 export default function QuestionsAndAnswers() {
     const router = useRouter();
 
-    const regex = /\d{5,6}/g; //
+    const regex = /\d+$/; //
 
     const data = router.query.subject != undefined ? router.query.subject.match(regex) : router.query.subject;
     const old_qid = data ? data[0] : null; 
@@ -30,7 +30,8 @@ export default function QuestionsAndAnswers() {
             </Head>
             <Header/>
             <Navbar/>
-            {/* <BreadCrumb type={"Q & A"} heading={abstrophy} subject={router.query.subject} sub_subject={router.query.subsubject} sub_sub_subject={router.query.chieldsubject}/> */}
+            {/* <BreadCrumb type={"Q & A"} heading={abstrophy} subject={answer?.subject} sub_subject={answer?.subsubject} sub_sub_subject={router.query.chieldsubject}/> */}
+            <BreadCrumb type={"Q & A"} heading={abstrophy} subject={answer?.subject} sub_subject={answer?.subsubject} sub_sub_subject={answer?.cheild_subject}/>
             <Answer data={answer}/>
             <Follow/>
             <Footer/>

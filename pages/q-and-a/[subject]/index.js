@@ -18,11 +18,11 @@ import Answer from './answer'
 export default function QandACategory() {
     const router = useRouter();
 
-    const regex = /\d{5,6}/g; //
-
+    const regex = /\d+$/; //
+   
     const data = router.query.subject != undefined ? router.query.subject.match(regex) : router.query.subject;
     const OLD_QID = data ? data[0] : null; 
-    console.log(OLD_QID)
+
     const { data: subsubjects, isLoading:subsubjectsIsLoading, error:subsubjectsError } = useQuery([router.query.subject], () => getSubSubject(router.query.subject),{staleTime:Infinity, enabled: !!router.query.subject}) //only called when subject would be present
     if(OLD_QID)
         return <Answer/>
@@ -38,7 +38,7 @@ export default function QandACategory() {
             {/* <AskExpert2/> */}
             {/* <CollegeHomework/> */}
             <StepByStep/>
-            <BrowseBySubjects2 data={subsubjects}/>
+            <BrowseBySubjects2 data={subsubjects} heading={router.query.subject}/>
             <BusinessHomework/>
             <Services/>
             <Follow/>
