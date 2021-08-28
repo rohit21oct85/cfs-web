@@ -30,7 +30,8 @@ export default function QuestionsAndAnswers() {
             </Head>
             <Header/>
             <Navbar/>
-            {/* <BreadCrumb type={"Q & A"} heading={abstrophy} subject={router.query.subject} sub_subject={router.query.subsubject} sub_sub_subject={router.query.chieldsubject}/> */}
+            {/* <BreadCrumb type={"Q & A"} heading={abstrophy} subject={answer?.subject} sub_subject={answer?.subsubject} sub_sub_subject={router.query.chieldsubject}/> */}
+            <BreadCrumb type={"Q & A"} heading={abstrophy} subject={answer?.subject} sub_subject={answer?.subsubject} sub_sub_subject={answer?.cheild_subject}/>
             <Answer data={answer}/>
             <Follow/>
             <Footer/>
