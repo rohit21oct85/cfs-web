@@ -14,7 +14,7 @@ import { useState } from 'react'
 export default function QuestionsAndAnswers() {
     const router = useRouter();
 
-    const regex = /\d{6}/g; //
+    const regex = /\d{5,6}/g; //
 
     const data = router.query.subject != undefined ? router.query.subject.match(regex) : router.query.subject;
     const old_qid = data ? data[0] : null; 
@@ -30,7 +30,7 @@ export default function QuestionsAndAnswers() {
             </Head>
             <Header/>
             <Navbar/>
-            <BreadCrumb type={"Q & A"} heading={abstrophy} subject={router.query.subject} sub_subject={router.query.subsubject} sub_sub_subject={router.query.chieldsubject}/>
+            {/* <BreadCrumb type={"Q & A"} heading={abstrophy} subject={router.query.subject} sub_subject={router.query.subsubject} sub_sub_subject={router.query.chieldsubject}/> */}
             <Answer data={answer}/>
             <Follow/>
             <Footer/>
