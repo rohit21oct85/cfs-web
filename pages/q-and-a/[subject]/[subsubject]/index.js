@@ -30,7 +30,7 @@ export default function QandASubCategory() {
             {/* <AskExpert2/>
             <CollegeHomework/> */}
             <StepByStep/>
-            <BrowseBySubjects3 data={childsubjects}/>
+            <BrowseBySubjects3 data={childsubjects} heading={router.query.subsubject}/>
             <BusinessHomework/>
             <Services/>
             <Follow/>

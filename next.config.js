@@ -10,12 +10,12 @@ module.exports = {
         // NEXTAUTH_URL:"https://crazyforstudy.com",
         // JWT_SIGNING_PRIVATE_KEY:`X_7FQqWRZXqNIWCsGYz9MfPJtsD6zj3vLTs3myNZ6cM`,
 
-        // razor_pay_key:'rzp_test_ANFdQNpgQn4gvm',
-        // razor_pay_secret:'YSuiOAW6OviacJxQwaCzNj7C',
-        // plan_id:'plan_H95OjUCdv3Upow',
+        razor_pay_key:'rzp_test_ANFdQNpgQn4gvm',
+        razor_pay_secret:'YSuiOAW6OviacJxQwaCzNj7C',
+        plan_id:'plan_H95OjUCdv3Upow',
 
-        // stripe_p_key:'pk_test_8tdoBYKAN0byYPGOMaYvvcQa',
-        // stripe_s_secret:'sk_test_ygam1fkRTDiqM8w1Msr0ITP6',
+        stripe_p_key:'pk_test_8tdoBYKAN0byYPGOMaYvvcQa',
+        stripe_s_secret:'sk_test_ygam1fkRTDiqM8w1Msr0ITP6',
     },
 }
 

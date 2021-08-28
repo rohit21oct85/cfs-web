@@ -212,6 +212,7 @@ return (
 				
 							<div className="col-md-12 text-center social_link_banner">
 								<ul>
+									{/* u can remove providers && it was causing an error thats the reason ist present */}
 									{Object.values(providers).map(provider => (
 										<span key={provider.id}>
 										{provider.id === "credentials" ? <span></span> :

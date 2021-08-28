@@ -27,8 +27,11 @@ export default NextAuth({
         password: {  label: "Password", type: "password" }
       },
       async authorize(credentials) {
+        console.log("DSAdsain next auth")
+        console.log("DSAdsain next auth")
         // Add logic here to look up the user from the credentials supplied
         const user = await setLogin(credentials);
+        console.log("DSAdsain next auth")
         if (user) {
           // console.log(user);
 		      // Any object returned will be saved in `user` property of the JWT
@@ -112,6 +115,7 @@ export default NextAuth({
     },
     signIn : async (user, account, profile) => { 
       try{
+        console.log("in signin nextauth")
         if(!user.student){
           user.fullname = user.name;
           user.img = user.image;

@@ -32,8 +32,8 @@ export default function QandA() {
             <TryCrazy/>
             <BuySubscription/>
             <About/>
-            <HowItWorks/>
             <BrowseBySubjects data={subjects}/>
+            <HowItWorks/>
             {/* <StudyHelp/> */}
             <WhyChooseOnline/>
             <WhatStudentsThink/>
